@@ -8,12 +8,14 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/home")
 def home():
-	#print nix.search('pizza').json()
 	return render_template('main.html')
+
+@app.route("/works")
+def works():
+	return render_template('works.html')
 
 @app.route("/about")
 def about():
-	#print nix.search('pizza').json()
 	return render_template('about.html')
 
 if __name__ == "__main__":
