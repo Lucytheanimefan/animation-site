@@ -1,7 +1,16 @@
-{% extends "layout.html" %}
-{% block body %}
-  <div class="hi">Hi!</div>
-  <ul class=entries>
- 
-  </ul>
+{% extends "layout.html" %} {% block body %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="weight">Weight:</label>
+            <input type="text" class="form-control" id="usr">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="height">Height:</label>
+            <input type="password" class="form-control" id="pwd">
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,11 +1,35 @@
 <!doctype html>
-<title>Flaskr</title>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/lib/bootstrap/css/bootstrap.min.css') }}">
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/lib/bootstrap/js/bootstrap.min.js') }}">
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='js/lib/jquery.min.js') }}">
-<div class=page>
-  <h1>Food Recommender</h1>
-  <div class=metanav>
-  {% block body %}{% endblock %}
-</div>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eat Food!</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/lib/bootstrap/css/bootstrap.min.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/layout.min.css') }}">
+</head>
+
+<body data-sidebar-color="sidebar-light" class="sidebar-light">
+    <!-- Header start-->
+    <header>
+        <div class="search-bar closed">
+            <form>
+                <div class="input-group input-group-lg">
+                    <input type="text" placeholder="Search for..." class="form-control"><span class="input-group-btn">
+              <button type="button" class="btn btn-default search-bar-toggle"><i class="ti-close"></i></button></span>
+                </div>
+            </form>
+        </div>
+    </header>
+    <div class="main-container">
+        <h1>Food Recommender</h1>
+        <div class="container-fluid">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='css/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
