@@ -2,6 +2,10 @@
     font-family: 'Quicksand', sans-serif;
 }
 
+body{
+	background-color: black;
+}
+
 #background {
     position: absolute;
     background-color: black;
@@ -12,12 +16,14 @@
     overflow: hidden;
 }
 
-footer {
+.navbar {
     position: absolute;
     left: 0;
     bottom: 0;
     height: 100px;
     width: 100%;
+    background: none;
+    border:0px;
 }
 
 

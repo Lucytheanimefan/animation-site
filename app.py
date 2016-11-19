@@ -6,9 +6,15 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def hello():
+@app.route("/home")
+def home():
 	#print nix.search('pizza').json()
 	return render_template('main.html')
+
+@app.route("/about")
+def about():
+	#print nix.search('pizza').json()
+	return render_template('about.html')
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
