@@ -13,7 +13,7 @@ var targetFPS = 33;
 
 // Set the dimensions of the canvas as variables so they can be used.
 var canvasWidth = $(window).width();
-var canvasHeight = 1.2*$(window).height();
+var canvasHeight = $(window).height();
 
 // Create an image object (only need one instance)
 var imageObj = new Image();
@@ -146,7 +146,7 @@ function init() {
 function draw() {
     // Clear the drawing surface and fill it with a black background
     context.fillStyle = "rgba(0, 0, 0, 0.5)";
-    context.fillRect(0, 0, 400, 400);
+    context.fillRect(0, 0, $(window).width(), $(window).height());
 
     // Go through all of the particles and draw them.
     particles.forEach(function(particle) {
