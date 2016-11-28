@@ -6,24 +6,16 @@ body {
     background-color: black;
 }
 
-#background {
-    position: absolute;
-    background-color: black;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
 .navbar {
-    position: absolute;
     text-align: center;
+    /*
+    position: absolute;
     left: 10%;
     right: 10%;
     bottom: 0px !important;
     background: none;
     border: 0px;
+    */
 }
 
 .navbar .navbar-nav {
@@ -37,7 +29,7 @@ body {
 .nav,
 .nav li,
 .nav a {
-    bottom: 0px !important;
+    /*bottom: 0px !important;*/
     text-align: center;
 }
 
@@ -47,6 +39,12 @@ body {
     font-weight: bolder;
 }
 
+footer{
+    position: absolute; 
+    left: 0 ; right: 0; bottom: 0; 
+    text-align: center;
+    margin-bottom: 10px;
+}
 
 /*----------------title fade in-----------------*/
 
