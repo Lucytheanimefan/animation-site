@@ -56,11 +56,13 @@ span {
     text-shadow: 0 0 0 whitesmoke;
     -webkit-animation: smoky 5s both;
     animation: smoky 5s both;
+    animation-iteration-count: infinite;
 }
 
 span:nth-child(even) {
     -webkit-animation-name: smoky-mirror;
     animation-name: smoky-mirror;
+    animation-iteration-count:infinite;
 }
 
 @-webkit-keyframes smoky {
@@ -222,10 +224,10 @@ span:nth-of-type(21) {
     z-index: 10;
     margin-top: 30%;
     margin-bottom: 30%;
-    margin-left: 35%;
-    margin-right: 35%;
+
     font-size: 60px;
     text-align: center;
+    width: 100%;
 }
 
 @keyframes fadein {

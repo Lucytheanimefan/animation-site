@@ -1,9 +1,10 @@
+
 /*------------smoke-----------------*/
 // Create an array to store our particles
 var particles = [];
 
 // The amount of particles to render
-var particleCount = 30;
+var particleCount = 50;
 
 // The maximum velocity in each direction
 var maxVelocity = 2;
@@ -28,6 +29,9 @@ imageObj.onload = function() {
 // Once the callback is arranged then set the source of the image
 imageObj.src = "static/img/smoke.png";
 
+$("#background").attr("width", canvasWidth);
+$("#background").attr('height', canvasHeight);
+
 // A function to create a particle object.
 function Particle(context) {
 
@@ -40,7 +44,7 @@ function Particle(context) {
     this.yVelocity = 0;
 
     // Set the radius
-    this.radius = 5;
+    this.radius = 20;
 
     // Store the context which will be used to draw the particle
     this.context = context;
