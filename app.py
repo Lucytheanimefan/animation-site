@@ -18,9 +18,9 @@ def works():
 def about():
 	return render_template('about.html')
 
-@app.route("/test")
-def test():
-	return render_template('test/test.html')
+@app.route("/castleinblood")
+def castle():
+	return render_template('castleinblood/test.html')
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
