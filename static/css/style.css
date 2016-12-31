@@ -41,9 +41,18 @@ body {
 
 footer{
     position: absolute; 
-    left: 0 ; right: 0; bottom: 0; 
+    left: 0 ; right: 0; 
+    bottom: 0 !important; 
     text-align: center;
     margin-bottom: 10px;
+}
+
+a, h1, h2{
+    color: white;
+}
+
+a:hover{
+    color: lightgrey;
 }
 
 .thumbnails{
