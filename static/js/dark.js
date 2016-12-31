@@ -7,10 +7,19 @@ $("body").mouseover(function() {
     $(this).css("opacity", 0.5);
 })
 */
+var hole_diam = 200;
 
-$(".im").hover(function() {
-    console.log("hover over butterfly");
-})
+/*
+window.onresize = function() {
+    var img = document.getElementById('castle');
+    img.style.width = "100%";
+    img.style.height = "100%";
+    var hole = document.getElementById("hole");
+    hole.style.width = "100%";
+    hole.style.height = "100%";
+};
+*/
+
 
 $(".im").on({
     mouseenter: function() {
@@ -26,30 +35,52 @@ $(".im").on({
 });
 
 $(document).ready(function() {
-    var isHovered = $('#butterfly').is(":hover");
-
     $(document).mousemove(function(e) {
-        console.log(isHovered);
-        //$('#circle').css('left',e.pageX+"px");
-        //$('#circle').css('top',e.pageY+"px");
+        $(".drop").remove();
         $('#hole').css('left', e.pageX + "px");
         $('#hole').css('top', e.pageY + "px");
         var mouseX = e.pageX;
         var mouseY = e.pageY;
+        createRain(mouseX - hole_diam, mouseX + hole_diam, mouseY - hole_diam, mouseY + hole_diam);
+        $("#castle").css("clip", "rect(" + (mouseY - hole_diam) + "px, " + (mouseX + 2*hole_diam) + "px, " + (mouseY + hole_diam) + "px, " + (mouseX - 2.5*hole_diam) + "px)");
+        console.log("css:" + $("#castle").css("clip"));
         $(".im").each(function(index) {
+
+            ///* clip: shape(top, right, bottom, left); NB 'rect' is the only available option */
             myelement = $(this);
-            $(this)[0].getBoundingClientRect()
             var bounds = [myelement.offset().left, myelement.offset().top, myelement.width(), myelement.height()];
-            console.log("Bounds: "+bounds);
             if (mouseX > bounds[0] && mouseX < (bounds[0] + bounds[2]) && mouseY > bounds[1] && mouseY < (bounds[3] + bounds[1])) {
-                console.log("hovering over the image!");
                 $(this).show();
                 $(this).css("visibility", "visible");
             } else {
-            	console.log("NOT hovering over the image!");
                 $(this).css("visibility", "hidden");
             }
-            console.log(index + ": " + $(this).text());
         });
+
     });
 });
+
+
+
+/*----------rain--------------*/
+// number of drops created.
+var nbDrop = 80;
+
+// function to generate a random number range.
+function randRange(minNum, maxNum) {
+    return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);
+}
+
+// function to generate drops
+function createRain(leftRange0, leftRange1, topRange0, topRange1) {
+
+    for (i = 1; i < nbDrop; i++) {
+        var dropLeft = randRange(leftRange0, leftRange1);
+        var dropTop = randRange(topRange0, topRange1);
+
+        $('.rain').append('<div class="drop" id="drop' + i + '"></div>');
+        $('#drop' + i).css('left', dropLeft);
+        $('#drop' + i).css('top', dropTop);
+    }
+
+}
