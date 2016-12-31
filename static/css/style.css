@@ -46,6 +46,10 @@ footer{
     margin-bottom: 10px;
 }
 
+.thumbnails{
+    width: 400px;
+    height: 350px;
+}
 /*----------------title fade in-----------------*/
 
 @import url(http://fonts.googleapis.com/css?family=Finger+Paint);
