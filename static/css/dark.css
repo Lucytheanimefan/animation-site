@@ -15,10 +15,12 @@ body {
 }
 
 #castle {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  /* clip: shape(top, right, bottom, left); NB 'rect' is the only available option */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    clip: shape(0, 0, 0, 0);
+    visibility: hidden;
+    /* clip: shape(top, right, bottom, left); NB 'rect' is the only available option */
 }
 
 
