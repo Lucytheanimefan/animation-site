@@ -2,19 +2,44 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+
+
 .bio, .links{
-    margin-left: 4px;
+    margin-left: 2px;
 }
-.letter{
+
+
+.about {
+    margin-bottom: 3%;
+}
+
+.profile {
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+}
+
+.bio{
+    margin-top: 10px;
+    text-align: left !important;
+}
+
+.letter {
     height: 300px;
+    text-align: center !important;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 body {
     background-color: black;
 }
 
-.links{
+.links {
     color: white;
 }
+
 .navbar {
     text-align: center;
     /*
@@ -31,8 +56,9 @@ body {
     display: inline-block;
     float: none;
 }
+
 .navbar .navbar-collapse {
-  text-align: center;
+    text-align: center;
 }
 
 .nav,
@@ -48,26 +74,31 @@ body {
     font-weight: bolder;
 }
 
-footer{
-    position: absolute; 
-    left: 0 ; right: 0; 
-    bottom: 0 !important; 
+footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0 !important;
     text-align: center;
     margin-bottom: 10px;
 }
 
-a, h1, h2{
+a,
+h1,
+h2 {
     color: white;
 }
 
-a:hover{
+a:hover {
     color: lightgrey;
 }
 
-.thumbnails{
+.thumbnails {
     width: 400px;
     height: 350px;
 }
+
+
 /*----------------title fade in-----------------*/
 
 @import url(http://fonts.googleapis.com/css?family=Finger+Paint);
@@ -82,7 +113,7 @@ span {
 span:nth-child(even) {
     -webkit-animation-name: smoky-mirror;
     animation-name: smoky-mirror;
-    animation-iteration-count:infinite;
+    animation-iteration-count: infinite;
 }
 
 @-webkit-keyframes smoky {
@@ -244,7 +275,6 @@ span:nth-of-type(21) {
     z-index: 10;
     margin-top: 30%;
     margin-bottom: 30%;
-
     font-size: 60px;
     text-align: center;
     width: 100%;
