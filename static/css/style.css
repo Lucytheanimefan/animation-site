@@ -1,11 +1,20 @@
 * {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
+.bio, .links{
+    margin-left: 4px;
+}
+.letter{
+    height: 300px;
+}
 body {
     background-color: black;
 }
 
+.links{
+    color: white;
+}
 .navbar {
     text-align: center;
     /*
