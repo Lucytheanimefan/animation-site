@@ -8,29 +8,46 @@ function init() {
 
     scene = new THREE.Scene();
 
-    camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
     camera.position.z = 1000;
 
-    geometry = new THREE.BoxGeometry( 200, 200, 200 );
-    material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
+    geometry = new THREE.BoxGeometry(200, 200, 200);
+    material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true });
 
-    mesh = new THREE.Mesh( geometry, material );
-    scene.add( mesh );
+    mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
 
     renderer = new THREE.WebGLRenderer();
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setSize(window.innerWidth, window.innerHeight);
 
-    document.body.appendChild( renderer.domElement );
+    document.body.appendChild(renderer.domElement);
 
 }
 
 function animate() {
 
-    requestAnimationFrame( animate );
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
 
-    mesh.rotation.x += 0.01;
-    mesh.rotation.y += 0.02;
+    window.addEventListener("keydown", function(e) {
+        if (e != undefined) {
+            console.log(e.keyCode);
+            if (e.keyCode == '38') {
+                // up arrow
+                mesh.rotation.y += 0.02;
+            } else if (e.keyCode == '40') {
+                // down arrow
+                mesh.rotation.y -= 0.02;
+            } else if (e.keyCode == '37') {
+                // left arrow
+                mesh.rotation.x -= 0.01;
+            } else if (e.keyCode == '39') {
+                // right arrow
+                mesh.rotation.x += 0.01;
+            }
+        }
+    });
 
-    renderer.render( scene, camera );
+
 
 }
