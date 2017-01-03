@@ -22,6 +22,10 @@ def about():
 def castle():
 	return render_template('castleinblood/test.html')
 
+@app.route("/three")
+def three():
+	return render_template('three/three.html')
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
