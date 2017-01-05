@@ -1,0 +1,20 @@
+{% extends "genLayout.html" %}
+<!--css-->
+{% block css %}
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/diary/style.css') }}"> {% endblock %}
+<!--html-->
+{% block body %}
+<div id="main">
+    <div id="flipbook">
+        <div class="hard">Death Note</div>
+        <div class="hard">pg1</div>
+        <div class="hard">pg2</div>
+        <div class="hard">pg3</div>
+    </div>
+</div>
+{% endblock %}
+<!--js-->
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/lib/turn.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/diary/script.js') }}"></script>
+{% endblock %}

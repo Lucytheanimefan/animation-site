@@ -26,6 +26,16 @@ def castle():
 def three():
 	return render_template('three/three.html')
 
+'''
+@app.route("/deathnote")
+def deathnote():
+	return render_template("deathnote/index.html")
+'''
+
+@app.route("/diary")
+def diary():
+	return render_template("diary/index.html")
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
