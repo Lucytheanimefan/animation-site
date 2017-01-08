@@ -1,6 +1,5 @@
 var noteBookText = ["エル・ローライト" /*L*/ , "夜 神 月 ライト" /*Light*/ ]
 
-
 generatePages(20, function() {
     $("#flipbook").turn({
         width: 1000,
@@ -15,7 +14,7 @@ generatePages(20, function() {
 function generatePages(numPages, callback) {
     console.log("Generate pages");
     for (var i = 0; i < numPages; i++) {
-        $("#flipbook").append('<div class="hard"><span class="pgNum"></span><canvas id="flipPg' + i + '"></canvas>' + '</div>');
+        $("#flipbook").append('<div class="hard"><span class="pgNum"></span><canvas class = "canvasPage" id="flipPg' + i + '"></canvas>' + '</div>');
     }
     callback();
 }
@@ -39,12 +38,12 @@ function initDrawText() {
 
 function initCanvasVariables() {
     //createCanvasOnCurrentPage();
-    ctx = document.querySelector("canvas").getContext("2d"),
+    ctx = document.querySelector(".canvasPage").getContext("2d"),
         dashLen = 220,
         dashOffset = dashLen,
         speed = 5,
         txt = noteBookText.pop(),
-        x = 30,
+        x = 0,
         i = 0;
 }
 
@@ -52,11 +51,19 @@ function createCanvasOnCurrentPage() {
     $("#flipPg" + $("#flipbook").turn("page")).append("<canvas width='470'></canvas>")
 }
 
-var lineHeight = 50;
+var lineHeight = 10;
 var lineWidth = 60;
 var y = 90;
-(function loop() {
+var firstPgCount = 0; //not being used
 
+(function loop() {
+    /*
+    if ($("#flipbook").turn("page")==1 && firstPgCount==0){
+        ctx = document.querySelector("#coverPage").getContext("2d");
+        txt = "Death Note";
+        firstPgCount++;
+    }
+    */
     console.log("variables: txt: " + txt + ", x: " + x + ", y: " + y);
     //console.log("Current page: " + $("#flipbook").turn("page"));
     ctx.clearRect(x, 0, lineWidth /*width*/ , lineHeight /*height*/ );
