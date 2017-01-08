@@ -184,13 +184,14 @@ var howToUse = [
 var noteBookText = ["エル・ローライト" /*L*/ , "夜 神 月 ライト" /*Light*/ ]
 
 var rulesPages = howToUse.length;
-generatePages(rulesPages+4, function() {
+console.log("Num rules pages: " + rulesPages)
+generatePages(rulesPages + 4, function() {
     $("#flipbook").turn({
         width: 1000,
         height: 600,
         autoCenter: true
     });
-    initDrawText();
+    console.log("DOES IT EXIST?: " + $(".canvasPage"));
 })
 
 
@@ -198,7 +199,7 @@ generatePages(rulesPages+4, function() {
 function generatePages(numPages, callback) {
     console.log("Generate pages");
     for (var i = 0; i < numPages; i++) {
-        if (i < rulesPages && i>0) { //rules pages
+        if (i < rulesPages /*&& i>0*/ ) { //rules pages
             initRulesPages(i);
         } else {
             $("#flipbook").append('<div class="hard"><span class="pgNum"></span><canvas class = "canvasPage" id="flipPg' + i + '"></canvas>' + '</div>');
@@ -209,7 +210,7 @@ function generatePages(numPages, callback) {
 
 function initRulesPages(i) {
     $("#flipbook").append('<div class="hard" class = "rules" id="pg' + i + '"><span class="pgNum"></span><h1>' +
-        romanize(i) + '</h1><div id = "rules' + i + '"></div></div>');
+        romanize(i+1) + '</h1><div id = "rules' + i + '"></div></div>');
     for (var j = 0; j < howToUse[i].length; j++) {
         $("#rules" + i).append("<p>" + howToUse[i][j] + "</p>");
     }
@@ -229,6 +230,18 @@ function romanize(num) {
     return roman;
 }
 
+function flipToPage() {
+    if ($("#flipOption").attr("value") == "notebook") {
+        $("#flipbook").turn("page", rulesPages + 3);
+        $("#flipOption").html("rules pages");
+        $("#flipOption").attr("value","rules")
+    }else{
+        $("#flipbook").turn("page", 2);
+        $("#flipOption").html("notebook pages");
+        $("#flipOption").attr("value","notebook")
+    }
+}
+
 /*--------writing out text effect------*/
 var oldText;
 var y = 0;
@@ -243,18 +256,14 @@ function initDrawText() {
     //ctx.lineJoin = "round";
     ctx.globalAlpha = 1 / 3;
     ctx.strokeStyle = ctx.fillStyle = "black";
-    //ctx.fill = "black"
+    ctx.fill = "black"
 }
 
 function initCanvasVariables() {
-    //createCanvasOnCurrentPage();
-    /*if ($("#flipbook").turn("page") == 1) {
-        textArray = howToUse;
-        query = "#coverPage";
-    } else {*/
     textArray = noteBookText;
     query = ".canvasPage"
         //}
+    console.log(document.querySelector(query))
     ctx = document.querySelector(query).getContext("2d"),
         dashLen = 220,
         dashOffset = dashLen,
@@ -273,23 +282,13 @@ var lineWidth = 60;
 var y = 90;
 var firstPgCount = 0; //not being used
 
-(function loop() {
-    /*
-    if ($("#flipbook").turn("page")==1 && firstPgCount==0){
-        ctx = document.querySelector("#coverPage").getContext("2d");
-        txt = "Death Note";
-        firstPgCount++;
-    }
-    */
-
-    console.log("variables: txt: " + txt + ", x: " + x + ", y: " + y);
-    //console.log("Current page: " + $("#flipbook").turn("page"));
+function animateHandWriting() {
     ctx.clearRect(x, 0, lineWidth /*width*/ , lineHeight /*height*/ );
     ctx.setLineDash([dashLen - dashOffset, dashOffset - speed]); // create a long dash mask
     dashOffset -= speed; // reduce dash length
     ctx.strokeText(txt[i], x, y); // stroke letter
 
-    if (dashOffset > 0) { requestAnimationFrame(loop); } // animate
+    if (dashOffset > 0) { requestAnimationFrame(animateHandWriting); } // animate
     else {
         //console.log("CUrrent letter: " + txt[i]);
         //console.log("Last letter: " + txt[txt.length - 1])
@@ -298,7 +297,7 @@ var firstPgCount = 0; //not being used
         x += ctx.measureText(txt[i++]).width + ctx.lineWidth * Math.random();
         ctx.setTransform(1, 0, 0, 1, 0, 3 * Math.random()); // random y-delta
         ctx.rotate(Math.random() * 0.005); // random rotation
-        if (i < txt.length) requestAnimationFrame(loop);
+        if (i < txt.length) requestAnimationFrame(animateHandWriting);
         if (txt[i] == txt[txt.length]) {
             if (noteBookText.length <= 0) {
                 stop();
@@ -306,13 +305,20 @@ var firstPgCount = 0; //not being used
                 console.log("AT LAST LETTER")
                 y = y + 20;
                 initCanvasVariables();
-                loop();
+                animateHandWriting();
             }
         }
 
     }
 
-})();
+}
+
+$(document).mouseup(function() {
+    if ($("#flipbook").turn("page") > (rulesPages + 1)) {
+        initDrawText();
+        animateHandWriting();
+    }
+})
 
 function stop() {
     //console.log("STOP")

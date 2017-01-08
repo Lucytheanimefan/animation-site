@@ -2,12 +2,16 @@
 <!--css-->
 {% block css %}
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/diary/style.css') }}"> {% endblock %}
-
 <!--html-->
 {% block body %}
 <div id="main">
+    <div class="row">
+        <button onclick="flipToPage();">Flip to <span id="flipOption" value="notebook">notebook pages</span></button>
+    </div>
     <div id="flipbook">
-        <div class="hard">Death Note<canvas id="coverPage"></canvas></div>
+        <div class="hard"><h1>Death Note</h1>
+            <canvas id="coverPage"></canvas>
+        </div>
     </div>
 </div>
 {% endblock %}
