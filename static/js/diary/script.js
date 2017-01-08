@@ -1,3 +1,9 @@
+var howToUse = ["• The human whose name is written in this note shall die.",
+    "• This note will not take effect unless the writer has the person's face in their mind when writing his/her name. Therefore, people sharing the same name will not be affected.",
+    "• If the cause of death is written within the next 40 seconds of writing the person's name, it will happen.",
+    "• If the cause of death is not specified, the person will simply die of a heart attack.",
+    "• After writing the cause of death, details of the death should be written in the next 6 minutes and 40 seconds."
+]
 var noteBookText = ["エル・ローライト" /*L*/ , "夜 神 月 ライト" /*Light*/ ]
 
 generatePages(20, function() {
@@ -29,20 +35,28 @@ function initDrawText() {
     initCanvasVariables();
 
     oldText = txt;
-    ctx.font = "15px Comic Sans MS, cursive, TSCu_Comic, sans-serif";
-    ctx.lineWidth = 0.25;
+    ctx.font = "15px Comic Sans MS, cursive, TSCu_Comic, sans-serif";//'Carrois Gothic', sans-serif";
+    ctx.lineWidth = 0.2;
     //ctx.lineJoin = "round";
     ctx.globalAlpha = 1 / 3;
-    ctx.strokeStyle = ctx.fillStyle = "black";
+    ctx.strokeStyle=ctx.fillStyle = "black";
+    //ctx.fill = "black"
 }
 
 function initCanvasVariables() {
     //createCanvasOnCurrentPage();
-    ctx = document.querySelector(".canvasPage").getContext("2d"),
+    /*if ($("#flipbook").turn("page") == 1) {
+        textArray = howToUse;
+        query = "#coverPage";
+    } else {*/
+        textArray = noteBookText;
+        query = ".canvasPage"
+    //}
+    ctx = document.querySelector(query).getContext("2d"),
         dashLen = 220,
         dashOffset = dashLen,
         speed = 5,
-        txt = noteBookText.pop(),
+        txt = textArray.pop(),
         x = 0,
         i = 0;
 }
@@ -64,6 +78,7 @@ var firstPgCount = 0; //not being used
         firstPgCount++;
     }
     */
+
     console.log("variables: txt: " + txt + ", x: " + x + ", y: " + y);
     //console.log("Current page: " + $("#flipbook").turn("page"));
     ctx.clearRect(x, 0, lineWidth /*width*/ , lineHeight /*height*/ );
@@ -86,7 +101,7 @@ var firstPgCount = 0; //not being used
                 stop();
             } else {
                 console.log("AT LAST LETTER")
-                y = y + 50;
+                y = y + 20;
                 initCanvasVariables();
                 loop();
             }
