@@ -35,7 +35,7 @@ function initDrawText() {
     initCanvasVariables();
 
     oldText = txt;
-    ctx.font = "15px Comic Sans MS, cursive, TSCu_Comic, sans-serif";//'Carrois Gothic', sans-serif";
+    ctx.font = "15px Death Note Font";//'Carrois Gothic', sans-serif";
     ctx.lineWidth = 0.2;
     //ctx.lineJoin = "round";
     ctx.globalAlpha = 1 / 3;

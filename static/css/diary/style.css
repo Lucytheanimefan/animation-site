@@ -1,4 +1,10 @@
+@font-face {
+    font-family: "Death Note Font";
+    src: url(/static/fonts/DEATHNOTE_Font/DEATHNOTEFont.ttf) format("truetype");
+}
+
 body {
+	font-family: "Death Note Font";
     text-align: center;
     margin: auto 0;
     background-color: black;
