@@ -181,7 +181,9 @@ var howToUse = [
     ],
     ["Some limited number of Death Notes have white or red front covers, but they would make no difference in their effects, as compared with the black cover Death Notes."]
 ]
-var noteBookText = ["エル・ローライト" /*L*/ , "夜 神 月 ライト" /*Light*/ ]
+
+var names = ["エル・ローライト" /*L*/ , "夜 神 月 ライト" /*Light*/ ]
+var noteBookText = ["エル・ローライト" /*L*/ , "夜 神 月 ライト" /*Light*/ ];
 
 var rulesPages = howToUse.length;
 console.log("Num rules pages: " + rulesPages)
@@ -210,7 +212,7 @@ function generatePages(numPages, callback) {
 
 function initRulesPages(i) {
     $("#flipbook").append('<div class="hard" class = "rules" id="pg' + i + '"><span class="pgNum"></span><h1>' +
-        romanize(i+1) + '</h1><div id = "rules' + i + '"></div></div>');
+        romanize(i + 1) + '</h1><div id = "rules' + i + '"></div></div>');
     for (var j = 0; j < howToUse[i].length; j++) {
         $("#rules" + i).append("<p>" + howToUse[i][j] + "</p>");
     }
@@ -234,11 +236,12 @@ function flipToPage() {
     if ($("#flipOption").attr("value") == "notebook") {
         $("#flipbook").turn("page", rulesPages + 3);
         $("#flipOption").html("rules pages");
-        $("#flipOption").attr("value","rules")
-    }else{
+        $("#flipOption").attr("value", "rules");
+        initHandWriting();
+    } else {
         $("#flipbook").turn("page", 2);
         $("#flipOption").html("notebook pages");
-        $("#flipOption").attr("value","notebook")
+        $("#flipOption").attr("value", "notebook")
     }
 }
 
@@ -259,6 +262,7 @@ function initDrawText() {
     ctx.fill = "black"
 }
 
+var nameCount = 0;
 function initCanvasVariables() {
     textArray = noteBookText;
     query = ".canvasPage"
@@ -268,9 +272,10 @@ function initCanvasVariables() {
         dashLen = 220,
         dashOffset = dashLen,
         speed = 5,
-        txt = textArray.pop(),
+        txt = textArray[nameCount],
         x = 0,
         i = 0;
+    nameCount++;
 }
 
 function createCanvasOnCurrentPage() {
@@ -280,7 +285,6 @@ function createCanvasOnCurrentPage() {
 var lineHeight = 10;
 var lineWidth = 60;
 var y = 90;
-var firstPgCount = 0; //not being used
 
 function animateHandWriting() {
     ctx.clearRect(x, 0, lineWidth /*width*/ , lineHeight /*height*/ );
@@ -313,12 +317,17 @@ function animateHandWriting() {
 
 }
 
-$(document).mouseup(function() {
+function initHandWriting() {
+    nameCount=0;
+    canvas = document.querySelector(".canvasPage");
     if ($("#flipbook").turn("page") > (rulesPages + 1)) {
+        y=90;
         initDrawText();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         animateHandWriting();
     }
-})
+
+}
 
 function stop() {
     //console.log("STOP")
