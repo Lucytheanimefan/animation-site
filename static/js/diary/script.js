@@ -21,9 +21,9 @@ function generatePages(numPages, callback) {
             initRulesPages(i);
         } else {
             if (i % 2 == 0) {
-                $("#flipbook").append('<div class="hard"><span class="pgNum"></span><canvas class = "canvasPage" id="flipPg' + i + '"></canvas>' + '</div>');
+                $("#flipbook").append('<div class="hard shadow"><span class="pgNum"></span><canvas class = "canvasPage" id="flipPg' + i + '"></canvas>' + '</div>');
             } else {
-                $("#flipbook").append('<div class = "typablePage hard"><span class="pgNum"></span>' +
+                $("#flipbook").append('<div class = "typablePage hard shadow"><span class="pgNum"></span>' +
                     '<div class = "names">' + '<div class = "inputNames"></div>' +
                     '<input onkeypress="addNameToNotebook()" type="text" id = "nameInput"></input></div></div>');
             }
@@ -95,7 +95,7 @@ var colors = ["white", "black"]
 var backgroundDelay = 1500;
 
 function updateCSS(rulesPage = 0) {
-    $(".page").css("background-color", colors[0 + rulesPage]);
+    //$(".page").css("background-color", colors[0 + rulesPage]);
     $("#flipbook").css("color", colors[1 - rulesPage]);
     console.log("Background should become: " + colors[rulesPage])
     $("body").animate({
