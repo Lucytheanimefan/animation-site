@@ -3,7 +3,7 @@ var noteBookText = ["エル・ローライト" /*L*/ , "夜 神 月 ライト" /
 
 var rulesPages = howToUse.length;
 console.log("Num rules pages: " + rulesPages)
-generatePages(rulesPages + 4, function() {
+generatePages(rulesPages + 2, function() {
     $("#flipbook").turn({
         width: 900,
         height: 600,

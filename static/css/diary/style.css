@@ -66,6 +66,7 @@ h1{
 }
 
 .rulesContent{
+	color: white !important;
 	margin-left: 40px;
 	margin-right: 40px;
 	margin-top: 150px;
