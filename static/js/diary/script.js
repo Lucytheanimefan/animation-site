@@ -1,4 +1,4 @@
-var names = ["エル・ローライト" /*L*/ , "夜 神 月 ライト" /*Light*/ ]
+//var names = ["エル・ローライト" /*L*/ , "夜 神 月 ライト" /*Light*/ ]
 var noteBookText = ["エル・ローライト" /*L*/ , "夜 神 月 ライト" /*Light*/ ];
 
 var rulesPages = howToUse.length;
