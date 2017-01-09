@@ -9,6 +9,7 @@ generatePages(rulesPages + 4, function() {
         height: 600,
         autoCenter: true
     });
+    initClickableTypeablePage();
 })
 
 
@@ -22,11 +23,20 @@ function generatePages(numPages, callback) {
             if (i % 2 == 0) {
                 $("#flipbook").append('<div class="hard"><span class="pgNum"></span><canvas class = "canvasPage" id="flipPg' + i + '"></canvas>' + '</div>');
             } else {
-                $("#flipbook").append('<div class="hard"><span class="pgNum"></span><textarea cols="50" rows="30" onkeyup="auto_grow(this)"></textarea></div>');
+                $("#flipbook").append('<div class = "typablePage" class="hard"><span class="pgNum"></span>' +
+                    '<div class = "names">' + '<div class = "inputNames"></div>' +
+                    '<input onkeypress="addNameToNotebook()" type="text" id = "nameInput"></input></div></div>');
             }
         }
     }
     callback();
+}
+
+function initClickableTypeablePage() {
+    $(document).click(function() {
+        console.log("Typable page clicked");
+        $('#nameInput').focus();
+    });
 }
 
 function auto_grow(element) {
@@ -35,6 +45,21 @@ function auto_grow(element) {
         element.style.height = (element.scrollHeight) + "px";
     }
 }
+
+function addNameToNotebook() {
+    event = window.event;
+    if (event.keyCode == 13) {
+        console.log("Clicked enter!")
+        $(".inputNames").append("<p>" + $('#nameInput').val() + "</p>");
+        //move it down
+        var tp = $('#nameInput').position().top;
+        console.log("TOP: " + tp)
+        $('#nameInput').offset({ top: tp + 15 });
+        console.log("New top: " + $('#nameInput').position().top);
+        $("#nameInput").val("");
+    }
+}
+
 
 function initRulesPages(i) {
     $("#flipbook").append('<div class="hard" class = "rules" id="pg' + i + '"><span class="pgNum"></span><h1>' +
@@ -159,9 +184,7 @@ function animateHandWriting() {
                 animateHandWriting();
             }
         }
-
     }
-
 }
 
 function initHandWriting() {

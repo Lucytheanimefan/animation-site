@@ -35,14 +35,12 @@ body {
 	text-align: justify;
 }
 
-textarea {
-	width: 400px;
-    resize: none;
-    overflow: hidden;
-    min-height: 50px;
-    max-height: 500px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+.names{
+	margin-top: 50px;
+}
+
+#nameInput {
+	text-align: center;
     border: none;
     outline: none;
     border-color: transparent;
