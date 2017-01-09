@@ -5,7 +5,7 @@ var rulesPages = howToUse.length;
 console.log("Num rules pages: " + rulesPages)
 generatePages(rulesPages + 4, function() {
     $("#flipbook").turn({
-        width: 1000,
+        width: 900,
         height: 600,
         autoCenter: true
     });
@@ -23,7 +23,7 @@ function generatePages(numPages, callback) {
             if (i % 2 == 0) {
                 $("#flipbook").append('<div class="hard"><span class="pgNum"></span><canvas class = "canvasPage" id="flipPg' + i + '"></canvas>' + '</div>');
             } else {
-                $("#flipbook").append('<div class = "typablePage" class="hard"><span class="pgNum"></span>' +
+                $("#flipbook").append('<div class = "typablePage hard"><span class="pgNum"></span>' +
                     '<div class = "names">' + '<div class = "inputNames"></div>' +
                     '<input onkeypress="addNameToNotebook()" type="text" id = "nameInput"></input></div></div>');
             }
@@ -69,10 +69,11 @@ function addNameToNotebook() {
 
 
 function initRulesPages(i) {
-    $("#flipbook").append('<div class="hard" class = "rules" id="pg' + i + '"><span class="pgNum"></span><h1>' +
-        romanize(i + 1) + '</h1><div id = "rules' + i + '"></div></div>');
+    $("#flipbook").append('<div class="hard rules" id="pg' + i + '"><span class="pgNum"></span>'+'<div class="rulesContent">'+'<h2>' +
+        romanize(i + 1) + '</h2><div id = "rules' + i + '"></div></div></div>');
+    $("#rules" + i).append("<ul class = 'rulesBullets'></ul>");
     for (var j = 0; j < howToUse[i].length; j++) {
-        $("#rules" + i).append("<p class='rulesText'>" + howToUse[i][j] + "</p>");
+        $("#rules" + i+" .rulesBullets").append("<li class='rulesText'> " + howToUse[i][j] + "</li>");
     }
 
 }

@@ -26,6 +26,11 @@ h1{
 	font-size: 60px !important;
 }
 
+.rules{
+	background-image: url("/static/img/deathnote/Death_Note_border.png");
+	background-size: 450px 600px;
+}
+
 .title{
 	margin-top: 50px;
 }
@@ -37,11 +42,19 @@ h1{
 	color: white;
 }
 
+.rulesBullets{
+	padding-left: 10px;
+}
+
 .rulesText{
-	margin-left: 20px;
-	margin-right: 20px;
-	font-size: 20px;
+	font-size: 17px;
 	text-align: justify;
+}
+
+.rulesContent{
+	margin-left: 40px;
+	margin-right: 40px;
+	margin-top: 150px;
 }
 
 .names{
