@@ -46,17 +46,24 @@ function auto_grow(element) {
     }
 }
 
+var pageFull = false; 
 function addNameToNotebook() {
     event = window.event;
-    if (event.keyCode == 13) {
+    if (event.keyCode == 13 && !pageFull) {
         console.log("Clicked enter!")
         $(".inputNames").append("<p>" + $('#nameInput').val() + "</p>");
+        $("#nameInput").val("");
         //move it down
         var tp = $('#nameInput').position().top;
         console.log("TOP: " + tp)
-        $('#nameInput').offset({ top: tp + 15 });
+        $('#nameInput').css( "top", (tp + 10) );
         console.log("New top: " + $('#nameInput').position().top);
-        $("#nameInput").val("");
+        if (tp>540){
+            pageFull=true;
+            $("#nameInput").prop('disabled', true); 
+            console.log("PAGE FULL!");
+        }
+        
     }
 }
 
