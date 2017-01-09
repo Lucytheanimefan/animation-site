@@ -193,7 +193,6 @@ generatePages(rulesPages + 4, function() {
         height: 600,
         autoCenter: true
     });
-    console.log("DOES IT EXIST?: " + $(".canvasPage"));
 })
 
 
@@ -214,7 +213,7 @@ function initRulesPages(i) {
     $("#flipbook").append('<div class="hard" class = "rules" id="pg' + i + '"><span class="pgNum"></span><h1>' +
         romanize(i + 1) + '</h1><div id = "rules' + i + '"></div></div>');
     for (var j = 0; j < howToUse[i].length; j++) {
-        $("#rules" + i).append("<p>" + howToUse[i][j] + "</p>");
+        $("#rules" + i).append("<p class='rulesText'>" + howToUse[i][j] + "</p>");
     }
 
 }
@@ -233,17 +232,19 @@ function romanize(num) {
 }
 
 var colors = ["white", "black"]
-var backgroundDelay = 5000;
+var backgroundDelay = 1500;
 
 function updateCSS(rulesPage = 0) {
     $(".page").css("background-color", colors[0 + rulesPage]);
     $("#flipbook").css("color", colors[1 - rulesPage]);
+    console.log("Background should become: "+colors[rulesPage])
     $("body").animate({
-        backgroundColor: colors[rulesPage],
+        backgroundColor: colors[Math.abs(rulesPage-1)],
     }, backgroundDelay)
 }
 
 function flipToPage() {
+    console.log("currently: "+$("#flipOption").attr("value"))
     if ($("#flipOption").attr("value") == "notebook") {
         $("#flipbook").turn("page", rulesPages + 3);
         $("#flipOption").html("rules pages");
