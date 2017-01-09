@@ -1,5 +1,5 @@
 //var names = ["エル・ローライト" /*L*/ , "夜 神 月 ライト" /*Light*/ ]
-var noteBookText = ["エル・ローライト" /*L*/ , "夜 神 月 ライト" /*Light*/ ];
+var noteBookText = ["レイ=ペンバー"/*Rei Penbā*/,"南空ナオミ"/*Naomi Misora*/,"リンド=L=テイラー" /*Lind L Tailor*/ , "エル・ローライト" /*L*/,"高田=清美"/*Kiyomi Takada*/ , "夜 神 月 ライト" /*Light*/ ];
 
 var rulesPages = howToUse.length;
 console.log("Num rules pages: " + rulesPages)
@@ -21,7 +21,7 @@ function generatePages(numPages, callback) {
             initRulesPages(i);
         } else {
             if (i % 2 == 0) {
-                $("#flipbook").append('<div class="hard shadow"><span class="pgNum"></span><canvas class = "canvasPage" id="flipPg' + i + '"></canvas>' + '</div>');
+                $("#flipbook").append('<div class="hard shadow"><span class="pgNum"></span><canvas class = "canvasPage" height = "600" id="flipPg' + i + '"></canvas>' + '</div>');
             } else {
                 $("#flipbook").append('<div class = "typablePage hard shadow"><span class="pgNum"></span>' +
                     '<div class = "names">' + '<div class = "inputNames"></div>' +
@@ -46,7 +46,8 @@ function auto_grow(element) {
     }
 }
 
-var pageFull = false; 
+var pageFull = false;
+
 function addNameToNotebook() {
     event = window.event;
     if (event.keyCode == 13 && !pageFull) {
@@ -56,24 +57,24 @@ function addNameToNotebook() {
         //move it down
         var tp = $('#nameInput').position().top;
         console.log("TOP: " + tp)
-        $('#nameInput').css( "top", (tp + 10) );
+        $('#nameInput').css("top", (tp + 10));
         console.log("New top: " + $('#nameInput').position().top);
-        if (tp>540){
-            pageFull=true;
-            $("#nameInput").prop('disabled', true); 
+        if (tp > 540) {
+            pageFull = true;
+            $("#nameInput").prop('disabled', true);
             console.log("PAGE FULL!");
         }
-        
+
     }
 }
 
 
 function initRulesPages(i) {
-    $("#flipbook").append('<div class="hard rules" id="pg' + i + '"><span class="pgNum"></span>'+'<div class="rulesContent">'+'<h2>' +
+    $("#flipbook").append('<div class="hard rules" id="pg' + i + '"><span class="pgNum"></span>' + '<div class="rulesContent">' + '<h2>' +
         romanize(i + 1) + '</h2><div id = "rules' + i + '"></div></div></div>');
     $("#rules" + i).append("<ul class = 'rulesBullets'></ul>");
     for (var j = 0; j < howToUse[i].length; j++) {
-        $("#rules" + i+" .rulesBullets").append("<li class='rulesText'> " + howToUse[i][j] + "</li>");
+        $("#rules" + i + " .rulesBullets").append("<li class='rulesText'> " + howToUse[i][j] + "</li>");
     }
 
 }
@@ -151,7 +152,7 @@ function initCanvasVariables() {
     ctx = document.querySelector(query).getContext("2d"),
         dashLen = 220,
         dashOffset = dashLen,
-        speed = 5,
+        speed = 7,
         txt = textArray[nameCount],
         x = 0,
         i = 0;
@@ -159,7 +160,7 @@ function initCanvasVariables() {
 }
 
 function createCanvasOnCurrentPage() {
-    $("#flipPg" + $("#flipbook").turn("page")).append("<canvas width='470'></canvas>")
+    $("#flipPg" + $("#flipbook").turn("page")).append("<canvas width='470' height='500'></canvas>")
 }
 
 var lineHeight = 10;

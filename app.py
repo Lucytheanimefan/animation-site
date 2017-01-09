@@ -32,7 +32,7 @@ def deathnote():
 	return render_template("deathnote/index.html")
 '''
 
-@app.route("/diary")
+@app.route("/deathnote")
 def diary():
 	return render_template("diary/index.html")
 
