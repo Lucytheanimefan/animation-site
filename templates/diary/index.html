@@ -7,16 +7,19 @@
 {% block body %}
 <div id="main">
     <div class="row buttonNav">
-        <button onclick="flipToPage();">Flip to <span id="flipOption" value="notebook">notebook pages</span></button>
+        <button type="button" class="btn" onclick="flipToPage();">Flip to <span id="flipOption" value="notebook">notebook pages</span></button>
     </div>
     <div id="flipbook">
-        <div class="hard" id = "titlePage">
+        <div class="hard" id="titlePage">
             <div class="row title">
                 <h1><b id="D">D</b>EATH NOTE</h1>
             </div>
         </div>
     </div>
 </div>
+<audio controls autoplay loop>
+    <source src="/static/sound/Kira_Theme.mp3" type="audio/mpeg">
+</audio>
 {% endblock %}
 <!--js-->
 {% block scripts %}

@@ -3,8 +3,12 @@
     src: url(/static/fonts/DEATHNOTE_Font/DEATHNOTEFont.ttf) format("truetype");
 }
 
+audio{
+	display: none;
+}
+
 body {
-	font-family: "Death Note Font";
+	font-family: "Death Note Font" !important;
     text-align: center;
     margin: auto 0;
     background-color: white;
@@ -20,6 +24,20 @@ body {
 
 h1{
 	font-size: 50px;
+}
+
+.btn{
+	background-color: #565656 !important;
+	color: white;
+}
+
+.btn:hover{
+	background-color: darkgrey;
+	color: white;
+}
+
+.buttonNav{
+	margin-bottom: 20px;
 }
 
 #D{
