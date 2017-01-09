@@ -7,7 +7,7 @@ body {
 	font-family: "Death Note Font";
     text-align: center;
     margin: auto 0;
-    background-color: black;
+    background-color: white;
 }
 
 #main {
@@ -18,7 +18,13 @@ body {
     margin-left: -500px;
 }
 
+
+
 .page {
-    background-color: white;
+    background-color: black;
+}
+
+#flipbook{
+	color: white;
 }
 

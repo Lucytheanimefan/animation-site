@@ -238,10 +238,21 @@ function flipToPage() {
         $("#flipOption").html("rules pages");
         $("#flipOption").attr("value", "rules");
         initHandWriting();
-    } else {
+        //update css
+        $(".page").css("background-color", "white");
+        $("#flipbook").css("color", "black");
+        $("body").css("background-color", "black");
+
+    } else { //flip to rules
         $("#flipbook").turn("page", 2);
         $("#flipOption").html("notebook pages");
-        $("#flipOption").attr("value", "notebook")
+        $("#flipOption").attr("value", "notebook");
+
+
+        //update css
+        $(".page").css("background-color", "black");
+        $("#flipbook").css("color", "white");
+        $("body").css("background-color", "white");
     }
 }
 
@@ -263,6 +274,7 @@ function initDrawText() {
 }
 
 var nameCount = 0;
+
 function initCanvasVariables() {
     textArray = noteBookText;
     query = ".canvasPage"
@@ -318,10 +330,10 @@ function animateHandWriting() {
 }
 
 function initHandWriting() {
-    nameCount=0;
+    nameCount = 0;
     canvas = document.querySelector(".canvasPage");
     if ($("#flipbook").turn("page") > (rulesPages + 1)) {
-        y=90;
+        y = 90;
         initDrawText();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         animateHandWriting();
