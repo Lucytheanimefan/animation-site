@@ -1,9 +1,9 @@
 //var names = ["エル・ローライト" /*L*/ , "夜 神 月 ライト" /*Light*/ ]
-var noteBookText = ["レイ=ペンバー"/*Rei Penbā*/,"南空ナオミ"/*Naomi Misora*/,"リンド=L=テイラー" /*Lind L Tailor*/ , "エル・ローライト" /*L*/,"高田=清美"/*Kiyomi Takada*/ , "夜 神 月 ライト" /*Light*/ ];
+var noteBookText = ["レイ=ペンバー" /*Rei Penbā*/ , "南空ナオミ" /*Naomi Misora*/ , "リンド=L=テイラー" /*Lind L Tailor*/ , "エル・ローライト" /*L*/ , "高田=清美" /*Kiyomi Takada*/ , "夜 神 月 ライト" /*Light*/ ];
 
 var rulesPages = howToUse.length;
 console.log("Num rules pages: " + rulesPages)
-generatePages(rulesPages + 2, function() {
+generatePages(rulesPages + 3, function() {
     $("#flipbook").turn({
         width: 900,
         height: 600,
@@ -19,6 +19,11 @@ function generatePages(numPages, callback) {
     for (var i = 0; i < numPages; i++) {
         if (i < rulesPages /*&& i>0*/ ) { //rules pages
             initRulesPages(i);
+        } else if (i==(numPages-1)) { //last page = credits
+            $("#flipbook").append('<div class="hard shadow" id = "creditsPage"><span class="pgNum"></span>' +'<h2>Credits</h2>'+
+                '<p>Music: Light\'s theme (composed by Yoshihisa Hirano and Hideki Taniuchi)</p>'+
+                '<p>All of the Death Note rules and names are courtesy of the source itself and its wiki page</p>'+
+             '</div>');
         } else {
             if (i % 2 == 0) {
                 $("#flipbook").append('<div class="hard shadow"><span class="pgNum"></span><canvas class = "canvasPage" height = "600" id="flipPg' + i + '"></canvas>' + '</div>');

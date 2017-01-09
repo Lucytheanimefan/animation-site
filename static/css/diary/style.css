@@ -54,7 +54,7 @@ h1{
 	margin-top: 50px;
 }
 
-#titlePage{
+#titlePage, #creditsPage{
 	background-color: black !important;
 }
 .page {
@@ -62,7 +62,7 @@ h1{
 }
 
 
-#flipbook{
+#flipbook, #creditsPage{
 	color: white;
 }
 
