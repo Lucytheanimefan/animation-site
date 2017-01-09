@@ -232,6 +232,17 @@ function romanize(num) {
     return roman;
 }
 
+var colors = ["white", "black"]
+var backgroundDelay = 5000;
+
+function updateCSS(rulesPage = 0) {
+    $(".page").css("background-color", colors[0 + rulesPage]);
+    $("#flipbook").css("color", colors[1 - rulesPage]);
+    $("body").animate({
+        backgroundColor: colors[rulesPage],
+    }, backgroundDelay)
+}
+
 function flipToPage() {
     if ($("#flipOption").attr("value") == "notebook") {
         $("#flipbook").turn("page", rulesPages + 3);
@@ -239,9 +250,7 @@ function flipToPage() {
         $("#flipOption").attr("value", "rules");
         initHandWriting();
         //update css
-        $(".page").css("background-color", "white");
-        $("#flipbook").css("color", "black");
-        $("body").css("background-color", "black");
+        updateCSS();
 
     } else { //flip to rules
         $("#flipbook").turn("page", 2);
@@ -250,9 +259,7 @@ function flipToPage() {
 
 
         //update css
-        $(".page").css("background-color", "black");
-        $("#flipbook").css("color", "white");
-        $("body").css("background-color", "white");
+        updateCSS(1);
     }
 }
 
@@ -266,9 +273,9 @@ function initDrawText() {
 
     oldText = txt;
     ctx.font = "15px Death Note Font"; //'Carrois Gothic', sans-serif";
-    ctx.lineWidth = 0.2;
+    ctx.lineWidth = 0.1;
     //ctx.lineJoin = "round";
-    ctx.globalAlpha = 1 / 3;
+    ctx.globalAlpha = 0.9;
     ctx.strokeStyle = ctx.fillStyle = "black";
     ctx.fill = "black"
 }
