@@ -98,7 +98,9 @@ h1{
 
 ul, li{
 	margin: 0;
+	padding: 0.2em;
 }
+
 .names{
 	margin-top: 50px;
 }
