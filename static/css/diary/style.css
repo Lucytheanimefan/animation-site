@@ -110,6 +110,7 @@ h1{
 }
 
 #nameInput {
+	width: 400px;
 	font-size: 18px;
 	text-align: center;
     border: none;

@@ -177,7 +177,7 @@ function initCanvasVariables() {
     ctx = document.querySelector(query).getContext("2d"),
         dashLen = 220,
         dashOffset = dashLen,
-        speed = 10,
+        speed = 12,
         txt = textArray[nameCount],
         x = 0,
         i = 0;
@@ -190,7 +190,7 @@ function createCanvasOnCurrentPage() {
 
 var lineHeight = 10;
 var lineWidth = 60;
-var y = 70;
+var y = 50;
 
 function animateHandWriting() {
     ctx.clearRect(x, 0, lineWidth /*width*/ , lineHeight /*height*/ );
