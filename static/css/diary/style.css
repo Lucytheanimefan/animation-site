@@ -11,7 +11,7 @@ body {
 	font-family: "Death Note Font" !important;
     text-align: center;
     margin: auto 0;
-    background-color: white;
+    background-color: black;
 }
 
 #main {
@@ -57,6 +57,11 @@ h1{
 #titlePage, #creditsPage{
 	background-color: black !important;
 }
+
+#creditsPage p{
+	font-size: 19px;
+}
+
 .page {
     background-color: white;
 }
@@ -68,11 +73,11 @@ h1{
 
 #flipbook .shadow,
 #flipbook.shadow{
-  -webkit-box-shadow: 0 4px 10px #666;
-  -moz-box-shadow: 0 4px 10px #666;
-  -ms-box-shadow: 0 4px 10px #666;
-  -o-box-shadow: 0 4px 10px #666;
-  box-shadow: 0 4px 10px #666;
+  -webkit-box-shadow: 0 7px 10px #666;
+  -moz-box-shadow: 0 7px 10px #666;
+  -ms-box-shadow: 0 7px 10px #666;
+  -o-box-shadow: 0 7px 10px #666;
+  box-shadow: 0 7px 10px #666;
 }
 
 .rulesBullets{
@@ -80,7 +85,7 @@ h1{
 }
 
 .rulesText{
-	font-size: 18.8px;
+	font-size: 18.2px;
 	text-align: justify;
 }
 
@@ -95,7 +100,13 @@ h1{
 	margin-top: 50px;
 }
 
+.inputNames{
+	font-size: 19px !important;
+	color: black;
+}
+
 #nameInput {
+	font-size: 19px;
 	text-align: center;
     border: none;
     outline: none;

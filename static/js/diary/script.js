@@ -104,9 +104,11 @@ function updateCSS(rulesPage = 0) {
     //$(".page").css("background-color", colors[0 + rulesPage]);
     $("#flipbook").css("color", colors[1 - rulesPage]);
     console.log("Background should become: " + colors[rulesPage])
+    /*
     $("body").animate({
         backgroundColor: colors[Math.abs(rulesPage - 1)],
     }, backgroundDelay)
+    */
 }
 
 function flipToPage() {
