@@ -1,5 +1,23 @@
 //var names = ["エル・ローライト" /*L*/ , "夜 神 月 ライト" /*Light*/ ]
-var noteBookText = ["レイ=ペンバー" /*Rei Penbā*/ , "南空ナオミ" /*Naomi Misora*/ , "リンド=L=テイラー" /*Lind L Tailor*/ , "エル・ローライト" /*L*/ , "高田=清美" /*Kiyomi Takada*/ , "夜 神 月 ライト" /*Light*/ ];
+var noteBookText = ["渋伊丸 拓男 事故死", "渋伊丸 拓雄 事故死", "渋井丸 拓男 事故死" /*Shibuimaru Takuo   accidental death*/ , "渋伊丸 拓夫 事故死", "渋伊丸 卓男 事故死", "渋井丸 卓男 事故死", "渋井丸 拓雄 事故死", "渋井丸 拓夫 事故死",
+    "Lind L Tailor" /*Lind L Tailor*/ ,
+    "Haley Belle 心臓麻痺",
+    "Raye Penber 心臓麻痺" /*Rei Penbā*/ ,
+    "Liab Zaopack 心臓麻痺",
+    "Arire Weekwood 心臓麻痺",
+    "Ale Funderrem 心臓麻痺",
+    "Freddi Guntair 心臓麻痺",
+    "Knick Staek",
+    "Bess Sekllet",
+    "Frigde Copen",
+    "Toors Denote 心臓麻痺",
+    "Girela Sevenster",
+    "南空ナオミ" /*Naomi Misora*/ ,
+    "エル・ローライト" /*L*/ ,
+    "ミハエル・ケール" /*Mello*/ ,
+    "高田=清美" /*Kiyomi Takada*/ ,
+    "夜 神 月 ライト" /*Light*/
+];
 
 var rulesPages = howToUse.length;
 console.log("Num rules pages: " + rulesPages)
@@ -19,11 +37,11 @@ function generatePages(numPages, callback) {
     for (var i = 0; i < numPages; i++) {
         if (i < rulesPages /*&& i>0*/ ) { //rules pages
             initRulesPages(i);
-        } else if (i==(numPages-1)) { //last page = credits
-            $("#flipbook").append('<div class="hard shadow" id = "creditsPage"><span class="pgNum"></span>' +'<h2>Credits</h2>'+
-                '<p>Music: Light\'s theme composed by Yoshihisa Hirano and Hideki Taniuchi</p>'+
-                '<p>All of the Death Note rules and names are courtesy of the source itself and its wiki page</p>'+
-             '</div>');
+        } else if (i == (numPages - 1)) { //last page = credits
+            $("#flipbook").append('<div class="hard shadow" id = "creditsPage"><span class="pgNum"></span>' + '<h2>Credits</h2>' +
+                '<p>Music: Light\'s theme composed by Yoshihisa Hirano and Hideki Taniuchi</p>' +
+                '<p>All of the Death Note rules and names are courtesy of the source itself and its wiki page</p>' +
+                '</div>');
         } else {
             if (i % 2 == 0) {
                 $("#flipbook").append('<div class="hard shadow"><span class="pgNum"></span><canvas class = "canvasPage" height = "600" id="flipPg' + i + '"></canvas>' + '</div>');
@@ -104,11 +122,11 @@ function updateCSS(rulesPage = 0) {
     //$(".page").css("background-color", colors[0 + rulesPage]);
     $("#flipbook").css("color", colors[1 - rulesPage]);
     console.log("Background should become: " + colors[rulesPage])
-    /*
-    $("body").animate({
-        backgroundColor: colors[Math.abs(rulesPage - 1)],
-    }, backgroundDelay)
-    */
+        /*
+        $("body").animate({
+            backgroundColor: colors[Math.abs(rulesPage - 1)],
+        }, backgroundDelay)
+        */
 }
 
 function flipToPage() {
@@ -159,7 +177,7 @@ function initCanvasVariables() {
     ctx = document.querySelector(query).getContext("2d"),
         dashLen = 220,
         dashOffset = dashLen,
-        speed = 7,
+        speed = 9,
         txt = textArray[nameCount],
         x = 0,
         i = 0;
