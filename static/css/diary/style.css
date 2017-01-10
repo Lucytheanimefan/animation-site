@@ -101,12 +101,16 @@ h1{
 }
 
 .inputNames{
-	font-size: 19px !important;
+	font-size: 18px !important;
 	color: black;
 }
 
+.inputNames p{
+	margin: 0em !important;
+}
+
 #nameInput {
-	font-size: 19px;
+	font-size: 18px;
 	text-align: center;
     border: none;
     outline: none;
