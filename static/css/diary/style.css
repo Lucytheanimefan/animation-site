@@ -89,6 +89,10 @@ h1{
 	text-align: justify;
 }
 
+.smaller{
+	font-size: 17px;
+}
+
 .rulesContent{
 	color: white !important;
 	margin-left: 40px;
