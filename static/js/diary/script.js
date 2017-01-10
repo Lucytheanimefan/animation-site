@@ -41,7 +41,9 @@ function generatePages(numPages, callback) {
             $("#flipbook").append('<div class="hard shadow" id = "creditsPage"><span class="pgNum"></span>' + '<h2>Credits</h2>' +
                 '<p>Music: Light\'s theme composed by Yoshihisa Hirano and Hideki Taniuchi</p>' +
                 '<p>All of the Death Note rules and names are courtesy of the source itself and its wiki page</p>' +
-                '</div>');
+                '<h3>Disclaimer</h3>'+
+                '<p>Names in the notebook are purely fictional. Any resemblance to real people or groups is coincidental.</p>'+
+                '<p>This "notebook" does not, in fact, kill people</p>'+'</div>');
         } else {
             if (i % 2 == 0) {
                 $("#flipbook").append('<div class="hard shadow"><span class="pgNum"></span><canvas class = "canvasPage" height = "600" id="flipPg' + i + '"></canvas>' + '</div>');
