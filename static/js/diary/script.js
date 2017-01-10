@@ -21,7 +21,7 @@ function generatePages(numPages, callback) {
             initRulesPages(i);
         } else if (i==(numPages-1)) { //last page = credits
             $("#flipbook").append('<div class="hard shadow" id = "creditsPage"><span class="pgNum"></span>' +'<h2>Credits</h2>'+
-                '<p>Music: Light\'s theme (composed by Yoshihisa Hirano and Hideki Taniuchi)</p>'+
+                '<p>Music: Light\'s theme composed by Yoshihisa Hirano and Hideki Taniuchi</p>'+
                 '<p>All of the Death Note rules and names are courtesy of the source itself and its wiki page</p>'+
              '</div>');
         } else {
