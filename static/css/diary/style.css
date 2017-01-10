@@ -96,6 +96,9 @@ h1{
 	margin-top: 150px;
 }
 
+ul, li{
+	margin: 0;
+}
 .names{
 	margin-top: 50px;
 }
