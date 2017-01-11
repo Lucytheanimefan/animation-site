@@ -2,12 +2,14 @@
     font-family: 'Open Sans', sans-serif;
 }
 
-
-
-.bio, .links{
-    margin-left: 2px;
+.container-fluid {
+    margin-top: 5%;
 }
 
+.bio,
+.links {
+    margin-left: 2px;
+}
 
 .about {
     margin-bottom: 3%;
@@ -19,7 +21,7 @@
     text-align: center;
 }
 
-.bio{
+.bio {
     margin-top: 10px;
     text-align: left !important;
 }
@@ -74,13 +76,38 @@ body {
     font-weight: bolder;
 }
 
-footer {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0 !important;
-    text-align: center;
-    margin-bottom: 10px;
+.navbar-toggle .icon-bar {
+    background-color: white;
+    color: white !important;
+    stroke: white;
+}
+
+.icon-bar,
+.navbar-toggle,
+.navbar-toggle.collapsed {
+
+    /*CSS transitions*/
+    -o-transition-property: none !important;
+    -moz-transition-property: none !important;
+    -ms-transition-property: none !important;
+    -webkit-transition-property: none !important;
+    transition-property: none !important;
+    /*CSS transforms*/
+    -o-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    -webkit-transform: none !important;
+    transform: none !important;
+    /*CSS animations*/
+    -webkit-animation: none !important;
+    -moz-animation: none !important;
+    -o-animation: none !important;
+    -ms-animation: none !important;
+    animation: none !important;
+}
+
+.buffer {
+    height: 120px;
 }
 
 a,
@@ -98,9 +125,10 @@ a:hover {
     height: 350px;
 }
 
-#deathnote{
+#deathnote {
     width: auto !important;
 }
+
 
 /*----------------title fade in-----------------*/
 

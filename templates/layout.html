@@ -27,46 +27,67 @@
     })(window, document, 'script', 'dataLayer', 'GTM-WC3W4JN');
     </script>
 </head>
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WC3W4JN" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- Header start-->
+<header>
+    <nav class="navbar navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--????-->
+                <a class="navbar-brand" href="/">deadfisheyed</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('about') }}">About</a></li>
+                    <li><a href="{{ url_for('works') }}">Works</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
 
 <body>
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WC3W4JN" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <!-- Header start-->
-    <header>
-    </header>
-
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-    <footer>
-        <nav class="navbar">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('about') }}">About</a></li>
-                <li><a href="{{ url_for('works') }}">Works</a></li>
-            </ul>
-        </nav>
-        <div>Contact: deadfisheyed@gmail.com</div>
-    </footer>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='css/lib/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/water.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <script>
-    (function(i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function() {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', 'UA-89624096-1', 'auto');
-    ga('send', 'pageview');
-    </script>
+    {% block body %}{% endblock %}
+    <div class="row buffer"></div>
 </body>
+<footer class="footer">
+    <!--<nav class="navbar">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('works') }}">Works</a></li>
+        </ul>
+    </nav>-->
+    <div class="container">
+        <p>Contact: deadfisheyed@gmail.com</p>
+    </div>
+</footer>
+<script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='css/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/water.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script>
+(function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+ga('create', 'UA-89624096-1', 'auto');
+ga('send', 'pageview');
+</script>
