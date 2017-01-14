@@ -6,6 +6,17 @@
     margin-top: 5%;
 }
 
+#title {
+    position: absolute;
+    font-color: white;
+    z-index: 10;
+    margin-top: 30%;
+    margin-bottom: 30%;
+    font-size: 60px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
 .bio,
 .links {
     margin-left: 2px;
@@ -300,16 +311,7 @@ span:nth-of-type(21) {
     animation-delay: 2.1s;
 }
 
-#title {
-    position: absolute;
-    font-color: white;
-    z-index: 10;
-    margin-top: 30%;
-    margin-bottom: 30%;
-    font-size: 60px;
-    text-align: center;
-    width: 100%;
-}
+
 
 @keyframes fadein {
     from {
