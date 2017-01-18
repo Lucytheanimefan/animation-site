@@ -2,7 +2,7 @@
 <!--css-->
 {% block css %}
 <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/diary/style.css') }}"> {% endblock %}
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/deathnote/style.css') }}"> {% endblock %}
 <!--html-->
 {% block body %}
 <div id="main">
@@ -25,6 +25,6 @@
 {% block scripts %}
 <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/lib/turn.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/diary/rules.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/diary/script.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/deathnote/rules.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/deathnote/script.js') }}"></script>
 {% endblock %}

@@ -34,7 +34,7 @@ def deathnote():
 
 @app.route("/deathnote")
 def diary():
-	return render_template("diary/index.html")
+	return render_template("deathnote/index.html")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
