@@ -5,7 +5,7 @@ var howToUse = [
         "If the cause of death is not specified, the person will simply die of a heart attack.",
         "After writing the cause of death, details of the death should be written in the next 6 minutes and 40 seconds."
     ],
-    ["The note shall become the property of the human world, once it touches the ground of (arrives in) the human world.",
+    ["The note shall become the property of the human world, once it touches the ground of or arrives in the human world.",
         "The owner of the note can recognize the image and voice of the original owner, i.e. a god of death.",
         "The human who uses the notebook can neither go to Heaven nor Hell."
     ],
@@ -86,7 +86,7 @@ var howToUse = [
         "Even though only one name is written in the Death Note, if it influences and causes other humans that are not written in it to die, the victim's cause of death will be a heart attack."
     ],
     ["If you write die of disease with a specific disease's name and the person's time of death, there must be a sufficient amount of time for the disease to progress. If the set time is too tight, the victim will die of a heart attack after 6 minutes and 40 seconds after completing the Death Note.",
-        "If you write, die of disease for the cause of death, but only write a specific time of death without the actual name of disease, the human will die from an adequate disease. But the Death Note can only operate within 23 days (in the human calendar). This is called the 23 day rule."
+        "If you write, die of disease for the cause of death, but only write a specific time of death without the actual name of disease, the human will die from an adequate disease. But the Death Note can only operate within 23 days in the human calendar. This is called the 23 day rule."
     ],
     ["If you write die of disease like before with a specific disease's name, but without a specific time, if it takes more than 24 days for the human to die the 23 day rule will not take effect and the human will die at an adequate time depending on the disease.",
         "When rewriting the cause and/or details of death it must be done within 6 minutes and 40 seconds. You cannot change the victim's time of death, however soon it may be."

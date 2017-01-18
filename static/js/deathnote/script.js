@@ -41,9 +41,9 @@ function generatePages(numPages, callback) {
             $("#flipbook").append('<div class="hard shadow" id = "creditsPage"><span class="pgNum"></span>' + '<h2>Credits</h2>' +
                 '<p>Music: Light\'s theme composed by Yoshihisa Hirano and Hideki Taniuchi</p>' +
                 '<p>All of the Death Note rules and names are courtesy of the source itself and its wiki page</p>' +
-                '<h3>Disclaimer</h3>'+
-                '<p>Names in the notebook are purely fictional. Any resemblance to real people or groups is coincidental.</p>'+
-                '<p>This "notebook" does not, in fact, kill people</p>'+'</div>');
+                '<h3>Disclaimer</h3>' +
+                '<p>Names in the notebook are purely fictional. Any resemblance to real people or groups is coincidental.</p>' +
+                '<p>This "notebook" does not, in fact, kill people</p>' + '</div>');
         } else {
             if (i % 2 == 0) {
                 $("#flipbook").append('<div class="hard shadow"><span class="pgNum"></span><canvas class = "canvasPage" height = "600" id="flipPg' + i + '"></canvas>' + '</div>');
@@ -93,7 +93,7 @@ function addNameToNotebook() {
     }
 }
 
-
+//0 is the first page where rules begin
 function initRulesPages(i) {
     $("#flipbook").append('<div class="hard rules" id="pg' + i + '"><span class="pgNum"></span>' + '<div class="rulesContent">' + '<h2>' +
         romanize(i + 1) + '</h2><div id = "rules' + i + '"></div></div></div>');
@@ -101,7 +101,27 @@ function initRulesPages(i) {
     for (var j = 0; j < howToUse[i].length; j++) {
         $("#rules" + i + " .rulesBullets").append("<li class='rulesText'> " + howToUse[i][j] + "</li>");
     }
+}
 
+//40 seconds countdown
+function createCountDown(divElement) {
+    var digit = ["tens", "ones"];
+    var place = ["seconds", "hundredths"]
+    var html = "";
+    for (j = 0; j < place.length; i++) {
+        for (k = 0; k < digit.length; k++) {
+            html = html + "<div class='time-part-wrapper'>" +
+                "<div class='time-part "+place[j]+" "+digit[k]+"'>"+
+                "<div class='digit-wrapper'>";
+            for (var i = 0; i < 10; i++) {
+                html = html + "<span class='digit'>"+i+"</span>"
+
+            }
+            html = html + "</div></div></div>";
+        }
+    }
+
+    html = "<div class='wrapper'>"+html+"</div>";
 }
 
 function romanize(num) {
