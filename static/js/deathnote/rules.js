@@ -171,7 +171,6 @@ var howToUse = [
         "<span class='smaller'>When the god of death has seen the end of the first owner of the Death Note has written that human's name on his/her own Death Note.</span>",
         "<span class='smaller'>When the Death Note which has been brought in is destroyed and cannot be used by humans anymore.</span>",
         "<span class='smaller'>If nobody claims the ownership of the Death Note, and it is unnecessary to haunt anyone.<span>",
-        "<span class='smaller'>When the god of death loses track of the Death Note which he/she possesses, cannot identify which human is owning the Death Note, or cannot locate where the owner is, and therefore needs to find such information through the hole in the world of gods of death.</span>",
         "Even in the situations above, gods of death are obliged to confirm the death of the first owner and write down that humans name in his/her Death Note."
     ],
     ["In the world of gods of death there are a few copies of what humans may call user guidebook for using the Death Note in the human world. However, the guidebook is not allowed to be delivered to humans.",
