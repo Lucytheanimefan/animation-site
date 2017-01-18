@@ -163,7 +163,7 @@ var howToUse = [
     ["A human death caused by Death Note will indirectly lengthen some other human's original life even without a specific intention to lengthen a particular person's original life span in the human world."],
     ["After a god of death has brought the Death Note to the human world and given its ownership to a human, that god of death has the right to kill the human using his/her own Death Note for reasons such as disliking the owner."],
     ["Even if a new victim's name, cause of death, or situation of death is written on top of the originally written name, cause of death or situation of death, there will be no effect on the original victim's death. The same thing will also apply to erasing what was written with a pencil, or whitening out what was written with a pen, in attempt to rewrite it."],
-    ["<span class='smaller'>Once the victim's name, cause of death and situation of death have been written down in the Death Note, this death will still take place even if that Death Note or the part of the note in which it has been written is destroyed, for example, burned into ashes, before the stated time of death.</span>",
+    ["<span class='smaller'>Once the victim's name, cause of death and situation of death have been written down in the Death Note, this death will still take place even if that Death Note or the part of the note in which it has been written is destroyed before the stated time of death.</span>",
         "<span class='smaller'>If the victim's name has been written and then the Death Note is destroyed in the middle of writing the cause of death, the victim will be killed by heart attack in 40 seconds after writing the name.</span>",
         "<span class='smaller'>If the victim's name and cause of death have been written and the middle of writing the situation of death, then the victim will be killed within 6 minutes and 40 seconds via the stated cause of death if the cause is possible within that period of time, but otherwise, the victim will die by heart attack.</span>"
     ],
@@ -172,9 +172,8 @@ var howToUse = [
         "<span class='smaller'>When the god of death has seen the end of the first owner of the Death Note brought into the human world and has written that human's name on his/her own Death Note.</span>",
         "<span class='smaller'>When the Death Note which has been brought in is destroyed, like burned, and cannot be used by humans anymore.</span>",
         "<span class='smaller'>If nobody claims the ownership of the Death Note, and it is unnecessary to haunt anyone.<span>",
-        "<span class='smaller'>If, for any reason, the god of death possessing the Death Note has been replaced by another god of death.</span>",
         "<span class='smaller'>When the god of death loses track of the Death Note which he/she possesses, cannot identify which human is owning the Death Note, or cannot locate where the owner is, and therefore needs to find such information through the hole in the world of gods of death.</span>",
-        "Even in the situations 2, 3, and 4 above, gods of death are obliged to confirm the death of the first owner and write down that humans name in his/her Death Note even when he/she is in the world of gods of death."
+        "Even in the situations above, gods of death are obliged to confirm the death of the first owner and write down that humans name in his/her Death Note."
     ],
     ["In the world of gods of death there are a few copies of what humans may call user guidebook for using the Death Note in the human world. However, the guidebook is not allowed to be delivered to humans.",
         "It is perfectly okay for gods of death to read the guidebook for him/herself and teach humans about its contents, no matter what the content may include"
