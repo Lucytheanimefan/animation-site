@@ -167,7 +167,7 @@ var howToUse = [
         "<span class='smaller'>If the victim's name has been written and then the Death Note is destroyed in the middle of writing the cause of death, the victim will be killed by heart attack in 40 seconds after writing the name.</span>"
     ],
     ["No matter what medical or scientific method may be employed, it is impossible for humans to distinguish whether or not the human has the eye of power of a god of death. Even gods of death cannot distinguish this fact, except for the very god of death that traded his/her eye power with that human."],
-    ["The following situations are the cases where a god of death that has brought the Death Note into the human world is allowed to return to the world of gods of death:",
+    ["The following situations are cases where a god of death that has brought the Death Note into the human world is allowed to return to their own world:",
         "<span class='smaller'>When the god of death has seen the end of the first owner of the Death Note has written that human's name on his/her own Death Note.</span>",
         "<span class='smaller'>When the Death Note which has been brought in is destroyed and cannot be used by humans anymore.</span>",
         "<span class='smaller'>If nobody claims the ownership of the Death Note, and it is unnecessary to haunt anyone.<span>",
