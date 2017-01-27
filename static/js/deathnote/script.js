@@ -101,27 +101,32 @@ function initRulesPages(i) {
     for (var j = 0; j < howToUse[i].length; j++) {
         $("#rules" + i + " .rulesBullets").append("<li class='rulesText'> " + howToUse[i][j] + "</li>");
     }
+    if (i==2){
+        $("#rules" + i).append("<div class='wrapper'>"+"<div class='time-part-wrapper'>" +createCountDown()+"</div></div>")
+
+    }
 }
 
 //40 seconds countdown
-function createCountDown(divElement) {
+function createCountDown() {
     var digit = ["tens", "ones"];
     var place = ["seconds", "hundredths"]
     var html = "";
-    for (j = 0; j < place.length; i++) {
+    for (j = 0; j < place.length; j++) {
         for (k = 0; k < digit.length; k++) {
-            html = html + "<div class='time-part-wrapper'>" +
+            html = html +
                 "<div class='time-part "+place[j]+" "+digit[k]+"'>"+
                 "<div class='digit-wrapper'>";
             for (var i = 0; i < 10; i++) {
                 html = html + "<span class='digit'>"+i+"</span>"
 
             }
-            html = html + "</div></div></div>";
+            html = html + "</div></div>";
         }
     }
 
     html = "<div class='wrapper'>"+html+"</div>";
+    return html;
 }
 
 function romanize(num) {
