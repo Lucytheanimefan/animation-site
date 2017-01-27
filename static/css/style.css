@@ -2,6 +2,19 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+.navbar-brand {
+    display: inline;
+}
+
+#fishLogo {
+    width: 17%;
+    /*
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+    */
+}
+
 .container-fluid {
     margin-top: 5%;
 }
@@ -17,6 +30,7 @@
     width: 100%;
     height: 100%;
 }
+
 .bio,
 .links {
     margin-left: 2px;
@@ -97,7 +111,6 @@ body {
 .icon-bar,
 .navbar-toggle,
 .navbar-toggle.collapsed {
-
     /*CSS transitions*/
     -o-transition-property: none !important;
     -moz-transition-property: none !important;
@@ -311,8 +324,6 @@ span:nth-of-type(21) {
     -webkit-animation-delay: 2.1s;
     animation-delay: 2.1s;
 }
-
-
 
 @keyframes fadein {
     from {
