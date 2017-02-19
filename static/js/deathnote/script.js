@@ -101,10 +101,12 @@ function initRulesPages(i) {
     for (var j = 0; j < howToUse[i].length; j++) {
         $("#rules" + i + " .rulesBullets").append("<li class='rulesText'> " + howToUse[i][j] + "</li>");
     }
+    /*
     if (i==2){
         $("#rules" + i).append("<div class='wrapper'>"+"<div class='time-part-wrapper'>" +createCountDown()+"</div></div>")
 
     }
+    */
 }
 
 //40 seconds countdown
