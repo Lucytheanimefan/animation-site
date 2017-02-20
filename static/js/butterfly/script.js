@@ -1,6 +1,8 @@
 var canvas = $("canvas");
 
-var spread = 50;
+var spread = 150;
+var w = 7
+var h = w
 
 
 var ctx = canvas[0].getContext("2d"),
@@ -21,7 +23,7 @@ $("canvas").click(function(e) {
     console.log("Canvas click: X: " + e.pageX + "  Y: " + e.pageY);
     //ctx.fillStyle = "rgb(0,0,0)";
     //ctx.fillRect(e.pageX, e.pageY, 10, 10);
-    spawnBlackness(e.pageX, e.pageY, 5, 5, 0);
+    spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
     //requestAnimationFrame(spawnBlackness);
 })
 
@@ -42,28 +44,31 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function spawnBlackness(x, y, width, height, alpha) {
+function spawnBlackness(x, y, width, height, alpha, i) {
     console.log("width: " + width + "; height: " + height)
     var rand = getRandomInt(-100,100);
-    width = Math.sqrt(width + Math.pow(rand,2));
-    height++ //Math.sqrt(height + Math.pow(rand,2));
-    alpha += .01;
+    //width = Math.sqrt(width + Math.pow(rand,2));
+    //height++ //Math.sqrt(height + Math.pow(rand,2));
+    alpha += .001;
 
 
     //var coordRand = 1;
-    parseInt(Math.random() * 2) ?  coordRand =1 : coordRand = -1;
+    parseInt(Math.random() * 2) ?  coordRand1 =1 : coordRand1 = -1;
+    parseInt(Math.random() * 2) ?  coordRand2 =1 : coordRand2 = -1;
+    var scale = getRandomInt(0,10);
 
-    console.log("coordRand: "+coordRand)
     
-    x = x + x/2*coordRand;
-    y = y + y/3*coordRand;
+    x+=coordRand1*scale;
+    y+=coordRand2*scale;
+    i++;
+    console.log("i: "+i)
     ctx.fillRect(x, y, width, height);
     ctx.fillStyle = "rgba(0,0,0," + alpha + ")";
     requestID = requestAnimationFrame(function() {
-        spawnBlackness(x, y, width, height, alpha);
+        spawnBlackness(x, y, width, height, alpha,i);
 
     });
-    if (width > spread && height > spread) {
+    if (i > spread) {
         cancelAnimationFrame(requestID);
     }
 }
