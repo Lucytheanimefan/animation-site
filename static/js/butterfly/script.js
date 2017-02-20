@@ -11,10 +11,10 @@ var ctx = canvas[0].getContext("2d"),
 canvas.attr("width", width);
 canvas.attr("height", height);
 
-var requestAnimationFrame = window.requestAnimationFrame || 
-                            window.mozRequestAnimationFrame || 
-                            window.webkitRequestAnimationFrame || 
-                            window.msRequestAnimationFrame;
+var requestAnimationFrame = window.requestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.msRequestAnimationFrame;
 
 
 $("canvas").click(function(e) {
@@ -36,20 +36,43 @@ function animate(highResTimestamp) {
 // Start the animation.
 requestAnimationFrame(animate);
  */
-
-function spawnBlackness(x, y, width, height,alpha) {
-	console.log("width: "+width+"; height: "+height)
-	ctx.fillRect(x,y,width,height);
-	ctx.fillStyle = "rgba(0,0,0,"+alpha+")";
-	width++;
-	height++;
-	alpha +=1;
-	requestID =requestAnimationFrame(function(){
-		spawnBlackness(x,y,width,height,alpha);
-	});
-	if (width>spread){
-		cancelAnimationFrame(requestID);
-	}
-
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
 }
 
+function spawnBlackness(x, y, width, height, alpha) {
+    console.log("width: " + width + "; height: " + height)
+    ctx.fillRect(x, y, width, height);
+    ctx.fillStyle = "rgba(0,0,0," + alpha + ")";
+    var rand = getRandomInt(-100,100);
+    width = Math.sqrt(width + Math.pow(rand,2));
+    height++ //Math.sqrt(height + Math.pow(rand,2));
+    alpha += .01;
+
+
+    //var coordRand = 1;
+    parseInt(Math.random() * 2) ?  coordRand =1 : coordRand = -1;
+
+    console.log("coordRand: "+coordRand)
+    
+    x = x + x/2*coordRand;
+    requestID = requestAnimationFrame(function() {
+        spawnBlackness(x, y, width, height, alpha);
+
+    });
+    if (width > spread && height > spread) {
+        cancelAnimationFrame(requestID);
+    }
+}
+
+function getCoordinates(x) {
+    //y ( x ) = Ae^(−bx) cos x;
+    A = 10;
+    b = 5;
+    y = A * Math.pow(Math.E, -b * x) * Math.cos(x);
+    console.log("Y: " + y)
+    return y
+
+}
