@@ -1,9 +1,9 @@
 var canvas = $("canvas");
 
 var spread = 200;
-var w = 7
+var w = 10
 var h = w
-
+var alphaDiff = 0.0005
 
 var ctx = canvas[0].getContext("2d"),
     width = $(document).width(),
@@ -74,7 +74,7 @@ function getRandomInt(min, max) {
 function spawnBlackness(x, y, width, height, alpha, i) {
     console.log("width: " + width + "; height: " + height)
     var rand = getRandomInt(-100,100);
-    alpha += .001;
+    alpha += alphaDiff;
     parseInt(Math.random() * 2) ?  coordRand1 =1 : coordRand1 = -1;
     parseInt(Math.random() * 2) ?  coordRand2 =1 : coordRand2 = -1;
     var scale = getRandomInt(Math.pow(i, 1/3),Math.pow(i,1/3)+2);
