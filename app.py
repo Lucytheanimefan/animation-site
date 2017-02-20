@@ -22,6 +22,10 @@ def about():
 def castle():
 	return render_template('castleinblood/test.html')
 
+@app.route("/butterfly")
+def butterfly():
+	return render_template('butterfly/index.html')
+
 @app.route("/three")
 def three():
 	return render_template('three/three.html')
