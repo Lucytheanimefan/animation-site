@@ -44,8 +44,6 @@ function getRandomInt(min, max) {
 
 function spawnBlackness(x, y, width, height, alpha) {
     console.log("width: " + width + "; height: " + height)
-    ctx.fillRect(x, y, width, height);
-    ctx.fillStyle = "rgba(0,0,0," + alpha + ")";
     var rand = getRandomInt(-100,100);
     width = Math.sqrt(width + Math.pow(rand,2));
     height++ //Math.sqrt(height + Math.pow(rand,2));
@@ -58,6 +56,9 @@ function spawnBlackness(x, y, width, height, alpha) {
     console.log("coordRand: "+coordRand)
     
     x = x + x/2*coordRand;
+    y = y + y/3*coordRand;
+    ctx.fillRect(x, y, width, height);
+    ctx.fillStyle = "rgba(0,0,0," + alpha + ")";
     requestID = requestAnimationFrame(function() {
         spawnBlackness(x, y, width, height, alpha);
 
