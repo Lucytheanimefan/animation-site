@@ -7,5 +7,13 @@ body{
 }
 
 #chapel{
+	margin-top: 0px;
 	height: 1000px !important;
+	z-index: -10;
+}
+
+#background{
+	z-index: 1;
+	margin-left: -150px;
+	position: absolute;
 }
