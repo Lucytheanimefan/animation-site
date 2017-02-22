@@ -30,6 +30,10 @@ def butterfly():
 def three():
 	return render_template('three/three.html')
 
+@app.route("/chapel_entrance")
+def chapel():
+	return render_template('chapel_entrance/index.html')
+
 '''
 @app.route("/deathnote")
 def deathnote():

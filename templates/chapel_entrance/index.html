@@ -1,0 +1,19 @@
+{% extends "genLayout.html" %}
+<!--css-->
+{% block css %}
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/chapel_entrance/style.css') }}"> {% endblock %}
+<!--html-->
+{% block body %}
+<div id="main">
+
+<img id = "chapel" src = "/static/img/chapelentrance.jpg">
+
+    
+</div>
+
+{% endblock %}
+<!--js-->
+{% block scripts %}
+<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/chapel_entrance/script.js') }}"></script>
+{% endblock %}
