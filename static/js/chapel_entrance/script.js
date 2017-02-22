@@ -24,12 +24,12 @@ var requestAnimationFrame = window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.msRequestAnimationFrame;
 
-var alphaDiff = 0.001
+var alphaDiff = 0.0005
 var spread = 500
-spawnBlackness(50, 50, 5, 5, 0.01, 0)
+spawnLines(50, 50, 5, 5, 0.01, 0)
 
-
-function spawnBlackness(x, y, width, height, alpha, i) {
+//ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+function spawnLines(x, y, width, height, alpha, i) {
     console.log("width: " + width + "; height: " + height)
     var rand = getRandomInt(-100, 100);
     alpha += alphaDiff;
@@ -39,29 +39,33 @@ function spawnBlackness(x, y, width, height, alpha, i) {
     x += coordRand1 * scale;
     y += coordRand2 * scale;
     i++;
-    console.log("i: " + i)
-    if (coordRand1 > 0) {
-        ctx.beginPath();
-        ctx.moveTo(Math.log(x) * coordRand1, x + Math.sqrt(coordRand1));
-        ctx.lineTo(x * width, coordRand2 * y + width);
-        ctx.lineTo(2 * y, Math.sqrt(y * x));
-        ctx.closePath();
-        ctx.stroke();
-    } else {
-        ctx.beginPath();
-        ctx.moveTo(1000-x, 1000- (x + Math.sqrt(coordRand1)));
-        ctx.lineTo(x * width, coordRand2 * y + width);
-        ctx.lineTo(2 * y, Math.sqrt(y * x));
-        ctx.closePath();
-        ctx.stroke();
-    }
+
+    cp1x = 1000 - width
+    cp1y = .75 * y
+    cp2x = Math.sqrt(x) * width;
+    cp2y = 2.4 * y
+
+    //arc
+    ctx.beginPath();
+    ctx.moveTo(550, 200);
+    ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+
+    //web
+    ctx.moveTo(800, 800);
+    ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+    ctx.stroke();
+
+
+
     ctx.strokeStyle = "rgba(255,255,255," + alpha + ")";
     ctx.fillStyle = "rgba(255,255,255," + alpha + ")";
     requestID = requestAnimationFrame(function() {
-        spawnBlackness(x, y, width, height, alpha, i);
+        spawnLines(x, y, width, height, alpha, i);
 
     });
     if (i > spread) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
         cancelAnimationFrame(requestID);
     }
 }
