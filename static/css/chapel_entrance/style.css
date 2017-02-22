@@ -17,3 +17,8 @@ body{
 	margin-left: -150px;
 	position: absolute;
 }
+
+.credit{
+    position: fixed;
+    top:0;
+}
