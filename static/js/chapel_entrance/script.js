@@ -9,15 +9,6 @@ var ctx = canvas[0].getContext("2d"),
 canvas.attr("width", width);
 canvas.attr("height", height);
 
-//get pixel of where mouse is
-$('canvas').mousemove(function(e) {
-    var x = e.pageX;
-    var y = e.pageY;
-    var coord = "x=" + x + ", y=" + y;
-    var c = this.getContext('2d');
-    var p = c.getImageData(x, y, 1, 1).data;
-    console.log(coord)
-});
 
 var requestAnimationFrame = window.requestAnimationFrame ||
     window.mozRequestAnimationFrame ||
@@ -26,13 +17,13 @@ var requestAnimationFrame = window.requestAnimationFrame ||
 
 var alphaDiff = 0.0005
 var spread = 550;
-var spread2 = null;
+var spread2 = 200;
 var j =0;
 spawnLines(50, 50, 5, 5, 0.01, 0)
 
 //ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
 function spawnLines(x, y, width, height, alpha, i, lines = false) {
-    console.log("width: " + width + "; height: " + height)
+    //console.log("width: " + width + "; height: " + height)
     var rand = getRandomInt(-100, 100);
     alpha += alphaDiff;
     parseInt(Math.random() * 2) ? coordRand1 = 1 : coordRand1 = -1;
@@ -42,6 +33,7 @@ function spawnLines(x, y, width, height, alpha, i, lines = false) {
     if (lines) {
         x += coordRand1 * scale;
         y += coordRand2 * scale;
+        j++;
     } else {
         x += scale; //coordRand1 * scale;
         y += scale; //coordRand2 * scale;
@@ -73,19 +65,17 @@ function spawnLines(x, y, width, height, alpha, i, lines = false) {
     ctx.fillStyle = "rgba(255,255,255," + alpha + ")";
     requestID = requestAnimationFrame(function() {
         spawnLines(x, y, width, height, alpha, i, lines);
-
     });
+
     if (i > spread) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        spread2 = 220 + i;
         cancelAnimationFrame(requestID);
-        j++;
 
         //now with the lines
-        if (spread2 && j < spread2) {
+        if (j < spread2) {
             spawnLines(50, 50, 5, 5, 0.01, 0, true);
         }else{
-        	console.log("STOP");
+        	console.log("Thanks for visiting");
         }
     }
 }
