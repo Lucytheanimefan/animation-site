@@ -25,7 +25,9 @@ var requestAnimationFrame = window.requestAnimationFrame ||
     window.msRequestAnimationFrame;
 
 var alphaDiff = 0.0005
-var spread = 550
+var spread = 550;
+var spread2 = null;
+var j =0;
 spawnLines(50, 50, 5, 5, 0.01, 0)
 
 //ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
@@ -75,10 +77,15 @@ function spawnLines(x, y, width, height, alpha, i, lines = false) {
     });
     if (i > spread) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+        spread2 = 220 + i;
         cancelAnimationFrame(requestID);
+        j++;
 
         //now with the lines
-        spawnLines(50, 50, 5, 5, 0.01, 0, true);
+        if (spread2 && j < spread2) {
+            spawnLines(50, 50, 5, 5, 0.01, 0, true);
+        }else{
+        	console.log("STOP");
+        }
     }
 }
