@@ -25,19 +25,25 @@ var requestAnimationFrame = window.requestAnimationFrame ||
     window.msRequestAnimationFrame;
 
 var alphaDiff = 0.0005
-var spread = 500
+var spread = 550
 spawnLines(50, 50, 5, 5, 0.01, 0)
 
 //ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
-function spawnLines(x, y, width, height, alpha, i) {
+function spawnLines(x, y, width, height, alpha, i, lines = false) {
     console.log("width: " + width + "; height: " + height)
     var rand = getRandomInt(-100, 100);
     alpha += alphaDiff;
     parseInt(Math.random() * 2) ? coordRand1 = 1 : coordRand1 = -1;
     parseInt(Math.random() * 2) ? coordRand2 = 1 : coordRand2 = -1;
     var scale = getRandomInt(Math.pow(i, 1 / 3), Math.pow(i, 1 / 3) + 2);
-    x += scale;
-    y += scale;
+
+    if (lines) {
+        x += coordRand1 * scale;
+        y += coordRand2 * scale;
+    } else {
+        x += scale; //coordRand1 * scale;
+        y += scale; //coordRand2 * scale;
+    }
     i++;
 
     cp1x = 1000 - width
@@ -58,20 +64,21 @@ function spawnLines(x, y, width, height, alpha, i) {
 
     //from the left
     ctx.moveTo(100, 800);
-    ctx.bezierCurveTo(cp1x+width+1000, cp1y, cp2x, cp2y, x, y);
+    ctx.bezierCurveTo(cp1x + width + 1000, cp1y, cp2x, cp2y, x, y);
     ctx.stroke();
-
-
 
     ctx.strokeStyle = "rgba(255,255,255," + alpha + ")";
     ctx.fillStyle = "rgba(255,255,255," + alpha + ")";
     requestID = requestAnimationFrame(function() {
-        spawnLines(x, y, width, height, alpha, i);
+        spawnLines(x, y, width, height, alpha, i, lines);
 
     });
     if (i > spread) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         cancelAnimationFrame(requestID);
+
+        //now with the lines
+        spawnLines(50, 50, 5, 5, 0.01, 0, true);
     }
 }
