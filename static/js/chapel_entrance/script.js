@@ -36,8 +36,8 @@ function spawnLines(x, y, width, height, alpha, i) {
     parseInt(Math.random() * 2) ? coordRand1 = 1 : coordRand1 = -1;
     parseInt(Math.random() * 2) ? coordRand2 = 1 : coordRand2 = -1;
     var scale = getRandomInt(Math.pow(i, 1 / 3), Math.pow(i, 1 / 3) + 2);
-    x += coordRand1 * scale;
-    y += coordRand2 * scale;
+    x += scale;
+    y += scale;
     i++;
 
     cp1x = 1000 - width
@@ -50,9 +50,15 @@ function spawnLines(x, y, width, height, alpha, i) {
     ctx.moveTo(550, 200);
     ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
 
-    //web
+    //make these happen later?
+    //from the right
     ctx.moveTo(800, 800);
     ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+    ctx.stroke();
+
+    //from the left
+    ctx.moveTo(100, 800);
+    ctx.bezierCurveTo(cp1x+width+1000, cp1y, cp2x, cp2y, x, y);
     ctx.stroke();
 
 
