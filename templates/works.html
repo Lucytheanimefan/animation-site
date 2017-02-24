@@ -3,28 +3,41 @@
     <h1>Works</h1>
     <hr>
     <div class="row">
-        <div class="col-md-4">
-            <div class="work">
-                <a href="/castleinblood"><img class="thumbnails" src="/static/img/thumbnails/castle_in_blood.png"></a>
-                <p>Created on 12/31/16 by Lucy & Stephanie</p>
-            </div>
-            <div class="work">
-                <a href="/chapel_entrance"><img class="thumbnails" src="/static/img/thumbnails/chapel_thumb.jpg"></a>
-                <p>Chapel In Light. Created on 2/22/17. Photography courtesy of Duke math extraordinaire Yuhao Hu. Other weird effects by Lucy.</p>
-            </div>
+        {% for work in works %}
+        <div class="work">
+            <a href="/works/{{ work.url }}">{{ work.name }}</a>
+            <p>Created on {{ work.date }}</p>
+            <p>By
+            {% for credit in work.credit %}
+                {{ credit }},
+            {% endfor %}
+            </p>
         </div>
-        <div class="col-md-4">
-            <div class="video work">
-                <a href="https://www.youtube.com/embed/B2hQEygUcRM"><img class="thumbnails" src="/static/img/thumbnails/button.png"></a>
-                <p>Created on 11/25/16 by Lucy & Stephanie</p>
-            </div>
-        </div>
+        {% endfor %}
+    </div>
+    <div class="row">
         <div class="col-md-4">
             <div class="work">
-                <a href="/deathnote"><img class="thumbnails" id="deathnote" src="/static/img/deathnote/Death_Note_border.png"></a>
-                <p>Published 1/9/17 by Lucy</p>
-            </div>
+                <a href="/works/castleinblood"><img class="thumbnails" src="/static/img/thumbnails/castle_in_blood.png"></a>
+            <p>Created on 12/31/16 by Lucy & Stephanie</p>
+        </div>
+        <div class="work">
+            <a href="/works/chapel_entrance"><img class="thumbnails" src="/static/img/thumbnails/chapel_thumb.jpg"></a>
+            <p>Chapel In Light. Created on 2/22/17. Photography courtesy of Duke math extraordinaire Yuhao Hu. Other weird effects by Lucy.</p>
         </div>
     </div>
+    <div class="col-md-4">
+        <div class="video work">
+            <a href="https://www.youtube.com/embed/B2hQEygUcRM"><img class="thumbnails" src="/static/img/thumbnails/button.png"></a>
+            <p>Created on 11/25/16 by Lucy & Stephanie</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="work">
+            <a href="/works/deathnote"><img class="thumbnails" id="deathnote" src="/static/img/deathnote/Death_Note_border.png"></a>
+            <p>Published 1/9/17 by Lucy</p>
+        </div>
+    </div>
+</div>
 </div>
 {% endblock %}
