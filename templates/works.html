@@ -3,19 +3,17 @@
     <h1>Works</h1>
     <hr>
     <div class="row">
-        {% for work in works %}
-        <div class="work">
-            <a href="/works/{{ work.url }}">{{ work.name }}
-            <img class= "thumbnail" src={{ "/static/img/thumbnails/" + work.url + ".png" }}>
+        <div class="col-md-4">
+            {% for work in works %}
+            <div class="work">
+                <a href="/works/{{ work.url }}">{{ work.name }}
+            <!--<img class= "thumbnail" src={{ "/static/img/thumbnails/" + work.url + ".png" }}>-->
             </a>
-            <p>Created on {{ work.date }}
-            By
-            {% for credit in work.credit %}
-                {{ credit }},
+                <p>Created on {{ work.date }} By {% for credit in work.credit %} {{ credit }}, {% endfor %}
+                </p>
+            </div>
             {% endfor %}
-            </p>
         </div>
-        {% endfor %}
     </div>
     <!--
     <div class="row">
