@@ -5,9 +5,11 @@
     <div class="row">
         {% for work in works %}
         <div class="work">
-            <a href="/works/{{ work.url }}">{{ work.name }}</a>
-            <p>Created on {{ work.date }}</p>
-            <p>By
+            <a href="/works/{{ work.url }}">{{ work.name }}
+            <img class= "thumbnail" src={{ "/static/img/thumbnails/" + work.url + ".png" }}>
+            </a>
+            <p>Created on {{ work.date }}
+            By
             {% for credit in work.credit %}
                 {{ credit }},
             {% endfor %}
@@ -15,6 +17,7 @@
         </div>
         {% endfor %}
     </div>
+    <!--
     <div class="row">
         <div class="col-md-4">
             <div class="work">
@@ -37,7 +40,7 @@
             <a href="/works/deathnote"><img class="thumbnails" id="deathnote" src="/static/img/deathnote/Death_Note_border.png"></a>
             <p>Published 1/9/17 by Lucy</p>
         </div>
-    </div>
+    </div>-->
 </div>
 </div>
 {% endblock %}
