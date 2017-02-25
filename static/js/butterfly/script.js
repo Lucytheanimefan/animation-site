@@ -59,34 +59,87 @@ function okToMove(opacity) {
     return (opacity < maxOpacity);
 }
 
+
+x = 0;
+y = 0;
+var width = $("#background").width();
+var height = $("#background").height();
+var radius = width / 2;
+
+var moveLeft, moveRight, moveUp, moveDown;
+
 function getNewPosition() {
     //get random position
     var width = $("#background").width();
     var height = $("#background").height();
 
-    var new_y = Math.floor(Math.random()*height);
-    var new_x = Math.floor(Math.random()*width);
+    console.log(width + "," + height)
 
-    var old_x = $("#butterfly").offset().left;
-    var old_y = $("#butterfly").offset().top;
-    return [new_x-old_x, new_y-old_y]
+    parseInt(Math.random() * 2) ? coordRand = 1 : coordRand = -1;
+    parseInt(Math.random() * 2) ? coordRand1 = 1 : coordRand1 = -1;
+
+    //var new_y = coordRand * (y + Math.floor(Math.random() * 5));
+    //var new_x = coordRand * (x + Math.floor(Math.random() * 5));
+    var pos = $("#butterfly_container").position();
+    console.log(pos);
+    if (pos.left > width - 500 || moveLeft) {
+        console.log("moveLeft")
+        x--
+        moveLeft = true;
+        moveRight = false;
+        moveUp = false;
+        moveDown = false;
+    }
+    if (pos.left < 0 || moveRight) {
+        console.log("moveRight")
+        x++
+        moveRight = true;
+        moveLeft = false;
+        moveUp = false;
+        moveDown = false;
+    }
+    if (pos.top > height || moveUp) {
+        console.log("moveUp")
+        y--;
+        moveUp = true;
+        moveRight = false;
+        moveLeft = false;
+        moveDown = false;
+    }
+    if (pos.top < 0 || moveDown) {
+        console.log("moveDown")
+        y++;
+        moveDown = true;
+        moveRight = false;
+        moveUp = false;
+        moveLeft = false;
+    }
+    if (!(moveDown || moveRight || moveUp || moveLeft)) {
+        x++;
+        y++;
+    }
+
+
+
+    //return [x++, y++]
+    return [x, y]
 
 }
 
-function butterflyMove(opacity=null) {
+function butterflyMove(opacity = null) {
     var new_pos = getNewPosition();
-    var speed = 5//calcSpeed([old_pos.top, old_pos.left], new_pos);
-    console.log(new_pos)
+    var speed = 5 //calcSpeed([old_pos.top, old_pos.left], new_pos);
+        //console.log(new_pos)
     $("#butterfly_container").animate({
-        top: new_pos[1],//new_pos[0],
-        left: new_pos[0]//new_pos[1]
-    }, speed, function(){
+        top: new_pos[1], //new_pos[0],
+        left: new_pos[0] //new_pos[1]
+    }, speed, function() {
         butterflyMove();
     })
 
 }
 
-$(document).ready(function(){
+$(document).ready(function() {
     butterflyMove();
 })
 
