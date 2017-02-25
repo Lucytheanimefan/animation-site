@@ -5,6 +5,7 @@ var w = 5
 var h = w
 var alphaDiff = 0.0005
 var maxOpacity = 200;
+var audio;
 
 var ctx = canvas[0].getContext("2d"),
     width = $(document).width(),
@@ -22,8 +23,8 @@ var requestAnimationFrame = window.requestAnimationFrame ||
 
 $("canvas").click(function(e) {
     console.log("Canvas click: X: " + e.pageX + "  Y: " + e.pageY);
-    //ctx.fillStyle = "rgb(0,0,0)";
-    //ctx.fillRect(e.pageX, e.pageY, 10, 10);
+    //play music
+    //playMusic();
     spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
     spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
     spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
@@ -213,5 +214,14 @@ function getCoordinates(x) {
     y = A * Math.pow(Math.E, -b * x) * Math.cos(x);
     console.log("Y: " + y)
     return y
+}
 
+/**
+ * [playMusic description]
+ * @param  {[type]} musicfile .mp3 file probably
+ * @return {[type]}           [description]
+ */
+function playMusic(musicfile) {
+    audio = new Audio(musicfile);
+    audio.play();
 }
