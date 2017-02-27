@@ -45,11 +45,11 @@ def three():
 def chapel():
 	return render_template('chapel_entrance/index.html')
 
-'''
-@app.route("/deathnote")
-def deathnote():
-	return render_template("deathnote/index.html")
-'''
+
+@app.route("/chair")
+def chair():
+	return render_template("chair/index.html")
+
 
 @app.route("/deathnote")
 def diary():

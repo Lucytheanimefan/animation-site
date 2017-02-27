@@ -21,6 +21,8 @@ var requestAnimationFrame = window.requestAnimationFrame ||
     window.msRequestAnimationFrame;
 
 
+
+
 $("canvas").click(function(e) {
     console.log("Canvas click: X: " + e.pageX + "  Y: " + e.pageY);
     //play music
