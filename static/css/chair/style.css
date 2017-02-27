@@ -1,4 +1,10 @@
+@font-face {
+    font-family: "Tokyo Ghoul Font";
+    src: url(/static/fonts/youmurderer-bb/youmurdererbb_reg.ttf) format("truetype");
+}
+
 body {
+	font-family: "Tokyo Ghoul Font" !important;
     background-color: none !important;
 }
 
@@ -9,7 +15,7 @@ body {
 .line {
     display: none;
     color: red;
-    font-size: 14px;
+    font-size: 30px;
     
 }
 
