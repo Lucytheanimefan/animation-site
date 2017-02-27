@@ -2,20 +2,32 @@ body {
     background-color: none !important;
 }
 
+#text {
+    z-index: 1;
+}
+
 .line {
     display: none;
-    background: rgb(34, 34, 34);
-    /* for IE */
-    background: rgba(34, 34, 34, 0.55);
-    color: white;
+    color: red;
+    font-size: 14px;
+    
 }
+
+#background {
+    top: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+
+/*checkered background yay Kaneki*/
 
 body {
     background-image: -moz-linear-gradient(45deg, #000 25%, transparent 25%), -moz-linear-gradient(-45deg, #000 25%, transparent 25%), -moz-linear-gradient(45deg, transparent 75%, #000 75%), -moz-linear-gradient(-45deg, transparent 75%, #000 75%);
     background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, #000), color-stop(.25, transparent)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, #000), color-stop(.25, transparent)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, transparent), color-stop(.75, #000)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, #000));
-    -moz-background-size: 100px 100px;
-    background-size: 100px 100px;
-    -webkit-background-size: 100px 101px;
+    -moz-background-size: 300px 300px;
+    background-size: 300px 300px;
+    -webkit-background-size: 300px 301px;
     /* override value for shitty webkit */
-    background-position: 0 0, 50px 0, 50px -50px, 0px 50px;
+    background-position: 0 0, 150px 0, 150px -150px, 0px 150px;
 }
