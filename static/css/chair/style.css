@@ -14,8 +14,9 @@ body {
 
 .line {
     display: none;
-    color: red;
+    color: darkred;
     font-size: 30px;
+    background: transparent;
     
 }
 

@@ -6,7 +6,22 @@ function rgbToHex(r, g, b) {
 
 
 function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function lineBreak(numChars, line) {
+    var toRet = "";
+    for (var i = 0; i < line.length; i++) {
+        toRet = toRet + line.charAt(i).toString();
+        if (i % numChars == 0) {
+            if (line.charAt(i + 1) == ' ' || line.charAt(i - 1) == ' ') {
+                toRet = toRet + "<br>";
+            }/*else{
+            	toRet = toRet + "-<br>";
+            }*/
+        }
+    }
+    return toRet;
 }
