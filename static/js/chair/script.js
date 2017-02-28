@@ -7,10 +7,10 @@ var functions = {
         crackGrounds();
     },
     1: function() {
-        console.log("1");
+        crackGrounds();
     },
     2: function() {
-        console.log("2");
+        crackGrounds();
     },
     3: function() {
         spiderLily($("canvas").width() / 2, $("canvas").height() / 2, 0, 0);
@@ -32,15 +32,29 @@ var requestAnimationFrame = window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.msRequestAnimationFrame;
 
-function createLines() {
-    len = passage.length;
-    for (var i = 0; i < len; i++) {
-        var id = "line" + i;
-        var string = lineBreak(50, passage[i])
-        $("#text").append("<div class='line' id = " + id + ">" + string + "</div>");
-        $("#" + id).fadeIn(i * 1500, lineCallback(i));
+var i = 0;
 
-    }
+function createLines() {
+    var line = passage.shift()
+    var id = "line" + i;
+    var string = lineBreak(50, line)
+    $("#text").append("<div class='line' id = " + id + ">" + string + "</div>");
+    i++;
+    $("#" + id).fadeIn(i * 1500, function() {
+        lineCallback(i);
+        createLines();
+    });
+
+    /*
+        len = passage.length;
+        for (var i = 0; i < len; i++) {
+            var id = "line" + i;
+            var string = lineBreak(50, passage[i])
+            $("#text").append("<div class='line' id = " + id + ">" + string + "</div>");
+            $("#" + id).fadeIn(i * 1500, lineCallback(i));
+
+        }
+        */
 
     function lineCallback(index) {
         console.log("linecallback! " + index);
@@ -57,7 +71,7 @@ var done = 500;
 var cubeTimes = 0;
 
 function crackGrounds() {
-	console.log("crackGrounds")
+    console.log("crackGrounds")
     w = parseInt(width / 150);
     h = parseInt($("#background").height() / 150);
     //console.log(height)
@@ -138,7 +152,7 @@ function crackGround(x, y, xl, yl, i) {
     if (i == 50) {
         cancelAnimationFrame(requestID);
         cubeTimes++;
-        if (cubeTimes > 5) {
+        if (cubeTimes > 20) {
             console.log("STOP");
         } else {
             crackGround(originalX + 1, originalY, originalxl, originalyl, 0);
