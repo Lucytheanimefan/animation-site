@@ -15,7 +15,16 @@ var functions = {
         //crackGrounds();
     },
     3: function() {
-        spiderLily($("canvas").width() / 2, $("canvas").height() / 2, 0, 0);
+
+    },
+    4: function() {
+    	createBox();
+    },
+    5:function(){
+    	openBox();
+    },
+    6:function(){
+    	flowerInBox();
     }
 }
 
@@ -55,17 +64,6 @@ function createLines() {
         }, 3000);
     });
 
-    /*
-        len = passage.length;
-        for (var i = 0; i < len; i++) {
-            var id = "line" + i;
-            var string = lineBreak(50, passage[i])
-            $("#text").append("<div class='line' id = " + id + ">" + string + "</div>");
-            $("#" + id).fadeIn(i * 1500, lineCallback(i));
-
-        }
-        */
-
     function lineCallback(index) {
         console.log("linecallback! " + index);
         if (index in functions) {
@@ -96,10 +94,6 @@ function crackGrounds() {
     }
 }
 
-function spiderLily(x, y, opacity = 0, i = 0) {
-
-
-}
 
 function nearestNumDivisibleByX(num, X, lowerOrUpper) {
     return Math.round((parseInt(num / X) + lowerOrUpper) * X)
@@ -114,8 +108,8 @@ function inBlackZone(x, y) {
         //if values are odd
     if (upperBoundx / 150 % 2 == 0) {
         return (upperBoundy / 150 % 2 != 0);
-    }else{
-    	return (upperBoundy / 150 % 2 == 0);
+    } else {
+        return (upperBoundy / 150 % 2 == 0);
     }
 
 }
@@ -131,7 +125,7 @@ function crackGround(x, y, xl, yl, i = 0, lineWidth = 3, strokeColor = "black") 
         originalxl = xl;
         originalyl = yl;
     }
-    
+
     ctx.lineWidth = lineWidth;
     console.log("y: " + parseInt(y))
         //switch the colors
@@ -149,7 +143,7 @@ function crackGround(x, y, xl, yl, i = 0, lineWidth = 3, strokeColor = "black") 
     Math.random() < 0.67 ? factor = 1 : factor = -1;
     y = yl
     x = xl
-    xl = xl + factor * ((2*maxLineLength) * Math.random());
+    xl = xl + factor * ((2 * maxLineLength) * Math.random());
     yl = yl + (maxLineLength * Math.random());
     lineWidth = lineWidth * 0.99
 
@@ -157,10 +151,8 @@ function crackGround(x, y, xl, yl, i = 0, lineWidth = 3, strokeColor = "black") 
         crackGround(x, y, xl, yl, i, lineWidth);
     });
 
-    if (i == 300 || x>$("canvas").width() || y>$("canvas").height()) {
-    	//connect the lines
-    	//ctx.moveTo(0,0)
-    
+    if (i == 300 || x > $("canvas").width() || y > $("canvas").height()) {
+
         cancelAnimationFrame(requestID);
         cubeTimes++;
         if (cubeTimes > 1) {
@@ -169,4 +161,29 @@ function crackGround(x, y, xl, yl, i = 0, lineWidth = 3, strokeColor = "black") 
             crackGround(originalX + 100, originalY, originalxl + 100, originalyl, 0);
         }
     }
+}
+
+
+/*-------box-----------*/
+function createBox() {
+    $("#box").append('<div class="cube"> <b class = "front side">'+
+    	'</b><b class = "back side"></b>'+'<b class = "top"></b>'+
+    	'<b class = "bottom"> </b>'+
+    	'<b class = "left side"></b>'+
+    	'<b class = "right side" > </b> </div>')
+}
+
+function openBox() {
+    $(".side").each(function() {
+        $(this).addClass("boxgone");
+    })
+}
+
+function flowerInBox(){
+	$("#box").empty();
+	$("#box").append("<div class='flowerBox'>"+"<canvas id='flower'></canvas>"+"</div>")
+}
+
+function createFlower(){
+	
 }

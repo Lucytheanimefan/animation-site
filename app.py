@@ -1,12 +1,17 @@
 import os
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template
+from flask_assets import Environment, Bundle
 
 app = Flask(__name__)
 
 my_works = [{'url':'castleinblood','name':'Castle in Blood','credit':["Lucy","Stephanie"],'date':'12/31/16'},
 {'url':'chapel_entrance','name':'Chapel in Light','credit':["Lucy", "Yuhao Hu"],'date':'2/22/17'},
 {'url':'deathnote','name':'Death Note','credit':['Lucy'],'date':'1/9/17'}]
+
+assets = Environment(app)
+
+#js = Bundle('js/jquery.js', 'base.js', 'widgets.js',filters='jsmin', output='packed.js')
+#assets.register('js_all', js)
 
 #{'url':'butterfly','name':'Butterfly','credit':["Lucy","Kaijie"],'date':''}, NOT DONE YET
 @app.route("/")
