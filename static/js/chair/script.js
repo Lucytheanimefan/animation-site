@@ -144,10 +144,10 @@ function crackGround(x, y, xl, yl, i = 0, lineWidth = 3, strokeColor = "black") 
     opacity = 0.99 * opacity;
 
     i++;
-    Math.random() < 0.75 ? factor = 1 : factor = -1;
+    Math.random() < 0.67 ? factor = 1 : factor = -1;
     y = yl
     x = xl
-    xl = xl + factor * (maxLineLength * Math.random());
+    xl = xl + factor * ((2*maxLineLength) * Math.random());
     yl = yl + (maxLineLength * Math.random());
     lineWidth = lineWidth * 0.99
 
@@ -155,13 +155,13 @@ function crackGround(x, y, xl, yl, i = 0, lineWidth = 3, strokeColor = "black") 
         crackGround(x, y, xl, yl, i, lineWidth);
     });
 
-    if (i == 150) {
+    if (i == 300) {
         cancelAnimationFrame(requestID);
         cubeTimes++;
-        if (cubeTimes > 10) {
+        if (cubeTimes > 1) {
             console.log("STOP");
         } else {
-            crackGround(originalX + 1, originalY, originalxl, originalyl, 0);
+            crackGround(originalX + 100, originalY, originalxl + 100, originalyl, 0);
         }
     }
 }
