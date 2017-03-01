@@ -122,6 +122,7 @@ function inBlackZone(x, y) {
 var colors = { "black": 0, "white": 1 }
 var colorMap = ["white", "black"]
 
+
 function crackGround(x, y, xl, yl, i = 0, lineWidth = 3, strokeColor = "black") {
     var opacity = 100;
     if (i == 0) {
@@ -130,7 +131,7 @@ function crackGround(x, y, xl, yl, i = 0, lineWidth = 3, strokeColor = "black") 
         originalxl = xl;
         originalyl = yl;
     }
-    ctx.beginPath();
+    
     ctx.lineWidth = lineWidth;
     console.log("y: " + parseInt(y))
         //switch the colors
@@ -138,6 +139,7 @@ function crackGround(x, y, xl, yl, i = 0, lineWidth = 3, strokeColor = "black") 
     inBlackZone(x, y) ? strokeColor = "white" : strokeColor = "black";
     ctx.globalAlpha = opacity;
     ctx.strokeStyle = strokeColor;
+    ctx.beginPath();
     ctx.moveTo(x, y);
     ctx.lineTo(xl, yl);
     ctx.stroke();
@@ -155,7 +157,10 @@ function crackGround(x, y, xl, yl, i = 0, lineWidth = 3, strokeColor = "black") 
         crackGround(x, y, xl, yl, i, lineWidth);
     });
 
-    if (i == 300) {
+    if (i == 300 || x>$("canvas").width() || y>$("canvas").height()) {
+    	//connect the lines
+    	//ctx.moveTo(0,0)
+    
         cancelAnimationFrame(requestID);
         cubeTimes++;
         if (cubeTimes > 1) {
