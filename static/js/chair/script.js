@@ -4,13 +4,15 @@ $(document).ready(function() {
 
 var functions = {
     0: function() {
-        crackGrounds();
+        crackGround(0, 0, 4, 4, 0);
+        //crackGrounds();
     },
     1: function() {
-        crackGrounds();
+        crackGround(0, 0, 3, 3, 0);
+        //crackGrounds();
     },
     2: function() {
-        crackGrounds();
+        //crackGrounds();
     },
     3: function() {
         spiderLily($("canvas").width() / 2, $("canvas").height() / 2, 0, 0);
@@ -36,13 +38,21 @@ var i = 0;
 
 function createLines() {
     var line = passage.shift()
+    if (line == undefined || line.length < 1) {
+        return;
+    }
     var id = "line" + i;
-    var string = lineBreak(50, line)
+    var string = line;
+    //var string = lineBreak(50, line)
     $("#text").append("<div class='line' id = " + id + ">" + string + "</div>");
     i++;
-    $("#" + id).fadeIn(i * 1500, function() {
+    $("#" + id).fadeIn(i * 1000, function() {
         lineCallback(i);
         createLines();
+        setTimeout(function() {
+            console.log("Erase: " + (i - 3));
+            $("#line" + (i - 3)).fadeOut(2000);
+        }, 3000);
     });
 
     /*
@@ -66,7 +76,7 @@ function createLines() {
 
 
 
-var maxLineLength = 10;
+var maxLineLength = 17 //$('canvas').width()/1;
 var done = 500;
 var cubeTimes = 0;
 
@@ -87,41 +97,32 @@ function crackGrounds() {
 }
 
 function spiderLily(x, y, opacity = 0, i = 0) {
-    ctx.beginPath();
-    ctx.moveTo(x, y);
 
-    x1 = 0.5 * x;
-    y1 = .2 * y;
-    x2 = -0.5 * x;
-    y2 = .3 * y;
-    xe = .7 * x;
-    ye = .7 * y;
-
-    ctx.bezierCurveTo(x1, y1, x2, y2, xe, ye);
-    ctx.closePath();
-    ctx.globalAlpha = opacity
-    opacity = opacity++;
-    ctx.stroke();
-
-    x1 = 0.5 * x;
-    y1 = .2 * y;
-    x2 = -0.5 * x;
-    y2 = .3 * y;
-    xe = .7 * x;
-    ye = .7 * y;
-    i++;
-    requestID = requestAnimationFrame(function() {
-        spiderLily(xe, ye, opacity, i);
-    });
-
-    if (i > 50) {
-
-        cancelAnimationFrame(requestID);
-    }
 
 }
 
-function crackGround(x, y, xl, yl, i) {
+function nearestNumDivisibleByX(num, X, lowerOrUpper) {
+    return Math.round((parseInt(num / X) + lowerOrUpper) * X)
+}
+
+function inBlackZone(x, y) {
+    var upperBoundy = nearestNumDivisibleByX(y, 150, 1);
+    var lowerBoundy = nearestNumDivisibleByX(y, 150, -1);
+    var upperBoundx = nearestNumDivisibleByX(x, 150, 1);
+    var lowerBoundx = nearestNumDivisibleByX(x, 150, -1);
+    console.log("bounds: [" + lowerBoundx + "," + upperBoundx + "], [" + lowerBoundy + ", " + upperBoundy + "]")
+        //if values are odd
+    if (upperBoundx / 150 % 2 == 0) {
+        return (upperBoundy / 150 % 2 != 0);
+    }else{
+    	return (upperBoundy / 150 % 2 == 0);
+    }
+
+}
+var colors = { "black": 0, "white": 1 }
+var colorMap = ["white", "black"]
+
+function crackGround(x, y, xl, yl, i = 0, lineWidth = 3, strokeColor = "black") {
     var opacity = 100;
     if (i == 0) {
         originalX = x;
@@ -130,10 +131,13 @@ function crackGround(x, y, xl, yl, i) {
         originalyl = yl;
     }
     ctx.beginPath();
-    ctx.lineWidth = Math.pow(20 - i, 1 / 3);
-    //Math.random() < 0.9 ? ctx.strokeStyle = "black" : ctx.strokeStyle = "darkred";
+    ctx.lineWidth = lineWidth;
+    console.log("y: " + parseInt(y))
+        //switch the colors
+    console.log("in black zone? " + inBlackZone(x, y))
+    inBlackZone(x, y) ? strokeColor = "white" : strokeColor = "black";
     ctx.globalAlpha = opacity;
-    ctx.strokeStyle = "black";
+    ctx.strokeStyle = strokeColor;
     ctx.moveTo(x, y);
     ctx.lineTo(xl, yl);
     ctx.stroke();
@@ -145,14 +149,16 @@ function crackGround(x, y, xl, yl, i) {
     x = xl
     xl = xl + factor * (maxLineLength * Math.random());
     yl = yl + (maxLineLength * Math.random());
+    lineWidth = lineWidth * 0.99
 
     requestID = requestAnimationFrame(function() {
-        crackGround(x, y, xl, yl, i);
+        crackGround(x, y, xl, yl, i, lineWidth);
     });
-    if (i == 50) {
+
+    if (i == 150) {
         cancelAnimationFrame(requestID);
         cubeTimes++;
-        if (cubeTimes > 20) {
+        if (cubeTimes > 10) {
             console.log("STOP");
         } else {
             crackGround(originalX + 1, originalY, originalxl, originalyl, 0);

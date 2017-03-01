@@ -12,6 +12,10 @@ body {
     z-index: 1;
 }
 
+.white_text{
+	color: white;
+	background: rgba(0,0,0,0.5);
+}
 .line {
     display: none;
     color: darkred;
