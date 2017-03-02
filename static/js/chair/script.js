@@ -12,19 +12,16 @@ var functions = {
         //crackGrounds();
     },
     2: function() {
-        //crackGrounds();
+
     },
     3: function() {
 
     },
     4: function() {
-    	createBox();
+
     },
-    5:function(){
-    	openBox();
-    },
-    6:function(){
-    	flowerInBox();
+    7: function() {
+
     }
 }
 
@@ -163,27 +160,3 @@ function crackGround(x, y, xl, yl, i = 0, lineWidth = 3, strokeColor = "black") 
     }
 }
 
-
-/*-------box-----------*/
-function createBox() {
-    $("#box").append('<div class="cube"> <b class = "front side">'+
-    	'</b><b class = "back side"></b>'+'<b class = "top"></b>'+
-    	'<b class = "bottom"> </b>'+
-    	'<b class = "left side"></b>'+
-    	'<b class = "right side" > </b> </div>')
-}
-
-function openBox() {
-    $(".side").each(function() {
-        $(this).addClass("boxgone");
-    })
-}
-
-function flowerInBox(){
-	$("#box").empty();
-	$("#box").append("<div class='flowerBox'>"+"<canvas id='flower'></canvas>"+"</div>")
-}
-
-function createFlower(){
-	
-}

@@ -8,8 +8,17 @@
     <div class="col-md-8 offset-md-2">
         <div id="text"></div>
     </div>
-    <div class="wrapper" id = "box">
-        
+    <div class="wrapper">
+        <img class="bg-image main animated" src="" alt="">
+        <div class="drawing ui-corner-all animated">
+            <canvas id="draw-refract"></canvas>
+            <canvas id="draw-reflect"></canvas>
+            <canvas id="draw-fractures"></canvas>
+            <canvas id="draw-mainline"></canvas>
+            <canvas id="draw-noise"></canvas>
+            <canvas id="draw-debug" style="display: none;"></canvas>
+            <div id="draw-picker"></div>
+        </div>
     </div>
     <canvas id="background"></canvas>
 </div>
@@ -20,4 +29,5 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/lib/three.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/chair/text.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/chair/script.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/chair/glass_shatter.js') }}"></script>
 {% endblock %}

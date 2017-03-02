@@ -4,7 +4,7 @@
 }
 
 body {
-	font-family: "Tokyo Ghoul Font" !important;
+    font-family: "Tokyo Ghoul Font" !important;
     background-color: none !important;
 }
 
@@ -12,21 +12,45 @@ body {
     z-index: 1;
 }
 
-.white_text{
-	color: white;
-	background: rgba(0,0,0,0.5);
+.white_text {
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
 }
+
 .line {
     display: none;
     color: darkred;
     font-size: 30px;
     background: transparent;
-    
 }
 
 #background {
     top: 0;
+    left: 0 !important;
     position: absolute;
+    z-index: -2;
+}
+
+.bg-image {
+    display: block;
+    position: absolute;
+    width: 150%;
+    height: 150%;
+}
+
+.drawing {
+    position: relative;
+}
+
+.drawing > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.wrapper {
+    position: absolute;
+    border: none !important;
     z-index: -1;
 }
 
@@ -41,88 +65,4 @@ body {
     -webkit-background-size: 300px 301px;
     /* override value for shitty webkit */
     background-position: 0 0, 150px 0, 150px -150px, 0px 150px;
-}
-
-/* keyframes for rotating animation */
-@-webkit-keyframes spin {
-  from { transform: rotateY(0); }
-  to   { transform: rotateY(360deg); }
-}
-
-.wrapper{
-  height: 300px;
-  margin-top:50px;
-  position:relative;
-  perspective: 800;
-  perspective-origin: 50% 100px;
-}
-
-/* cube wrapper */
-.cube{
-  position: relative;
-  margin: 0 auto;
-  width: 50px;
-  transform-style: preserve-3d;
-  animation: spin 4s infinite linear;
-  transition: all 1s linear;
-}
-
-/* cube */
-b{
-  position:absolute;
-  width:100px;
-  height:200px;
-  display:block;
-  background:rgba(255,255,255,0.5);
-  box-shadow:inset 0 0 30px rgba(0,0,0,0.7);
-  font-size:20px;
-  text-align:center;
-  line-height:200px;
-  color:rgba(0,0,0,0.5);
-  font-family:sans-serif;
-  text-transform:uppercase;
-  transition: all 1s linear;
-}
-b.back{
-  transform: translateZ(-50px) rotateY(180deg);
-}
-b.right{
-  transform:rotateY(-270deg) translateX(50px);
-  transform-origin: top right;
-}
-b.left{
-  transform:rotateY(270deg) translateX(-50px);
-  transform-origin: center left;
-}
-b.top{
-  transform:rotateX(-90deg) translateY(-50px);
-  transform-origin: top center;
-}
-b.bottom{
-  transform:rotateX(90deg) translateY(50px);
-  transform-origin: bottom center;
-}
-b.front{
-  transform: translateZ(50px);
-}
-
-/* hover transformations */
-.cube{
-}
-.cube b.right.boxgone{
-  transform: translateZ(50px) rotateX(-90deg);
-  transform-origin: bottom center;
-}
-.cube b.left.boxgone{
-  transform: translateZ(50px) rotateX(90deg);
-  transform-origin: bottom center;
-}
-.cube b.back.boxgone{
-  transform: translateZ(50px) rotateX(-90deg);
-  transform-origin: bottom center;
-}
-
-.cube b.front.boxgone{
-  transform: translateZ(50px) rotateX(90deg);
-  transform-origin: bottom center;
 }
