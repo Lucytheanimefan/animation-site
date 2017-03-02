@@ -1,7 +1,17 @@
 $(document).ready(function() {
     createLines();
-    $('audio').on('canplay', function() {
-        this.play();
+    //var audio = new Audio('/static/sound/Tokyo_Ghoul_unravel_tv.mp3');
+    //audio.play();
+    soundManager.url = '/path/to/swf-files/';
+
+    soundManager.onready(function() {
+        soundManager.createSound({
+            id: 'unravel',
+            url: '/static/sound/Tokyo_Ghoul_unravel_tv.mp3'
+        });
+
+        // ...and play it
+        soundManager.play('unravel');
     });
 });
 
