@@ -17,3 +17,6 @@ var passage = ["Oshiete oshiete yo sono shikumi wo",
     "Oboete te boku no koto wo",
     "Azayakana mama"
 ]
+
+
+var delay = [7]

@@ -13,9 +13,13 @@ audio {
     display: none;
 }
 
+#main{
+    position: relative;
+}
 
 #text {
     z-index: 1;
+    margin-left: 60%;
 }
 
 .white_text {
@@ -34,7 +38,7 @@ audio {
     top: 0;
     left: 0 !important;
     position: absolute;
-    z-index: -2;
+    z-index: -5;
 }
 
 .bg-image {
@@ -42,6 +46,10 @@ audio {
     position: absolute;
     width: 150%;
     height: 150%;
+}
+#draw-picker{
+    top: 0px !important;
+    position: absolute;
 }
 
 .drawing {
@@ -55,6 +63,7 @@ audio {
 }
 
 .wrapper {
+    top: 0px !important;
     position: absolute;
     border: none !important;
     z-index: -1;

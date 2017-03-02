@@ -1,7 +1,11 @@
 $(document).ready(function() {
-    createLines();
+    setTimeout(function() {
+        createLines();
+    }, 6500);
+
     //var audio = new Audio('/static/sound/Tokyo_Ghoul_unravel_tv.mp3');
     //audio.play();
+    /*
     soundManager.url = '/path/to/swf-files/';
 
     soundManager.onready(function() {
@@ -9,10 +13,9 @@ $(document).ready(function() {
             id: 'unravel',
             url: '/static/sound/Tokyo_Ghoul_unravel_tv.mp3'
         });
-
-        // ...and play it
         soundManager.play('unravel');
     });
+    */
 });
 
 var functions = {
@@ -23,22 +26,62 @@ var functions = {
         crackGround(0, 0, 3, 3, 0);
     },
     2: function() {
-        //trigger a click
-        var e = new jQuery.Event("click");
-        e.pageX = 500;
-        e.pageY = 100;
-        $('#draw-picker').trigger(e);
+
 
     },
     3: function() {
 
     },
     4: function() {
+        setTimeout(function() {
+            breakGlass(500, 100);
+        }, 300);
 
     },
-    7: function() {
+    8: function() {
+        setTimeout(function() {
+            breakGlass(600, 450);
+        }, 1500);
 
+    },
+    14: function() {
+        for (var i = 0; i < 10; i++) {
+            crackGround(0, 0, i, i, 0);
+            setTimeout(function() {
+                breakGlass(i * 50, i * 70);
+            }, i*50);
+
+        }
+
+    },
+    15: function() {
+        breakGlass(900, 700);
+    },
+    16: function() {
+        clearAll();
+    },
+    17: function() {
+        credits();
     }
+}
+
+function clearAll() {
+    //remove!!
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    $(".wrapper").fadeOut(8000);
+    $("#background").fadeOut(8000);
+}
+
+function breakGlass(x, y) {
+    //trigger a click
+    var e = new jQuery.Event("click");
+    e.pageX = x;
+    e.pageY = y;
+    $('#draw-picker').trigger(e);
+}
+
+function credits() {
+    $("#main").append("<h1>Song: Unravel by Ling Tosite Sigure. Tokyo Ghoul opening 1.</h1>");
 }
 
 
@@ -66,15 +109,20 @@ function createLines() {
     var id = "line" + i;
     var string = line;
     //var string = lineBreak(50, line)
+
     $("#text").append("<div class='line' id = " + id + ">" + string + "</div>");
+
+
     i++;
-    $("#" + id).fadeIn(i * 1000, function() {
+    $("#" + id).fadeIn(i * 500, function() {
         lineCallback(i);
         createLines();
+        /*
         setTimeout(function() {
-            console.log("Erase: " + (i - 3));
-            $("#line" + (i - 3)).fadeOut(2000);
-        }, 3000);
+            console.log("Erase: " + (i - 4));
+            $("#line" + (i - 4)).fadeOut(5000);
+        }, 5000);
+        */
     });
 
     function lineCallback(index) {
@@ -130,7 +178,7 @@ var colors = { "black": 0, "white": 1 }
 var colorMap = ["white", "black"]
 
 
-function crackGround(x, y, xl, yl, i = 0, lineWidth = 3, strokeColor = "black") {
+function crackGround(x, y, xl, yl, i = 0, lineWidth = 1, strokeColor = "black") {
     var opacity = 100;
     if (i == 0) {
         originalX = x;

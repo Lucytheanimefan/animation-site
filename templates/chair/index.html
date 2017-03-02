@@ -5,9 +5,7 @@
 <!--html-->
 {% block body %}
 <div id="main">
-    <div class="col-md-8 offset-md-2">
-        <div id="text"></div>
-    </div>
+    <div id="text"></div>
     <div class="wrapper">
         <img class="bg-image main animated" src="" alt="">
         <div class="drawing ui-corner-all animated">
@@ -21,8 +19,10 @@
         </div>
     </div>
     <canvas id="background"></canvas>
-
-
+    <audio controls autoplay>
+        <source src="/static/sound/Tokyo_Ghoul_unravel_tv.mp3" type="audio/mpeg">
+        <source src="/static/sound/Tokyo_Ghoul_unravel_tv.mp3" type="audio/ogg">
+    </audio>
 </div>
 {% endblock %}
 <!--js-->
