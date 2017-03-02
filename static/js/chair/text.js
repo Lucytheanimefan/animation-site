@@ -16,5 +16,3 @@ var passage = ["Oshiete oshiete yo sono shikumi wo",
     "Anata wo kizutsuketaku wa nai yo",
     "Oboete te boku no koto wo"
 ]
-
-
