@@ -8,6 +8,10 @@ body {
     background-color: none !important;
 }
 
+audio {
+    display: none;
+}
+
 #text {
     z-index: 1;
 }

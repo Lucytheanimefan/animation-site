@@ -5,13 +5,16 @@ $(document).ready(function() {
 var functions = {
     0: function() {
         crackGround(0, 0, 4, 4, 0);
-        //crackGrounds();
     },
     1: function() {
         crackGround(0, 0, 3, 3, 0);
-        //crackGrounds();
     },
     2: function() {
+    	//trigger a click
+    	var e = new jQuery.Event("click");
+    	e.pageX = 500;
+    	e.pageY = 100;
+    	$('#draw-picker').trigger(e);
 
     },
     3: function() {
