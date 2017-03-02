@@ -8,7 +8,7 @@ my_works = [{'url':'castleinblood','name':'Castle in Blood','credit':["Lucy","St
 {'url':'chapel_entrance','name':'Chapel in Light','credit':["Lucy", "Yuhao Hu"],'date':'2/22/17'},
 {'url':'deathnote','name':'Death Note','credit':['Lucy'],'date':'1/9/17'}]
 
-assets = Environment(app)
+
 
 #js = Bundle('js/jquery.js', 'base.js', 'widgets.js',filters='jsmin', output='packed.js')
 #assets.register('js_all', js)
