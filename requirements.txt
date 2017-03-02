@@ -6,4 +6,3 @@ MarkupSafe==0.23
 pymongo==3.3.1
 requests==2.12.1
 Werkzeug==0.11.11
-Flask-Assets==0.11.1
