@@ -18,4 +18,3 @@ var passage = ["Oshiete oshiete yo sono shikumi wo",
 ]
 
 
-var delay = [7]
