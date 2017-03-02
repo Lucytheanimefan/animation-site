@@ -14,8 +14,7 @@ var passage = ["Oshiete oshiete yo sono shikumi wo",
     "Mitsumenaide",
     "Dare ka ga kaita sekai no naka de",
     "Anata wo kizutsuketaku wa nai yo",
-    "Oboete te boku no koto wo",
-    "Azayakana mama"
+    "Oboete te boku no koto wo"
 ]
 
 
