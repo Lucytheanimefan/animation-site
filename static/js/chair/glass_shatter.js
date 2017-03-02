@@ -614,12 +614,12 @@
       // Instead of 2556 originally used - $image.outerWidth(true)
 
       $canvas.each(function() {
-        this.height = 800;
+        this.height = 1000;
         this.width = 2000;
       });
 
       $('#draw-picker').css({
-        height: 800,
+        height: 1000,
         width: 2000
       });
 
@@ -640,7 +640,7 @@
       $('#draw-picker').click(function() {
           if (options = validate())
           {
-             options.height = 800;
+             options.height = 1000;
              options.width = 2000;
              options.center = currentCenter;
              options.debug = true;

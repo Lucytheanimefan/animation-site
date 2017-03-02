@@ -1,5 +1,8 @@
 $(document).ready(function() {
     createLines();
+    $('audio').on('canplay', function() {
+        this.play();
+    });
 });
 
 var functions = {
@@ -10,11 +13,11 @@ var functions = {
         crackGround(0, 0, 3, 3, 0);
     },
     2: function() {
-    	//trigger a click
-    	var e = new jQuery.Event("click");
-    	e.pageX = 500;
-    	e.pageY = 100;
-    	$('#draw-picker').trigger(e);
+        //trigger a click
+        var e = new jQuery.Event("click");
+        e.pageX = 500;
+        e.pageY = 100;
+        $('#draw-picker').trigger(e);
 
     },
     3: function() {
@@ -162,4 +165,3 @@ function crackGround(x, y, xl, yl, i = 0, lineWidth = 3, strokeColor = "black") 
         }
     }
 }
-
