@@ -1,4 +1,4 @@
-//var names = ["エル・ローライト" /*L*/ , "夜 神 月 ライト" /*Light*/ ]
+
 var noteBookText = ["渋伊丸 拓男 事故死", "渋伊丸 拓雄 事故死", "渋井丸 拓男 事故死" /*Shibuimaru Takuo   accidental death*/ , "渋伊丸 拓夫 事故死", "渋伊丸 卓男 事故死", "渋井丸 卓男 事故死", "渋井丸 拓雄 事故死", "渋井丸 拓夫 事故死",
     "Lind L Tailor" /*Lind L Tailor*/ ,
     "Haley Belle 心臓麻痺",
@@ -105,12 +105,7 @@ function initRulesPages(i) {
     for (var j = 0; j < howToUse[i].length; j++) {
         $("#rules" + i + " .rulesBullets").append("<li class='rulesText'> " + howToUse[i][j] + "</li>");
     }
-    /*
-    if (i==2){
-        $("#rules" + i).append("<div class='wrapper'>"+"<div class='time-part-wrapper'>" +createCountDown()+"</div></div>")
 
-    }
-    */
 }
 
 //40 seconds countdown
