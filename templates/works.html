@@ -9,7 +9,7 @@
                 <a href="/works/{{ work.url }}">{{ work.name }}
             <!--<img class= "thumbnail" src={{ "/static/img/thumbnails/" + work.url + ".png" }}>-->
             </a>
-                <p>Created on {{ work.date }} By {% for credit in work.credit %} {{ credit }}, {% endfor %}
+                <p>Created on {{ work.date }} <br> ·{% for credit in work.credit %} {{ credit }} · {% endfor %}
                 </p>
             </div>
             {% endfor %}
