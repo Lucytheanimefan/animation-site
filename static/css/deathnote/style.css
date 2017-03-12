@@ -3,6 +3,10 @@
     src: url(/static/fonts/DEATHNOTE_Font/DEATHNOTEFont.ttf) format("truetype");
 }
 
+#coverImage{
+  display: none;
+}
+
 audio {
     display: none;
 }
