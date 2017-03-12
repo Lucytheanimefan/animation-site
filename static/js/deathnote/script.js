@@ -28,7 +28,7 @@ generatePages(rulesPages + 3, function() {
         autoCenter: true
     });
     initClickableTypeablePage();
-})
+});
 
 
 
@@ -61,6 +61,10 @@ function initClickableTypeablePage() {
     $(document).click(function() {
         console.log("Typable page clicked");
         $('#nameInput').focus();
+        if (parseInt($("#flipbook").turn("page")) == 66) {
+            flipToPage();
+
+        }
     });
 }
 
@@ -117,17 +121,17 @@ function createCountDown() {
     for (j = 0; j < place.length; j++) {
         for (k = 0; k < digit.length; k++) {
             html = html +
-                "<div class='time-part "+place[j]+" "+digit[k]+"'>"+
+                "<div class='time-part " + place[j] + " " + digit[k] + "'>" +
                 "<div class='digit-wrapper'>";
             for (var i = 0; i < 10; i++) {
-                html = html + "<span class='digit'>"+i+"</span>"
+                html = html + "<span class='digit'>" + i + "</span>"
 
             }
             html = html + "</div></div>";
         }
     }
 
-    html = "<div class='wrapper'>"+html+"</div>";
+    html = "<div class='wrapper'>" + html + "</div>";
     return html;
 }
 
