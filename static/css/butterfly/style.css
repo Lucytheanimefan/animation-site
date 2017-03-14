@@ -6,96 +6,120 @@ canvas {
 
 /*butterfly flapping*/
 
-#butterfly_container {
-    z-index: -1;
-    perspective: 600px;
-    perspective-origin: -20% 20%;
-    top: 10px;
-    color: gray;
-    margin: 0px auto;
-    position: relative;
+@keyframes flap {
+    0% {
+        transform: rotateY(80deg);
+    }
+    100% {
+        transform: rotateY(-80deg);
+    }
 }
-
-#butterfly {
-    transform: rotateZ(-0deg) rotate3d(0, 1, 0, 0deg) scale3d(0.5, 0.5, 0.5);
-    transform-origin: 51% 50%;
-    left: 0px;
-    top: 0px;
-    width: 400px;
-    height: 238px;
-    transform-style: preserve-3d;
-    /*Fly in a loop below*/
-    /*animation-name: butterflyani;
-animation-duration: 5s;
-animation-iteration-count: infinite;
-animation-timing-function: linear;*/
+body {
+    perspective: 1500px;
+    transform-origin: center center;
 }
-
-.wing {
-    transform: rotateX(0deg) translate3d(-200px, 0px, 0px) rotate3d(0, 1, 0, 100deg);
-    transform-origin: top right;
+.container {
     position: absolute;
-    left: 200px;
-    top: 0px;
-    width: 200px !important;
-    height: 238px;
-    background: url(/static/img/butterfly/butterfly2wing.png) no-repeat;
-    animation-name: rightwingani;
-    animation-duration: 0.6s;
-    animation-delay: 0.5s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-out;
+    top: 100px;
+    left: 30px;
+    transform-style: preserve-3d;
+    transform: rotateX(70deg);
+}
+.hover-container {
+    transform-style: preserve-3d;
+}
+.wing {
+    position: absolute;
+
+    transform-style: preserve-3d;
+    animation: flap 0.3s linear infinite alternate;
+    width: 100px;
+    height: 100px;
+    /*background-color: rgba(252, 227, 100, 0.69);*/
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.9) 65%,rgba(0,0,76,0.9) 100%);
+    border-bottom: 3px solid darkblue;
+}
+.wing:after {
+    content: ' ';
+    position: absolute;
+    width: 74px;
+    height: 88px;
+    top: -76px;
+    left: 25px;
+    /*background-color: rgba(252, 227, 100, 0.69);*/
+    background: radial-gradient(ellipse at center, rgba(228, 203, 125, 0.9) 24%,rgba(248, 237, 110, 0.9) 27%,rgba(252,227,100,0.9) 64%,rgba(255, 0, 0, 0.9) 100%);
+    border-radius: 50% 114%;
+}
+.left {
+    transform-origin: right center;
+    border-radius: 177% 50%;
+}
+.right {
+    transform-origin: left center;
+    border-radius: 50% 177%;
+    left: 100px;
+    animation-direction: alternate-reverse;
 }
 
-#butterfly .left {
-    transform: rotateX(0deg) rotate3d(0, 1, 0, 0deg);
-    animation-name: leftwingani;
-    left: 0px;
-    top: 0px;
+.left:after {
+    left: 25px;
+    border-radius: 50% 114%;
 }
 
-@keyframes rightwingani {
-    from {
-        transform: rotateX(0deg) translate3d(-200px, 0px, 0px) rotate3d(0, 1, 0, 160deg);
-    }
-    50% {
-        transform: rotateX(0deg) translate3d(-200px, 0px, 0px) rotate3d(0, 1, 0, 100deg);
-    }
-    to {
-        transform: rotateX(0deg) translate3d(-200px, 0px, 0px) rotate3d(0, 1, 0, 160deg);
-    }
+.right:after {
+    left: 0;
+    border-radius: 114% 50%;
 }
 
-@keyframes leftwingani {
-    from {
-        transform: rotateX(0deg) rotate3d(0, 1, 0, 0deg);
-    }
-    50% {
-        transform: rotateX(0deg) rotate3d(0, 1, 0, 40deg);
-    }
-    to {
-        transform: rotateX(0deg) rotate3d(0, 1, 0, 00deg);
-    }
+.body {
+    display: none;
+    /*
+    width: 5px;
+    height: 80px;
+    border-radius: 5px;
+    background-color: #333;
+    position: absolute;
+    left: 100px;
+    top: -30px;*/
 }
 
+.head {
+    display: none;
+    /*
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #333;
+    left: 95px;
+    top: 32px;*/
+}
+.head:before {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 1px;
+    height: 40px;
+    background-color: #333;
+    transform: rotateX(34deg) rotateZ(20deg) translateY(20px);
+    top: -7px;
+}
+.head:after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 1px;
+    height: 40px;
+    background-color: #333;
+    transform: rotateX(34deg) rotateZ(-20deg) translateY(20px);
+    top: -7px;
+    left: 15px;
+}
 
-/*Fly in a loop keyframes below*/
-
-
-/*@keyframes butterflyani {
-	from {
-		transform: rotate3d(0, 1, 0, 0deg) scale3d(0.5, 0.5, 0.5) translate3d(-300px, 350px, 0px);
-	}
-	25% {
-		transform: rotate3d(0, 1, 0, -90deg) scale3d(0.5, 0.5, 0.5) translate3d(-300px, 350px, 0px);
-	}
-	50% {
-		transform: rotate3d(0, 1, 0, -180deg) scale3d(0.5, 0.5, 0.5) translate3d(-300px, 350px, 0px);
-	}
-	75% {
-		transform: rotate3d(0, 1, 0, -270deg) scale3d(0.5, 0.5, 0.5) translate3d(-300px, 350px, 0px);
-	}
-	to{
-		transform: rotate3d(0, 1, 0, -360deg) scale3d(0.5, 0.5, 0.5) translate3d(-300px, 350px, 0px);
-	}
-}*/
+/*butterfly follows path*/
+.container {
+    transition:
+        top 3s cubic-bezier(.34,.63,.26,.94),
+        left 3s cubic-bezier(.34,.63,.26,.94),
+        transform 1s linear;
+}

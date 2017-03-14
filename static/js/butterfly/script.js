@@ -24,7 +24,7 @@ var requestAnimationFrame = window.requestAnimationFrame ||
 
 
 $("canvas").click(function(e) {
-    console.log("Canvas click: X: " + e.pageX + "  Y: " + e.pageY);
+    //console.log("Canvas click: X: " + e.pageX + "  Y: " + e.pageY);
     //play music
     //playMusic();
     spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
@@ -69,98 +69,6 @@ var width = $("#background").width();
 var height = $("#background").height();
 var radius = width / 2;
 
-var moveLeft, moveRight, moveUp, moveDown;
-
-function getNewPosition() {
-    //get random position
-    var width = $("#background").width();
-    var height = $("#background").height();
-
-    console.log(width + "," + height)
-
-    parseInt(Math.random() * 2) ? coordRand = 1 : coordRand = -1;
-    parseInt(Math.random() * 2) ? coordRand1 = 1 : coordRand1 = -1;
-
-    //var new_y = coordRand * (y + Math.floor(Math.random() * 5));
-    //var new_x = coordRand * (x + Math.floor(Math.random() * 5));
-    var pos = $("#butterfly_container").position();
-    console.log(pos);
-    if (pos.left > width - 500 || moveLeft) {
-        console.log("moveLeft")
-        x--
-        moveLeft = true;
-        moveRight = false;
-        moveUp = false;
-        moveDown = false;
-    }
-    if (pos.left < 0 || moveRight) {
-        console.log("moveRight")
-        x++
-        moveRight = true;
-        moveLeft = false;
-        moveUp = false;
-        moveDown = false;
-    }
-    if (pos.top > height || moveUp) {
-        console.log("moveUp")
-        y--;
-        moveUp = true;
-        moveRight = false;
-        moveLeft = false;
-        moveDown = false;
-    }
-    if (pos.top < 0 || moveDown) {
-        console.log("moveDown")
-        y++;
-        moveDown = true;
-        moveRight = false;
-        moveUp = false;
-        moveLeft = false;
-    }
-    if (!(moveDown || moveRight || moveUp || moveLeft)) {
-        x++;
-        y++;
-    }
-
-
-
-    //return [x++, y++]
-    return [x, y]
-
-}
-
-function butterflyMove(opacity = null) {
-    var new_pos = getNewPosition();
-    var speed = 5 //calcSpeed([old_pos.top, old_pos.left], new_pos);
-        //console.log(new_pos)
-    $("#butterfly_container").animate({
-        top: new_pos[1], //new_pos[0],
-        left: new_pos[0] //new_pos[1]
-    }, speed, function() {
-        butterflyMove();
-    })
-
-}
-
-$(document).ready(function() {
-    butterflyMove();
-})
-
-function calcSpeed(prev, next) {
-
-    var x = Math.abs(prev[1] - next[1]);
-    var y = Math.abs(prev[0] - next[0]);
-
-    var greatest = x > y ? x : y;
-
-    var speedModifier = 0.1;
-
-    var speed = Math.ceil(greatest / speedModifier);
-
-    return speed;
-
-}
-
 function findPos(obj) {
     var curleft = 0,
         curtop = 0;
@@ -188,7 +96,7 @@ function getRandomInt(min, max) {
 }
 
 function spawnBlackness(x, y, width, height, alpha, i) {
-    console.log("width: " + width + "; height: " + height)
+    //console.log("width: " + width + "; height: " + height)
     var rand = getRandomInt(-100, 100);
     alpha += alphaDiff;
     parseInt(Math.random() * 2) ? coordRand1 = 1 : coordRand1 = -1;
@@ -197,7 +105,7 @@ function spawnBlackness(x, y, width, height, alpha, i) {
     x += coordRand1 * scale;
     y += coordRand2 * scale;
     i++;
-    console.log("i: " + i)
+    //console.log("i: " + i)
     ctx.fillRect(x, y, width, height);
     ctx.fillStyle = "rgba(0,0,0," + alpha + ")";
     requestID = requestAnimationFrame(function() {
@@ -226,4 +134,27 @@ function getCoordinates(x) {
 function playMusic(musicfile) {
     audio = new Audio(musicfile);
     audio.play();
+}
+
+
+/*--------butterfly animation---------*/
+document.addEventListener('click', moveTo);
+var container = document.querySelector('.container');
+var butterflyWingspan = 30;
+var rotationDamping = 10;
+function moveTo(e) {
+    var currentX = parseInt(container.style.left, 10);
+    var currentY = parseInt(container.style.top, 10);
+    var newX = e.clientX - butterflyWingspan;
+    var newY = e.clientY;
+    var deltaX = newX - currentX;
+    var deltaY = newY - currentY;
+
+    var rotateZ = -Math.min(Math.max(deltaX / rotationDamping, -90), 90);
+    var rotateX = 90 - Math.min(Math.max(deltaY / rotationDamping, -90), 90);
+    var translateZ = newY - 500;
+
+    container.style.left = newX + 'px'; 
+    container.style.top = newY + 'px'; 
+    container.style.transform = 'translateZ(' + translateZ + 'px) rotateX(' + rotateX + 'deg) rotateZ(' + rotateZ + 'deg)'; 
 }
