@@ -1,11 +1,13 @@
 var canvas = $("canvas");
-
+var clickCount = 1;
 var spread = 200;
 var w = 5
 var h = w
 var alphaDiff = 0.0005
 var maxOpacity = 200;
 var audio;
+var continueBlackness = false;
+var continueButterfly = false;
 
 var ctx = canvas[0].getContext("2d"),
     width = $(document).width(),
@@ -21,19 +23,36 @@ var requestAnimationFrame = window.requestAnimationFrame ||
     window.msRequestAnimationFrame;
 
 
+$(document).mousedown(function() {
+    continueBlackness = false;
+    continueButterfly = true;
+    moveTo(butterfly1Path.shift());
+}).mouseup(function(e) {
+    continueBlackness = true;
+    continueButterfly = false;
+    spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+    spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+    spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+    spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+    spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+})
 
-
+/*
 $("canvas").click(function(e) {
-    //console.log("Canvas click: X: " + e.pageX + "  Y: " + e.pageY);
-    //play music
-    //playMusic();
-    spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-    spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-    spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-    spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-    spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+    if (clickCount % 2 == 0) {
+        console.log(clickCount);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+    } else {
+        moveTo(butterfly1Path.shift());
+    }
+    clickCount += 1;
     //requestAnimationFrame(spawnBlackness);
 })
+*/
 
 function getOpacity(x, y) {
     var p = ctx.getImageData(x, y, 1, 1).data;
@@ -112,7 +131,7 @@ function spawnBlackness(x, y, width, height, alpha, i) {
         spawnBlackness(x, y, width, height, alpha, i);
 
     });
-    if (i > spread) {
+    if (!continueBlackness) {
         cancelAnimationFrame(requestID);
     }
 }
@@ -138,15 +157,24 @@ function playMusic(musicfile) {
 
 
 /*--------butterfly animation---------*/
-document.addEventListener('click', moveTo);
+//document.addEventListener('click', moveTo);
 var container = document.querySelector('.container');
 var butterflyWingspan = 30;
 var rotationDamping = 10;
-function moveTo(e) {
+var butterfly1Path = [
+    [10, 150],
+    [200, 600],
+    [30, 400],
+    [100, 400],
+    [50, 150]
+];
+
+
+function moveTo(coords) {
     var currentX = parseInt(container.style.left, 10);
     var currentY = parseInt(container.style.top, 10);
-    var newX = e.clientX - butterflyWingspan;
-    var newY = e.clientY;
+    var newX = coords[0] - butterflyWingspan;
+    var newY = coords[1];
     var deltaX = newX - currentX;
     var deltaY = newY - currentY;
 
@@ -154,7 +182,15 @@ function moveTo(e) {
     var rotateX = 90 - Math.min(Math.max(deltaY / rotationDamping, -90), 90);
     var translateZ = newY - 500;
 
-    container.style.left = newX + 'px'; 
-    container.style.top = newY + 'px'; 
-    container.style.transform = 'translateZ(' + translateZ + 'px) rotateX(' + rotateX + 'deg) rotateZ(' + rotateZ + 'deg)'; 
+    container.style.left = newX + 'px';
+    container.style.top = newY + 'px';
+    container.style.transform = 'translateZ(' + translateZ + 'px) rotateX(' + rotateX + 'deg) rotateZ(' + rotateZ + 'deg)';
+    if (continueButterfly) {
+        setTimeout(function() {
+            moveTo(butterfly1Path.shift());
+        }, 700);
+    } else {
+        return;
+    }
+
 }
