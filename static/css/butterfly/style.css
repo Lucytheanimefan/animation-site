@@ -1,3 +1,62 @@
+/* intro */
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400");
+.text-js {
+  opacity: 0;
+}
+
+.cursor {
+  display: block;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: -5px;
+  width: 2px;
+  /* Change colour of Cursor Here */
+  background-color: white;
+  z-index: 1;
+  -webkit-animation: flash 0.5s none infinite alternate;
+          animation: flash 0.5s none infinite alternate;
+}
+
+@-webkit-keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  boz-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+.headline {
+  margin: 20px;
+  color: black;
+  font-size: 32px;
+  text-align: center;
+}
+.headline h1 {
+  letter-spacing: 1.6px;
+  font-weight: 300;
+}
+
+/* end intro */
+
+
+
 canvas {
     position: absolute;
     z-index: 1;
@@ -29,8 +88,8 @@ body {
 }
 
 .container2{
-    top: 100px;
-    left: 150px;
+    top: 800px;
+    left: 600px;
 }
 
 .hover-container {
