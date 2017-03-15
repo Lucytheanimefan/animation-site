@@ -102,11 +102,11 @@ function mouseUpMouseDownFunctionality() {
         continueBlackness = true;
         continueButterfly = false;
         clearInterval(butterflyID);
-        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0.1, 0);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0.1, 0);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0.1, 0);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0.1, 0);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0.1, 0);
     })
 }
 
@@ -160,7 +160,7 @@ function getRandomInt(min, max) {
 function spawnBlackness(x, y, width, height, alpha, i) {
     //console.log("width: " + width + "; height: " + height)
     var rand = getRandomInt(-100, 100);
-    alpha += alphaDiff;
+    //alpha += alphaDiff;
     width += alphaDiff;
     height += alphaDiff;
     parseInt(Math.random() * 2) ? coordRand1 = 1 : coordRand1 = -1;
@@ -174,6 +174,9 @@ function spawnBlackness(x, y, width, height, alpha, i) {
     ctx.fillStyle = "rgba(0,0,0," + alpha + ")";
     requestID = requestAnimationFrame(function() {
         spawnBlackness(x, y, width, height, alpha, i);
+        if (i % 10 == 0) {
+            spawnBlackness(x, y, width, height, alpha, i);
+        }
 
     });
     if (!continueBlackness) {
