@@ -73,7 +73,6 @@ $(document).ready(function() {
 });
 
 
-
 var ctx = canvas[0].getContext("2d"),
     width = $(document).width(),
     height = $(document).height(),
@@ -81,6 +80,18 @@ var ctx = canvas[0].getContext("2d"),
 
 canvas.attr("width", width);
 canvas.attr("height", height);
+
+//audio1.onended=function(){
+setTimeout(function() {
+    console.log("Music done!");
+    $(document).unbind("mousedown");
+    $(document).unbind("mouseup");
+    $(".container1").remove();
+    $(".container2").css('z-index', 99);
+    $(".wing2").css('background', 'radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 10%, rgba(255, 255, 255, 0.9) 100%)');
+    $(".wing2:after").css('background', 'radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 10%, rgba(255, 255, 255, 0.9) 100%)');
+}, 60000);
+//}
 
 var requestAnimationFrame = window.requestAnimationFrame ||
     window.mozRequestAnimationFrame ||
