@@ -54,20 +54,22 @@ $(document).ready(function() {
     audio1.play();
     $(".container").css("display", 'none');
     $("#background").css("display", 'none');
+
     autoType(".type-js", typingSpeed);
     var timeToWait1 = amntOfChars * typingSpeed;
     setTimeout(function() {
         autoType(".type-js2", typingSpeed);
     }, timeToWait1);
     var timeToWait2 = amntOfChars * typingSpeed;
-    var timeToWait = timeToWait1+timeToWait2;
+    var timeToWait = timeToWait1 + timeToWait2;
     setTimeout(function() {
         $(".headline").remove();
         $(".container").fadeIn(500);
         $("#background").fadeIn(500);
         audio1.pause();
+        mouseUpMouseDownFunctionality();
 
-    }, timeToWait-10000);
+    }, timeToWait - 10000);
 });
 
 
@@ -85,27 +87,28 @@ var requestAnimationFrame = window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.msRequestAnimationFrame;
 
-//moveTo(coords, container, path)
-$(document).mousedown(function() {
-    audio1.play();
-    continueBlackness = false;
-    continueButterfly = true;
-    butterflyID = setInterval(function() {
-        moveTo(butterflyPath["butterfly1"].shift(), container1, "butterfly1");
-        moveTo(butterflyPath["butterfly2"].shift(), container2, "butterfly2");
-    }, 500)
+function mouseUpMouseDownFunctionality() {
+    $(document).mousedown(function() {
+        audio1.play();
+        continueBlackness = false;
+        continueButterfly = true;
+        butterflyID = setInterval(function() {
+            moveTo(butterflyPath["butterfly1"].shift(), container1, "butterfly1");
+            moveTo(butterflyPath["butterfly2"].shift(), container2, "butterfly2");
+        }, 500)
 
-}).mouseup(function(e) {
-    audio1.pause();
-    continueBlackness = true;
-    continueButterfly = false;
-    clearInterval(butterflyID);
-    spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-    spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-    spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-    spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-    spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-})
+    }).mouseup(function(e) {
+        audio1.pause();
+        continueBlackness = true;
+        continueButterfly = false;
+        clearInterval(butterflyID);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
+    })
+}
 
 
 
