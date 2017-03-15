@@ -9,6 +9,28 @@ var audio;
 var continueBlackness = false;
 var continueButterfly = false;
 
+var container1 = document.querySelector('.container1');
+var container2 = document.querySelector('.container2');
+var butterflyWingspan = 30;
+var rotationDamping = 10;
+var butterflyPath = {
+    'butterfly1': [
+        [10, 150],
+        [200, 600],
+        [30, 400],
+        [100, 400],
+        [50, 150]
+    ],
+    'butterfly2': [
+        [150, 10],
+        [600, 200],
+        [400, 30],
+        [400, 100],
+        [150, 50]
+    ]
+};
+
+
 var ctx = canvas[0].getContext("2d"),
     width = $(document).width(),
     height = $(document).height(),
@@ -22,14 +44,19 @@ var requestAnimationFrame = window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.msRequestAnimationFrame;
 
-
+//moveTo(coords, container, path)
 $(document).mousedown(function() {
     continueBlackness = false;
     continueButterfly = true;
-    moveTo(butterfly1Path.shift());
+    butterflyID = setInterval(function() {
+        moveTo(butterflyPath["butterfly1"].shift(), container1, "butterfly1");
+        moveTo(butterflyPath["butterfly2"].shift(), container2, "butterfly2");
+    },500)
+
 }).mouseup(function(e) {
     continueBlackness = true;
     continueButterfly = false;
+    clearInterval(butterflyID);
     spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
     spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
     spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
@@ -158,21 +185,13 @@ function playMusic(musicfile) {
 
 /*--------butterfly animation---------*/
 //document.addEventListener('click', moveTo);
-var container = document.querySelector('.container');
-var butterflyWingspan = 30;
-var rotationDamping = 10;
-var butterfly1Path = [
-    [10, 150],
-    [200, 600],
-    [30, 400],
-    [100, 400],
-    [50, 150]
-];
 
 
-function moveTo(coords) {
+function moveTo(coords, container, path) {
+    console.log(container)
     var currentX = parseInt(container.style.left, 10);
     var currentY = parseInt(container.style.top, 10);
+    console.log(currentX + "," + currentY)
     var newX = coords[0] - butterflyWingspan;
     var newY = coords[1];
     var deltaX = newX - currentX;
@@ -185,12 +204,13 @@ function moveTo(coords) {
     container.style.left = newX + 'px';
     container.style.top = newY + 'px';
     container.style.transform = 'translateZ(' + translateZ + 'px) rotateX(' + rotateX + 'deg) rotateZ(' + rotateZ + 'deg)';
+    /*
     if (continueButterfly) {
-        setTimeout(function() {
-            moveTo(butterfly1Path.shift());
-        }, 700);
+       
+            moveTo(butterflyPath[path].shift());
+      
     } else {
         return;
-    }
+    }*/
 
 }

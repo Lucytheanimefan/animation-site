@@ -28,6 +28,11 @@ body {
     transform: rotateX(70deg);
 }
 
+.container2{
+    top: 100px;
+    left: 150px;
+}
+
 .hover-container {
     transform-style: preserve-3d;
 }
@@ -52,6 +57,29 @@ body {
     left: 25px;
     /*background-color: rgba(252, 227, 100, 0.69);*/
     background: radial-gradient(ellipse at center, rgba(0, 0, 76, 0.9) 14%, rgba(0, 0, 0, 0.9) 17%, rgba(0,0,0, 0.9) 64%, rgba(0, 0, 0, 0.5) 100%);
+    border-radius: 50% 114%;
+}
+
+.wing2 {
+    position: absolute;
+    transform-style: preserve-3d;
+    animation: flap 0.3s linear infinite alternate;
+    width: 100px;
+    height: 100px;
+    /*background-color: rgba(252, 227, 100, 0.69);*/
+    background: radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 10%, rgba(0, 0, 0, 0.9) 100%);
+    border-bottom: 3px solid black;
+}
+
+.wing2:after {
+    content: ' ';
+    position: absolute;
+    width: 74px;
+    height: 88px;
+    top: -76px;
+    left: 25px;
+    /*background-color: rgba(252, 227, 100, 0.69);*/
+    background: radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 14%, rgba(0, 0, 0, 0.9) 17%, rgba(50,50,50, 0.9) 64%, rgba(0, 0, 0, 0.5) 100%);
     border-radius: 50% 114%;
 }
 
