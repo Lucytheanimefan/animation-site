@@ -1,8 +1,8 @@
 var canvas = $("canvas");
 var clickCount = 1;
 var spread = 200;
-var w = 5
-var h = w
+var w = 5;
+var h = w;
 var alphaDiff = 0.0005
 var maxOpacity = 200;
 var audio;
@@ -16,17 +16,28 @@ var rotationDamping = 10;
 var butterflyPath = {
     'butterfly1': [
         [10, 150],
-        [200, 600],
-        [30, 400],
-        [100, 400],
-        [50, 150]
+        [10, 350],
+        [50, 370],
+        [70, 400],
+        [90, 500],
+        [400, 50],
+        [550, 40],
+        [590, 590],
+        [650, 700],
+        [700, 400],
     ],
     'butterfly2': [
         [150, 10],
-        [600, 200],
-        [400, 30],
-        [400, 100],
-        [150, 50]
+        [350, 10],
+        [370, 50],
+        [400, 70],
+        [500, 90],
+        [550, 40],
+        [600, 600],
+        [100, 600],
+        [0, 650],
+        [300, 550],
+        [400, 700]
     ]
 };
 
@@ -51,7 +62,7 @@ $(document).mousedown(function() {
     butterflyID = setInterval(function() {
         moveTo(butterflyPath["butterfly1"].shift(), container1, "butterfly1");
         moveTo(butterflyPath["butterfly2"].shift(), container2, "butterfly2");
-    },500)
+    }, 500)
 
 }).mouseup(function(e) {
     continueBlackness = true;
@@ -64,22 +75,7 @@ $(document).mousedown(function() {
     spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
 })
 
-/*
-$("canvas").click(function(e) {
-    if (clickCount % 2 == 0) {
-        console.log(clickCount);
-        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-        spawnBlackness(e.pageX, e.pageY, w, h, 0, 0);
-    } else {
-        moveTo(butterfly1Path.shift());
-    }
-    clickCount += 1;
-    //requestAnimationFrame(spawnBlackness);
-})
-*/
+
 
 function getOpacity(x, y) {
     var p = ctx.getImageData(x, y, 1, 1).data;
@@ -87,22 +83,7 @@ function getOpacity(x, y) {
     return parseInt(opac);
 }
 
-//get pixel of where mouse is
-/*
-$('canvas').mousemove(function(e) {
-    var pos = findPos(this);
-    var x = e.pageX - pos.x;
-    var y = e.pageY - pos.y;
-    var coord = "x=" + x + ", y=" + y;
-    var c = this.getContext('2d');
-    var p = c.getImageData(x, y, 1, 1).data; 
-    var opac = p[3]; //opacity, 255 if black
-    console.log(p)
-    var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2]));
-    
-    console.log(coord + "<br>" + hex);
-});
-*/
+
 
 function okToMove(opacity) {
     return (opacity < maxOpacity);
@@ -145,6 +126,8 @@ function spawnBlackness(x, y, width, height, alpha, i) {
     //console.log("width: " + width + "; height: " + height)
     var rand = getRandomInt(-100, 100);
     alpha += alphaDiff;
+    width += alphaDiff;
+    height += alphaDiff;
     parseInt(Math.random() * 2) ? coordRand1 = 1 : coordRand1 = -1;
     parseInt(Math.random() * 2) ? coordRand2 = 1 : coordRand2 = -1;
     var scale = getRandomInt(Math.pow(i, 1 / 3), Math.pow(i, 1 / 3) + 2);
@@ -184,8 +167,25 @@ function playMusic(musicfile) {
 
 
 /*--------butterfly animation---------*/
-//document.addEventListener('click', moveTo);
 
+var lambda =0.5;
+
+function butterflyCurve() {
+    coordinates = [];
+    for (t = 0; t < 100; t++) {
+        var x = Math.sin(t) * (Math.pow(Math.E, Math.cos(t)) - 2 * Math.cos(lambda * t) - Math.pow(Math.sin(t / 12), 5));
+        var y = Math.cos(t) * (Math.pow(Math.E, Math.cos(t)) - 2 * Math.cos(lambda * t) - Math.pow(Math.sin(t / 12), 5));
+        coordinates.push([300*x + 200,300*y + 200]);
+    }
+
+    console.log(coordinates);
+    butterflyPath['butterfly1'] = coordinates;
+    butterflyPath['butterfly2'] = coordinates.reverse();
+
+    console.log(butterflyPath)
+}
+
+butterflyCurve();
 
 function moveTo(coords, container, path) {
     console.log(container)
