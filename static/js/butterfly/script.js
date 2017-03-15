@@ -5,42 +5,21 @@ var w = 5;
 var h = w;
 var alphaDiff = 0.0005
 var maxOpacity = 200;
-var audio;
+var audio1 = new Audio("/static/sound/butterfly.mp3"); //main theme
+var audio2 = new Audio(""); //black spreading
 var continueBlackness = false;
 var continueButterfly = false;
-var typingSpeed = 50;
+var typingSpeed = 47;
 
 var container1 = document.querySelector('.container1');
 var container2 = document.querySelector('.container2');
 var butterflyWingspan = 30;
 var rotationDamping = 10;
 var butterflyPath = {
-    'butterfly1': [
-        [10, 150],
-        [10, 350],
-        [50, 370],
-        [70, 400],
-        [90, 500],
-        [400, 50],
-        [550, 40],
-        [590, 590],
-        [650, 700],
-        [700, 400],
-    ],
-    'butterfly2': [
-        [150, 10],
-        [350, 10],
-        [370, 50],
-        [400, 70],
-        [500, 90],
-        [550, 40],
-        [600, 600],
-        [100, 600],
-        [0, 650],
-        [300, 550],
-        [400, 700]
-    ]
+    'butterfly1': [],
+    'butterfly2': []
 };
+
 
 
 function autoType(elementClass, typingSpeed) {
@@ -53,7 +32,7 @@ function autoType(elementClass, typingSpeed) {
     thhis = thhis.find(".text-js");
     var text = thhis.text().trim().split('');
     amntOfChars = text.length;
-    console.log("Chars: "+amntOfChars)
+    console.log("Chars: " + amntOfChars)
     var newString = "";
     thhis.text("|");
     setTimeout(function() {
@@ -72,16 +51,23 @@ function autoType(elementClass, typingSpeed) {
 }
 
 $(document).ready(function() {
-    $(".container").css("display",'none');
-    $("#background").css("display",'none');
+    audio1.play();
+    $(".container").css("display", 'none');
+    $("#background").css("display", 'none');
     autoType(".type-js", typingSpeed);
-    var timeToWait = amntOfChars*typingSpeed + 2000;
-    setTimeout(function(){
-        $(".type-js").remove();
+    var timeToWait1 = amntOfChars * typingSpeed;
+    setTimeout(function() {
+        autoType(".type-js2", typingSpeed);
+    }, timeToWait1);
+    var timeToWait2 = amntOfChars * typingSpeed;
+    var timeToWait = timeToWait1+timeToWait2;
+    setTimeout(function() {
+        $(".headline").remove();
         $(".container").fadeIn(500);
         $("#background").fadeIn(500);
+        audio1.pause();
 
-    }, timeToWait);
+    }, timeToWait-10000);
 });
 
 
@@ -101,6 +87,7 @@ var requestAnimationFrame = window.requestAnimationFrame ||
 
 //moveTo(coords, container, path)
 $(document).mousedown(function() {
+    audio1.play();
     continueBlackness = false;
     continueButterfly = true;
     butterflyID = setInterval(function() {
@@ -109,6 +96,7 @@ $(document).mousedown(function() {
     }, 500)
 
 }).mouseup(function(e) {
+    audio1.pause();
     continueBlackness = true;
     continueButterfly = false;
     clearInterval(butterflyID);
@@ -197,16 +185,6 @@ function getCoordinates(x) {
     y = A * Math.pow(Math.E, -b * x) * Math.cos(x);
     console.log("Y: " + y)
     return y
-}
-
-/**
- * [playMusic description]
- * @param  {[type]} musicfile .mp3 file probably
- * @return {[type]}           [description]
- */
-function playMusic(musicfile) {
-    audio = new Audio(musicfile);
-    audio.play();
 }
 
 
