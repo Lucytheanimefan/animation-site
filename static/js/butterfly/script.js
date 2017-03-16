@@ -11,12 +11,14 @@ var audioDarkLoop = new Audio("/static/sound/DarkLoop3.mp3"); //black spreading
 //infinite loop
 audioDarkLoop.loop = true;
 
+var audioEnding = new Audio("/static/sound/ending.mp3");
 var audioIntro = new Audio("/static/sound/Intro.mp3");
 audioIntro.addEventListener('ended', function() {
     beginButterflyScene();
 });
 var audioButterfly = new Audio("/static/sound/butterfly.mp3"); //main theme
 audioButterfly.addEventListener('ended', function() {
+    audioEnding.play();
     endingSequence();
 });
 
@@ -102,20 +104,35 @@ canvas.attr("height", height);
 function endingSequence() {
     $(document).unbind("mousedown");
     $(document).unbind("mouseup");
+    lostCurve();
     clearInterval(butterflyID);
     ctx.fillStyle = "black";
     continueBlackness = true;
     spawnBlackness(500, 500, w, h, 0.1, 0, 16);
     spawnBlackness(100, 100, w, h, 0.1, 0, 16);
-    spawnBlackness(800, 800, w, h, 0.1, 0, 16);
-    spawnBlackness(800, 100, w, h, 0.1, 0, 16);
+    spawnBlackness(100, 400, w, h, 0.1, 0, 16);
     spawnBlackness(100, 800, w, h, 0.1, 0, 16);
+    spawnBlackness(400, 100, w, h, 0.1, 0, 16);
+    spawnBlackness(400, 400, w, h, 0.1, 0, 16);
+    spawnBlackness(400, 700, w, h, 0.1, 0, 16);
+    spawnBlackness(800, 700, w, h, 0.1, 0, 16);
+    spawnBlackness(800, 400, w, h, 0.1, 0, 16);
+    spawnBlackness(800, 100, w, h, 0.1, 0, 16);
+
     moveTo([450, 400], container2, "butterfly2");
+    clearInterval(butterflyID);
+    butterflyPath["butterfly2"] = [];
+    butterflyID = setInterval(function() {
+        if (butterflyPath["butterfly2"].length <= 1) {
+            clearInterval(butterflyID);
+        }
+        moveTo(butterflyPath["butterfly2"].shift(), container2, "butterfly2");
+    }, 500);
     setTimeout(function() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         $(document).css("background-color", "black");
         continueBlackness = false;
-    }, 10000);
+    }, 8000);
     $(".container1").remove();
     $(".container2").css('z-index', 99);
     $(".wing2").css('background', 'radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 10%, rgba(255, 255, 255, 0.9) 100%)');
@@ -146,7 +163,7 @@ function mouseUpMouseDownFunctionality() {
             }
             moveTo(butterflyPath["butterfly1"].shift(), container1, "butterfly1");
             moveTo(butterflyPath["butterfly2"].shift(), container2, "butterfly2");
-        }, 500)
+        }, 500);
 
     }).mouseup(function(e) {
         audioButterfly.pause();
@@ -314,6 +331,16 @@ function hourGlassCurve() {
         butterflyPath['butterfly1'].push([300 * x + 400, 200 * y + 300]);
         butterflyPath['butterfly2'].push([300 * x1 + 400, 200 * y1 + 300]);
     }
+}
+
+function lostCurve() {
+    butterflyPath['butterfly2'].push([450, 400]);
+    butterflyPath['butterfly2'].push([100, 100]);
+    butterflyPath['butterfly2'].push([800, 100]);
+    butterflyPath['butterfly2'].push([100, 800]);
+    butterflyPath['butterfly2'].push([800, 800]);
+    butterflyPath['butterfly2'].push([450, 400]);
+
 }
 
 function moveTo(coords, container, path) {
