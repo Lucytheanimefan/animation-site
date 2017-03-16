@@ -108,16 +108,16 @@ function endingSequence() {
     clearInterval(butterflyID);
     ctx.fillStyle = "black";
     continueBlackness = true;
-    spawnBlackness(500, 500, w, h, 0.1, 0, 10);
-    spawnBlackness(100, 100, w, h, 0.1, 0, 10);
-    spawnBlackness(100, 400, w, h, 0.1, 0, 10);
-    spawnBlackness(100, 800, w, h, 0.1, 0, 10);
-    spawnBlackness(400, 100, w, h, 0.1, 0, 10);
-    spawnBlackness(400, 400, w, h, 0.1, 0, 10);
-    spawnBlackness(400, 700, w, h, 0.1, 0, 10);
-    spawnBlackness(800, 700, w, h, 0.1, 0, 10);
-    spawnBlackness(800, 400, w, h, 0.1, 0, 10);
-    spawnBlackness(800, 100, w, h, 0.1, 0, 10);
+    spawnBlackness(500, 500, w, h, 0.1, 0, 20);
+    spawnBlackness(100, 100, w, h, 0.1, 0, 20);
+    spawnBlackness(100, 400, w, h, 0.1, 0, 20);
+    spawnBlackness(100, 800, w, h, 0.1, 0, 20);
+    spawnBlackness(400, 100, w, h, 0.1, 0, 20);
+    spawnBlackness(400, 400, w, h, 0.1, 0, 20);
+    spawnBlackness(400, 700, w, h, 0.1, 0, 20);
+    spawnBlackness(800, 700, w, h, 0.1, 0, 20);
+    spawnBlackness(800, 400, w, h, 0.1, 0, 20);
+    spawnBlackness(800, 100, w, h, 0.1, 0, 20);
 
     moveTo([450, 400], container2, "butterfly2");
     clearInterval(butterflyID);
@@ -340,6 +340,7 @@ function lostCurve() {
     butterflyPath['butterfly2'].push([70, 800]);
     butterflyPath['butterfly2'].push([800, 800]);
     butterflyPath['butterfly2'].push([450, 400]);
+    circleCurve()
 
 }
 
