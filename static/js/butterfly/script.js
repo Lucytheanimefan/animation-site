@@ -15,7 +15,7 @@ var audioIntro = new Audio("/static/sound/Intro.mp3");
 audioIntro.addEventListener('ended', function() {
     beginButterflyScene();
 });
-var audioButterfly = new Audio("/static/sound/Butterfly.mp3"); //main theme
+var audioButterfly = new Audio("/static/sound/butterfly.mp3"); //main theme
 audioButterfly.addEventListener('ended', function() {
     endingSequence();
 });
