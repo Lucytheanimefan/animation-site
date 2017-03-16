@@ -1,15 +1,30 @@
 var canvas = $("canvas");
 var clickCount = 1;
-var spread = 200;
+var timeElapsed = 0;
 var w = 5;
 var h = w;
 var alphaDiff = 0.0005
 var maxOpacity = 200;
-var audio1 = new Audio("/static/sound/butterfly.mp3"); //main theme
-var audio2 = new Audio(""); //black spreading
+var darkonplaying = true;
+var darkonpause = false;
+var audioDarkLoop = new Audio("/static/sound/DarkLoop3.mp3"); //black spreading
+//infinite loop
+audioDarkLoop.loop = true;
+
+var audioIntro = new Audio("/static/sound/Intro.mp3");
+audioIntro.addEventListener('ended', function() {
+    beginButterflyScene();
+});
+var audioButterfly = new Audio("/static/sound/Butterfly.mp3"); //main theme
+audioButterfly.addEventListener('ended', function() {
+    endingSequence();
+});
+
+
+
 var continueBlackness = false;
 var continueButterfly = false;
-var typingSpeed = 47;
+var typingSpeed = 54;
 
 var container1 = document.querySelector('.container1');
 var container2 = document.querySelector('.container2');
@@ -20,7 +35,12 @@ var butterflyPath = {
     'butterfly2': []
 };
 
-
+function beginButterflyScene() {
+    $(".headline").remove();
+    $(".container").fadeIn(500);
+    $("#background").fadeIn(500);
+    mouseUpMouseDownFunctionality();
+}
 
 function autoType(elementClass, typingSpeed) {
     var thhis = $(elementClass);
@@ -32,7 +52,6 @@ function autoType(elementClass, typingSpeed) {
     thhis = thhis.find(".text-js");
     var text = thhis.text().trim().split('');
     amntOfChars = text.length;
-    console.log("Chars: " + amntOfChars)
     var newString = "";
     thhis.text("|");
     setTimeout(function() {
@@ -51,25 +70,23 @@ function autoType(elementClass, typingSpeed) {
 }
 
 $(document).ready(function() {
-    audio1.play();
+    butterflyCurve();
+    hourGlassCurve();
+    flowerCurve();
+    polyLineCurve();
+    circleCurve();
+    localStorage.setItem("butterflyPaths", JSON.stringify(butterflyPath));
+
+    audioIntro.play();
     $(".container").css("display", 'none');
     $("#background").css("display", 'none');
-
     autoType(".type-js", typingSpeed);
     var timeToWait1 = amntOfChars * typingSpeed;
     setTimeout(function() {
         autoType(".type-js2", typingSpeed);
     }, timeToWait1);
-    var timeToWait2 = amntOfChars * typingSpeed;
-    var timeToWait = timeToWait1 + timeToWait2;
-    setTimeout(function() {
-        $(".headline").remove();
-        $(".container").fadeIn(500);
-        $("#background").fadeIn(500);
-        audio1.pause();
-        mouseUpMouseDownFunctionality();
 
-    }, timeToWait - 10000);
+    //beginButterflyScene(); //for testing
 });
 
 
@@ -82,45 +99,75 @@ canvas.attr("width", width);
 canvas.attr("height", height);
 
 //audio1.onended=function(){
-setTimeout(function() {
-    console.log("Music done!");
+function endingSequence() {
+    ctx.fillStyle = "black";
+    spawnBlackness(500, 500, w, h, 0.1, 0, 16);
+    butterflyPath["butterfly2"] = [
+        [500, 500]
+    ];
+    setTimeout(function() {
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }, 5000);
     $(document).unbind("mousedown");
     $(document).unbind("mouseup");
     $(".container1").remove();
     $(".container2").css('z-index', 99);
     $(".wing2").css('background', 'radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 10%, rgba(255, 255, 255, 0.9) 100%)');
-    $(".wing2:after").css('background', 'radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 10%, rgba(255, 255, 255, 0.9) 100%)');
-}, 60000);
-//}
+    $('head').append('<style>.wing2:after{background:radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 10%, rgba(255, 255, 255, 0.9) 100%) !important;}</style>');
+}
 
 var requestAnimationFrame = window.requestAnimationFrame ||
     window.mozRequestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.msRequestAnimationFrame;
 
+var totalSongLength = 169;
+
 function mouseUpMouseDownFunctionality() {
     $(document).mousedown(function() {
-        audio1.play();
+        audioButterfly.play();
+        startTime = new Date();
+        if (!audioDarkLoop.paused) { //hack to avoid Promise Error
+            audioDarkLoop.pause();
+        }
         continueBlackness = false;
         continueButterfly = true;
         butterflyID = setInterval(function() {
+            if (butterflyPath["butterfly1"].length <= 1 || butterflyPath["butterfly2"].length <= 1) {
+                flowerCurve();
+                polyLineCurve();
+                circleCurve();
+            }
             moveTo(butterflyPath["butterfly1"].shift(), container1, "butterfly1");
             moveTo(butterflyPath["butterfly2"].shift(), container2, "butterfly2");
         }, 500)
 
     }).mouseup(function(e) {
-        audio1.pause();
+        audioButterfly.pause();
+        endTime = new Date();
+        timeDiff = endTime - startTime;
+        timeDiff /= 1000;
+        timeElapsed = timeElapsed + Math.round(timeDiff % 60);
+        console.log(timeElapsed);
+        var spread = Math.round(20 * totalSongLength / timeElapsed);
+        console.log("spread: " + spread);
+        //hack to avoid Promise Error
+        setTimeout(function() {
+            if (audioDarkLoop.paused) {
+                audioDarkLoop.play();
+            }
+        }, 150);
+
         continueBlackness = true;
         continueButterfly = false;
         clearInterval(butterflyID);
-        spawnBlackness(e.pageX, e.pageY, w, h, 0.1, 0);
-        spawnBlackness(e.pageX, e.pageY, w, h, 0.1, 0);
-        spawnBlackness(e.pageX, e.pageY, w, h, 0.1, 0);
-        spawnBlackness(e.pageX, e.pageY, w, h, 0.1, 0);
-        spawnBlackness(e.pageX, e.pageY, w, h, 0.1, 0);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0.1, 0, spread);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0.1, 0, spread);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0.1, 0, spread);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0.1, 0, spread);
+        spawnBlackness(e.pageX, e.pageY, w, h, 0.1, 0, spread);
     })
 }
-
 
 
 function getOpacity(x, y) {
@@ -168,7 +215,7 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function spawnBlackness(x, y, width, height, alpha, i) {
+function spawnBlackness(x, y, width, height, alpha, i, spread = 10) {
     //console.log("width: " + width + "; height: " + height)
     var rand = getRandomInt(-100, 100);
     //alpha += alphaDiff;
@@ -184,9 +231,9 @@ function spawnBlackness(x, y, width, height, alpha, i) {
     ctx.fillRect(x, y, width, height);
     ctx.fillStyle = "rgba(0,0,0," + alpha + ")";
     requestID = requestAnimationFrame(function() {
-        spawnBlackness(x, y, width, height, alpha, i);
-        if (i % 10 == 0) {
-            spawnBlackness(x, y, width, height, alpha, i);
+        spawnBlackness(x, y, width, height, alpha, i, spread);
+        if (i % spread == 0) {
+            spawnBlackness(x, y, width, height, alpha, i, spread);
         }
 
     });
@@ -195,42 +242,77 @@ function spawnBlackness(x, y, width, height, alpha, i) {
     }
 }
 
-function getCoordinates(x) {
-    //y ( x ) = Ae^(−bx) cos x;
-    A = 10;
-    b = 5;
-    y = A * Math.pow(Math.E, -b * x) * Math.cos(x);
-    console.log("Y: " + y)
-    return y
-}
-
-
 /*--------butterfly animation---------*/
 
 var lambda = 0.5;
 
 function butterflyCurve() {
-    coordinates = [];
-    for (t = 0; t < 100; t++) {
+    var coordinates = [];
+    for (t = 0; t < 70; t++) {
         var x = Math.sin(t) * (Math.pow(Math.E, Math.cos(t)) - 2 * Math.cos(lambda * t) - Math.pow(Math.sin(t / 12), 5));
         var y = Math.cos(t) * (Math.pow(Math.E, Math.cos(t)) - 2 * Math.cos(lambda * t) - Math.pow(Math.sin(t / 12), 5));
-        coordinates.push([300 * x + 200, 300 * y + 200]);
+        var coordinates = [300 * x + 300, 300 * y + 200];
+        if (t % 2 == 0) {
+            butterflyPath['butterfly1'].push(coordinates);
+        } else {
+            butterflyPath['butterfly2'].push(coordinates);
+        }
     }
 
-    console.log(coordinates);
-    butterflyPath['butterfly1'] = coordinates;
-    butterflyPath['butterfly2'] = coordinates.reverse();
-
-    console.log(butterflyPath)
 }
 
-butterflyCurve();
+//hanging out?
+function flowerCurve() {
+    var k = 8;
+    for (var theta = 0; theta < 30; theta++) {
+        var coordinates = [];
+        var x = Math.cos(k * theta);
+        var y = Math.cos(k * theta);
+        var x1 = Math.cos(k * (theta + 1));
+        var y1 = Math.cos(k * (theta + 1));
+        butterflyPath['butterfly1'].push([300 * x + 400, 400 * y + 400]);
+        butterflyPath['butterfly2'].push([300 * x1 + 400, 400 * y1 + 400])
+    }
+
+}
+
+
+function polyLineCurve() {
+    for (var x = 0; x < 30; x++) {
+        var y = 700 * Math.sin(x) + 300;
+        var x1 = x + 1;
+        var y1 = 700 * Math.sin(x1) + 300;
+        butterflyPath['butterfly1'].push([20 * (x + 5), y]);
+        butterflyPath['butterfly2'].push([20 * x1 + 200, y1]);
+    }
+}
+
+function circleCurve() {
+    for (var t = 0; t < 14; t += 0.7) {
+        var x = Math.cos(t);
+        var y = Math.sin(t);
+        var x1 = Math.cos(t + 0.1);
+        var y1 = Math.sin(t + 0.1);
+        butterflyPath['butterfly1'].push([300 * x + 350, 300 * y + 330]);
+        butterflyPath['butterfly2'].push([300 * x1 + 380, 300 * y1 + 430]);
+    }
+
+}
+
+function hourGlassCurve() {
+    for (var t = -50; t < 50; t++) {
+        var x = 2 * Math.cos(3 * t);
+        var y = 3 * Math.sin(t);
+        var x1 = 2 * Math.cos(3 * (-1 * t));
+        var y1 = 3 * Math.sin(-1 * t);
+        butterflyPath['butterfly1'].push([300 * x + 400, 200 * y + 300]);
+        butterflyPath['butterfly2'].push([300 * x1 + 400, 200 * y1 + 300]);
+    }
+}
 
 function moveTo(coords, container, path) {
-    console.log(container)
     var currentX = parseInt(container.style.left, 10);
     var currentY = parseInt(container.style.top, 10);
-    console.log(currentX + "," + currentY)
     var newX = coords[0] - butterflyWingspan;
     var newY = coords[1];
     var deltaX = newX - currentX;
@@ -243,13 +325,5 @@ function moveTo(coords, container, path) {
     container.style.left = newX + 'px';
     container.style.top = newY + 'px';
     container.style.transform = 'translateZ(' + translateZ + 'px) rotateX(' + rotateX + 'deg) rotateZ(' + rotateZ + 'deg)';
-    /*
-    if (continueButterfly) {
-       
-            moveTo(butterflyPath[path].shift());
-      
-    } else {
-        return;
-    }*/
 
 }
