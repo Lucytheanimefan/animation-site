@@ -100,16 +100,22 @@ canvas.attr("height", height);
 
 //audio1.onended=function(){
 function endingSequence() {
-    ctx.fillStyle = "black";
-    spawnBlackness(500, 500, w, h, 0.1, 0, 16);
-    butterflyPath["butterfly2"] = [
-        [500, 500]
-    ];
-    setTimeout(function() {
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }, 5000);
     $(document).unbind("mousedown");
     $(document).unbind("mouseup");
+    clearInterval(butterflyID);
+    ctx.fillStyle = "black";
+    continueBlackness = true;
+    spawnBlackness(500, 500, w, h, 0.1, 0, 16);
+    spawnBlackness(100, 100, w, h, 0.1, 0, 16);
+    spawnBlackness(800, 800, w, h, 0.1, 0, 16);
+    spawnBlackness(800, 100, w, h, 0.1, 0, 16);
+    spawnBlackness(100, 800, w, h, 0.1, 0, 16);
+    moveTo([450, 400], container2, "butterfly2");
+    setTimeout(function() {
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        $(document).css("background-color", "black");
+        continueBlackness = false;
+    }, 10000);
     $(".container1").remove();
     $(".container2").css('z-index', 99);
     $(".wing2").css('background', 'radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 10%, rgba(255, 255, 255, 0.9) 100%)');
@@ -149,7 +155,7 @@ function mouseUpMouseDownFunctionality() {
         timeDiff /= 1000;
         timeElapsed = timeElapsed + Math.round(timeDiff % 60);
         console.log(timeElapsed);
-        var spread = Math.round(20 * totalSongLength / timeElapsed);
+        var spread = Math.round(16 * totalSongLength / timeElapsed);
         console.log("spread: " + spread);
         //hack to avoid Promise Error
         setTimeout(function() {
