@@ -7,6 +7,7 @@ var alphaDiff = 0.0005
 var maxOpacity = 200;
 var darkonplaying = true;
 var darkonpause = false;
+var butterflyID = null;
 var audioDarkLoop = new Audio("/static/sound/DarkLoop3.mp3"); //black spreading
 //infinite loop
 audioDarkLoop.loop = true;
@@ -36,6 +37,15 @@ var butterflyPath = {
     'butterfly1': [],
     'butterfly2': []
 };
+
+var ctx = canvas[0].getContext("2d"),
+    width = $(document).width(),
+    height = $(document).height(),
+    a, b;
+
+canvas.attr("width", width);
+canvas.attr("height", height);
+
 
 function beginButterflyScene() {
     $(".headline").remove();
@@ -72,13 +82,14 @@ function autoType(elementClass, typingSpeed) {
 }
 
 $(document).ready(function() {
+
     butterflyCurve();
     hourGlassCurve();
     flowerCurve();
     polyLineCurve();
     circleCurve();
     localStorage.setItem("butterflyPaths", JSON.stringify(butterflyPath));
-
+    
     audioIntro.play();
     $(".container").css("display", 'none');
     $("#background").css("display", 'none');
@@ -87,56 +98,73 @@ $(document).ready(function() {
     setTimeout(function() {
         autoType(".type-js2", typingSpeed);
     }, timeToWait1);
-
+    
     //beginButterflyScene(); //for testing
+    //audioEnding.play();
+    //endingSequence();
 });
 
-
-var ctx = canvas[0].getContext("2d"),
-    width = $(document).width(),
-    height = $(document).height(),
-    a, b;
-
-canvas.attr("width", width);
-canvas.attr("height", height);
 
 //audio1.onended=function(){
 function endingSequence() {
     $(document).unbind("mousedown");
     $(document).unbind("mouseup");
     lostCurve();
-    clearInterval(butterflyID);
+    if (butterflyID) {
+        clearInterval(butterflyID);
+    }
     ctx.fillStyle = "black";
     continueBlackness = true;
-    spawnBlackness(500, 500, w, h, 0.1, 0, 20);
-    spawnBlackness(100, 100, w, h, 0.1, 0, 20);
-    spawnBlackness(100, 400, w, h, 0.1, 0, 20);
-    spawnBlackness(100, 800, w, h, 0.1, 0, 20);
-    spawnBlackness(400, 100, w, h, 0.1, 0, 20);
-    spawnBlackness(400, 400, w, h, 0.1, 0, 20);
-    spawnBlackness(400, 700, w, h, 0.1, 0, 20);
-    spawnBlackness(800, 700, w, h, 0.1, 0, 20);
-    spawnBlackness(800, 400, w, h, 0.1, 0, 20);
-    spawnBlackness(800, 100, w, h, 0.1, 0, 20);
+    var ymax= $(window).height();
+    var xmax = $(window).width() - 100;
+    var s = 36;
+    spawnBlackness(xmax/2, ymax/2, w, h, 0.1, 0, s);
+    spawnBlackness(100, 100, w, h, 0.1, 0, s);
+    spawnBlackness(100, ymax/2, w, h, 0.1, 0, s);
+    spawnBlackness(100, ymax, w, h, 0.1, 0, s);
+    spawnBlackness(xmax/2, 100, w, h, 0.1, 0, s);
+    spawnBlackness(xmax/2, ymax/2, w, h, 0.1, 0, s);
+    spawnBlackness(xmax/2, ymax-40, w, h, 0.1, 0, s);
+    spawnBlackness(xmax/4, 100, w, h, 0.1, 0, s);
+    spawnBlackness(xmax/4, ymax/2, w, h, 0.1, 0, s);
+    spawnBlackness(xmax/4, ymax-40, w, h, 0.1, 0, s);
+    spawnBlackness(3*xmax/4, 100, w, h, 0.1, 0, s);
+    spawnBlackness(3*xmax/4, ymax/2, w, h, 0.1, 0, s);
+    spawnBlackness(3*xmax/4, ymax-40, w, h, 0.1, 0, s);
+    spawnBlackness(xmax, ymax, w, h, 0.1, 0, s);
+    spawnBlackness(xmax, ymax/2, w, h, 0.1, 0, s);
+    spawnBlackness(xmax, 100, w, h, 0.1, 0, s);
 
-    moveTo([450, 400], container2, "butterfly2");
+    moveTo([xmax/2, ymax/2], container2, "butterfly2");
     clearInterval(butterflyID);
+    //animate
     butterflyID = setInterval(function() {
         if (butterflyPath["butterfly2"].length <= 1) {
             clearInterval(butterflyID);
+            disableAnimation();
         }
         moveTo(butterflyPath["butterfly2"].shift(), container2, "butterfly2");
     }, 500);
+
+    //background to black
     setTimeout(function() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        $(document).css("background-color", "black");
+        $('body').animate({backgroundColor: 'black'}, 'slow');
+        $("canvas").remove();
         continueBlackness = false;
-    }, 8000);
+    }, 18000);
+
+    //update UI
     $(".container1").remove();
     $(".container2").css('z-index', 99);
     $(".wing2").css('background', 'radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 10%, rgba(255, 255, 255, 0.9) 100%)');
     $('head').append('<style>.wing2:after{background:radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 10%, rgba(255, 255, 255, 0.9) 100%) !important;}</style>');
 }
+
+function disableAnimation(){
+    $('.wing2').addClass('notanimate');
+}
+
 
 var requestAnimationFrame = window.requestAnimationFrame ||
     window.mozRequestAnimationFrame ||
@@ -334,13 +362,15 @@ function hourGlassCurve() {
 
 function lostCurve() {
     butterflyPath["butterfly2"] = [];
+    //circleCurve();
+    var a = 500;
+    for (var t = 0; t < 27; t+=0.3) {
+        var x = 1.4*a*Math.pow(Math.cos(t),3);
+        var y = a*Math.pow(Math.sin(t),3);
+        butterflyPath['butterfly2'].push([x + 550, y + 350]);
+    }
+
     butterflyPath['butterfly2'].push([450, 400]);
-    butterflyPath['butterfly2'].push([70, 70]);
-    butterflyPath['butterfly2'].push([800, 70]);
-    butterflyPath['butterfly2'].push([70, 800]);
-    butterflyPath['butterfly2'].push([800, 800]);
-    butterflyPath['butterfly2'].push([450, 400]);
-    circleCurve()
 
 }
 

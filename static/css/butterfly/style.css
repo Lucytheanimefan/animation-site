@@ -1,62 +1,67 @@
+body{
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
 /* intro */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400");
 .text-js {
-  opacity: 0;
+    opacity: 0;
 }
 
 .cursor {
-  display: block;
-  position: absolute;
-  height: 100%;
-  top: 0;
-  right: -5px;
-  width: 2px;
-  /* Change colour of Cursor Here */
-  background-color: white;
-  z-index: 1;
-  -webkit-animation: flash 0.5s none infinite alternate;
-          animation: flash 0.5s none infinite alternate;
+    display: block;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: -5px;
+    width: 2px;
+    /* Change colour of Cursor Here */
+    background-color: white;
+    z-index: 1;
+    -webkit-animation: flash 0.5s none infinite alternate;
+    animation: flash 0.5s none infinite alternate;
 }
 
 @-webkit-keyframes flash {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 @keyframes flash {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
+
 * {
-  margin: 0;
-  padding: 0;
-  boz-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+    boz-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
 }
 
 .headline {
-  margin: 20px;
-  color: black;
-  font-size: 32px;
-  text-align: left;
-  position: absolute;
+    margin: 20px;
+    color: black;
+    font-size: 32px;
+    text-align: left;
+    position: absolute;
 }
+
 .headline h1 {
-  letter-spacing: 1.6px;
-  font-weight: 300;
+    letter-spacing: 1.6px;
+    font-weight: 300;
 }
+
 
 /* end intro */
-
-
 
 canvas {
     position: absolute;
@@ -88,7 +93,7 @@ body {
     transform: rotateX(70deg);
 }
 
-.container2{
+.container2 {
     top: 800px;
     left: 600px;
 }
@@ -116,7 +121,7 @@ body {
     top: -76px;
     left: 25px;
     /*background-color: rgba(252, 227, 100, 0.69);*/
-    background: radial-gradient(ellipse at center, rgba(0, 0, 76, 0.9) 14%, rgba(0, 0, 0, 0.9) 17%, rgba(0,0,0, 0.9) 64%, rgba(0, 0, 0, 0.5) 100%);
+    background: radial-gradient(ellipse at center, rgba(0, 0, 76, 0.9) 14%, rgba(0, 0, 0, 0.9) 17%, rgba(0, 0, 0, 0.9) 64%, rgba(0, 0, 0, 0.5) 100%);
     border-radius: 50% 114%;
 }
 
@@ -139,7 +144,7 @@ body {
     top: -76px;
     left: 25px;
     /*background-color: rgba(252, 227, 100, 0.69);*/
-    background: radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 14%, rgba(0, 0, 0, 0.9) 17%, rgba(50,50,50, 0.9) 64%, rgba(0, 0, 0, 0.5) 100%);
+    background: radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 14%, rgba(0, 0, 0, 0.9) 17%, rgba(50, 50, 50, 0.9) 64%, rgba(0, 0, 0, 0.5) 100%);
     border-radius: 50% 114%;
 }
 
@@ -217,4 +222,25 @@ body {
 
 .container {
     transition: top 3s cubic-bezier(.34, .63, .26, .94), left 3s cubic-bezier(.34, .63, .26, .94), transform 1s linear;
+}
+
+.notanimate {
+    /*CSS transitions*/
+    -o-transition-property: none !important;
+    -moz-transition-property: none !important;
+    -ms-transition-property: none !important;
+    -webkit-transition-property: none !important;
+    transition-property: none !important;
+    /*CSS transforms*/
+    -o-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    -webkit-transform: none !important;
+    transform: none !important;
+    /*CSS animations*/
+    -webkit-animation: none !important;
+    -moz-animation: none !important;
+    -o-animation: none !important;
+    -ms-animation: none !important;
+    animation: none !important;
 }
