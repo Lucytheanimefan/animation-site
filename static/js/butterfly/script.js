@@ -93,7 +93,7 @@ $(document).ready(function() {
     polyLineCurve();
     circleCurve();
     localStorage.setItem("butterflyPaths", JSON.stringify(butterflyPath));
-/*
+
     audioIntro.play();
     $(".container").css("display", 'none');
     $("#background").css("display", 'none');
@@ -102,10 +102,10 @@ $(document).ready(function() {
     setTimeout(function() {
         autoType(".type-js2", typingSpeed);
     }, timeToWait1);
-*/
+
     //beginButterflyScene(); //for testing
-    audioEnding.play();
-    endingSequence();
+    //audioEnding.play();
+    //endingSequence();
 });
 
 
@@ -163,7 +163,7 @@ function endingSequence() {
         $(".container2").css('z-index', 99);
         $(".wing2").css('background', 'radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 10%, rgba(255, 255, 255, 0.9) 100%)');
         $('head').append('<style>.wing2:after{background:radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 10%, rgba(255, 255, 255, 0.9) 100%) !important;}</style>');
-    }, 18000);
+    }, 17000);
 
 }
 
