@@ -16,10 +16,10 @@ var audioEnding = new Audio("/static/sound/ending.mp3");
 var audioIntro = new Audio("/static/sound/Intro.mp3");
 audioIntro.addEventListener('ended', function() {
     beginButterflyScene();
-    $(".instructions").css("display","inline");
-    setTimeout(function(){
+    $(".instructions").css("display", "inline");
+    setTimeout(function() {
         $(".instructions").fadeOut(3000);
-    },1000);
+    }, 1000);
 });
 var audioButterfly = new Audio("/static/sound/butterfly.mp3"); //main theme
 audioButterfly.addEventListener('ended', function() {
@@ -86,7 +86,7 @@ function autoType(elementClass, typingSpeed) {
 }
 
 $(document).ready(function() {
-    $(".instructions").css("display","none");
+    $(".instructions").css("display", "none");
     butterflyCurve();
     hourGlassCurve();
     flowerCurve();
@@ -113,7 +113,6 @@ $(document).ready(function() {
 function endingSequence() {
     $(document).unbind("mousedown");
     $(document).unbind("mouseup");
-    lostCurve();
     if (butterflyID) {
         clearInterval(butterflyID);
     }
@@ -141,17 +140,19 @@ function endingSequence() {
 
     moveTo([xmax / 2, ymax / 2], container2, "butterfly2");
     clearInterval(butterflyID);
-    //animate
-    butterflyID = setInterval(function() {
-        if (butterflyPath["butterfly2"].length <= 1) {
-            clearInterval(butterflyID);
-            disableAnimation();
-        }
-        moveTo(butterflyPath["butterfly2"].shift(), container2, "butterfly2");
-    }, 500);
+
 
     //background to black
     setTimeout(function() {
+        lostCurve();
+        //animate
+        butterflyID = setInterval(function() {
+            if (butterflyPath["butterfly2"].length <= 1) {
+                clearInterval(butterflyID);
+                disableAnimation();
+            }
+            moveTo(butterflyPath["butterfly2"].shift(), container2, "butterfly2");
+        }, 500);
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         $('body').animate({ backgroundColor: 'black' }, 'slow');
         $("canvas").remove();
