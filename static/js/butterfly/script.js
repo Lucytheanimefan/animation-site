@@ -93,7 +93,7 @@ $(document).ready(function() {
     polyLineCurve();
     circleCurve();
     localStorage.setItem("butterflyPaths", JSON.stringify(butterflyPath));
-
+/*
     audioIntro.play();
     $(".container").css("display", 'none');
     $("#background").css("display", 'none');
@@ -102,10 +102,10 @@ $(document).ready(function() {
     setTimeout(function() {
         autoType(".type-js2", typingSpeed);
     }, timeToWait1);
-
+*/
     //beginButterflyScene(); //for testing
-    //audioEnding.play();
-    //endingSequence();
+    audioEnding.play();
+    endingSequence();
 });
 
 
@@ -139,11 +139,12 @@ function endingSequence() {
     spawnBlackness(xmax, 100, w, h, 0.1, 0, s);
 
     moveTo([xmax / 2, ymax / 2], container2, "butterfly2");
-    clearInterval(butterflyID);
+    
 
 
     //background to black
     setTimeout(function() {
+        clearInterval(butterflyID);
         lostCurve();
         //animate
         butterflyID = setInterval(function() {
@@ -369,7 +370,7 @@ function lostCurve() {
     butterflyPath["butterfly2"] = [];
     //circleCurve();
     var a = 500;
-    for (var t = 0; t < 27; t += 0.3) {
+    for (var t = 0; t < 21; t += 0.3) {
         var x = 1.4 * a * Math.pow(Math.cos(t), 3);
         var y = a * Math.pow(Math.sin(t), 3);
         butterflyPath['butterfly2'].push([x + 550, y + 350]);
