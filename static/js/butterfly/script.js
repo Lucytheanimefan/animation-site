@@ -16,6 +16,10 @@ var audioEnding = new Audio("/static/sound/ending.mp3");
 var audioIntro = new Audio("/static/sound/Intro.mp3");
 audioIntro.addEventListener('ended', function() {
     beginButterflyScene();
+    $(".instructions").css("display","inline");
+    setTimeout(function(){
+        $(".instructions").fadeOut(3000);
+    },1000);
 });
 var audioButterfly = new Audio("/static/sound/butterfly.mp3"); //main theme
 audioButterfly.addEventListener('ended', function() {
@@ -82,14 +86,14 @@ function autoType(elementClass, typingSpeed) {
 }
 
 $(document).ready(function() {
-
+    $(".instructions").css("display","none");
     butterflyCurve();
     hourGlassCurve();
     flowerCurve();
     polyLineCurve();
     circleCurve();
     localStorage.setItem("butterflyPaths", JSON.stringify(butterflyPath));
-/*
+
     audioIntro.play();
     $(".container").css("display", 'none');
     $("#background").css("display", 'none');
@@ -98,10 +102,10 @@ $(document).ready(function() {
     setTimeout(function() {
         autoType(".type-js2", typingSpeed);
     }, timeToWait1);
-*/
+
     //beginButterflyScene(); //for testing
-    audioEnding.play();
-    endingSequence();
+    //audioEnding.play();
+    //endingSequence();
 });
 
 
