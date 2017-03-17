@@ -89,7 +89,7 @@ $(document).ready(function() {
     polyLineCurve();
     circleCurve();
     localStorage.setItem("butterflyPaths", JSON.stringify(butterflyPath));
-    
+/*
     audioIntro.play();
     $(".container").css("display", 'none');
     $("#background").css("display", 'none');
@@ -98,10 +98,10 @@ $(document).ready(function() {
     setTimeout(function() {
         autoType(".type-js2", typingSpeed);
     }, timeToWait1);
-    
+*/
     //beginButterflyScene(); //for testing
-    //audioEnding.play();
-    //endingSequence();
+    audioEnding.play();
+    endingSequence();
 });
 
 
@@ -115,27 +115,27 @@ function endingSequence() {
     }
     ctx.fillStyle = "black";
     continueBlackness = true;
-    var ymax= $(window).height();
+    var ymax = $(window).height();
     var xmax = $(window).width() - 100;
     var s = 36;
-    spawnBlackness(xmax/2, ymax/2, w, h, 0.1, 0, s);
+    spawnBlackness(xmax / 2, ymax / 2, w, h, 0.1, 0, s);
     spawnBlackness(100, 100, w, h, 0.1, 0, s);
-    spawnBlackness(100, ymax/2, w, h, 0.1, 0, s);
+    spawnBlackness(100, ymax / 2, w, h, 0.1, 0, s);
     spawnBlackness(100, ymax, w, h, 0.1, 0, s);
-    spawnBlackness(xmax/2, 100, w, h, 0.1, 0, s);
-    spawnBlackness(xmax/2, ymax/2, w, h, 0.1, 0, s);
-    spawnBlackness(xmax/2, ymax-40, w, h, 0.1, 0, s);
-    spawnBlackness(xmax/4, 100, w, h, 0.1, 0, s);
-    spawnBlackness(xmax/4, ymax/2, w, h, 0.1, 0, s);
-    spawnBlackness(xmax/4, ymax-40, w, h, 0.1, 0, s);
-    spawnBlackness(3*xmax/4, 100, w, h, 0.1, 0, s);
-    spawnBlackness(3*xmax/4, ymax/2, w, h, 0.1, 0, s);
-    spawnBlackness(3*xmax/4, ymax-40, w, h, 0.1, 0, s);
+    spawnBlackness(xmax / 2, 100, w, h, 0.1, 0, s);
+    spawnBlackness(xmax / 2, ymax / 2, w, h, 0.1, 0, s);
+    spawnBlackness(xmax / 2, ymax - 40, w, h, 0.1, 0, s);
+    spawnBlackness(xmax / 4, 100, w, h, 0.1, 0, s);
+    spawnBlackness(xmax / 4, ymax / 2, w, h, 0.1, 0, s);
+    spawnBlackness(xmax / 4, ymax - 40, w, h, 0.1, 0, s);
+    spawnBlackness(3 * xmax / 4, 100, w, h, 0.1, 0, s);
+    spawnBlackness(3 * xmax / 4, ymax / 2, w, h, 0.1, 0, s);
+    spawnBlackness(3 * xmax / 4, ymax - 40, w, h, 0.1, 0, s);
     spawnBlackness(xmax, ymax, w, h, 0.1, 0, s);
-    spawnBlackness(xmax, ymax/2, w, h, 0.1, 0, s);
+    spawnBlackness(xmax, ymax / 2, w, h, 0.1, 0, s);
     spawnBlackness(xmax, 100, w, h, 0.1, 0, s);
 
-    moveTo([xmax/2, ymax/2], container2, "butterfly2");
+    moveTo([xmax / 2, ymax / 2], container2, "butterfly2");
     clearInterval(butterflyID);
     //animate
     butterflyID = setInterval(function() {
@@ -149,19 +149,19 @@ function endingSequence() {
     //background to black
     setTimeout(function() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        $('body').animate({backgroundColor: 'black'}, 'slow');
+        $('body').animate({ backgroundColor: 'black' }, 'slow');
         $("canvas").remove();
         continueBlackness = false;
+        //update UI
+        $(".container1").remove();
+        $(".container2").css('z-index', 99);
+        $(".wing2").css('background', 'radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 10%, rgba(255, 255, 255, 0.9) 100%)');
+        $('head').append('<style>.wing2:after{background:radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 10%, rgba(255, 255, 255, 0.9) 100%) !important;}</style>');
     }, 18000);
 
-    //update UI
-    $(".container1").remove();
-    $(".container2").css('z-index', 99);
-    $(".wing2").css('background', 'radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 10%, rgba(255, 255, 255, 0.9) 100%)');
-    $('head').append('<style>.wing2:after{background:radial-gradient(ellipse at center, rgba(50, 50, 50, 0.9) 10%, rgba(255, 255, 255, 0.9) 100%) !important;}</style>');
 }
 
-function disableAnimation(){
+function disableAnimation() {
     $('.wing2').addClass('notanimate');
 }
 
@@ -364,9 +364,9 @@ function lostCurve() {
     butterflyPath["butterfly2"] = [];
     //circleCurve();
     var a = 500;
-    for (var t = 0; t < 27; t+=0.3) {
-        var x = 1.4*a*Math.pow(Math.cos(t),3);
-        var y = a*Math.pow(Math.sin(t),3);
+    for (var t = 0; t < 27; t += 0.3) {
+        var x = 1.4 * a * Math.pow(Math.cos(t), 3);
+        var y = a * Math.pow(Math.sin(t), 3);
         butterflyPath['butterfly2'].push([x + 550, y + 350]);
     }
 
