@@ -39,7 +39,7 @@ function drawLine(ctx, startx, starty, endx, endy, color = "black", width = 10) 
     ctx.stroke();
 }
 
-function animateLines(context, coordinates, width = 1, color = "black", opacity = 1, i = 0, callback = null) {
+function animateLines(reqID, context, coordinates, width = 1, color = "black", opacity = 1, i = 0, callback = null) {
     setLine(context, i, coordinates, width, color, opacity);
     i += 1;
 
@@ -49,11 +49,11 @@ function animateLines(context, coordinates, width = 1, color = "black", opacity 
             console.log("Callback!")
             callback();
         }
-        cancelAnimationFrame(requestID);
+        cancelAnimationFrame(window["requestID"+reqID]);
 
     } else {
-        requestID = requestAnimationFrame(function() {
-            animateLines(context, coordinates, width, color, opacity, i, callback);
+        window["requestID"+reqID] = requestAnimationFrame(function() {
+            animateLines(reqID, context, coordinates, width, color, opacity, i, callback);
         });
     }
 }
