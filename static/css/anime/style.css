@@ -3,6 +3,7 @@ body{
 }
 canvas{
 	position: absolute;
+	z-index: 1;
 }
 img{
 	top: 0;

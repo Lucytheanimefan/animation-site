@@ -37,5 +37,51 @@ function drawLine(ctx, startx, starty, endx, endy, color = "black", width = 10) 
     ctx.strokeStyle = color;
     ctx.lineWidth = width;
     ctx.stroke();
+}
 
+function animateLines(context, coordinates, width = 1, color = "black", opacity = 1, i = 0, callback = null) {
+    setLine(context, i, coordinates, width, color, opacity);
+    i += 1;
+
+    if (i > (coordinates.length-1)) {
+        console.log("greater than")
+        if (callback) {
+            console.log("Callback!")
+            callback();
+        }
+        cancelAnimationFrame(requestID);
+
+    } else {
+        requestID = requestAnimationFrame(function() {
+            animateLines(context, coordinates, width, color, opacity, i, callback);
+        });
+    }
+}
+
+function setLine(context, i, coords, width, color, opacity) {
+    context.lineWidth = width;
+    context.strokeStyle = color;
+    context.globalAlpha = opacity;
+    context.beginPath();
+    if (i == 0) {
+        context.moveTo(coords[i][0], coords[i][1]);
+        context.lineTo(coords[i + 1][0], coords[i + 1][1]);
+    } else {
+        context.moveTo(coords[i - 1][0], coords[i - 1][1]);
+        context.lineTo(coords[i][0], coords[i][1]);
+    }
+    context.closePath();
+    context.stroke();
+}
+
+function generateCoordinates(start, end, step = 1, horizontal, extraCoord) {
+    var coords = []
+    for (var i = start; i < end; i += step) {
+        if (horizontal) {
+            coords.push([i, extraCoord]);
+        } else {
+            coords.push([extraCoord, i]);
+        }
+    }
+    return coords;
 }
