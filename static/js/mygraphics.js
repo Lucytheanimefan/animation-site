@@ -18,10 +18,24 @@ function lineBreak(numChars, line) {
         if (i % numChars == 0) {
             if (line.charAt(i + 1) == ' ') {
                 toRet = toRet + "<br>";
-            }/*else{
-            	toRet = toRet + "-<br>";
-            }*/
+            }
+            /*else{
+                            toRet = toRet + "-<br>";
+                        }*/
         }
     }
     return toRet;
+}
+
+
+function drawLine(ctx, startx, starty, endx, endy, color = "black", width = 10) {
+    // Stroked triangle
+    ctx.beginPath();
+    ctx.moveTo(startx, starty);
+    ctx.lineTo(endx, endy);
+    ctx.closePath();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.stroke();
+
 }

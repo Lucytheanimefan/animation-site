@@ -1,0 +1,10 @@
+body{
+	background-color: black;
+}
+canvas{
+	position: absolute;
+}
+img{
+	top: 0;
+	position: absolute;
+}

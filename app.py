@@ -35,7 +35,7 @@ def daily_post(variable):
     #do your code here
     return render_template(variable+"/index.html")
 
-
+'''
 @app.route("/castleinblood")
 def castle():
 	return render_template('castleinblood/index.html')
@@ -56,11 +56,11 @@ def chapel():
 @app.route("/chair")
 def chair():
 	return render_template("chair/index.html")
+'''
 
-
-@app.route("/deathnote")
+@app.route("/anime")
 def diary():
-	return render_template("deathnote/index.html")
+	return render_template("anime/index.html")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
