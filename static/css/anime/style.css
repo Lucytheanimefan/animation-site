@@ -9,3 +9,9 @@ img{
 	top: 0;
 	position: absolute;
 }
+
+#naruto{
+	display: none;
+	right: 5%;
+
+}
