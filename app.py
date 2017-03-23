@@ -1,6 +1,6 @@
 import os
-from flask import Flask, render_template
-
+from flask import Flask, render_template,send_from_directory, jsonify
+import requests
 
 app = Flask(__name__)
 
@@ -61,6 +61,17 @@ def chair():
 @app.route("/anime")
 def diary():
 	return render_template("anime/index.html")
+
+@app.route("/vishnu")
+def vish():
+	return render_template("vishnu/index.html")
+
+@app.route("/lol", methods=["GET"])
+def lol():
+	return send_from_directory(app.static_folder, "lol.txt")
+
+
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
