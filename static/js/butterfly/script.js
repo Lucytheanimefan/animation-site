@@ -15,11 +15,13 @@ audioDarkLoop.loop = true;
 var audioEnding = new Audio("/static/sound/ending.mp3");
 var audioIntro = new Audio("/static/sound/Intro.mp3");
 audioIntro.addEventListener('ended', function() {
+
     beginButterflyScene();
-    $(".instructions").css("display", "inline");
+    $(".mynotification").css("display", "inline");
+    /*
     setTimeout(function() {
         $(".instructions").fadeOut(3000);
-    }, 1000);
+    }, 1000);*/
 });
 var audioButterfly = new Audio("/static/sound/butterfly.mp3"); //main theme
 audioButterfly.addEventListener('ended', function() {
@@ -50,6 +52,27 @@ var ctx = canvas[0].getContext("2d"),
 canvas.attr("width", width);
 canvas.attr("height", height);
 
+
+$('.close-me.leftn').on('click', function() {
+    $(this).closest('.mynotification').addClass('close-left');
+    $('.text-notification, .close-me').fadeOut(2000);
+
+    setTimeout(function() {
+        $(".mynotification").remove();
+    }, 1000)
+
+});
+var classes = ['close-right', 'close-bottom', 'close-left'];
+$('.close-me').on('click', function() {
+    if (
+        $('.mynotification').hasClass(classes[0]) &&
+        $('.mynotification').hasClass(classes[1]) &&
+        $('.mynotification').hasClass(classes[2])) {
+        $('.mytitle').fadeOut(500, function() {
+            $('.mytitle').text('Refresh to see it again!').fadeIn(500);
+        });
+    }
+});
 
 function beginButterflyScene() {
     $(".headline").remove();
@@ -139,7 +162,7 @@ function endingSequence() {
     spawnBlackness(xmax, 100, w, h, 0.1, 0, s);
 
     moveTo([xmax / 2, ymax / 2], container2, "butterfly2");
-    
+
 
 
     //background to black
