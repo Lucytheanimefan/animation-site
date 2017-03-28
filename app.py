@@ -51,12 +51,12 @@ def three():
 @app.route("/chapel_entrance")
 def chapel():
 	return render_template('chapel_entrance/index.html')
-
-
-@app.route("/chair")
-def chair():
-	return render_template("chair/index.html")
 '''
+
+@app.route("/dystopia")
+def chair():
+	return render_template("dystopia/index.html")
+
 
 @app.route("/anime")
 def diary():
