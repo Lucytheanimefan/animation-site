@@ -13,7 +13,9 @@ function main() {
     centerY = canvas.height / 2;
     animateCircles(radius, 1, 0, function() {
         drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY);
-        animateFullCircle(radius, centerX, centerY);
+        animateFullCircle(radius, centerX, centerY, function(){
+        	addImage(ctx, "/static/img/icon-01.png"); //TEST IMAGE: REPLACE LATER
+        });
     });
 
 
@@ -43,22 +45,28 @@ function animateCircles(radius, width = 1, id = 0, callback = null) {
     }
 }
 
-function animateFullCircle(rad, cX, cY) {
+function animateFullCircle(rad, cX, cY, callback) {
     drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY); //white
     drawCircle(ctx, canvas, "#000", rad, cX, cY);
     setTimeout(function() {
+    	console.log("redraw circle");
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY);
     }, 1000);
 
     cY += 1;
     filledCircleRequestID = requestAnimationFrame(function() {
-        animateFullCircle(rad, cX, cY);
+        animateFullCircle(rad, cX, cY, callback);
     });
 
     if (cY > canvas.height / 2 + 2 * radius) {
         cancelAnimationFrame(filledCircleRequestID);
-        //drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY);
+        if (callback) {
+            setTimeout(function() {
+            	console.log("Animate full circle callback");
+                callback();
+            },1000);
+        }
     }
 
 }
@@ -86,4 +94,13 @@ function generateCircleCoordinates(steps, radius, centerX, centerY) {
         coords[i] = [x, y];
     }
     return coords;
+}
+//context.arc(x,y,r,sAngle,eAngle,counterclockwise);
+function addImage(ctx, imagePath) {
+	console.log("Added image?");
+    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true); // you can use any shape
+    ctx.clip();
+    base_image = new Image();
+    base_image.src = imagePath;
+    ctx.drawImage(base_image, centerX - radius, centerY - radius, radius * 2, radius * 2);
 }
