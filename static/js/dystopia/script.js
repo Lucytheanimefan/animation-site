@@ -13,8 +13,8 @@ function main() {
     centerY = canvas.height / 2;
     animateCircles(radius, 1, 0, function() {
         drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY);
-        animateFullCircle(radius, centerX, centerY, function(){
-        	addImage(ctx, "/static/img/icon-01.png"); //TEST IMAGE: REPLACE LATER
+        animateFullCircle(radius, centerX, centerY, function() {
+            addImage(ctx, "/static/img/butterfly/butterfly1.png"); //TEST IMAGE: REPLACE LATER
         });
     });
 
@@ -49,10 +49,10 @@ function animateFullCircle(rad, cX, cY, callback) {
     drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY); //white
     drawCircle(ctx, canvas, "#000", rad, cX, cY);
     setTimeout(function() {
-    	console.log("redraw circle");
+        console.log("redraw circle");
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY);
-    }, 1000);
+    }, 700);
 
     cY += 1;
     filledCircleRequestID = requestAnimationFrame(function() {
@@ -63,9 +63,9 @@ function animateFullCircle(rad, cX, cY, callback) {
         cancelAnimationFrame(filledCircleRequestID);
         if (callback) {
             setTimeout(function() {
-            	console.log("Animate full circle callback");
+                console.log("Animate full circle callback");
                 callback();
-            },1000);
+            }, 1000);
         }
     }
 
@@ -96,11 +96,28 @@ function generateCircleCoordinates(steps, radius, centerX, centerY) {
     return coords;
 }
 //context.arc(x,y,r,sAngle,eAngle,counterclockwise);
+//context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
 function addImage(ctx, imagePath) {
-	console.log("Added image?");
-    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true); // you can use any shape
+    console.log("Added image?");
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
+    ctx.closePath();
     ctx.clip();
+    //ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true); // you can use any shape
+    //ctx.clip();
     base_image = new Image();
     base_image.src = imagePath;
-    ctx.drawImage(base_image, centerX - radius, centerY - radius, radius * 2, radius * 2);
+    base_image.onload = function() {
+            ctx.drawImage(base_image, centerX - radius, centerY - radius, radius * 2, radius * 2);
+            //possibly more efficient to insert image in html first so no need for load
+        }
+        //ctx.drawImage(base_image, centerX - radius, centerY - radius, radius * 2, radius * 2);
+/*
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
+    ctx.clip();
+    ctx.closePath();
+    ctx.restore();
+    */
 }
