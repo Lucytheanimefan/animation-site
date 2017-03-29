@@ -11,10 +11,11 @@ function main() {
     radius = canvas.width / 6;
     centerX = canvas.width / 2;
     centerY = canvas.height / 2;
+    setImage("/static/img/butterfly/butterfly1.png");
     animateCircles(radius, 1, 0, function() {
         drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY);
         animateFullCircle(radius, centerX, centerY, function() {
-            addImage(ctx, "/static/img/butterfly/butterfly1.png"); //TEST IMAGE: REPLACE LATER
+            addImage(ctx); //TEST IMAGE: REPLACE LATER
         });
     });
 
@@ -47,11 +48,13 @@ function animateCircles(radius, width = 1, id = 0, callback = null) {
 
 function animateFullCircle(rad, cX, cY, callback) {
     drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY); //white
+
     drawCircle(ctx, canvas, "#000", rad, cX, cY);
     setTimeout(function() {
         console.log("redraw circle");
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY);
+
     }, 700);
 
     cY += 1;
@@ -97,27 +100,32 @@ function generateCircleCoordinates(steps, radius, centerX, centerY) {
 }
 //context.arc(x,y,r,sAngle,eAngle,counterclockwise);
 //context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
-function addImage(ctx, imagePath) {
+function setImage(imagePath) {
+    base_image = new Image();
+    base_image.src = imagePath;
+}
+
+function addImage(ctx, alpha = 0) {
     console.log("Added image?");
+    ctx.globalAlpha=1;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY);
+    ctx.globalAlpha = alpha;
     ctx.save();
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
     ctx.closePath();
     ctx.clip();
-    //ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true); // you can use any shape
-    //ctx.clip();
-    base_image = new Image();
-    base_image.src = imagePath;
-    base_image.onload = function() {
-            ctx.drawImage(base_image, centerX - radius, centerY - radius, radius * 2, radius * 2);
-            //possibly more efficient to insert image in html first so no need for load
-        }
-        //ctx.drawImage(base_image, centerX - radius, centerY - radius, radius * 2, radius * 2);
-/*
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
-    ctx.clip();
-    ctx.closePath();
-    ctx.restore();
-    */
+
+    ctx.drawImage(base_image, centerX - radius, centerY - radius, radius * 2, radius * 2);
+    //possibly more efficient to insert image in html first so no need for load
+
+    alpha += 0.01;
+    imageRequestId = requestAnimationFrame(function() {
+        addImage(ctx, alpha);
+    });
+
+    if (alpha > 1) {
+        cancelAnimationFrame(imageRequestId);
+    }
 }
