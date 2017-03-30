@@ -44,12 +44,13 @@ function animateLines(reqID, context, coordinates, width = 1, color = "black", o
     i += 1;
 
     if (i > (coordinates.length-1)) {
-        console.log("greater than")
+        //console.log("greater than")
         if (callback) {
-            console.log("Callback!")
+            //console.log("Callback!")
             callback();
         }
         cancelAnimationFrame(window["requestID"+reqID]);
+        console.log("Cancel animateLInes")
 
     } else {
         window["requestID"+reqID] = requestAnimationFrame(function() {

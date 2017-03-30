@@ -1,3 +1,5 @@
+var numRingsDrawn = 2;
+
 $(document).ready(function() {
     main();
 })
@@ -11,11 +13,14 @@ function main() {
     radius = canvas.width / 6;
     centerX = canvas.width / 2;
     centerY = canvas.height / 2;
-    setImage("/static/img/butterfly/butterfly1.png");
+    setImage("/static/img/dystopia/tulip.jpeg");
     animateCircles(radius, 1, 0, function() {
         drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY);
         animateFullCircle(radius, centerX, centerY, function() {
-            addImage(ctx); //TEST IMAGE: REPLACE LATER
+            addImage(ctx, 0, function() {
+                cutUp();
+            }); //TEST IMAGE: REPLACE LATER
+
         });
     });
 
@@ -34,11 +39,9 @@ function animateCircles(radius, width = 1, id = 0, callback = null) {
             animateCircles(radius, width, id, callback);
         }, delay);
     });
-    if (width > 2) {
-        console.log("Cancel")
+    if (width > numRingsDrawn) {
         cancelAnimationFrame(circleRequestID);
         if (callback) {
-            console.log("Callback")
             setTimeout(function() {
                 callback();
             }, delay);
@@ -51,7 +54,7 @@ function animateFullCircle(rad, cX, cY, callback) {
 
     drawCircle(ctx, canvas, "#000", rad, cX, cY);
     setTimeout(function() {
-        console.log("redraw circle");
+        //console.log("redraw circle");
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY);
 
@@ -65,19 +68,16 @@ function animateFullCircle(rad, cX, cY, callback) {
     if (cY > canvas.height / 2 + 2 * radius) {
         cancelAnimationFrame(filledCircleRequestID);
         if (callback) {
-            setTimeout(function() {
-                console.log("Animate full circle callback");
-                callback();
-            }, 1000);
+            callback();
         }
     }
 
 }
 
 function drawCircle(ctx, canvas, color, radius, x, y, clearRect = false) {
-    console.log("Draw filled circle");
+    //console.log("Draw filled circle");
     if (clearRect) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(-50, -50, canvas.width, canvas.height);
     }
     // draw the circle
     ctx.beginPath();
@@ -105,9 +105,9 @@ function setImage(imagePath) {
     base_image.src = imagePath;
 }
 
-function addImage(ctx, alpha = 0) {
+function addImage(ctx, alpha = 0, callback = null) {
     console.log("Added image?");
-    ctx.globalAlpha=1;
+    ctx.globalAlpha = 1;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY);
     ctx.globalAlpha = alpha;
@@ -116,16 +116,56 @@ function addImage(ctx, alpha = 0) {
     ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
     ctx.closePath();
     ctx.clip();
-
     ctx.drawImage(base_image, centerX - radius, centerY - radius, radius * 2, radius * 2);
-    //possibly more efficient to insert image in html first so no need for load
-
     alpha += 0.01;
     imageRequestId = requestAnimationFrame(function() {
-        addImage(ctx, alpha);
+        addImage(ctx, alpha, callback);
     });
 
     if (alpha > 1) {
         cancelAnimationFrame(imageRequestId);
+        if (callback) {
+            callback();
+        }
     }
+}
+//animateLines(reqID, context, coordinates, width = 1, color = "black", opacity = 1, i = 0, callback = null) 
+function cutUp() {
+    canvas.getContext('2d'); //reset ctx
+    var startEnd = { "start": [0, 0], "end": [500, 500] }
+    animateLines(10, ctx, generateDiagonalCoordinates(startEnd), 1, "white",0.5);
+}
+
+
+/**
+ * [generateDiagonalCoordinates description]
+ * @param  {Object} startEnd {"start":[x,y],"end":[x1,y1]}
+ * @return {[type]}          [description]
+ */
+function generateDiagonalCoordinates(startEnd, step = 1) {
+
+    var start = startEnd["start"];
+    var end = startEnd["end"];
+    var newX = start[0];
+    var newY = start[1];
+    var coords = [start];
+    if (end[0] > start[0]) {
+        addX = step;
+    } else {
+        addX = -step;
+    }
+    if (end[1] > start[1]) {
+        addY = step;
+    } else {
+        addY = -step;
+    }
+    while (newX != end[0] && newY != end[1]) {
+        newX = newX + addX;
+        newY = newY + addY;
+        coords.push([newX, newY]);
+
+    }
+    console.log(coords);
+    return coords;
+
 }
