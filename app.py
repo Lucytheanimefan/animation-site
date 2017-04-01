@@ -53,9 +53,9 @@ def chapel():
 	return render_template('chapel_entrance/index.html')
 '''
 
-@app.route("/dystopia")
+@app.route("/flower")
 def chair():
-	return render_template("dystopia/index.html")
+	return render_template("flower/index.html")
 
 
 @app.route("/anime")
