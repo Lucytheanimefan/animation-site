@@ -4,12 +4,19 @@ $(document).ready(function() {
     main();
 })
 
-
-function main() {
+function initCanvas() {
     canvas = document.getElementById('background');
+}
+
+function canvasSetup() {
     canvas.width = $(document).width();
     canvas.height = $(document).height();
     ctx = canvas.getContext('2d');
+}
+
+function main() {
+    initCanvas();
+    canvasSetup();
     radius = canvas.width / 6;
     centerX = canvas.width / 2;
     centerY = canvas.height / 2;
@@ -118,11 +125,13 @@ function addImage(ctx, alpha = 0, callback = null) {
     ctx.clip();
     ctx.drawImage(base_image, centerX - radius, centerY - radius, radius * 2, radius * 2);
     alpha += 0.01;
+    ctx.restore();
     imageRequestId = requestAnimationFrame(function() {
         addImage(ctx, alpha, callback);
     });
 
     if (alpha > 1) {
+        //ctx.restore();
         cancelAnimationFrame(imageRequestId);
         if (callback) {
             callback();
@@ -131,9 +140,9 @@ function addImage(ctx, alpha = 0, callback = null) {
 }
 //animateLines(reqID, context, coordinates, width = 1, color = "black", opacity = 1, i = 0, callback = null) 
 function cutUp() {
-    canvas.getContext('2d'); //reset ctx
-    var startEnd = { "start": [0, 0], "end": [500, 500] }
-    animateLines(10, ctx, generateDiagonalCoordinates(startEnd), 1, "white",0.5);
+    //ctx.restore();
+    var startEnd = { "start": [0, 0], "end": [1500, 1500] }
+    animateLines(10, ctx, generateDiagonalCoordinates(startEnd), 10, "white");
 }
 
 
