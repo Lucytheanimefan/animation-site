@@ -30,8 +30,6 @@ function main() {
 
         });
     });
-
-
 }
 
 //animateLines(reqID, context, coordinates, width = 1, color = "black", opacity = 1, i = 0, callback = null)
@@ -140,25 +138,69 @@ function addImage(ctx, alpha = 0, callback = null) {
 }
 //animateLines(reqID, context, coordinates, width = 1, color = "black", opacity = 1, i = 0, callback = null) 
 function cutUp() {
-    var rad = radius*.7;
+    var rad = radius * .7;
     var coords = generateCircleCoordinates(50, rad + 20, centerX, centerY);
-    console.log("coords: ");
-    console.log(coords);
-    
-    /*
-    animateLines(0, ctx, generateCircleCoordinates(100, rad, centerX+rad, centerY), 1, "white");
-    animateLines(1, ctx, generateCircleCoordinates(100, rad, centerX-rad, centerY), 1, "white");
-    animateLines(2, ctx, generateCircleCoordinates(100, rad, centerX, centerY+rad), 1, "white");
-    animateLines(3, ctx, generateCircleCoordinates(100, rad, centerX, centerY-rad), 1, "white");
-    */
-    for (var i=0; i<coords.length; i++){
-        animateLines(i, ctx, generateCircleCoordinates(100, rad, coords[i][0], coords[i][1]), 1, "white");
+    for (var i = 0; i < coords.length; i++) {
+        if (i == coords.length - 1) {
+            callback = function() {
+                //j=0;
+                /*
+                for (var j = 0; j < 2 * radius; j++) {
+                    console.log("Draw cropped image");
+                    var cropRegion = [{ x: centerX, y: centerY },
+                        { x: centerX + 50, y: centerY + 50 }
+                    ];
+                    var croppedCan = crop(cropRegion[0], cropRegion[1]);
+                    // Create an image for the new canvas.
+                    var image = new Image();
+                    image.src = croppedCan.toDataURL();
+                    image.onload = function() {
+                        // Put the image where you need to.
+                        ctx.drawImage(image, j, 2 * j, 50, 50);
+                    }
+                }*/
+            }
+        } else {
+            callback = null;
+        }
+        animateLines(i, ctx, generateCircleCoordinates(100, rad, coords[i][0], coords[i][1]), 1, "white", 0.5, 0, callback);
     }
-    //ctx.restore();
-    //var startEnd = { "start": [0, 0], "end": [$(document).width(), $(document).height()] }
-    //animateLines(10, ctx, generateDiagonalCoordinates(startEnd), 1, "white", 0.5);
 }
 
+function cropFlower(x, y, x1, y1, i = 0) {
+    var cropRegion = [{ x: centerX, y: centerY },
+        { x: centerX + 50, y: centerY + 50 }
+    ];
+    var croppedCan = crop(cropRegion[0], cropRegion[1]);
+    // Create an image for the new canvas.
+    var image = new Image();
+    image.src = croppedCan.toDataURL();
+    image.onload = function() {
+        // Put the image where you need to.
+        ctx.drawImage(image, j, 2 * j, 50, 50);
+        cropFlower(x, y, x1, y1, i);
+    }
+
+    if (i == 100) { //temp end for recursive call
+        return;
+    }
+}
+
+function crop(a, b) {
+    // get the image data you want to keep.
+    var imageData = ctx.getImageData(a.x, a.y, b.x, b.y);
+
+    // create a new cavnas same as clipped size and a context
+    var newCan = document.createElement('canvas');
+    newCan.width = b.x - a.x;
+    newCan.height = b.y - a.y;
+    var newCtx = newCan.getContext('2d');
+
+    // put the clipped image on the new canvas.
+    newCtx.putImageData(imageData, 0, 0);
+
+    return newCan;
+}
 
 /**
  * [generateDiagonalCoordinates description]
