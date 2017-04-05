@@ -144,9 +144,9 @@ function cutUp() {
         if (i == coords.length - 1) {
             callback = function() {
                 //j=0;
-                /*
+
                 for (var j = 0; j < 2 * radius; j++) {
-                    console.log("Draw cropped image");
+                    //console.log("Draw cropped image");
                     var cropRegion = [{ x: centerX, y: centerY },
                         { x: centerX + 50, y: centerY + 50 }
                     ];
@@ -158,7 +158,7 @@ function cutUp() {
                         // Put the image where you need to.
                         ctx.drawImage(image, j, 2 * j, 50, 50);
                     }
-                }*/
+                }
             }
         } else {
             callback = null;

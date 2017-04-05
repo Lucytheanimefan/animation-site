@@ -62,9 +62,9 @@ def chair():
 def diary():
 	return render_template("anime/index.html")
 
-@app.route("/vishnu")
+@app.route("/dystopia")
 def vish():
-	return render_template("vishnu/index.html")
+	return render_template("dystopia/index.html")
 
 @app.route("/lol", methods=["GET"])
 def lol():

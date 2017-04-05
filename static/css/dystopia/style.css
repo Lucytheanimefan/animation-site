@@ -1,0 +1,12 @@
+body{
+	background-color: black;
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+
+#earth{
+	display: block;
+	margin: 0 auto;
+	width: 50%;
+	height: auto;
+}
