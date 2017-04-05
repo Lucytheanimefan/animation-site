@@ -140,7 +140,7 @@ function addImage(ctx, alpha = 0, callback = null) {
 function cutUp() {
     var rad = radius * .7;
     var coords = generateCircleCoordinates(50, rad + 20, centerX, centerY);
-    var particleCoords = generateCircleCoordinates(50, radius, centerX-20, centerY);
+    var particleCoords = generateCircleCoordinates(50, radius, centerX - 20, centerY);
     for (var i = 0; i < coords.length; i++) {
         animateLines(i, ctx, generateCircleCoordinates(100, rad, coords[i][0], coords[i][1]), 1, "white", 0.5, 0, function() {
 
@@ -151,10 +151,10 @@ function cutUp() {
 }
 
 function cropImage(coords, width = 50, height = 50, j = 0) {
-    var xCrop = getRandomInt(centerX-radius + width, centerX+radius-width);
-    var yCrop = getRandomInt(centerY-radius + height, centerY+radius-height);
+    var xCrop = getRandomInt(centerX - radius + width, centerX + radius - width);
+    var yCrop = getRandomInt(centerY - radius + height, centerY + radius - height);
     var cropRegion = [{ x: xCrop, y: yCrop },
-        { x: xCrop+ width, y: yCrop + height }
+        { x: xCrop + width, y: yCrop + height }
     ];
     var croppedCan = crop(cropRegion[0], cropRegion[1]);
     // Create an image for the new canvas.
@@ -162,13 +162,22 @@ function cropImage(coords, width = 50, height = 50, j = 0) {
     image.src = croppedCan.toDataURL();
     var x = coords[j][0];
     var y = coords[j][1];
-    j = j + 1;
     image.onload = function() {
         // Put the image where you need to.
-        ctx.drawImage(image, x + width, y + height, width, height);
-        if (j>=coords.length){
+        window["crop" + j + "id"] = requestAnimationFrame(function() {
+            console.log("Animate cropped image: "+j)
+            ctx.drawImage(image, x + width, y + height, width, height);
+            x+=1;
+            y+=1;
+            if (x<=0){
+                console.log("Cancel animation frame for cropped image: "+j)
+                cancelAnimationFrame(window["crop" + j + "id"]);
+            }
+        })
+        if ((j+1) >= coords.length) {
             return;
         }
+        j = j + 1;
         cropImage(coords, width, height, j);
     }
 }

@@ -50,7 +50,7 @@ function animateLines(reqID, context, coordinates, width = 1, color = "black", o
             callback();
         }
         cancelAnimationFrame(window["requestID"+reqID]);
-        console.log("Cancel animateLInes")
+        //console.log("Cancel animateLInes")
 
     } else {
         window["requestID"+reqID] = requestAnimationFrame(function() {
