@@ -140,49 +140,36 @@ function addImage(ctx, alpha = 0, callback = null) {
 function cutUp() {
     var rad = radius * .7;
     var coords = generateCircleCoordinates(50, rad + 20, centerX, centerY);
+    var particleCoords = generateCircleCoordinates(50, rad + 50, centerX, centerY);
     for (var i = 0; i < coords.length; i++) {
-        if (i == coords.length - 1) {
-            callback = function() {
-                //j=0;
+        animateLines(i, ctx, generateCircleCoordinates(100, rad, coords[i][0], coords[i][1]), 1, "white", 0.5, 0, function() {
 
-                for (var j = 0; j < 2 * radius; j++) {
-                    //console.log("Draw cropped image");
-                    var cropRegion = [{ x: centerX, y: centerY },
-                        { x: centerX + 50, y: centerY + 50 }
-                    ];
-                    var croppedCan = crop(cropRegion[0], cropRegion[1]);
-                    // Create an image for the new canvas.
-                    var image = new Image();
-                    image.src = croppedCan.toDataURL();
-                    image.onload = function() {
-                        // Put the image where you need to.
-                        ctx.drawImage(image, j, 2 * j, 50, 50);
-                    }
-                }
-            }
-        } else {
-            callback = null;
-        }
-        animateLines(i, ctx, generateCircleCoordinates(100, rad, coords[i][0], coords[i][1]), 1, "white", 0.5, 0, callback);
+        });
     }
+    cropImage(particleCoords, 25, 25);
+
 }
 
-function cropFlower(x, y, x1, y1, i = 0) {
+function cropImage(coords, width = 50, height = 50, j = 0) {
+    console.log("coords");
+    console.log(coords);
     var cropRegion = [{ x: centerX, y: centerY },
-        { x: centerX + 50, y: centerY + 50 }
+        { x: centerX + width, y: centerY + height }
     ];
     var croppedCan = crop(cropRegion[0], cropRegion[1]);
     // Create an image for the new canvas.
     var image = new Image();
     image.src = croppedCan.toDataURL();
+    var x = coords[j][0];
+    var y = coords[j][1];
+    j = j + 1;
     image.onload = function() {
         // Put the image where you need to.
-        ctx.drawImage(image, j, 2 * j, 50, 50);
-        cropFlower(x, y, x1, y1, i);
-    }
-
-    if (i == 100) { //temp end for recursive call
-        return;
+        ctx.drawImage(image, x + width, y + height, width, height);
+        if (j>=coords.length){
+            return;
+        }
+        cropImage(coords, width, height, j);
     }
 }
 
