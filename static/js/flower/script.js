@@ -140,7 +140,7 @@ function addImage(ctx, alpha = 0, callback = null) {
 function cutUp() {
     var rad = radius * .7;
     var coords = generateCircleCoordinates(50, rad + 20, centerX, centerY);
-    var particleCoords = generateCircleCoordinates(50, rad + 50, centerX, centerY);
+    var particleCoords = generateCircleCoordinates(50, radius, centerX-20, centerY);
     for (var i = 0; i < coords.length; i++) {
         animateLines(i, ctx, generateCircleCoordinates(100, rad, coords[i][0], coords[i][1]), 1, "white", 0.5, 0, function() {
 
@@ -151,10 +151,10 @@ function cutUp() {
 }
 
 function cropImage(coords, width = 50, height = 50, j = 0) {
-    console.log("coords");
-    console.log(coords);
-    var cropRegion = [{ x: centerX, y: centerY },
-        { x: centerX + width, y: centerY + height }
+    var xCrop = getRandomInt(centerX-radius + width, centerX+radius-width);
+    var yCrop = getRandomInt(centerY-radius + height, centerY+radius-height);
+    var cropRegion = [{ x: xCrop, y: yCrop },
+        { x: xCrop+ width, y: yCrop + height }
     ];
     var croppedCan = crop(cropRegion[0], cropRegion[1]);
     // Create an image for the new canvas.
