@@ -163,22 +163,30 @@ function cropImage(coords, width = 50, height = 50, j = 0) {
     var x = coords[j][0];
     var y = coords[j][1];
     image.onload = function() {
-        // Put the image where you need to.
-        window["crop" + j + "id"] = requestAnimationFrame(function() {
-            console.log("Animate cropped image: "+j)
-            ctx.drawImage(image, x + width, y + height, width, height);
-            x+=1;
-            y+=1;
-            if (x<=0){
-                console.log("Cancel animation frame for cropped image: "+j)
-                cancelAnimationFrame(window["crop" + j + "id"]);
-            }
-        })
-        if ((j+1) >= coords.length) {
-            return;
-        }
-        j = j + 1;
-        cropImage(coords, width, height, j);
+        loadDrawCroppedImage(image, x, y, width, height, j);
+    }
+
+    if ((j + 1) >= coords.length) {
+        return;
+    }
+    j += 1;
+    cropImage(coords, width, height, j);
+
+}
+
+function loadDrawCroppedImage(image, x, y, width, height, j,i=0) {
+    ctx.drawImage(image, x + width, y + height, width, height);
+    //}
+    x -= 1;
+    y += 1;
+    i+=1;
+    window["crop" +i + j + "id"] = requestAnimationFrame(function() {
+        loadDrawCroppedImage(image, x, y, width, height, j);
+
+    });
+    if (x <= 0) {
+        console.log("Cancel animation frame for cropped image: " + j)
+        cancelAnimationFrame(window["crop" + i + j + "id"]);
     }
 }
 
