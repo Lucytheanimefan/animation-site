@@ -24,7 +24,7 @@ function main() {
     animateCircles(radius, 1, 0, function() {
         drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY);
         animateFullCircle(radius, centerX, centerY, function() {
-            addImage(ctx, 0, function() {
+            addImage(ctx, 0, true, function() {
                 cutUp();
             }); //TEST IMAGE: REPLACE LATER
 
@@ -110,7 +110,7 @@ function setImage(imagePath) {
     base_image.src = imagePath;
 }
 
-function addImage(ctx, alpha = 0, callback = null) {
+function addImage(ctx, alpha = 0, animate = true, callback = null) {
     console.log("Added image?");
     ctx.globalAlpha = 1;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -122,11 +122,15 @@ function addImage(ctx, alpha = 0, callback = null) {
     ctx.closePath();
     ctx.clip();
     ctx.drawImage(base_image, centerX - radius, centerY - radius, radius * 2, radius * 2);
-    alpha += 0.01;
     ctx.restore();
-    imageRequestId = requestAnimationFrame(function() {
-        addImage(ctx, alpha, callback);
-    });
+    if (animate) {
+        alpha += 0.01;
+        imageRequestId = requestAnimationFrame(function() {
+            addImage(ctx, alpha, true, callback);
+        });
+    } else {
+        alpha = 1;
+    }
 
     if (alpha > 1) {
         //ctx.restore();
@@ -142,15 +146,17 @@ function cutUp() {
     var coords = generateCircleCoordinates(50, rad + 20, centerX, centerY);
     var particleCoords = generateCircleCoordinates(50, radius, centerX - 20, centerY);
     for (var i = 0; i < coords.length; i++) {
-        animateLines(i, ctx, generateCircleCoordinates(100, rad, coords[i][0], coords[i][1]), 1, "white", 0.5, 0, function() {
-
-        });
+        animateLines(i, ctx, generateCircleCoordinates(100, rad, coords[i][0], coords[i][1]), 1, "white", 0.5, 0);
     }
-    cropImage(particleCoords, 25, 25);
+    setTimeout(function() {
+        cropImage(particleCoords, 25, 25);
+    }, 1000);
 
 }
 
 function cropImage(coords, width = 50, height = 50, j = 0) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    addImage(ctx, 1, false);
     var xCrop = getRandomInt(centerX - radius + width, centerX + radius - width);
     var yCrop = getRandomInt(centerY - radius + height, centerY + radius - height);
     var cropRegion = [{ x: xCrop, y: yCrop },
@@ -163,7 +169,7 @@ function cropImage(coords, width = 50, height = 50, j = 0) {
     var x = coords[j][0];
     var y = coords[j][1];
     image.onload = function() {
-        loadDrawCroppedImage(image, x, y, width, height, j);
+        animateCroppedImage(image, x, y, width, height, j);
     }
 
     if ((j + 1) >= coords.length) {
@@ -174,14 +180,15 @@ function cropImage(coords, width = 50, height = 50, j = 0) {
 
 }
 
-function loadDrawCroppedImage(image, x, y, width, height, j,i=0) {
+function animateCroppedImage(image, x, y, width, height, j, i = 0) {
     ctx.drawImage(image, x + width, y + height, width, height);
-    //}
-    x -= 1;
-    y += 1;
-    i+=1;
-    window["crop" +i + j + "id"] = requestAnimationFrame(function() {
-        loadDrawCroppedImage(image, x, y, width, height, j);
+    var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+    var plusOrMinus1 = Math.random() < 0.5 ? -1 : 1;
+    x += plusOrMinus*10;
+    y += plusOrMinus1*10;
+    i += 1;
+    window["crop" + i + j + "id"] = requestAnimationFrame(function() {
+        animateCroppedImage(image, x, y, width, height, j);
 
     });
     if (x <= 0) {
