@@ -86,3 +86,78 @@ function generateCoordinates(start, end, step = 1, horizontal, extraCoord) {
     }
     return coords;
 }
+
+/**
+ * [generateDiagonalCoordinates description]
+ * @param  {Object} startEnd {"start":[x,y],"end":[x1,y1]}
+ * @return {[type]}          [description]
+ */
+function generateDiagonalCoordinates(startEnd, step = 1) {
+
+    var start = startEnd["start"];
+    var end = startEnd["end"];
+    var newX = start[0];
+    var newY = start[1];
+    var coords = [start];
+    if (end[0] > start[0]) {
+        addX = step;
+    } else {
+        addX = -step;
+    }
+    if (end[1] > start[1]) {
+        addY = step;
+    } else {
+        addY = -step;
+    }
+    while (newX != end[0] && newY != end[1]) {
+        newX = newX + addX;
+        newY = newY + addY;
+        coords.push([newX, newY]);
+
+    }
+    console.log(coords);
+    return coords;
+
+}
+
+function crop(a, b) {
+    // get the image data you want to keep.
+    var imageData = ctx.getImageData(a.x, a.y, b.x, b.y);
+
+    // create a new cavnas same as clipped size and a context
+    var newCan = document.createElement('canvas');
+    newCan.width = b.x - a.x;
+    newCan.height = b.y - a.y;
+    var newCtx = newCan.getContext('2d');
+
+    // put the clipped image on the new canvas.
+    newCtx.putImageData(imageData, 0, 0);
+
+    return newCan;
+}
+
+
+function drawCircle(ctx, canvas, color, radius, x, y, clearRect = false) {
+    //console.log("Draw filled circle");
+    if (clearRect) {
+        ctx.clearRect(-50, -50, canvas.width, canvas.height);
+    }
+    // draw the circle
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+    ctx.closePath();
+
+    // color in the circle
+    ctx.fillStyle = color;
+    ctx.fill();
+}
+
+function generateCircleCoordinates(steps, radius, centerX, centerY) {
+    var coords = [];
+    for (var i = 0; i <= steps; i++) {
+        var x = (centerX + radius * Math.cos(2 * Math.PI * i / steps));
+        var y = (centerY + radius * Math.sin(2 * Math.PI * i / steps));
+        coords[i] = [x, y];
+    }
+    return coords;
+}
