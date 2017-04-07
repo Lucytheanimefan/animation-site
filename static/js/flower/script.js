@@ -1,4 +1,5 @@
 var numRingsDrawn = 2;
+var petalSize = 400;
 var theta = generateTheta(0, 360, 1);
 console.log(theta);
 var k = 7; //number petals
@@ -26,7 +27,7 @@ function main() {
     animateCircles(radius, 1, 0, function() {
         drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY);
         animateFullCircle(radius, centerX, centerY, function() {
-            addImage(ctx, 0, true, function() {
+            addImage(ctx, 0, true, radius, function() {
                 cutUp();
             }); //TEST IMAGE: REPLACE LATER
 
@@ -65,7 +66,7 @@ function animateCircles(radius, width = 1, id = 0, callback = null) {
 }
 
 function animateFullCircle(rad, cX, cY, callback) {
-    drawCircle(ctx, canvas, "#FFF", radius, centerX, centerY); //white
+    drawCircle(ctx, canvas, "#FFF", rad, centerX, centerY); //white
 
     drawCircle(ctx, canvas, "#000", rad, cX, cY);
     setTimeout(function() {
@@ -96,7 +97,7 @@ function setImage(imagePath) {
     base_image.src = imagePath;
 }
 
-function addImage(ctx, alpha = 0, animate = true, callback = null) {
+function addImage(ctx, alpha = 0, animate = true, radius, callback = null) {
     //console.log("Added image?");
     ctx.globalAlpha = 1;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -112,7 +113,7 @@ function addImage(ctx, alpha = 0, animate = true, callback = null) {
     if (animate) {
         alpha += 0.01;
         imageRequestId = requestAnimationFrame(function() {
-            addImage(ctx, alpha, true, callback);
+            addImage(ctx, alpha, true, radius, callback);
         });
     } else {
         alpha = 1;
@@ -146,7 +147,6 @@ function animateCircularRings(rad, coords) {
 
 function cropImage(coords, width = 50, height = 50, j = 0) {
     //ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //addImage(ctx, 1, false);
     var xCrop = getRandomInt(centerX - radius + width, centerX + radius - width);
     var yCrop = getRandomInt(centerY - radius + height, centerY + radius - height);
     var cropRegion = [{ x: xCrop, y: yCrop },
@@ -162,23 +162,31 @@ function cropImage(coords, width = 50, height = 50, j = 0) {
     var x = coords[j][0];
     var y = coords[j][1];
     image.onload = function() {
-        animateCroppedImage(image, x, y, width/4, height/4, j);
+        animateCroppedImage(image, x, y, width / 4, height / 4, j);
         j += 1;
         cropImage(coords, width, height, j);
     }
-    
+
 
 }
 
-function toDegrees(degree) {
-    return degree;
-    //return Math.sin(degree * Math.PI / 180.0)
+function colorCircleAnimation(radius, x, y, alpha = 0, color = "black", callback = null) {
+    ctx.globalAlpha = alpha;
+    drawCircle(ctx, canvas, color, radius, x, y, false);
+    alpha += 0.01
+    circleReqID = requestAnimationFrame(function() {
+        colorCircleAnimation(radius, x, y, alpha);
+        if (callback) {
+            callback();
+        }
+    })
 }
 
+//function animateCircles(radius, width = 1, id = 0, callback = null)
 function animateCroppedImage(image, x, y, width, height, j, i = 0, radian = 0) {
     ctx.drawImage(image, x + width, y + height, width, height);
-    x = 400 * toDegrees(Math.cos(k * radian) * Math.cos(radian)) + centerX;
-    y = 400 * toDegrees(Math.cos(k * radian) * Math.sin(radian)) + centerY;
+    x = petalSize * Math.cos(k * radian) * Math.cos(radian) + centerX;
+    y = petalSize * Math.cos(k * radian) * Math.sin(radian) + centerY;
     //console.log("theta: " + theta[i]);
     //console.log(x + "," + y)
     i += 1;
@@ -190,5 +198,20 @@ function animateCroppedImage(image, x, y, width, height, j, i = 0, radian = 0) {
     if (i >= 600) {
         console.log("Cancel animation frame for cropped image: " + "crop" + j + "id");
         cancelAnimationFrame(window["crop" + j + "id"]);
+        if (j == 99) {
+            var rad = 1.1 * petalSize;
+            animateCircles(rad, 0.7, 0, function() {
+                addImage(ctx, 0, true, rad, function() {});
+                    /*
+                colorCircleAnimation(rad, centerX, centerY, 0, "black", function(){
+
+                });
+                */
+            });
+        }
     }
+}
+
+function cutImageUp() {
+
 }
