@@ -34,7 +34,7 @@ $(document).ready(function() {
         //zoomEarth();
         //three_dEarth();
         animate()
-        //render();
+            //render();
     }, 5000)
 
 })
@@ -63,6 +63,8 @@ function createSphere(radius, segments) {
 
 function animate() {
     sphere.rotation.y += 0.005;
+    camera.zoom -= 0.001;
+    camera.updateProjectionMatrix();
     requestAnimationFrame(animate);
     render();
 }
