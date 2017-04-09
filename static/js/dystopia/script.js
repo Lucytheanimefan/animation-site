@@ -33,7 +33,8 @@ $(document).ready(function() {
     setTimeout(function() {
         //zoomEarth();
         //three_dEarth();
-        render();
+        animate()
+        //render();
     }, 5000)
 
 })
@@ -60,11 +61,17 @@ function createSphere(radius, segments) {
     );
 }
 
+function animate() {
+    sphere.rotation.y += 0.005;
+    requestAnimationFrame(animate);
+    render();
+}
+
 
 function render() {
-    controls.update();
-    sphere.rotation.y += 0.0005;
+    //controls.update();
+    //sphere.rotation.y += 0.005;
     //clouds.rotation.y += 0.0005;
-    requestAnimationFrame(render);
+    //requestAnimationFrame(render);
     renderer.render(scene, camera);
 }
