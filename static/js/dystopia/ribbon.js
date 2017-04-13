@@ -109,7 +109,7 @@ function init() {
         sim.particles.push(np);
 
         if (i > 0) {
-            s = new Spring(np, op, step, 0.95);
+            s = new Spring(np, op, step, 0.3);
             sim.springs.push(s);
         }
 
