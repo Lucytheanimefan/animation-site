@@ -7,7 +7,8 @@
 <div id="main">
     <!--<img id = "earth" src="/static/img/dystopia/earth.png">-->
     <div id="webgl"></div>
-    <canvas id="ribbon"></canvas>
+    <canvas id='world'></canvas>
+
 </div>
 {% endblock %}
 <!--js-->
@@ -15,4 +16,5 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/lib/three.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/lib/TrackballControls.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/dystopia/script.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/dystopia/ribbon.js') }}"></script>
 {% endblock %}
