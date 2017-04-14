@@ -4,6 +4,15 @@ var THICKNESS = 12;
 var LENGTH = 10;
 var STEP = 0.1;
 var FPS = 1000 / 60;
+var coords = populateDummyCoords();
+
+function populateDummyCoords() {
+    var coords = [];
+    for (var i = 0; i < 500; i++) {
+        coords.push([i*Math.random()*10, i *Math.random()*10]);
+    }
+    return coords;
+}
 
 function Particle(x, y, mass) {
 
@@ -126,11 +135,20 @@ function init() {
     mouse = sim.particles[count - 1];
     mouse.fixed = true;
 
-    canvas.addEventListener('mousemove', function(event) {
-        mouse.x = event.clientX;
-        mouse.y = event.clientY;
-    });
+    setInterval(function() {
+        var shifted = coords.shift();
+        mouse.x = shifted[0];
+        mouse.y = shifted[1];
+    }, 500)
+
+    /*
+        canvas.addEventListener('mousemove', function(event) {
+            mouse.x = event.clientX;
+            mouse.y = event.clientY;
+        });
+        */
 };
+
 
 function step() {
 

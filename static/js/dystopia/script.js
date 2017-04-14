@@ -63,7 +63,7 @@ function createSphere(radius, segments) {
 
 function animate() {
     sphere.rotation.y += 0.005;
-    camera.zoom -= 0.001;
+    camera.zoom += 0.001;
     camera.updateProjectionMatrix();
     requestAnimationFrame(animate);
     render();
