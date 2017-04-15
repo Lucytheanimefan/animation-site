@@ -52,7 +52,7 @@ function createSphere(radius, segments) {
     return new THREE.Mesh(
         new THREE.SphereGeometry(radius, segments, segments),
         new THREE.MeshPhongMaterial({
-            map: THREE.ImageUtils.loadTexture('/static/img/dystopia/earth.png'),
+            map: THREE.ImageUtils.loadTexture('/static/img/dystopia/dystopia_map.png'),
             bumpMap: THREE.ImageUtils.loadTexture(''),
             bumpScale: 0.005,
             specularMap: THREE.ImageUtils.loadTexture(''),
