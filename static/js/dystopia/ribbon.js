@@ -136,10 +136,15 @@ function init() {
     mouse.fixed = true;
 
     setInterval(function() {
+        
         var shifted = coords.shift();
+        //changing anchor doesn't work
+        //anchor.x = anchor.x+1;
+        //anchor.y = anchor.x+1;
         console.log("new coords: " + shifted);
         mouse.x = shifted[0];
         mouse.y = shifted[1];
+        
     }, 50)
 
     /*
