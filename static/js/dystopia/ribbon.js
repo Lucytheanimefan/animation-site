@@ -1,14 +1,14 @@
 var TWO_PI = Math.PI * 2;
 var HALF_PI = Math.PI * 0.5;
 var THICKNESS = 20;
-var LENGTH = 4;
+var LENGTH = 3;
 var STEP = 0.1;
 var FPS = 1000 / 60;
 var coords = populateDummyCoords();
 
 function populateDummyCoords() {
     var coords = [];
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 15; i++) {
         coords.push.apply(coords, generateCircleCoordinates(10, 200, 500, 500));
     }
     return coords;
@@ -233,7 +233,7 @@ function step() {
     context.lineWidth = 0.5;
     context.stroke();
 
-    context.fillStyle = 'rgba(255,255,255,0.9)';
+    context.fillStyle = 'rgba(255,0,0,0.9)';
     context.fill();
 
     old = now;
