@@ -9,7 +9,7 @@ var coords = populateDummyCoords();
 function populateDummyCoords() {
     var coords = [];
     for (var i = 0; i < 15; i++) {
-        coords.push.apply(coords, generateCircleCoordinates(10, 200, 500, 500));
+        coords.push.apply(coords, generateCircleCoordinates(6, 200, 500, 500));
     }
     return coords;
 }
@@ -112,8 +112,8 @@ function init() {
     var sy = canvas.height * 0.5;
 
     for (var i = 0; i < count; ++i) {
-
-        //np = new Particle(i*8,i*8,0.1+Math.random()*0.01);
+        //not random version
+        //np = new Particle(sx + (i/count- 0.5) * 200, sy + (Math.random() - 0.5) * 200, 0.1 + Math.random() * 0.01);
         np = new Particle(sx + (Math.random() - 0.5) * 200, sy + (Math.random() - 0.5) * 200, 0.1 + Math.random() * 0.01);
         sim.particles.push(np);
 
