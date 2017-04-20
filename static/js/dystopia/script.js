@@ -7,7 +7,7 @@ var radius = 0.1,
     rotation = 6;
 
 //comet params
-var cometRadius = 0.5
+var cometRadius = 0.07
 
 var scene = new THREE.Scene();
 
