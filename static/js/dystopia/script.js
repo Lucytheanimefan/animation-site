@@ -11,6 +11,10 @@ var cometRadius = 0.07
 
 var scene = new THREE.Scene();
 
+// GLOW SCENE
+var glowscene = new THREE.Scene();
+glowscene.add( new THREE.AmbientLight( 0xffffff ) );
+
 var camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 1000);
 camera.position.z = 1.5;
 
@@ -22,20 +26,34 @@ var light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(5, 3, 5);
 scene.add(light);
 
+/*
+var cometLight = new THREE.DirectionalLight(0xffffff,6); 
+cometLight.position.set(7, 3, 5);
+cometLight.shadow.mapSize.width = 300;
+cometLight.shadow.mapSize.height = 400;
+
+scene.add(cometLight);
+*/
 
 var sphere = createEarth(radius, segments); //earth
 sphere.rotation.y = rotation;
+sphere.receiveShadow = true;
 scene.add(sphere)
 
 var comet = createComet(cometRadius, segments);
 comet.rotation.y = rotation;
-comet.translateX(0.5);
+comet.castShadow = true;
+//comet.translateX(0.5);
 scene.add(comet);
 
 var controls = new THREE.TrackballControls(camera);
 
 
 webglEl.appendChild(renderer.domElement);
+
+function createGlowScene(){
+    
+}
 
 //top right bottom left
 $(document).ready(function() {
@@ -82,10 +100,13 @@ function createComet(radius, segments) {
         })
     );
 }
-
+var newx=0
 function animate() {
+    comet.translateX(-0.01);
     comet.rotation.y+=0.09
     sphere.rotation.y += 0.005;
+    //newx+=1;
+    //cometLight.position.set(newx, newx, newx);
     //camera.zoom += 0.001;
     camera.updateProjectionMatrix();
     requestAnimationFrame(animate);

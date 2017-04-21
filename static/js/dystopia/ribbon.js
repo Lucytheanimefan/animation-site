@@ -251,8 +251,10 @@ function resize() {
     canvas.height = window.innerHeight;
 }
 
+//uncomment below to add ribbon back
+/*
 window.addEventListener("resize", resize);
 resize();
-
 init();
 step();
+*/
