@@ -10,11 +10,12 @@ var radius = 0.2,
 var cometRadius = 0.1
 
 var scene = new THREE.Scene();
-scene.add(new THREE.AmbientLight(0xffffff));
+scene.add(new THREE.AmbientLight(0x333333));
 
 // GLOW SCENE
 var cometScene = new THREE.Scene();
 cometScene.add( new THREE.AmbientLight( 0xffffff ) );
+
 
 var camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 1000);
 camera.position.z = 1.5;
@@ -26,17 +27,17 @@ renderer.autoClear = false;
 
 
 
-var light = new THREE.DirectionalLight(0xffffff, 0.1);
+var light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(5, 3, 5);
 scene.add(light);
 
-
+/*
 var cometLight = new THREE.DirectionalLight(0xffffff,2); 
 cometLight.position.set(7, 3, 5);
 cometLight.shadow.mapSize.width = 300;
 cometLight.shadow.mapSize.height = 400;
-
-cometScene.add(cometLight);
+*/
+//scene.add(cometLight);
 
 
 var sphere = createEarth(radius, segments); //earth
