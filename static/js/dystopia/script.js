@@ -103,8 +103,14 @@ function createComet(radius, segments) {
 }
 var newx=0
 function animate() {
+    var dist = comet.position.distanceToSquared(sphere.position)
+    if (collision(dist)){
+        console.log("DISTANCE:");
+        console.log(dist);
+    }
+    //console.log(comet.position.distanceToSquared(sphere.position));
     comet.translateX(-0.03);
-    comet.rotation.y+=0.09
+    comet.rotation.y+=0.05;
     sphere.rotation.y += 0.005;
     //newx+=1;
     //cometLight.position.set(newx, newx, newx);
@@ -114,6 +120,9 @@ function animate() {
     render();
 }
 
+function collision(dist){
+    return (dist<=(cometRadius+radius));
+}
 
 function render() {
     renderer.clear()
