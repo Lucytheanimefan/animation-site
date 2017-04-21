@@ -2,38 +2,42 @@ var webglEl = document.getElementById('webgl');
 var width = window.innerWidth,
     height = window.innerHeight;
 // Earth params
-var radius = 0.1,
+var radius = 0.2,
     segments = 32,
     rotation = 6;
 
 //comet params
-var cometRadius = 0.07
+var cometRadius = 0.1
 
 var scene = new THREE.Scene();
+scene.add(new THREE.AmbientLight(0xffffff));
 
 // GLOW SCENE
-var glowscene = new THREE.Scene();
-glowscene.add( new THREE.AmbientLight( 0xffffff ) );
+var cometScene = new THREE.Scene();
+cometScene.add( new THREE.AmbientLight( 0xffffff ) );
 
 var camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 1000);
 camera.position.z = 1.5;
 
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(width, height);
-scene.add(new THREE.AmbientLight(0x333333));
+renderer.autoClear = false;
 
-var light = new THREE.DirectionalLight(0xffffff, 1);
+
+
+
+var light = new THREE.DirectionalLight(0xffffff, 0.1);
 light.position.set(5, 3, 5);
 scene.add(light);
 
-/*
-var cometLight = new THREE.DirectionalLight(0xffffff,6); 
+
+var cometLight = new THREE.DirectionalLight(0xffffff,2); 
 cometLight.position.set(7, 3, 5);
 cometLight.shadow.mapSize.width = 300;
 cometLight.shadow.mapSize.height = 400;
 
-scene.add(cometLight);
-*/
+cometScene.add(cometLight);
+
 
 var sphere = createEarth(radius, segments); //earth
 sphere.rotation.y = rotation;
@@ -44,16 +48,12 @@ var comet = createComet(cometRadius, segments);
 comet.rotation.y = rotation;
 comet.castShadow = true;
 //comet.translateX(0.5);
-scene.add(comet);
+cometScene.add(comet);
 
 var controls = new THREE.TrackballControls(camera);
 
 
 webglEl.appendChild(renderer.domElement);
-
-function createGlowScene(){
-    
-}
 
 //top right bottom left
 $(document).ready(function() {
@@ -102,7 +102,7 @@ function createComet(radius, segments) {
 }
 var newx=0
 function animate() {
-    comet.translateX(-0.01);
+    comet.translateX(-0.03);
     comet.rotation.y+=0.09
     sphere.rotation.y += 0.005;
     //newx+=1;
@@ -115,10 +115,12 @@ function animate() {
 
 
 function render() {
+    renderer.clear()
     //controls.update();
     //sphere.rotation.y += 0.005;
     //clouds.rotation.y += 0.0005;
     //requestAnimationFrame(render);
+    renderer.render(cometScene, camera );
     renderer.render(scene, camera);
 }
 
