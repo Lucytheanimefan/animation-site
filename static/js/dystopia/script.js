@@ -31,13 +31,13 @@ var light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(5, 3, 5);
 scene.add(light);
 
-/*
+
 var cometLight = new THREE.DirectionalLight(0xffffff,2); 
 cometLight.position.set(7, 3, 5);
 cometLight.shadow.mapSize.width = 300;
 cometLight.shadow.mapSize.height = 400;
-*/
-//scene.add(cometLight);
+
+cometScene.add(cometLight);
 
 
 var sphere = createEarth(radius, segments); //earth
