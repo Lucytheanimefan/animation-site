@@ -14,7 +14,7 @@ scene.add(new THREE.AmbientLight(0x333333));
 
 // GLOW SCENE
 var cometScene = new THREE.Scene();
-cometScene.add( new THREE.AmbientLight( 0xffffff ) );
+cometScene.add(new THREE.AmbientLight(0xffffff));
 
 
 var camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 1000);
@@ -24,15 +24,12 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(width, height);
 renderer.autoClear = false;
 
-
-
-
 var light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(5, 3, 5);
 scene.add(light);
 
 
-var cometLight = new THREE.DirectionalLight(0xffffff,2); 
+var cometLight = new THREE.DirectionalLight(0xffffff, 2);
 cometLight.position.set(7, 3, 5);
 cometLight.shadow.mapSize.width = 300;
 cometLight.shadow.mapSize.height = 400;
@@ -52,6 +49,7 @@ comet.castShadow = true;
 cometScene.add(comet);
 
 var controls = new THREE.TrackballControls(camera);
+var vector = new THREE.Vector3();
 
 
 webglEl.appendChild(renderer.domElement);
@@ -61,7 +59,7 @@ $(document).ready(function() {
     //setTimeout(function() {
     //zoomEarth();
     //three_dEarth();
-    animate(); 
+    animate();
     //render();
     //}, 5000)
 
@@ -75,10 +73,13 @@ function zoomEarth() {
     }, 3000)
 }
 
+var earth;
+var comet;
 
 function createEarth(radius, segments) {
+    earth = new THREE.SphereGeometry(radius, segments, segments);
     return new THREE.Mesh(
-        new THREE.SphereGeometry(radius, segments, segments),
+        earth,
         new THREE.MeshPhongMaterial({
             map: THREE.ImageUtils.loadTexture('/static/img/dystopia/dystopia_map.png'),
             bumpMap: THREE.ImageUtils.loadTexture('/static/img/dystopia/earthbump1k.jpg'),
@@ -90,8 +91,9 @@ function createEarth(radius, segments) {
 }
 
 function createComet(radius, segments) {
+    comet = new THREE.SphereGeometry(radius, segments, segments);
     return new THREE.Mesh(
-        new THREE.SphereGeometry(radius, segments, segments),
+        comet,
         new THREE.MeshPhongMaterial({
             map: THREE.ImageUtils.loadTexture('/static/img/dystopia/comet.png'),
             bumpMap: THREE.ImageUtils.loadTexture(''),
@@ -101,36 +103,108 @@ function createComet(radius, segments) {
         })
     );
 }
-var newx=0
-function animate() {
+var newx = 0
+
+function animate(rotation = 0) {
     var dist = comet.position.distanceToSquared(sphere.position)
-    if (collision(dist)){
-        console.log("DISTANCE:");
-        console.log(dist);
+    if (collision(dist) && rotation > 500) {
+        //console.log("DISTANCE:");
+        //console.log(dist);
+        console.log("EXPLODE!");
+        console.log("num faces: "+earth.faces.length);
+        earth.vertices[ THREE.Math.randInt( 0, 35 ) ].multiplyScalar( 1.01 );
+        earth.verticesNeedUpdate = true;
+        //comet.translateX(-0.02);
+    } else {
+        comet.translateX(-0.02);
+        //}
+        //console.log(comet.position.distanceToSquared(sphere.position));
+
+        comet.rotation.y += 0.05;
     }
-    //console.log(comet.position.distanceToSquared(sphere.position));
-    comet.translateX(-0.03);
-    comet.rotation.y+=0.05;
     sphere.rotation.y += 0.005;
     //newx+=1;
     //cometLight.position.set(newx, newx, newx);
     //camera.zoom += 0.001;
     camera.updateProjectionMatrix();
-    requestAnimationFrame(animate);
+    requestAnimationFrame(function() {
+        rotation++;
+        animate(rotation);
+    });
     render();
 }
 
-function collision(dist){
-    return (dist<=(cometRadius+radius));
+function collision(dist) {
+    return (dist < (cometRadius + radius));
 }
+
+function explodeEarth() {
+    var explodeModifier = new THREE.ExplodeModifier();
+    explodeModifier.modify(earth);
+    var vertices = [];
+    var faces = [];
+/*
+    for (var i = 0, il = earth.faces.length; i < il; i++) {
+
+        var extraFace1 = new THREE.Face3().copy(face)
+        extraFace1.c = earth.vertices[0]
+
+        var extraFace2 = new THREE.Face3().copy(face)
+        extraFace2.b = earth.vertices[0]
+
+        var extraFace3 = new THREE.Face3().copy(face)
+        extraFace3.a = earth.vertices[0]
+
+        faces.push(extraFace1);
+        faces.push(extraFace2);
+        faces.push(extraFace3);
+    }
+    */
+}
+
+THREE.ExplodeModifier = function() {
+
+};
+
+THREE.ExplodeModifier.prototype.modify = function(geometry) {
+
+    var vertices = [];
+
+    for (var i = 0, il = geometry.faces.length; i < il; i++) {
+
+        var n = vertices.length;
+
+        var face = geometry.faces[i];
+
+        var a = face.a;
+        var b = face.b;
+        var c = face.c;
+
+        var va = geometry.vertices[a];
+        var vb = geometry.vertices[b];
+        var vc = geometry.vertices[c];
+
+        vertices.push(va.clone());
+        vertices.push(vb.clone());
+        vertices.push(vc.clone());
+
+        face.a = n;
+        face.b = n + 1;
+        face.c = n + 2;
+
+    }
+
+    geometry.vertices = vertices;
+
+};
 
 function render() {
+    explodeEarth();
     renderer.clear()
-    //controls.update();
-    //sphere.rotation.y += 0.005;
-    //clouds.rotation.y += 0.0005;
-    //requestAnimationFrame(render);
-    renderer.render(cometScene, camera );
+        //controls.update();
+        //sphere.rotation.y += 0.005;
+        //clouds.rotation.y += 0.0005;
+        //requestAnimationFrame(render);
+    renderer.render(cometScene, camera);
     renderer.render(scene, camera);
 }
-
