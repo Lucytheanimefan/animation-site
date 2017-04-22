@@ -109,8 +109,7 @@ var newx = 0
 function animate(rotation = 0) {
     TWEEN.update();
     var dist = comet.position.distanceToSquared(sphere.position)
-    if (collision(dist) && rotation > 200) {
-        console.log("COLLISION");
+    if (collision(dist)) {
         /*
         TWEEN.removeAll();
         var verticeA = 0;
@@ -145,7 +144,7 @@ function animate(rotation = 0) {
         }
         */
        comet.translateX(-0.002);
-        comet.rotation.y += 0.005;
+    comet.rotation.y += 0.005;
         
     } else {
         comet.translateX(-0.02);
