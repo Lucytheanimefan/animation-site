@@ -59,6 +59,7 @@ $(document).ready(function() {
     //setTimeout(function() {
     //zoomEarth();
     //three_dEarth();
+    prepareExplodeEarth();
     animate();
     //render();
     //}, 5000)
@@ -106,15 +107,46 @@ function createComet(radius, segments) {
 var newx = 0
 
 function animate(rotation = 0) {
+    TWEEN.update();
     var dist = comet.position.distanceToSquared(sphere.position)
-    if (collision(dist) && rotation > 500) {
-        //console.log("DISTANCE:");
-        //console.log(dist);
-        console.log("EXPLODE!");
-        console.log("num faces: "+earth.faces.length);
-        earth.vertices[ THREE.Math.randInt( 0, 35 ) ].multiplyScalar( 1.01 );
-        earth.verticesNeedUpdate = true;
-        //comet.translateX(-0.02);
+    if (collision(dist) && rotation > 200) {
+        console.log("COLLISION");
+        /*
+        TWEEN.removeAll();
+        var verticeA = 0;
+        var verticeB = 1;
+        var verticeC = 2;
+        for (var i = 0; i < earth.vertices.length/256; i++) {
+            TWEEN.removeAll();
+            var pos = new THREE.Vector3();
+            var final = Math.random();
+            pos.x = final;
+            pos.y = final;
+            pos.z = final;
+            //console.log(earth.vertices[verticeA]);
+            new TWEEN.Tween(earth.vertices[verticeA])
+                .to({ x: pos.x, y: pos.y, z: pos.z }, 2000)
+                .easing(TWEEN.Easing.Exponential.InOut)
+                .start();
+
+            new TWEEN.Tween(earth.vertices[verticeB])
+                .to({ x: pos.x, y: pos.y, z: pos.z }, 2000)
+                .easing(TWEEN.Easing.Exponential.InOut)
+                .start();
+
+            new TWEEN.Tween(earth.vertices[verticeC])
+                .to({ x: pos.x, y: pos.y, z: pos.z }, 2000)
+                .easing(TWEEN.Easing.Exponential.InOut)
+                .start();
+
+            verticeA += 3;
+            verticeB += 3;
+            verticeC += 3;
+        }
+        */
+       comet.translateX(-0.002);
+        comet.rotation.y += 0.005;
+        
     } else {
         comet.translateX(-0.02);
         //}
@@ -127,7 +159,7 @@ function animate(rotation = 0) {
     //cometLight.position.set(newx, newx, newx);
     //camera.zoom += 0.001;
     camera.updateProjectionMatrix();
-    requestAnimationFrame(function() {
+    window["rotation"] = requestAnimationFrame(function() {
         rotation++;
         animate(rotation);
     });
@@ -135,31 +167,13 @@ function animate(rotation = 0) {
 }
 
 function collision(dist) {
-    return (dist < (cometRadius + radius));
+    return (dist <=radius-cometRadius);
 }
 
-function explodeEarth() {
+function prepareExplodeEarth() {
     var explodeModifier = new THREE.ExplodeModifier();
     explodeModifier.modify(earth);
-    var vertices = [];
-    var faces = [];
-/*
-    for (var i = 0, il = earth.faces.length; i < il; i++) {
-
-        var extraFace1 = new THREE.Face3().copy(face)
-        extraFace1.c = earth.vertices[0]
-
-        var extraFace2 = new THREE.Face3().copy(face)
-        extraFace2.b = earth.vertices[0]
-
-        var extraFace3 = new THREE.Face3().copy(face)
-        extraFace3.a = earth.vertices[0]
-
-        faces.push(extraFace1);
-        faces.push(extraFace2);
-        faces.push(extraFace3);
-    }
-    */
+    earth.verticesNeedUpdate = true;
 }
 
 THREE.ExplodeModifier = function() {
@@ -199,7 +213,6 @@ THREE.ExplodeModifier.prototype.modify = function(geometry) {
 };
 
 function render() {
-    explodeEarth();
     renderer.clear()
         //controls.update();
         //sphere.rotation.y += 0.005;
