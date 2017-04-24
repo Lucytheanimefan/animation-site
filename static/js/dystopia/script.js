@@ -111,8 +111,12 @@ function animate(rotation = 0) {
     TWEEN.update();
     var dist = comet.position.distanceToSquared(sphere.position)
     if (collision(dist) && rotation>=100) {
-        for (var i=0; i<earth.vertices.length; i+=10){
-            earth.vertices[i].x +=0.01;
+        for (var i=0; i<earth.vertices.length; i+=2){
+            var rand= Math.random()>0.5? 1 : -1;
+            //var rand = 1;
+            earth.vertices[i].x +=rand*0.005;
+            earth.vertices[i].y +=rand*0.005;
+            earth.vertices[i].z +=rand*0.005;
             earth.verticesNeedUpdate = true;
             //console.log(earth.vertices[i].x);
         }
