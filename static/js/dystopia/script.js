@@ -110,7 +110,7 @@ var newx = 0
 function animate(rotation = 0) {
     TWEEN.update();
     var dist = comet.position.distanceToSquared(sphere.position)
-    if (collision(dist)) {
+    if (collision(dist) && rotation>=100) {
         for (var i=0; i<earth.vertices.length; i+=10){
             earth.vertices[i].x +=0.01;
             earth.verticesNeedUpdate = true;
