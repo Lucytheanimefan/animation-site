@@ -59,7 +59,7 @@ $(document).ready(function() {
     //setTimeout(function() {
     //zoomEarth();
     //three_dEarth();
-    prepareExplodeEarth();
+    //prepareExplodeEarth();
     animate();
     //render();
     //}, 5000)
@@ -79,6 +79,7 @@ var comet;
 
 function createEarth(radius, segments) {
     earth = new THREE.SphereGeometry(radius, segments, segments);
+    prepareExplodeEarth();
     return new THREE.Mesh(
         earth,
         new THREE.MeshPhongMaterial({
@@ -110,42 +111,18 @@ function animate(rotation = 0) {
     TWEEN.update();
     var dist = comet.position.distanceToSquared(sphere.position)
     if (collision(dist)) {
-        /*
-        TWEEN.removeAll();
-        var verticeA = 0;
-        var verticeB = 1;
-        var verticeC = 2;
-        for (var i = 0; i < earth.vertices.length/256; i++) {
-            TWEEN.removeAll();
-            var pos = new THREE.Vector3();
-            var final = Math.random();
-            pos.x = final;
-            pos.y = final;
-            pos.z = final;
-            //console.log(earth.vertices[verticeA]);
-            new TWEEN.Tween(earth.vertices[verticeA])
-                .to({ x: pos.x, y: pos.y, z: pos.z }, 2000)
-                .easing(TWEEN.Easing.Exponential.InOut)
-                .start();
-
-            new TWEEN.Tween(earth.vertices[verticeB])
-                .to({ x: pos.x, y: pos.y, z: pos.z }, 2000)
-                .easing(TWEEN.Easing.Exponential.InOut)
-                .start();
-
-            new TWEEN.Tween(earth.vertices[verticeC])
-                .to({ x: pos.x, y: pos.y, z: pos.z }, 2000)
-                .easing(TWEEN.Easing.Exponential.InOut)
-                .start();
-
-            verticeA += 3;
-            verticeB += 3;
-            verticeC += 3;
+        for (var i=0; i<earth.vertices.length; i+=10){
+            earth.vertices[i].x +=0.01;
+            earth.verticesNeedUpdate = true;
+            //console.log(earth.vertices[i].x);
         }
-        */
-       comet.translateX(-0.002);
-    comet.rotation.y += 0.005;
-        
+        //console.log(earth.vertices);
+        //console.log(sphere.earth.vertices);
+        //sphere.earth.vertices[THREE.Math.randInt(0, 35)].multiplyScalar(1.01);
+
+        comet.translateX(-0.002);
+        comet.rotation.y += 0.005;
+
     } else {
         comet.translateX(-0.02);
         //}
@@ -166,7 +143,7 @@ function animate(rotation = 0) {
 }
 
 function collision(dist) {
-    return (dist <=radius-cometRadius);
+    return (dist <= radius - cometRadius);
 }
 
 function prepareExplodeEarth() {
