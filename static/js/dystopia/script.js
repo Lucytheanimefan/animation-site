@@ -18,7 +18,14 @@ cometScene.add(new THREE.AmbientLight(0xffffff));
 
 
 var camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 1000);
+// Place camera on x axis
+camera.position.set(0,.8,1.5);
+camera.up = new THREE.Vector3(0,0,1);
+camera.lookAt(new THREE.Vector3(0,0,0));
+/*
 camera.position.z = 1.5;
+camera.position.y = 0.1;
+*/
 
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(width, height);
@@ -135,35 +142,15 @@ function animate(rotation = 0) {
 
         }
 
-
-        /*
-         for (var j = 0; j < earth.faces.length; j+=30) {
-             earth.verticesNeedUpdate = true;
-             earth.colorsNeedUpdate = true;
-             earth.elementsNeedUpdate = true;
-             earth.normalsNeedUpdate = true;
-             var myColor = new THREE.Color(0xff0000);
-             myColor.setRGB(Math.random(), Math.random(), Math.random());
-             var face = earth.faces[j];
-             console.log(face)
-             face.color = myColor;
-             face.vertexColors.push(myColor);
-             face.normal.x+=20;
-             face.normal.y+=20;
-             face.normal.z+=20;
-             //console.log(earth.vertices[i].x);
-         }
-         */
-
         comet.translateX(-0.009);
-        comet.rotation.y += 0.03;
+        comet.rotation.y += 0.03//*Math.random();
 
     } else {
         comet.translateX(-0.009);
         //}
         //console.log(comet.position.distanceToSquared(sphere.position));
 
-        comet.rotation.y += 0.03;
+        comet.rotation.y += 0.03//*Math.random();
     }
     sphere.rotation.y += 0.005;
     //newx+=1;
