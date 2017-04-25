@@ -110,19 +110,50 @@ var newx = 0
 function animate(rotation = 0) {
     TWEEN.update();
     var dist = comet.position.distanceToSquared(sphere.position)
-    if (collision(dist) && rotation>=100) {
-        for (var i=0; i<earth.vertices.length; i+=2){
-            var rand= Math.random()>0.5? 1 : -1;
+    if (collision(dist) && rotation >= 100) {
+
+        for (var i = 0; i < earth.vertices.length-3; i += 2) {
+            var rand = Math.random() > 0.5 ? 1 : -1;
             //var rand = 1;
-            earth.vertices[i].x +=rand*0.005;
-            earth.vertices[i].y +=rand*0.005;
-            earth.vertices[i].z +=rand*0.005;
+            
+            earth.vertices[i].x += rand * 0.005;
+            earth.vertices[i].y += rand * 0.0005;
+            earth.vertices[i].z += rand * 0.00005;
             earth.verticesNeedUpdate = true;
-            //console.log(earth.vertices[i].x);
+            //console.log(earth.faces[i]);
+            //earth.faces[i].a +=0.05;
+            //earth.faceVertexUvs[i] += 0.005; 
+            //
+            var A = earth.vertices[i + 0]
+            var B = earth.vertices[i + 1]
+            var C = earth.vertices[i + 2]
+
+            var scale = 1 + Math.random() * 0.01;
+            A.multiplyScalar(scale);
+            B.multiplyScalar(scale);
+            C.multiplyScalar(scale);
+
         }
-        //console.log(earth.vertices);
-        //console.log(sphere.earth.vertices);
-        //sphere.earth.vertices[THREE.Math.randInt(0, 35)].multiplyScalar(1.01);
+
+
+        /*
+         for (var j = 0; j < earth.faces.length; j+=30) {
+             earth.verticesNeedUpdate = true;
+             earth.colorsNeedUpdate = true;
+             earth.elementsNeedUpdate = true;
+             earth.normalsNeedUpdate = true;
+             var myColor = new THREE.Color(0xff0000);
+             myColor.setRGB(Math.random(), Math.random(), Math.random());
+             var face = earth.faces[j];
+             console.log(face)
+             face.color = myColor;
+             face.vertexColors.push(myColor);
+             face.normal.x+=20;
+             face.normal.y+=20;
+             face.normal.z+=20;
+             //console.log(earth.vertices[i].x);
+         }
+         */
 
         comet.translateX(-0.002);
         comet.rotation.y += 0.005;
