@@ -106,16 +106,16 @@ function createComet(radius, segments) {
     );
 }
 var newx = 0
+//var needShatter = true;
 
 function animate(rotation = 0) {
     TWEEN.update();
     var dist = comet.position.distanceToSquared(sphere.position)
     if (collision(dist) && rotation >= 100) {
-
-        for (var i = 0; i < earth.vertices.length-3; i += 2) {
+        for (var i = 0; i < earth.vertices.length - 3; i += 2) {
             var rand = Math.random() > 0.5 ? 1 : -1;
             //var rand = 1;
-            
+
             earth.vertices[i].x += rand * 0.005;
             earth.vertices[i].y += rand * 0.0005;
             earth.vertices[i].z += rand * 0.00005;
@@ -128,7 +128,7 @@ function animate(rotation = 0) {
             var B = earth.vertices[i + 1]
             var C = earth.vertices[i + 2]
 
-            var scale = 1 + Math.random() * 0.01;
+            var scale = 1 + Math.random() * 0.05;
             A.multiplyScalar(scale);
             B.multiplyScalar(scale);
             C.multiplyScalar(scale);
@@ -155,15 +155,15 @@ function animate(rotation = 0) {
          }
          */
 
-        comet.translateX(-0.002);
-        comet.rotation.y += 0.005;
+        comet.translateX(-0.009);
+        comet.rotation.y += 0.03;
 
     } else {
-        comet.translateX(-0.02);
+        comet.translateX(-0.009);
         //}
         //console.log(comet.position.distanceToSquared(sphere.position));
 
-        comet.rotation.y += 0.05;
+        comet.rotation.y += 0.03;
     }
     sphere.rotation.y += 0.005;
     //newx+=1;
