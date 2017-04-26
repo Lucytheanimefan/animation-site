@@ -18,10 +18,10 @@ cometScene.add(new THREE.AmbientLight(0xffffff));
 
 
 var camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 1000);
-// Place camera on x axis
-camera.position.set(4,0,0);
-camera.up = new THREE.Vector3(0,0,1);
-camera.lookAt(new THREE.Vector3(0,0,0));
+
+camera.position.set(0, .8, 1.5);
+camera.up = new THREE.Vector3(1, 1, 1);
+camera.lookAt(new THREE.Vector3(0, 0, 0));
 /*
 camera.position.z = 1.5;
 camera.position.y = 0.1;
@@ -47,7 +47,7 @@ cometScene.add(cometLight);
 var sphere = createEarth(radius, segments); //earth
 sphere.rotation.y = rotation;
 sphere.receiveShadow = true;
-scene.add(sphere)
+scene.add(sphere);
 
 var comet = createComet(cometRadius, segments);
 comet.rotation.y = rotation;
@@ -114,11 +114,11 @@ function createComet(radius, segments) {
     );
 }
 var newx = 0
-//var needShatter = true;
-
+    //var needShatter = true;
+var needsMove = true;
 function animate(rotation = 0) {
     TWEEN.update();
-    var dist = comet.position.distanceToSquared(sphere.position)
+    var dist = comet.position.distanceToSquared(sphere.position);
     if (collision(dist) && rotation >= 100) { //1000 is the golden #
         for (var i = 0; i < earth.vertices.length - 3; i += 2) {
             var rand = Math.random() > 0.5 ? 1 : -1;
@@ -128,10 +128,6 @@ function animate(rotation = 0) {
             earth.vertices[i].y += rand * 0.0005;
             earth.vertices[i].z += rand * 0.00005;
             earth.verticesNeedUpdate = true;
-            //console.log(earth.faces[i]);
-            //earth.faces[i].a +=0.05;
-            //earth.faceVertexUvs[i] += 0.005; 
-            //
             var A = earth.vertices[i + 0]
             var B = earth.vertices[i + 1]
             var C = earth.vertices[i + 2]
@@ -142,17 +138,34 @@ function animate(rotation = 0) {
             C.multiplyScalar(scale);
 
         }
-
-        comet.translateX(-0.009);
-        comet.rotation.y += 0.015//*Math.random();
-
-    } else {
-        comet.translateX(-0.009);
-        //}
-        //console.log(comet.position.distanceToSquared(sphere.position));
-
-        comet.rotation.y += 0.015//*Math.random();
     }
+    comet.translateX(-0.009);
+    //comet.rotation.y += 0.015 //*Math.random();
+        /*
+        } else {
+            comet.translateX(-0.009);
+            comet.rotation.y += 0.015 //*Math.random();
+        }
+        */
+        /*
+    var y = camera.position.y+0.001;
+    var z = camera.position.z+0.001;
+    var x = camera.position.x+0.001;
+    var b=rotation*0.001;
+    */
+        //camera.position.set(x, y, z);
+        //camera.lookAt(new THREE.Vector3(b, 0, 0));
+    comet.translateZ(0.0004);
+    
+    if (rotation >= 100 /*&& needsMove*/) {
+        needsMove=false;
+        //comet.translateZ(0.4);
+        comet.rotation.y += 0.025;
+    }else{
+        comet.rotation.y += 0.015; 
+    }
+    
+
     sphere.rotation.y += 0.005;
     //newx+=1;
     //cometLight.position.set(newx, newx, newx);
