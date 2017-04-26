@@ -19,7 +19,7 @@ cometScene.add(new THREE.AmbientLight(0xffffff));
 
 var camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 1000);
 // Place camera on x axis
-camera.position.set(0,.8,1.5);
+camera.position.set(4,0,0);
 camera.up = new THREE.Vector3(0,0,1);
 camera.lookAt(new THREE.Vector3(0,0,0));
 /*
@@ -52,8 +52,9 @@ scene.add(sphere)
 var comet = createComet(cometRadius, segments);
 comet.rotation.y = rotation;
 comet.castShadow = true;
-//comet.translateX(0.5);
+comet.translateZ(-0.5);
 cometScene.add(comet);
+
 
 var controls = new THREE.TrackballControls(camera);
 var vector = new THREE.Vector3();
@@ -118,7 +119,7 @@ var newx = 0
 function animate(rotation = 0) {
     TWEEN.update();
     var dist = comet.position.distanceToSquared(sphere.position)
-    if (collision(dist) && rotation >= 100) {
+    if (collision(dist) && rotation >= 100) { //1000 is the golden #
         for (var i = 0; i < earth.vertices.length - 3; i += 2) {
             var rand = Math.random() > 0.5 ? 1 : -1;
             //var rand = 1;
@@ -143,14 +144,14 @@ function animate(rotation = 0) {
         }
 
         comet.translateX(-0.009);
-        comet.rotation.y += 0.03//*Math.random();
+        comet.rotation.y += 0.015//*Math.random();
 
     } else {
         comet.translateX(-0.009);
         //}
         //console.log(comet.position.distanceToSquared(sphere.position));
 
-        comet.rotation.y += 0.03//*Math.random();
+        comet.rotation.y += 0.015//*Math.random();
     }
     sphere.rotation.y += 0.005;
     //newx+=1;
