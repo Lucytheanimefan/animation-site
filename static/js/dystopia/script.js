@@ -152,7 +152,7 @@ var needsMove = true;
 function animate(rotation = 0) {
     TWEEN.update();
     var dist = comet.position.distanceToSquared(sphere.position);
-    if (collision(dist) && rotation >= 1710) { //1000 is the golden #
+    if (collision(dist) && rotation >= 1700) { //1000 is the golden #
         for (var i = 0; i < earth.vertices.length - 3; i += 2) {
             var rand = Math.random() > 0.5 ? 1 : -1;
             //var rand = 1;
@@ -190,7 +190,7 @@ function animate(rotation = 0) {
     //camera.lookAt(new THREE.Vector3(b, 0, 0));
     comet.translateZ(0.0004);
 
-    if (rotation >= 1710 /*&& needsMove*/ ) {
+    if (rotation >= 1700 /*&& needsMove*/ ) {
         needsMove = false;
         //comet.translateZ(0.4);
         comet.rotation.y += 0.025;
