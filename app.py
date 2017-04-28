@@ -9,7 +9,8 @@ my_works = [{'url':'castleinblood','name':'Castle in Blood','credit':["Lucy","St
 {'url':'deathnote','name':'Death Note','credit':['Lucy'],'date':'1/9/17'},
 {'url':'chair','name':'Unravel (Tokyo Ghoul)','credit':["Lucy"],'date':'3/7/17'},
 {'url':'butterfly','name':'Butterfly','credit':["Kaijie", "Lucy"],'date':'3/16/17'},
-{'url':'flower','name':'Flower','credit':["Lucy", "Yuhao Hu (photography)"],'date':'4/6/17'}]
+{'url':'flower','name':'Flower','credit':["Lucy", "Yuhao Hu (photography)"],'date':'4/6/17'},
+{'url':'dystopia','name':'Comet','credit':["Kaijie", "Lucy"],'date':'4/28/17'}]
 
 
 
