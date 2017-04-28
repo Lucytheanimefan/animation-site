@@ -6,6 +6,11 @@ var radius = 0.2,
     segments = 32,
     rotation = 6;
 
+
+//audio
+var audio = new Audio("/static/sound/comet.mp3");
+
+
 //comet params
 var cometRadius = 0.1
 
@@ -86,6 +91,7 @@ webglEl.appendChild(renderer.domElement);
 //$("body").css("background-image","/static/img/dystopia/galaxy.png");
 //top right bottom left
 $(document).ready(function() {
+    audio.play();
     $("body").addClass("stage0");
     //$("body").addClass("stage0");
     //setTimeout(function() {
