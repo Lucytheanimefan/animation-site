@@ -11,7 +11,7 @@ body {
     /*background-color: black;*/
     overflow-y: hidden;
     overflow-x: hidden;
-    transition: background-image 4s cubic-bezier(.44, .75, .38, .73)
+    transition: background-image 8s cubic-bezier(.44, .75, .38, .73)
 }
 
 
