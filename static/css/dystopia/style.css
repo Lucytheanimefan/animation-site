@@ -1,17 +1,43 @@
-body{
-	background-image: url("/static/img/dystopia/galaxy.png");
-	background-size: cover;
-	overflow-y: hidden;
-	overflow-x: hidden;
+/* preload images (css only) -- remove if you're using a js method*/
+
+body:after {
+    display: none;
+    content: url("/static/img/dystopia/galaxy.png") url("/static/img/dystopia/reaper.png") url("/static/img/dystopia/nyc.png") url("/static/img/dystopia/greatwall.png")
 }
 
-#earth{
-	display: block;
-	margin: 0 auto;
-	width: 50%;
-	height: auto;
+body {
+    background-image: url("/static/img/dystopia/galaxy.png");
+    background-size: cover;
+    /*background-color: black;*/
+    overflow-y: hidden;
+    overflow-x: hidden;
+    transition: background-image 4s cubic-bezier(.44, .75, .38, .73)
 }
 
+
+}
+
+/* background image(s) */
+.stage0, .stage4 {
+    background-image: url("/static/img/dystopia/galaxy.png")
+}
+.stage1 {
+    background-image: url("/static/img/dystopia/nyc.png")
+}
+.stage2 {
+    background-image: url("/static/img/dystopia/greatwall.png")
+}
+.stage3 {
+    background-image: url("/static/img/dystopia/reaper.png")
+}
+
+
+#earth {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    height: auto;
+}
 #world {
     position: absolute;
     margin: auto;

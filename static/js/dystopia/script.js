@@ -47,9 +47,9 @@ camera.position.z = 1.5;
 camera.position.y = 0.1;
 */
 
-var renderer = new THREE.WebGLRenderer({ antialias: false,alpha:true });
+var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(width, height);
-renderer.setClearColor(0x000000, 0);
+renderer.setClearColor(0xffffff, 0);
 renderer.autoClear = false;
 
 var light = new THREE.DirectionalLight(0xffffff, 1);
@@ -83,15 +83,20 @@ var vector = new THREE.Vector3();
 
 webglEl.appendChild(renderer.domElement);
 
+//$("body").css("background-image","/static/img/dystopia/galaxy.png");
 //top right bottom left
 $(document).ready(function() {
+    $("body").addClass("stage0");
+    //$("body").addClass("stage0");
     //setTimeout(function() {
     //zoomEarth();
     //three_dEarth();
     //prepareExplodeEarth();
+    
     animate();
     //render();
     //}, 5000)
+    beginFadeBackground();
 
 })
 
@@ -252,7 +257,66 @@ function render() {
         //sphere.rotation.y += 0.005;
         //clouds.rotation.y += 0.0005;
         //requestAnimationFrame(render);
-    //renderer.render(backgroundScene, backgroundCamera);
+        //renderer.render(backgroundScene, backgroundCamera);
     renderer.render(cometScene, camera);
     renderer.render(scene, camera);
 }
+
+/*----------------transition background-----------*/
+
+function beginFadeBackground() {
+    /*
+    setTimeout(function(){
+        setBackground("nyc");
+    }, 2000);
+    setTimeout(function(){
+        setBackground("greatwall");
+    }, 4000);
+    */
+    /*
+    $('body').fadeIn('slow', 0.3, function() {
+        $("body").css('background-image', 'url("/static/img/dystopia/nyc.png")')
+    }).delay(3000).fadeIn('slow', 1);
+    $('body').fadeIn('slow', 0.3, function() {
+        $("body").css('background-image', 'url("/static/img/dystopia/greatwall.png")')
+    }).delay(6000).fadeIn('slow', 1);
+    */
+    var counter = 1;
+    var refreshIntervalId = setInterval(function() {
+        $("body").prop("class", "stage" + counter);
+        if (counter === 3) {
+            clearInterval(refreshIntervalId);
+            counter = 1;
+        } else {
+            counter++;
+        }
+    }, 7000);
+
+}
+
+function setBackground(imageName) {
+    var texture = THREE.ImageUtils.loadTexture('/static/img/dystopia/' + imageName + '.png');
+    var backgroundMesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(2, 2, 0),
+        new THREE.MeshBasicMaterial({
+            map: texture
+        }));
+
+    backgroundMesh.material.depthTest = false;
+    backgroundMesh.material.depthWrite = false;
+
+    backgroundScene.add(backgroundCamera);
+    backgroundScene.add(backgroundMesh);
+
+}
+
+/*
+$('#elem').fadeTo('slow', 0.3, function() {
+    $(this).css('background-image', 'url(' + $img + ')');
+}).fadeTo('slow', 1);
+With a 1 second delay:
+
+    $('#elem').fadeTo('slow', 0.3, function() {
+        $(this).css('background-image', 'url(' + $img + ')');
+    }).delay(1000).fadeTo('slow', 1);
+    */
