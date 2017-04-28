@@ -47,8 +47,9 @@ camera.position.z = 1.5;
 camera.position.y = 0.1;
 */
 
-var renderer = new THREE.WebGLRenderer();
+var renderer = new THREE.WebGLRenderer({ antialias: false,alpha:true });
 renderer.setSize(width, height);
+renderer.setClearColor(0x000000, 0);
 renderer.autoClear = false;
 
 var light = new THREE.DirectionalLight(0xffffff, 1);
@@ -251,7 +252,7 @@ function render() {
         //sphere.rotation.y += 0.005;
         //clouds.rotation.y += 0.0005;
         //requestAnimationFrame(render);
-    renderer.render(backgroundScene, backgroundCamera);
+    //renderer.render(backgroundScene, backgroundCamera);
     renderer.render(cometScene, camera);
     renderer.render(scene, camera);
 }

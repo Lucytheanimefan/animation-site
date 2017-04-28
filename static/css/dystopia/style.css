@@ -1,5 +1,6 @@
 body{
-	background-color: black;
+	background-image: url("/static/img/dystopia/galaxy.png");
+	background-size: cover;
 	overflow-y: hidden;
 	overflow-x: hidden;
 }
