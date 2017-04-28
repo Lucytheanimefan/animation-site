@@ -9,6 +9,26 @@ var radius = 0.2,
 //comet params
 var cometRadius = 0.1
 
+//background scene
+
+// Load the background texture
+var texture = THREE.ImageUtils.loadTexture('/static/img/dystopia/galaxy.png');
+var backgroundMesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(2, 2, 0),
+    new THREE.MeshBasicMaterial({
+        map: texture
+    }));
+
+backgroundMesh.material.depthTest = false;
+backgroundMesh.material.depthWrite = false;
+
+// Create your background scene
+var backgroundScene = new THREE.Scene();
+var backgroundCamera = new THREE.Camera();
+backgroundScene.add(backgroundCamera);
+backgroundScene.add(backgroundMesh);
+
+
 var scene = new THREE.Scene();
 scene.add(new THREE.AmbientLight(0x333333));
 
@@ -116,6 +136,7 @@ function createComet(radius, segments) {
 var newx = 0
     //var needShatter = true;
 var needsMove = true;
+
 function animate(rotation = 0) {
     TWEEN.update();
     var dist = comet.position.distanceToSquared(sphere.position);
@@ -141,30 +162,30 @@ function animate(rotation = 0) {
     }
     comet.translateX(-0.009);
     //comet.rotation.y += 0.015 //*Math.random();
-        /*
-        } else {
-            comet.translateX(-0.009);
-            comet.rotation.y += 0.015 //*Math.random();
-        }
-        */
-        /*
+    /*
+    } else {
+        comet.translateX(-0.009);
+        comet.rotation.y += 0.015 //*Math.random();
+    }
+    */
+    /*
     var y = camera.position.y+0.001;
     var z = camera.position.z+0.001;
     var x = camera.position.x+0.001;
     var b=rotation*0.001;
     */
-        //camera.position.set(x, y, z);
-        //camera.lookAt(new THREE.Vector3(b, 0, 0));
+    //camera.position.set(x, y, z);
+    //camera.lookAt(new THREE.Vector3(b, 0, 0));
     comet.translateZ(0.0004);
-    
-    if (rotation >= 1000 /*&& needsMove*/) {
-        needsMove=false;
+
+    if (rotation >= 1000 /*&& needsMove*/ ) {
+        needsMove = false;
         //comet.translateZ(0.4);
         comet.rotation.y += 0.025;
-    }else{
-        comet.rotation.y += 0.015; 
+    } else {
+        comet.rotation.y += 0.015;
     }
-    
+
 
     sphere.rotation.y += 0.005;
     //newx+=1;
@@ -230,6 +251,7 @@ function render() {
         //sphere.rotation.y += 0.005;
         //clouds.rotation.y += 0.0005;
         //requestAnimationFrame(render);
+    renderer.render(backgroundScene, backgroundCamera);
     renderer.render(cometScene, camera);
     renderer.render(scene, camera);
 }
