@@ -8,9 +8,11 @@ var radius = 0.2,
 
 
 //audio
-var audio = new Audio("/static/sound/comet.mp3");
+var myAudio = new Audio("/static/sound/comet.mp3");
 
-
+myAudio.onended=function(){
+    clearInterval(rotation_animation);
+}
 //comet params
 var cometRadius = 0.1
 
@@ -91,14 +93,14 @@ webglEl.appendChild(renderer.domElement);
 //$("body").css("background-image","/static/img/dystopia/galaxy.png");
 //top right bottom left
 $(document).ready(function() {
-    audio.play();
+    myAudio.play();
     $("body").addClass("stage0");
     //$("body").addClass("stage0");
     //setTimeout(function() {
     //zoomEarth();
     //three_dEarth();
     //prepareExplodeEarth();
-    
+
     animate();
     //render();
     //}, 5000)
@@ -148,6 +150,8 @@ function createComet(radius, segments) {
 var newx = 0
     //var needShatter = true;
 var needsMove = true;
+var expandRotation = false;
+var startTransZ = 0.0004;
 
 function animate(rotation = 0) {
     TWEEN.update();
@@ -172,25 +176,17 @@ function animate(rotation = 0) {
 
         }
     }
-    comet.translateX(-0.009);
-    //comet.rotation.y += 0.015 //*Math.random();
-    /*
+    if (expandRotation) {
+        comet.translateZ(0.000004);
+        comet.translateX(-0.0001);
+        comet.rotation.y += 0.001;
+
     } else {
         comet.translateX(-0.009);
-        comet.rotation.y += 0.015 //*Math.random();
-    }
-    */
-    /*
-    var y = camera.position.y+0.001;
-    var z = camera.position.z+0.001;
-    var x = camera.position.x+0.001;
-    var b=rotation*0.001;
-    */
-    //camera.position.set(x, y, z);
-    //camera.lookAt(new THREE.Vector3(b, 0, 0));
-    comet.translateZ(0.0004);
 
-    if (rotation >= 1700 /*&& needsMove*/ ) {
+        comet.translateZ(0.0004);
+    }
+    if (rotation >= 1700 /*&& needsMove*/ && !expandRotation) {
         needsMove = false;
         //comet.translateZ(0.4);
         comet.rotation.y += 0.025;
@@ -200,11 +196,8 @@ function animate(rotation = 0) {
 
 
     sphere.rotation.y += 0.005;
-    //newx+=1;
-    //cometLight.position.set(newx, newx, newx);
-    //camera.zoom += 0.001;
     camera.updateProjectionMatrix();
-    window["rotation"] = requestAnimationFrame(function() {
+    window["rotation_animation"] = requestAnimationFrame(function() {
         rotation++;
         animate(rotation);
     });
@@ -292,6 +285,10 @@ function beginFadeBackground() {
         $("body").prop("class", "stage" + counter);
         if (counter === 3) {
             clearInterval(refreshIntervalId);
+            setTimeout(function() {
+                expandRotation = true;
+            }, 1500);
+
             counter = 1;
         } else {
             counter++;
