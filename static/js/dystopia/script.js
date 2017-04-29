@@ -10,10 +10,13 @@ var radius = 0.2,
 //audio
 var myAudio = new Audio("/static/sound/comet.mp3");
 
-myAudio.onended=function(){
-    clearInterval(rotation_animation);
+myAudio.onended = function() {
+    setTimeout(function() {
+        clearInterval(rotation_animation);
+    }, 7000);
+
 }
-//comet params
+
 var cometRadius = 0.1
 
 //background scene
@@ -177,8 +180,8 @@ function animate(rotation = 0) {
         }
     }
     if (expandRotation) {
-        comet.translateZ(0.000004);
-        comet.translateX(-0.0001);
+        comet.translateZ(0.0001);
+        comet.translateX(-0.00225);
         comet.rotation.y += 0.001;
 
     } else {
@@ -197,7 +200,7 @@ function animate(rotation = 0) {
 
     sphere.rotation.y += 0.005;
     camera.updateProjectionMatrix();
-    window["rotation_animation"] = requestAnimationFrame(function() {
+    rotation_animation = requestAnimationFrame(function() {
         rotation++;
         animate(rotation);
     });
