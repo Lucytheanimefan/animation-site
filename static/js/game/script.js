@@ -40,8 +40,8 @@ function init() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     container.innerHTML = "";
     container.appendChild(renderer.domElement);
-    stats = new Stats();
-    container.appendChild(stats.dom);
+    //stats = new Stats();
+    //container.appendChild(stats.dom);
     //
     window.addEventListener('resize', onWindowResize, false);
 }
@@ -90,7 +90,7 @@ function generateTexture(data, width, height) {
         vector3.z = data[j - width * 2] - data[j + width * 2];
         vector3.normalize();
         shade = vector3.dot(sun);
-        imageData[i] = (96 + shade * 128) * (0.5 + data[j] * 0.007);
+        imageData[i] = (96 + shade * 50) * (0.5 + data[j] * 0.007);
         imageData[i + 1] = (32 + shade * 96) * (0.5 + data[j] * 0.007);
         imageData[i + 2] = (shade * 96) * (0.5 + data[j] * 0.007);
     }
@@ -117,7 +117,7 @@ function generateTexture(data, width, height) {
 function animate() {
     requestAnimationFrame(animate);
     render();
-    stats.update();
+    //stats.update();
 }
 
 function render() {
