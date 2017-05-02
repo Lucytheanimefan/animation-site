@@ -290,7 +290,7 @@ function beginFadeBackground() {
             clearInterval(refreshIntervalId);
             setTimeout(function() {
                 expandRotation = true;
-            }, 1500);
+            }, 2000);
 
             counter = 1;
         } else {
