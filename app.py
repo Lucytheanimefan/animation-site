@@ -64,13 +64,10 @@ def chair():
 def diary():
 	return render_template("anime/index.html")
 
-@app.route("/dystopia")
-def vish():
-	return render_template("dystopia/index.html")
+@app.route("/game")
+def game():
+	return render_template("game/index.html")
 
-@app.route("/lol", methods=["GET"])
-def lol():
-	return send_from_directory(app.static_folder, "lol.txt")
 
 
 
