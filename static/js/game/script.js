@@ -10,9 +10,15 @@ var worldWidth = 256,
     worldHalfWidth = worldWidth / 2,
     worldHalfDepth = worldDepth / 2;
 var clock = new THREE.Clock();
-init();
-animate();
+var myImage = new Image();
+myImage.src = "/static/img/dystopia/galaxy.png";
+console.log(myImage);
+myImage.onload = function() {
+    console.log("LOaded");
+    init();
+    animate();
 
+}
 
 function init() {
     container = document.getElementById('container');
@@ -80,20 +86,25 @@ function generateTexture(data, width, height) {
     canvas.width = width;
     canvas.height = height;
     context = canvas.getContext('2d');
-    context.fillStyle = '#000';
-    context.fillRect(0, 0, width, height);
+    //context.fillStyle = '#000';
+    //context.fillRect(0, 0, width, height);
+    context.drawImage(myImage, 0, 0, myImage.width, myImage.height, 0, 0, width, height);
     image = context.getImageData(0, 0, canvas.width, canvas.height);
     imageData = image.data;
+    console.log(imageData);
+
     for (var i = 0, j = 0, l = imageData.length; i < l; i += 4, j++) {
         vector3.x = data[j - 2] - data[j + 2];
         vector3.y = 2;
         vector3.z = data[j - width * 2] - data[j + width * 2];
         vector3.normalize();
         shade = vector3.dot(sun);
-        imageData[i] = (96 + shade * 50) * (0.5 + data[j] * 0.007);
-        imageData[i + 1] = (32 + shade * 96) * (0.5 + data[j] * 0.007);
-        imageData[i + 2] = (shade * 96) * (0.5 + data[j] * 0.007);
+        //imageData[i] = (96 + shade * 96) * (0.5 + data[j] * 0.007);
+        //imageData[i + 1] = (32 + shade * 96) * (0.5 + data[j] * 0.007);
+        //imageData[i + 2] = (shade * 96) * (0.5 + data[j] * 0.007);
+        imageData[i + 3] = (shade * 50) * (0.5 + data[j] * 0.007);
     }
+
     context.putImageData(image, 0, 0);
     // Scaled 4x
     canvasScaled = document.createElement('canvas');
@@ -104,6 +115,7 @@ function generateTexture(data, width, height) {
     context.drawImage(canvas, 0, 0);
     image = context.getImageData(0, 0, canvasScaled.width, canvasScaled.height);
     imageData = image.data;
+
     for (var i = 0, l = imageData.length; i < l; i += 4) {
         var v = ~~(Math.random() * 5);
         imageData[i] += v;
@@ -112,6 +124,7 @@ function generateTexture(data, width, height) {
     }
     context.putImageData(image, 0, 0);
     return canvasScaled;
+
 }
 //
 function animate() {
