@@ -43,17 +43,17 @@ function animateLines(reqID, context, coordinates, width = 1, color = "black", o
     setLine(context, i, coordinates, width, color, opacity);
     i += 1;
 
-    if (i > (coordinates.length-1)) {
+    if (i > (coordinates.length - 1)) {
         //console.log("greater than")
         if (callback) {
             //console.log("Callback!")
             callback();
         }
-        cancelAnimationFrame(window["requestID"+reqID]);
+        cancelAnimationFrame(window["requestID" + reqID]);
         //console.log("Cancel animateLInes")
 
     } else {
-        window["requestID"+reqID] = requestAnimationFrame(function() {
+        window["requestID" + reqID] = requestAnimationFrame(function() {
             animateLines(reqID, context, coordinates, width, color, opacity, i, callback);
         });
     }
@@ -92,7 +92,7 @@ function generateCoordinates(start, end, step = 1, horizontal, extraCoord) {
  * @param  {Object} startEnd {"start":[x,y],"end":[x1,y1]}
  * @return {[type]}          [description]
  */
-function generateDiagonalCoordinates(startEnd, step = 1) {
+function generateDiagonalCoordinates(startEnd, step = 1, keepXEnd = true, keepYEnd=true) {
 
     var start = startEnd["start"];
     var end = startEnd["end"];
@@ -109,7 +109,7 @@ function generateDiagonalCoordinates(startEnd, step = 1) {
     } else {
         addY = -step;
     }
-    while (newX != end[0] && newY != end[1]) {
+    while ((newX != end[0] && keepXEnd) && (newY != end[1]) && keepYEnd) {
         newX = newX + addX;
         newY = newY + addY;
         coords.push([newX, newY]);

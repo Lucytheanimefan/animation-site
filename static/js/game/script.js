@@ -18,20 +18,31 @@ console.log(myImage);
 
 
 $(document).ready(function() {
-    create3DWorld();
+    //create3DWorld();
+    create2DWorld();
+    mouseDown2DWorld();
 })
 
 function create2DWorld() {
-    container = $("container");
-    container.append("<canvas id='2Dworld'>");
+    container = $("#container");
+    container.append("<canvas id='2Dworld'></canvas>");
     canvas = document.getElementById("2Dworld");
-    context = canvas.getContext("2D");
+    context = canvas.getContext("2d");
+    console.log(context)
 }
 
+var start=0;
+var end=20;
 function mouseDown2DWorld() {
     $(document).mousedown(function() {
-    	context.
+    	animateLines("mouse", context, generateCoordinates(start, end, 1, true, 50)) 
     })
+    $(document).mouseup(function() {
+    	start = start+20;
+    	end = end+20;
+    	cancelAnimationFrame(["mousedownID"])
+    })
+
 }
 
 
