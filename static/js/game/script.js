@@ -5,28 +5,53 @@ if (!Detector.webgl) {
 var container, stats;
 var camera, controls, scene, renderer;
 var mesh, texture;
+var directionalLight;
 var worldWidth = 256,
     worldDepth = 256,
     worldHalfWidth = worldWidth / 2,
     worldHalfDepth = worldDepth / 2;
+
 var clock = new THREE.Clock();
 var myImage = new Image();
 myImage.src = "/static/img/dystopia/galaxy.png";
 console.log(myImage);
-myImage.onload = function() {
-    console.log("LOaded");
-    init();
-    animate();
 
+
+$(document).ready(function() {
+    create3DWorld();
+})
+
+function create2DWorld() {
+    container = $("container");
+    container.append("<canvas id='2Dworld'>");
+    canvas = document.getElementById("2Dworld");
+    context = canvas.getContext("2D");
+}
+
+function mouseDown2DWorld() {
+    $(document).mousedown(function() {
+    	context.
+    })
+}
+
+
+function create3DWorld() {
+    myImage.onload = function() {
+        console.log("LOaded");
+        init();
+        animate();
+    }
 }
 
 function init() {
     container = document.getElementById('container');
+    //directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
     camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 20000);
     scene = new THREE.Scene();
     controls = new THREE.FirstPersonControls(camera);
-    controls.movementSpeed = 1000;
+    controls.movementSpeed = 10;
     controls.lookSpeed = 0.1;
+    //controls.noFly = true;
     data = generateHeight(worldWidth, worldDepth);
     camera.position.y = data[worldHalfWidth + worldHalfDepth * worldWidth] * 10 + 500;
     var geometry = new THREE.PlaneBufferGeometry(7500, 7500, worldWidth - 1, worldDepth - 1);
@@ -40,6 +65,7 @@ function init() {
     texture.wrapT = THREE.ClampToEdgeWrapping;
     mesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ map: texture }));
     scene.add(mesh);
+    //scene.add(directionalLight);
     renderer = new THREE.WebGLRenderer();
     renderer.setClearColor(0xbfd1e5);
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -102,7 +128,9 @@ function generateTexture(data, width, height) {
         //imageData[i] = (96 + shade * 96) * (0.5 + data[j] * 0.007);
         //imageData[i + 1] = (32 + shade * 96) * (0.5 + data[j] * 0.007);
         //imageData[i + 2] = (shade * 96) * (0.5 + data[j] * 0.007);
-        imageData[i + 3] = (shade * 50) * (0.5 + data[j] * 0.007);
+        imageData[i + 3] = 90 * Math.abs(shade); //(shade * 50) * (0.5 + data[j] * 0.007);
+        //console.log(Math.abs(shade));
+        //console.log(shade);
     }
 
     context.putImageData(image, 0, 0);

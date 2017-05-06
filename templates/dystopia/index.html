@@ -18,9 +18,10 @@
 <!--js-->
 {% block scripts %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/lib/three.min.js') }}"></script>
-<script src="http://threejs.org/examples/js/modifiers/ExplodeModifier.js"></script> 
+<!--<script src="http://threejs.org/examples/js/modifiers/ExplodeModifier.js"></script> -->
 <script type="text/javascript" src="{{ url_for('static', filename='js/lib/TrackballControls.js') }}"></script>
-<script src="http://threejs.org/examples/js/libs/tween.min.js"></script> 
+<script type="text/javascript" src="{{ url_for('static', filename='js/lib/ExplodeModifier.js') }}"></script>
+<!--<script src="http://threejs.org/examples/js/lib/tween.min.js"></script> -->
 <script type="text/javascript" src="{{ url_for('static', filename='js/dystopia/script.js') }}"></script>
 <!--<script type="text/javascript" src="{{ url_for('static', filename='js/dystopia/ribbon.js') }}"></script>-->
 {% endblock %}

@@ -1,8 +1,16 @@
 import os
 from flask import Flask, render_template,send_from_directory, jsonify
+#from flask_assets import Environment, Bundle
 import requests
 
 app = Flask(__name__)
+'''
+assets = Environment(app)
+
+js = Bundle('/js/lib/jquery.js', 'base.js', 'widgets.js',
+            filters='jsmin', output='gen/packed.js')
+assets.register('js_all', js)
+'''
 
 my_works = [{'url':'castleinblood','name':'Castle in Blood','credit':["Lucy","Stephanie"],'date':'12/31/16'},
 {'url':'chapel_entrance','name':'Chapel in Light','credit':["Lucy", "Yuhao Hu (photography)"],'date':'2/22/17'},

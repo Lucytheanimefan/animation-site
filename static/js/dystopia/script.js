@@ -157,7 +157,7 @@ var expandRotation = false;
 var startTransZ = 0.0004;
 
 function animate(rotation = 0) {
-    TWEEN.update();
+    //TWEEN.update();
     var dist = comet.position.distanceToSquared(sphere.position);
     if (collision(dist) && rotation >= 1700) { //1000 is the golden #
         for (var i = 0; i < earth.vertices.length - 3; i += 2) {
