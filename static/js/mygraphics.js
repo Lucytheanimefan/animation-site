@@ -115,7 +115,7 @@ function generateDiagonalCoordinates(startEnd, step = 1, keepXEnd = true, keepYE
         coords.push([newX, newY]);
 
     }
-    console.log(coords);
+    //console.log(coords);
     return coords;
 
 }
