@@ -1,5 +1,4 @@
 body {
     background-image: url('/static/img/game/2dbackground.png');
-    background-position: right bottom; /*Positioning*/
-    /*background-repeat: no-repeat; */
+    background-repeat: no-repeat;
 }
