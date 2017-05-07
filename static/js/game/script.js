@@ -23,13 +23,7 @@ $(document).ready(function() {
     mouseDown2DWorld();
 })
 
-function create2DWorld() {
-    container = $("#container");
-    container.append("<canvas id='2Dworld'></canvas>");
-    canvas = document.getElementById("2Dworld");
-    context = canvas.getContext("2d");
-    console.log(context)
-}
+
 
 var background_xpos = 0;
 var speed = 1;
@@ -38,7 +32,7 @@ function mouseDown2DWorld() {
     $(document).keydown(function(e) {
         switch (e.which) {
             case 37: // left
-                if ((background_xpos+speed) < 0) {
+                if ((background_xpos + speed) < 0) {
                     background_xpos += speed;
                     $('body').css('background-position', background_xpos + 'px 0');
                     speed += 1;
@@ -66,7 +60,85 @@ function mouseDown2DWorld() {
 
 }
 
+//animation sprite images penguins
+container = $("#container");
+container.append("<canvas id='penguins'></canvas>");
+canvas = document.getElementById("penguins");
+canvas.width = 400;
+canvas.height = 400;
+var penguins = new Image();
+penguins.src = "/static/img/game/penguins.png";
 
+
+function gameLoop() {
+
+    window.requestAnimationFrame(gameLoop);
+
+    penguin.update();
+    penguin.render();
+}
+
+function sprite(options) {
+
+    var that = {},
+        frameIndex = 0,
+        tickCount = 0,
+        ticksPerFrame = options.ticksPerFrame || 0,
+        numberOfFrames = options.numberOfFrames || 1;
+
+    that.context = options.context;
+    that.width = options.width;
+    that.height = options.height;
+    that.image = options.image;
+
+    that.update = function() {
+        tickCount += 1;
+        if (tickCount > ticksPerFrame) {
+            tickCount = 0;
+            // If the current frame index is in range
+            if (frameIndex < numberOfFrames - 1) {
+                // Go to the next frame
+                frameIndex += 1;
+            } else {
+                frameIndex = 0;
+            }
+        }
+    };
+
+    that.render = function() {
+        // Clear the canvas
+        that.context.clearRect(0, 0, that.width, that.height);
+        // Draw the animation
+        that.context.drawImage(
+            that.image,
+            frameIndex * that.width / numberOfFrames,
+            0,
+            that.width / numberOfFrames,
+            that.height,
+            0,
+            0,
+            that.width / numberOfFrames,
+            that.height);
+    };
+    return that;
+}
+
+var penguin = sprite({
+    context: canvas.getContext("2d"),
+    width: 2400,
+    height: 400,
+    image: penguins,
+    numberOfFrames: 6,
+    ticksPerFrame: 4
+})
+
+// Load sprite sheet
+penguins.addEventListener("load", gameLoop);
+//coinImage.src = "images/coin-sprite-animation.png";
+
+
+
+/*--------------3d-------------------*/
 function create3DWorld() {
     myImage.onload = function() {
         console.log("LOaded");
