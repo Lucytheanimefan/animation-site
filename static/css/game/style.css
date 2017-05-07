@@ -1,4 +1,24 @@
 body {
     background-image: url('/static/img/game/2dbackground.png');
     background-repeat: no-repeat;
+    min-width: 400px;
+}
+
+#main{
+	text-align: center;
+	margin: 0 auto;
+}
+
+#container{
+	position: absolute;
+	z-index: -1;
+	/*background-image: url('/static/img/game/2dbackground.png');*/
+}
+
+canvas{
+	z-index: 1;
+}
+
+#penguins{
+	margin-top: 140px;
 }
