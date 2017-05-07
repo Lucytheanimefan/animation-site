@@ -19,7 +19,7 @@ console.log(myImage);
 
 $(document).ready(function() {
     //create3DWorld();
-    create2DWorld();
+    //create2DWorld();
     mouseDown2DWorld();
 })
 
@@ -31,17 +31,38 @@ function create2DWorld() {
     console.log(context)
 }
 
-var start=0;
-var end=20;
+var background_xpos = 0;
+var speed = 1;
+
 function mouseDown2DWorld() {
-    $(document).mousedown(function() {
-    	animateLines("mouse", context, generateCoordinates(start, end, 1, true, 50)) 
-    })
-    $(document).mouseup(function() {
-    	start = start+20;
-    	end = end+20;
-    	cancelAnimationFrame(["mousedownID"])
-    })
+    $(document).keydown(function(e) {
+        switch (e.which) {
+            case 37: // left
+                if ((background_xpos+speed) < 0) {
+                    background_xpos += speed;
+                    $('body').css('background-position', background_xpos + 'px 0');
+                    speed += 1;
+                }
+            case 38: // up
+                break;
+
+            case 39: // right
+                console.log("Speed: " + speed);
+                background_xpos -= speed;
+                $('body').css('background-position', background_xpos + 'px 0');
+                speed += 1;
+            case 40: // down
+                break;
+
+            default:
+                return; // exit this handler for other keys
+        }
+        e.preventDefault(); // prevent the default action (scroll / move caret)
+    });
+    $(document).keyup(function(e) {
+        speed = 1;
+        e.preventDefault(); // prevent the default action (scroll / move caret)
+    });
 
 }
 
