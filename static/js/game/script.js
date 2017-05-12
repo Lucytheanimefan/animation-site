@@ -1,6 +1,18 @@
 var penguinWalkIsPaused = false;
 var screenWidth = Math.round($(document).width());
+//animation sprite images penguins
+container = $("#container");
+container.append("<canvas id='penguins'></canvas>");
+canvas = document.getElementById("penguins");
+canvas.width = 400;
+canvas.height = 237;
+ctx = canvas.getContext("2d");
+var penguins = new Image();
+penguins.src = "/static/img/game/penguins.png";
 
+var penguinWalk;
+
+var brickSequence = ["AoTWall"];
 
 $(document).ready(function() {
     //create3DWorld();
@@ -11,8 +23,6 @@ $(document).ready(function() {
 var background_xpos = 0;
 var speed = 1;
 
-
-
 function mouseDown2DWorld() {
     $(document).keydown(function(e) {
         penguinWalkIsPaused = false;
@@ -20,9 +30,7 @@ function mouseDown2DWorld() {
         var penguin_x_pos = $("#container").position().left + $("#container").width() - 100; //100 offset of penguin width
         console.log(penguin_x_pos + "," + screenWidth);
         if (Math.abs(penguin_x_pos - screenWidth) < 15) {
-            console.log("Update bricks!");
-            $("#container").css("left", 0 + "px");
-            background_xpos = 0;
+            updateBricks();
         }
         switch (e.which) {
             case 37: // left
@@ -59,21 +67,16 @@ function mouseDown2DWorld() {
         speed = 1;
         e.preventDefault(); // prevent the default action (scroll / move caret)
     });
-
-
 }
 
-//animation sprite images penguins
-container = $("#container");
-container.append("<canvas id='penguins'></canvas>");
-canvas = document.getElementById("penguins");
-canvas.width = 400;
-canvas.height = 237;
-ctx = canvas.getContext("2d");
-var penguins = new Image();
-penguins.src = "/static/img/game/penguins.png";
+function updateBricks() {
+    $("#container").css("left", 0 + "px");
+    background_xpos = 0;
+    //add bricks
+    var newBrick = brickSequence.shift();
+    $("body").append("<img class='brick' id = '"+newBrick+"'src='/static/img/game/"+newBrick+".png'>");
 
-var penguinWalk;
+}
 
 function gameLoop() {
     penguinWalk = window.requestAnimationFrame(gameLoop);
