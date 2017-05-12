@@ -1,24 +1,36 @@
+html {
+    height: 100%;
+}
+
 body {
-    background-image: url('/static/img/game/background.png');
-    background-repeat: repeat-x;
+    min-height: 100%;
+    min-width: 1280;
+}
+
+body {
+    background: url('/static/img/game/background.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
+    height: 100%;
 }
 
-#main{
-	text-align: center;
-	margin: 0 auto;
+#main {
+    text-align: center;
+    margin: 0 auto;
 }
 
-#container{
-	position: absolute;
-	z-index: -1;
-	/*background-image: url('/static/img/game/2dbackground.png');*/
+#container {
+    position: absolute;
+    z-index: -1;
+    /*background-image: url('/static/img/game/2dbackground.png');*/
 }
 
-canvas{
-	z-index: 1;
+canvas {
+    z-index: 1;
 }
 
-#penguins{
-	margin-top: 140px;
+#penguins {
+    margin-top: 140px;
 }
