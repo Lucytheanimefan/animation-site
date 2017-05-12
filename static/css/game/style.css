@@ -9,18 +9,23 @@ body {
 }
 
 #main {
-    text-align: center;
+
+	position: relative;
     margin: 0 auto;
+    min-height: 600px;
+    height:100vh;
 }
 
 #container {
     position: absolute;
     z-index: 1;
-    /*background-image: url('/static/img/game/2dbackground.png');*/
 }
 
 .brick{
+	max-height: 300px;
+	position: absolute;
 	z-index: -1; 
+	bottom: 0;
 }
 
 #penguins {

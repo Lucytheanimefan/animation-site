@@ -73,9 +73,12 @@ function updateBricks() {
     $("#container").css("left", 0 + "px");
     background_xpos = 0;
     //add bricks
-    var newBrick = brickSequence.shift();
-    $("body").append("<img class='brick' id = '"+newBrick+"'src='/static/img/game/"+newBrick+".png'>");
-
+    if (brickSequence.length < 1) {
+        console.log("no more bricks")
+    } else {
+        var newBrick = brickSequence.shift();
+        $("#main").append("<img class='brick' id = '" + newBrick + "'src='/static/img/game/" + newBrick + ".png'>");
+    }
 }
 
 function gameLoop() {
