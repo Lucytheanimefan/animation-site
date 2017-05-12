@@ -1,4 +1,6 @@
 var penguinWalkIsPaused = false;
+var screenWidth = Math.round($(document).width());
+
 
 $(document).ready(function() {
     //create3DWorld();
@@ -13,21 +15,36 @@ var speed = 1;
 
 function mouseDown2DWorld() {
     $(document).keydown(function(e) {
+        penguinWalkIsPaused = false;
+
+        var penguin_x_pos = $("#container").position().left + $("#container").width() - 100; //100 offset of penguin width
+        console.log(penguin_x_pos + "," + screenWidth);
+        if (Math.abs(penguin_x_pos - screenWidth) < 15) {
+            console.log("Update bricks!");
+            $("#container").css("left", 0 + "px");
+            background_xpos = 0;
+        }
         switch (e.which) {
             case 37: // left
-                if ((background_xpos + speed) < 0) {
-                    background_xpos += speed;
-                    $('body').css('background-position', background_xpos + 'px 0');
-                    speed += 1;
+                if ((background_xpos - speed) > 0) {
+                    background_xpos -= speed;
+                    //$('body').css('background-position', background_xpos + 'px 0');
+                    $("#container").css("left", background_xpos + "px");
+                    if (speed < 15) {
+                        speed += 1;
+                    }
                 }
             case 38: // up
                 break;
 
             case 39: // right
                 console.log("Speed: " + speed);
-                background_xpos -= speed;
-                $('body').css('background-position', background_xpos + 'px 0');
-                speed += 1;
+                background_xpos += speed;
+                $("#container").css("left", background_xpos + "px");
+                //$('body').css('background-position', background_xpos + 'px 0');
+                if (speed < 15) {
+                    speed += 1;
+                }
             case 40: // down
                 break;
 
@@ -38,11 +55,11 @@ function mouseDown2DWorld() {
     });
     $(document).keyup(function(e) {
         //cancelAnimationFrame(penguinWalk);
-        penguinWalkIsPaused = !penguinWalkIsPaused;
+        penguinWalkIsPaused = true;
         speed = 1;
         e.preventDefault(); // prevent the default action (scroll / move caret)
     });
-    
+
 
 }
 
