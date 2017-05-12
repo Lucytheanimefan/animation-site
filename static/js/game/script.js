@@ -1,3 +1,5 @@
+var penguinWalkIsPaused = false;
+
 $(document).ready(function() {
     //create3DWorld();
     //create2DWorld();
@@ -7,9 +9,7 @@ $(document).ready(function() {
 var background_xpos = 0;
 var speed = 1;
 
-function create2DBackground(){
-    $("#background").append("<img id='' src='/static/img/game/2dbackground.png'>")
-}
+
 
 function mouseDown2DWorld() {
     $(document).keydown(function(e) {
@@ -37,9 +37,12 @@ function mouseDown2DWorld() {
         e.preventDefault(); // prevent the default action (scroll / move caret)
     });
     $(document).keyup(function(e) {
+        //cancelAnimationFrame(penguinWalk);
+        penguinWalkIsPaused = !penguinWalkIsPaused;
         speed = 1;
         e.preventDefault(); // prevent the default action (scroll / move caret)
     });
+    
 
 }
 
@@ -53,11 +56,14 @@ ctx = canvas.getContext("2d");
 var penguins = new Image();
 penguins.src = "/static/img/game/penguins.png";
 
+var penguinWalk;
 
 function gameLoop() {
-    window.requestAnimationFrame(gameLoop);
-    penguin.update();
-    penguin.render();
+    penguinWalk = window.requestAnimationFrame(gameLoop);
+    if (!penguinWalkIsPaused) {
+        penguin.update();
+        penguin.render();
+    }
 }
 
 function sprite(options) {
@@ -116,6 +122,3 @@ var penguin = sprite({
 // Load sprite sheet
 penguins.addEventListener("load", gameLoop);
 //coinImage.src = "images/coin-sprite-animation.png";
-
-
-
