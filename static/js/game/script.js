@@ -14,7 +14,7 @@ penguins.src = "/static/img/game/penguins.png";
 
 var penguinWalk;
 
-var brickSequence = ["brickWall", "AoTWall"];
+var brickSequence = ["brickwall", "AoTWall"];
 
 $(document).ready(function() {
     //create3DWorld();
