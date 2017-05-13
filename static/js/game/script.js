@@ -25,7 +25,8 @@ $(document).ready(function() {
 
 var background_xpos = 0;
 var main_xpos = 0;
-var speed = 1;
+var background_speed = 1;
+var penguin_speed = 0.5;
 
 function mouseDown2DWorld() {
     $(document).keydown(function(e) {
@@ -33,33 +34,44 @@ function mouseDown2DWorld() {
 
         var penguin_x_pos = $("#container").position().left + $("#container").width() - 100; //100 offset of penguin width
         //console.log(penguin_x_pos + "," + screenWidth);
-        if (Math.abs(penguin_x_pos - screenWidth) < 15) {
+        if (Math.abs(penguin_x_pos - screenWidth) < 500) {
             updateBricks();
         }
         switch (e.which) {
             case 37: // left
-                if ((background_xpos + speed) < 0) {
+                if ((background_xpos + background_speed) < 0) {
                     background_xpos += speed;
-                    main_xpos -= speed;
+                    main_xpos -= penguin_speed;
                     $('body').css('background-position', background_xpos + 'px 0');
-                    $(".brick").css('left',background_xpos+"px");
+                    $(".brick").each(function(i) {
+                            $(this).css("left", $(this).position().left + background_speed);
+                        })
+                        //$(".brick").css('left', background_xpos + "px");
                     $("#container").css("left", main_xpos + "px");
-                    if (speed < 15) {
-                        speed += 1;
+                    if (background_speed < 15) {
+                        background_speed += 1;
+                        penguin_speed += 0.5;
                     }
                 }
             case 38: // up
                 break;
 
             case 39: // right
-                console.log("Speed: " + speed);
-                background_xpos -= speed;
-                main_xpos += speed;
+                background_xpos -= background_speed;
+                main_xpos += penguin_speed;
                 $("#container").css("left", main_xpos + "px");
-                $(".brick").css('left',background_xpos+"px");
+                var offScreen = main_xpos>$("body").width();
+                if (offScreen){
+                    main_xpos = 0;
+                }
+                //$(".brick").css('left', background_xpos + "px");
+                $(".brick").each(function(i) {
+                    $(this).css("left", $(this).position().left - background_speed);
+                })
                 $('body').css('background-position', background_xpos + 'px 0');
-                if (speed < 15) {
-                    speed += 1;
+                if (background_speed < 15) {
+                    background_speed += 1;
+                    penguin_speed += 0.5;
                 }
             case 40: // down
                 break;
@@ -72,7 +84,8 @@ function mouseDown2DWorld() {
     $(document).keyup(function(e) {
         //cancelAnimationFrame(penguinWalk);
         penguinWalkIsPaused = true;
-        speed = 1;
+        background_speed = 1;
+        penguin_speed = 0.5;
         e.preventDefault(); // prevent the default action (scroll / move caret)
     });
 }
@@ -86,9 +99,9 @@ function updateBricks() {
     if (brickSequence.length < 1) {
         console.log("no more bricks")
     } else {
-
         var newBrick = brickSequence.shift();
         $("#main").append("<img class='brick' id = '" + newBrick + "'src='/static/img/game/" + newBrick + ".png'>");
+        $("#" + newBrick).css("left", main_xpos + "px");
     }
 }
 
