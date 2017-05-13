@@ -4,20 +4,23 @@ var screenWidth = Math.round($(document).width());
 container = $("#container");
 container.append("<canvas id='penguins'></canvas>");
 canvas = document.getElementById("penguins");
+var penguinHeight = 237;
 canvas.width = 400;
-canvas.height = 237;
+canvas.height = penguinHeight;
 ctx = canvas.getContext("2d");
 var penguins = new Image();
 penguins.src = "/static/img/game/penguins.png";
 
+
 var penguinWalk;
 
-var brickSequence = ["AoTWall"];
+var brickSequence = ["brickWall", "AoTWall"];
 
 $(document).ready(function() {
     //create3DWorld();
     //create2DWorld();
     mouseDown2DWorld();
+    updateBricks();
 })
 
 var background_xpos = 0;
@@ -28,7 +31,7 @@ function mouseDown2DWorld() {
         penguinWalkIsPaused = false;
 
         var penguin_x_pos = $("#container").position().left + $("#container").width() - 100; //100 offset of penguin width
-        console.log(penguin_x_pos + "," + screenWidth);
+        //console.log(penguin_x_pos + "," + screenWidth);
         if (Math.abs(penguin_x_pos - screenWidth) < 15) {
             updateBricks();
         }
@@ -70,6 +73,7 @@ function mouseDown2DWorld() {
 }
 
 function updateBricks() {
+    $(".brick").remove();
     $("#container").css("left", 0 + "px");
     background_xpos = 0;
     //add bricks
@@ -83,9 +87,19 @@ function updateBricks() {
 
 function gameLoop() {
     penguinWalk = window.requestAnimationFrame(gameLoop);
+    formatPenguin(".brick");
     if (!penguinWalkIsPaused) {
         penguin.update();
         penguin.render();
+    }
+}
+
+function formatPenguin(brickID = null) {
+    if ($(brickID).height()) {
+        var margin_top = Math.round($(document).height() - $(brickID).height() - penguinHeight);
+        $("#penguins").css("margin-top", margin_top);
+    } else {
+        $("#penguins").css("margin-top", Math.round($(document).height() - penguinHeight));
     }
 }
 

@@ -29,6 +29,6 @@ body {
 }
 
 #penguins {
-    margin-top: 140px;
+    /*margin-top: 140px;*/
     z-index: 10;
 }
