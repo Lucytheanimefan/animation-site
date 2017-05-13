@@ -82,9 +82,9 @@ function mouseDown2DWorld() {
                 }
                 updatePenguinPositions();
                 updateSpeeds();
-                lineCanvas.width = $("#container").position().left;
-                lineCanvas.height = $("#container").position().top + penguinHeight;
-                drawLineDesign(beginX, lineCanvas.height / 2, $("#container").position().left + 100, lineCanvas.height / 2);
+                lineCanvas.width = $("body").width()//$("#container").position().left;
+                lineCanvas.height = $("body").height()//$("#container").position().top + penguinHeight;
+                drawLineDesign(main_xpos);
                 //beginX = $("#container").position().left + 100;
                 break;
             case 40: // down
@@ -104,8 +104,15 @@ function mouseDown2DWorld() {
     });
 }
 
-function drawLineDesign(startx, starty, endx, endy) {
-    drawLine(lineContext, startx, starty, endx, endy, "white", 5);
+var reqID = 0;
+function drawLineDesign(endIndex) {
+    var coordinates = []
+    for (var i=0; i<endIndex; i++){
+        coordinates[i] = [clickX[i], clickY[i]];
+    }
+    animateLines(reqID, lineContext, coordinates, 1, "white");
+    reqID+=1; 
+    //drawLine(lineContext, startx, starty, endx, endy, "white", 5);
 }
 
 function updatePenguinPositions(right = true) {
