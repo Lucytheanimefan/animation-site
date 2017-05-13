@@ -110,7 +110,7 @@ function updateBricks() {
 
 function gameLoop() {
     penguinWalk = window.requestAnimationFrame(gameLoop);
-    var standingOnBrick = ($("#container").position().left >= ($("#" + mostRecentBrick).position().left) - 400) && (($("#container").position().left + 400) <= ($("#" + mostRecentBrick).position().left + $("#" + mostRecentBrick).width() + 200));
+    var standingOnBrick = ($("#container").position().left >= ($("#" + mostRecentBrick).position().left) - 200) && (($("#container").position().left + 400) <= ($("#" + mostRecentBrick).position().left + $("#" + mostRecentBrick).width() + 200));
     if (standingOnBrick) {
         formatPenguin("#" + mostRecentBrick);
     } else {
