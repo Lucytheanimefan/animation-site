@@ -2,8 +2,11 @@ var penguinWalkIsPaused = false;
 var screenWidth = Math.round($(document).width());
 //animation sprite images penguins
 container = $("#container");
-container.append("<canvas id='penguins'></canvas>");
+container.append("<canvas class='penguinCanvas'id='penguins'></canvas>");
+container.after("<canvas class='penguinCanvas' id='lineDesign'></canvas>");
 canvas = document.getElementById("penguins");
+lineCanvas = document.getElementById("lineDesign");
+lineContext = lineCanvas.getContext("2d");
 var penguinHeight = 237;
 var penguinWidth = 400;
 canvas.width = penguinWidth;
@@ -14,16 +17,7 @@ penguins.src = "/static/img/game/penguins.png";
 
 var noBrickHeight = $(document).height() - penguinHeight;
 var penguinWalk;
-
 var brickSequence = ["brickwall", "AoTWall"];
-
-$(document).ready(function() {
-    //create3DWorld();
-    //create2DWorld();
-    mouseDown2DWorld();
-    updateBricks(0);
-})
-
 var background_xpos = 0;
 var main_xpos = 0;
 var background_speed = 1;
@@ -32,6 +26,22 @@ var penguin_speed = 0.5;
 var mostRecentBrick = null;
 var currentBrick = 0;
 var nextBrick = null;
+
+//line design
+var beginX = 0;
+
+$(document).ready(function() {
+    create2DWorld();
+})
+
+
+function create2DWorld() {
+    setTimeout(function() {
+        penguinWalkIsPaused = true;
+    }, 100);
+    mouseDown2DWorld();
+    updateBricks(0);
+}
 
 function mouseDown2DWorld() {
     $(document).keydown(function(e) {
@@ -57,7 +67,6 @@ function mouseDown2DWorld() {
                 */
             case 38: // up
                 //jump
-
                 $("#container").animate({ top: '-=70px' }, 250, function() {
                     $("#container").animate({ top: '+=70px' }, 250);
                 });
@@ -73,6 +82,10 @@ function mouseDown2DWorld() {
                 }
                 updatePenguinPositions();
                 updateSpeeds();
+                lineCanvas.width = $("#container").position().left;
+                lineCanvas.height = $("#container").position().top + penguinHeight;
+                drawLineDesign(beginX, lineCanvas.height / 2, $("#container").position().left + 100, lineCanvas.height / 2);
+                //beginX = $("#container").position().left + 100;
                 break;
             case 40: // down
                 break;
@@ -91,6 +104,10 @@ function mouseDown2DWorld() {
     });
 }
 
+function drawLineDesign(startx, starty, endx, endy) {
+    drawLine(lineContext, startx, starty, endx, endy, "white", 5);
+}
+
 function updatePenguinPositions(right = true) {
     var dir = right ? -1 : 1;
     $(".brick").each(function(i) {
@@ -107,20 +124,14 @@ function updateSpeeds() {
     }
 }
 
-function updateBricks(begin=1) {
-    //$(".brick").remove();
-    //$("#container").css("left", 0 + "px");
-    //$('body').css('background-position', background_xpos + 'px 0');
-    //background_xpos = 0;
-    //add bricks
+function updateBricks(begin = 1) {
     if (brickSequence.length < 1) {
         console.log("no more bricks")
     } else {
         var newBrick = brickSequence.shift();
         mostRecentBrick = newBrick;
-        //currentBrick += 1;
         $("#main").append("<img class='brick' id = '" + newBrick + "'src='/static/img/game/" + newBrick + ".png'>");
-        $("#" + newBrick).css("left", (begin*($(document).width() - penguinWidth)) + "px") //main_xpos + "px");
+        $("#" + newBrick).css("left", (begin * ($(document).width() - penguinWidth)) + "px") //main_xpos + "px");
     }
 }
 
@@ -143,14 +154,7 @@ function formatPenguin(brickID = null) {
         var margin_top = Math.round($(document).height() - $(brickID).height() - penguinHeight);
         $("#penguins").css("margin-top", margin_top);
     } else {
-        //var margin_top = Math.round($(document).height() - penguinHeight);
-        //console.log("margin top: " + margin_top)
         $("#penguins").css("margin-top", noBrickHeight);
-        /*
-        setTimeout(function() {
-            updateBricks();
-        }, 2000);
-        */
     }
 }
 
@@ -209,4 +213,3 @@ var penguin = sprite({
 
 // Load sprite sheet
 penguins.addEventListener("load", gameLoop);
-//coinImage.src = "images/coin-sprite-animation.png";
