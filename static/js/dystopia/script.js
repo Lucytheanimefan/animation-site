@@ -180,8 +180,8 @@ function animate(rotation = 0) {
         }
     }
     if (expandRotation) {
-        comet.translateZ(0.0001);
-        comet.translateX(-0.00225);
+        comet.translateZ(0.0005);
+        comet.translateX(-0.00425);
         comet.rotation.y += 0.001;
 
     } else {
