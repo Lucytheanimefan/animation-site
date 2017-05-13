@@ -11,7 +11,7 @@ ctx = canvas.getContext("2d");
 var penguins = new Image();
 penguins.src = "/static/img/game/penguins.png";
 
-
+var noBrickHeight = $(document).height() - penguinHeight;
 var penguinWalk;
 
 var brickSequence = ["brickwall", "AoTWall"];
@@ -28,7 +28,7 @@ var main_xpos = 0;
 var background_speed = 1;
 var penguin_speed = 0.5;
 
-var mostRecentBrick = 0;
+var mostRecentBrick = null;
 
 function mouseDown2DWorld() {
     $(document).keydown(function(e) {
@@ -57,7 +57,6 @@ function mouseDown2DWorld() {
                 if (offScreen) {
                     main_xpos = 0;
                 }
-                //$(".brick").css('left', background_xpos + "px");
                 updatePenguinPositions();
                 updateSpeeds();
             case 40: // down
@@ -103,6 +102,7 @@ function updateBricks() {
         console.log("no more bricks")
     } else {
         var newBrick = brickSequence.shift();
+        mostRecentBrick = newBrick;
         $("#main").append("<img class='brick' id = '" + newBrick + "'src='/static/img/game/" + newBrick + ".png'>");
         $("#" + newBrick).css("left", main_xpos + "px");
     }
@@ -110,7 +110,12 @@ function updateBricks() {
 
 function gameLoop() {
     penguinWalk = window.requestAnimationFrame(gameLoop);
-    formatPenguin(".brick");
+    var standingOnBrick = ($("#container").position().left >= ($("#" + mostRecentBrick).position().left) - 400) && (($("#container").position().left + 400) <= ($("#" + mostRecentBrick).position().left + $("#" + mostRecentBrick).width() + 200));
+    if (standingOnBrick) {
+        formatPenguin("#" + mostRecentBrick);
+    } else {
+        formatPenguin();
+    }
     if (!penguinWalkIsPaused) {
         penguin.update();
         penguin.render();
@@ -122,7 +127,9 @@ function formatPenguin(brickID = null) {
         var margin_top = Math.round($(document).height() - $(brickID).height() - penguinHeight);
         $("#penguins").css("margin-top", margin_top);
     } else {
-        $("#penguins").css("margin-top", Math.round($(document).height() - penguinHeight));
+        //var margin_top = Math.round($(document).height() - penguinHeight);
+        //console.log("margin top: " + margin_top)
+        $("#penguins").css("margin-top", noBrickHeight);
     }
 }
 
