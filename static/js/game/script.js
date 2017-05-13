@@ -53,9 +53,9 @@ function mouseDown2DWorld() {
             case 39: // right
                 background_xpos -= background_speed;
                 main_xpos += penguin_speed;
-                var offScreen = main_xpos > $("body").width();
+                var offScreen = main_xpos > ($("body").width()-100);
                 if (offScreen) {
-                    main_xpos = 0;
+                    main_xpos = -200;
                 }
                 updatePenguinPositions();
                 updateSpeeds();
