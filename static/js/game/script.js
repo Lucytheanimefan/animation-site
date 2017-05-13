@@ -36,9 +36,11 @@ function mouseDown2DWorld() {
 
         var penguin_x_pos = $("#container").position().left + $("#container").width() - 100; //100 offset of penguin width
         //console.log(penguin_x_pos + "," + screenWidth);
+        /*
         if (Math.abs(penguin_x_pos - screenWidth) < 500) {
             updateBricks();
         }
+        */
         switch (e.which) {
             case 37: // left
                 if ((background_xpos + background_speed) < 0) {
@@ -48,12 +50,18 @@ function mouseDown2DWorld() {
                     updateSpeeds();
                 }
             case 38: // up
+                //jump
+
+                $("#container").animate({ top: '-=70px' }, 250, function() {
+                    $("#container").animate({ top: '+=70px' }, 250);
+                });
+
                 break;
 
             case 39: // right
                 background_xpos -= background_speed;
                 main_xpos += penguin_speed;
-                var offScreen = main_xpos > ($("body").width()-100);
+                var offScreen = main_xpos > ($("body").width() - 100);
                 if (offScreen) {
                     main_xpos = -200;
                 }
@@ -130,6 +138,10 @@ function formatPenguin(brickID = null) {
         //var margin_top = Math.round($(document).height() - penguinHeight);
         //console.log("margin top: " + margin_top)
         $("#penguins").css("margin-top", noBrickHeight);
+        setTimeout(function() {
+            updateBricks();
+        }, 2000);
+
     }
 }
 
