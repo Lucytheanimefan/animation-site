@@ -82,8 +82,8 @@ function mouseDown2DWorld() {
                 }
                 updatePenguinPositions();
                 updateSpeeds();
-                lineCanvas.width = $("body").width()//$("#container").position().left;
-                lineCanvas.height = $("body").height()//$("#container").position().top + penguinHeight;
+                lineCanvas.width = $("body").width() //$("#container").position().left;
+                lineCanvas.height = $("body").height() //$("#container").position().top + penguinHeight;
                 drawLineDesign(main_xpos);
                 //beginX = $("#container").position().left + 100;
                 break;
@@ -105,14 +105,34 @@ function mouseDown2DWorld() {
 }
 
 var reqID = 0;
+
 function drawLineDesign(endIndex) {
-    var coordinates = []
-    for (var i=0; i<endIndex; i++){
-        coordinates[i] = [clickX[i], clickY[i]];
+    /*var coordinates = []
+    for (var i = 0; i < endIndex; i++) {
+        var marg = parseInt($("#penguins").css("margin-top"));
+        coordinates[i] = [clickX[i] + main_xpos, clickY[i] + marg - 100];
+    }*/
+    var coordinates = penguinCoordinates();
+    if (endIndex>coordinates.length){
+        endIndex = endIndex%coordinates.length;
     }
-    animateLines(reqID, lineContext, coordinates, 1, "white");
+    animateLines(reqID, lineContext, coordinates.slice(0, endIndex), 1, "white");
     //reqID+=1; 
     //drawLine(lineContext, startx, starty, endx, endy, "white", 5);
+}
+
+function penguinCoordinates() {
+    var factor = 5;
+    var coordinates = [];
+    var i=0;
+    for (var t = -6; t < 6; t+=0.1) {
+        var marg = parseInt($("#penguins").css("margin-top"));
+        var x = 2.5 * Math.pow(Math.sin(-5 * t), 2) * Math.pow(2, Math.cos(Math.cos(4.28 * 2.3 * t)));
+        var y = 2.5 * Math.sin(Math.sin(-5 * t)) * Math.pow(Math.cos(4.28 * 2.3 * t), 2);
+        coordinates[i] = [x *factor + main_xpos, y *factor + marg];
+        i+=1;
+    }
+    return coordinates
 }
 
 function updatePenguinPositions(right = true) {
