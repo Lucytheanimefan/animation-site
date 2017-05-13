@@ -111,7 +111,7 @@ function drawLineDesign(endIndex) {
         coordinates[i] = [clickX[i], clickY[i]];
     }
     animateLines(reqID, lineContext, coordinates, 1, "white");
-    reqID+=1; 
+    //reqID+=1; 
     //drawLine(lineContext, startx, starty, endx, endy, "white", 5);
 }
 
