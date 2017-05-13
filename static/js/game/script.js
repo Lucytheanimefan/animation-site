@@ -24,6 +24,7 @@ $(document).ready(function() {
 })
 
 var background_xpos = 0;
+var main_xpos = 0;
 var speed = 1;
 
 function mouseDown2DWorld() {
@@ -37,10 +38,12 @@ function mouseDown2DWorld() {
         }
         switch (e.which) {
             case 37: // left
-                if ((background_xpos - speed) > 0) {
-                    background_xpos -= speed;
-                    //$('body').css('background-position', background_xpos + 'px 0');
-                    $("#container").css("left", background_xpos + "px");
+                if ((background_xpos + speed) < 0) {
+                    background_xpos += speed;
+                    main_xpos -= speed;
+                    $('body').css('background-position', background_xpos + 'px 0');
+                    $(".brick").css('left',background_xpos+"px");
+                    $("#container").css("left", main_xpos + "px");
                     if (speed < 15) {
                         speed += 1;
                     }
@@ -50,9 +53,11 @@ function mouseDown2DWorld() {
 
             case 39: // right
                 console.log("Speed: " + speed);
-                background_xpos += speed;
-                $("#container").css("left", background_xpos + "px");
-                //$('body').css('background-position', background_xpos + 'px 0');
+                background_xpos -= speed;
+                main_xpos += speed;
+                $("#container").css("left", main_xpos + "px");
+                $(".brick").css('left',background_xpos+"px");
+                $('body').css('background-position', background_xpos + 'px 0');
                 if (speed < 15) {
                     speed += 1;
                 }
@@ -73,13 +78,15 @@ function mouseDown2DWorld() {
 }
 
 function updateBricks() {
-    $(".brick").remove();
-    $("#container").css("left", 0 + "px");
-    background_xpos = 0;
+    //$(".brick").remove();
+    //$("#container").css("left", 0 + "px");
+    //$('body').css('background-position', background_xpos + 'px 0');
+    //background_xpos = 0;
     //add bricks
     if (brickSequence.length < 1) {
         console.log("no more bricks")
     } else {
+
         var newBrick = brickSequence.shift();
         $("#main").append("<img class='brick' id = '" + newBrick + "'src='/static/img/game/" + newBrick + ".png'>");
     }

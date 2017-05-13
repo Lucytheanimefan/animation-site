@@ -5,15 +5,15 @@ html {
 body {
     min-height: 600px;
     min-width: 1280px;
-    background: url('/static/img/game/background.png') no-repeat;
+    background: url('/static/img/game/background.png');
+    background-repeat: repeat-x;
 }
 
 #main {
-
-	position: relative;
+    position: relative;
     margin: 0 auto;
     min-height: 600px;
-    height:100vh;
+    height: 100vh;
 }
 
 #container {
@@ -21,11 +21,11 @@ body {
     z-index: 1;
 }
 
-.brick{
-	max-height: 300px;
-	position: absolute;
-	z-index: -1; 
-	bottom: 0;
+.brick {
+    max-height: 300px;
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
 }
 
 #penguins {
