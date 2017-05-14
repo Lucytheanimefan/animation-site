@@ -1,7 +1,3 @@
-if (!Detector.webgl) {
-    Detector.addGetWebGLMessage();
-    document.getElementById('container').innerHTML = "";
-}
 var container, stats;
 var camera, controls, scene, renderer;
 var mesh, texture;
@@ -18,11 +14,15 @@ console.log(myImage);
 
 /*--------------3d-------------------*/
 function create3DWorld() {
-    myImage.onload = function() {
-        console.log("LOaded");
+    if (!Detector.webgl) {
+        Detector.addGetWebGLMessage();
+        document.getElementById('container').innerHTML = "";
+    }
+    //myImage.onload = function() {
+        //console.log("LOaded");
         init();
         animate();
-    }
+    //}
 }
 
 function init() {

@@ -18,20 +18,22 @@ penguins.src = "/static/img/game/penguins.png";
 var noBrickHeight = $(document).height() - penguinHeight;
 var penguinWalk;
 var brickSequence = ["brickwall", "AoTWall"];
+var numBricks = brickSequence.length;
 var background_xpos = 0;
 var main_xpos = 0;
 var background_speed = 1;
 var penguin_speed = 0.5;
 
 var mostRecentBrick = null;
-var currentBrick = 0;
-var nextBrick = null;
+var numBricksPassed = -1;
+
 
 //line design
 var beginX = 0;
 
 $(document).ready(function() {
     create2DWorld();
+    //create3DWorld();
 })
 
 
@@ -107,14 +109,10 @@ function mouseDown2DWorld() {
 var reqID = 0;
 
 function drawLineDesign(endIndex) {
-    /*var coordinates = []
-    for (var i = 0; i < endIndex; i++) {
-        var marg = parseInt($("#penguins").css("margin-top"));
-        coordinates[i] = [clickX[i] + main_xpos, clickY[i] + marg - 100];
-    }*/
     var coordinates = penguinCoordinates();
-    if (endIndex>coordinates.length){
-        endIndex = endIndex%coordinates.length;
+    if (endIndex > coordinates.length) {
+        //create 3d world gate
+        endIndex = endIndex % coordinates.length;
     }
     animateLines(reqID, lineContext, coordinates.slice(0, endIndex), 1, "white");
     //reqID+=1; 
@@ -124,13 +122,13 @@ function drawLineDesign(endIndex) {
 function penguinCoordinates() {
     var factor = 5;
     var coordinates = [];
-    var i=0;
-    for (var t = -6; t < 6; t+=0.1) {
+    var i = 0;
+    for (var t = -6; t < 6; t += 0.1) {
         var marg = parseInt($("#penguins").css("margin-top"));
         var x = 2.5 * Math.pow(Math.sin(-5 * t), 2) * Math.pow(2, Math.cos(Math.cos(4.28 * 2.3 * t)));
         var y = 2.5 * Math.sin(Math.sin(-5 * t)) * Math.pow(Math.cos(4.28 * 2.3 * t), 2);
-        coordinates[i] = [x *factor + main_xpos, y *factor + marg];
-        i+=1;
+        coordinates[i] = [x * factor + main_xpos, y * factor + marg];
+        i += 1;
     }
     return coordinates
 }
@@ -153,7 +151,13 @@ function updateSpeeds() {
 
 function updateBricks(begin = 1) {
     if (brickSequence.length < 1) {
-        console.log("no more bricks")
+        console.log("3d world!");
+        //mostRecentBrick = null;
+        if (numBricksPassed >= numBricks) {
+            console.log("NEW WORLD");
+            remove2Dworld();
+            create3DWorld();
+        }
     } else {
         var newBrick = brickSequence.shift();
         mostRecentBrick = newBrick;
@@ -162,9 +166,28 @@ function updateBricks(begin = 1) {
     }
 }
 
+function remove2Dworld() {
+    cancelAnimationFrame(penguinWalk);
+    $(document).unbind('keydown');
+    $('#main').remove();
+    $("body").append("<div id='main'></div>");
+    $("#main").append('<div id="container"></div>');
+    $("#container").css("position","relative");
+    $("#container").css("left","0px");
+    //$("body").css("background-image", "");
+    $("body").css("background", "None");
+    $("body").css("background-repeat","no-repeat");
+}
+
 function gameLoop() {
     penguinWalk = window.requestAnimationFrame(gameLoop);
     var standingOnBrick = ($("#container").position().left >= ($("#" + mostRecentBrick).position().left) - 200) && (($("#container").position().left + 400) <= ($("#" + mostRecentBrick).position().left + $("#" + mostRecentBrick).width() + 200));
+
+    var passedBrick = $("#container").position().left >= ($("#" + mostRecentBrick).position().left + $(document).width()-10);
+    if (passedBrick) {
+        numBricksPassed += 1;
+    }
+
     if (standingOnBrick) {
         formatPenguin("#" + mostRecentBrick);
     } else {
