@@ -170,20 +170,20 @@ function remove2Dworld() {
     cancelAnimationFrame(penguinWalk);
     $(document).unbind('keydown');
     $('#main').remove();
-    $("body").append("<div id='main'></div>");
-    $("#main").append('<div id="container"></div>');
-    $("#container").css("position","relative");
-    $("#container").css("left","0px");
-    //$("body").css("background-image", "");
+    $("body").prepend("<div id='main'></div>");
+    $("#main").prepend('<div id="container"></div>');
+    $("body").css({ "overflow": "hidden" });
+    $("#container").css({ "left": "0px" });
+    $("body").css("background-image", "");
     $("body").css("background", "None");
-    $("body").css("background-repeat","no-repeat");
+    $("body").css("background-repeat", "no-repeat");
 }
 
 function gameLoop() {
     penguinWalk = window.requestAnimationFrame(gameLoop);
     var standingOnBrick = ($("#container").position().left >= ($("#" + mostRecentBrick).position().left) - 200) && (($("#container").position().left + 400) <= ($("#" + mostRecentBrick).position().left + $("#" + mostRecentBrick).width() + 200));
 
-    var passedBrick = $("#container").position().left >= ($("#" + mostRecentBrick).position().left + $(document).width()-10);
+    var passedBrick = $("#container").position().left >= ($("#" + mostRecentBrick).position().left + $(document).width() - 10);
     if (passedBrick) {
         numBricksPassed += 1;
     }
