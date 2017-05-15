@@ -171,12 +171,12 @@ function remove2Dworld() {
     $(document).unbind('keydown');
     $('#main').remove();
     $("body").prepend("<div id='main'></div>");
-    $("#main").prepend('<div id="container"></div>');
+    $("#main").prepend('<div id="container3d"></div>');
     $("body").css({ "overflow": "hidden" });
-    $("#container").css({ "left": "0px" });
     $("body").css("background-image", "");
     $("body").css("background", "None");
     $("body").css("background-repeat", "no-repeat");
+    $("#container3d").css({ "left": "0px" });
 }
 
 function gameLoop() {

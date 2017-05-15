@@ -16,7 +16,7 @@ console.log(myImage);
 function create3DWorld() {
     if (!Detector.webgl) {
         Detector.addGetWebGLMessage();
-        document.getElementById('container').innerHTML = "";
+        document.getElementById('container3d').innerHTML = "";
     }
     //myImage.onload = function() {
         //console.log("LOaded");
@@ -26,7 +26,7 @@ function create3DWorld() {
 }
 
 function init() {
-    container = document.getElementById('container');
+    container = document.getElementById('container3d');
     //directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
     camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 20000);
     scene = new THREE.Scene();
