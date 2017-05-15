@@ -54,10 +54,12 @@ function init() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     container.innerHTML = "";
     container.appendChild(renderer.domElement);
-    //stats = new Stats();
-    //container.appendChild(stats.dom);
-    //
+
     window.addEventListener('resize', onWindowResize, false);
+
+    //canvas should take up entire screen size
+    $("canvas").css("width","100%");
+    $("canvas").css("height","100%");
 }
 
 function onWindowResize() {
