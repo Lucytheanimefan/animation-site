@@ -70,6 +70,10 @@ body {
     color: white;
 }
 
+a{
+    text-decoration:none !important;
+}
+
 .navbar {
     text-align: center;
     /*
@@ -167,13 +171,13 @@ a:hover {
   height: 100% !important;
   background: #ffffff;
 }
-/*
+
 body {
   font-family: Karla, sans-serif;
   font-size: 11px;
   font-weight: 700;
 }
-*/
+
 
 * {
   box-sizing: border-box;
@@ -240,209 +244,3 @@ a {
 }
 
 
-/*----------------title fade in DEPRECATED-----------------*/
-/*
-@import url(http://fonts.googleapis.com/css?family=Finger+Paint);
-span {
-    display: inline-block;
-    text-shadow: 0 0 0 whitesmoke;
-    -webkit-animation: smoky 5s both;
-    animation: smoky 5s both;
-    animation-iteration-count: infinite;
-}
-
-span:nth-child(even) {
-    -webkit-animation-name: smoky-mirror;
-    animation-name: smoky-mirror;
-    animation-iteration-count: infinite;
-}
-
-@-webkit-keyframes smoky {
-    60% {
-        text-shadow: 0 0 40px whitesmoke;
-    }
-    to {
-        -webkit-transform: translate3d(15rem, -8rem, 0) rotate(-40deg) skewX(70deg) scale(1.5);
-        transform: translate3d(15rem, -8rem, 0) rotate(-40deg) skewX(70deg) scale(1.5);
-        text-shadow: 0 0 20px whitesmoke;
-        opacity: 0;
-    }
-}
-
-@keyframes smoky {
-    60% {
-        text-shadow: 0 0 40px whitesmoke;
-    }
-    to {
-        -webkit-transform: translate3d(15rem, -8rem, 0) rotate(-40deg) skewX(70deg) scale(1.5);
-        transform: translate3d(15rem, -8rem, 0) rotate(-40deg) skewX(70deg) scale(1.5);
-        text-shadow: 0 0 20px whitesmoke;
-        opacity: 0;
-    }
-}
-
-@-webkit-keyframes smoky-mirror {
-    60% {
-        text-shadow: 0 0 40px whitesmoke;
-    }
-    to {
-        -webkit-transform: translate3d(18rem, -8rem, 0) rotate(-40deg) skewX(-70deg) scale(2);
-        transform: translate3d(18rem, -8rem, 0) rotate(-40deg) skewX(-70deg) scale(2);
-        text-shadow: 0 0 20px whitesmoke;
-        opacity: 0;
-    }
-}
-
-@keyframes smoky-mirror {
-    60% {
-        text-shadow: 0 0 40px whitesmoke;
-    }
-    to {
-        -webkit-transform: translate3d(18rem, -8rem, 0) rotate(-40deg) skewX(-70deg) scale(2);
-        transform: translate3d(18rem, -8rem, 0) rotate(-40deg) skewX(-70deg) scale(2);
-        text-shadow: 0 0 20px whitesmoke;
-        opacity: 0;
-    }
-}
-
-span:nth-of-type(1) {
-    -webkit-animation-delay: 0.1s;
-    animation-delay: 0.1s;
-}
-
-span:nth-of-type(2) {
-    -webkit-animation-delay: 0.2s;
-    animation-delay: 0.2s;
-}
-
-span:nth-of-type(3) {
-    -webkit-animation-delay: 0.3s;
-    animation-delay: 0.3s;
-}
-
-span:nth-of-type(4) {
-    -webkit-animation-delay: 0.4s;
-    animation-delay: 0.4s;
-}
-
-span:nth-of-type(5) {
-    -webkit-animation-delay: 0.5s;
-    animation-delay: 0.5s;
-}
-
-span:nth-of-type(6) {
-    -webkit-animation-delay: 0.6s;
-    animation-delay: 0.6s;
-}
-
-span:nth-of-type(7) {
-    -webkit-animation-delay: 0.7s;
-    animation-delay: 0.7s;
-}
-
-span:nth-of-type(8) {
-    -webkit-animation-delay: 0.8s;
-    animation-delay: 0.8s;
-}
-
-span:nth-of-type(9) {
-    -webkit-animation-delay: 0.9s;
-    animation-delay: 0.9s;
-}
-
-span:nth-of-type(10) {
-    -webkit-animation-delay: 1s;
-    animation-delay: 1s;
-}
-
-span:nth-of-type(11) {
-    -webkit-animation-delay: 1.1s;
-    animation-delay: 1.1s;
-}
-
-span:nth-of-type(12) {
-    -webkit-animation-delay: 1.2s;
-    animation-delay: 1.2s;
-}
-
-span:nth-of-type(13) {
-    -webkit-animation-delay: 1.3s;
-    animation-delay: 1.3s;
-}
-
-span:nth-of-type(14) {
-    -webkit-animation-delay: 1.4s;
-    animation-delay: 1.4s;
-}
-
-span:nth-of-type(15) {
-    -webkit-animation-delay: 1.5s;
-    animation-delay: 1.5s;
-}
-
-span:nth-of-type(16) {
-    -webkit-animation-delay: 1.6s;
-    animation-delay: 1.6s;
-}
-
-span:nth-of-type(17) {
-    -webkit-animation-delay: 1.7s;
-    animation-delay: 1.7s;
-}
-
-span:nth-of-type(18) {
-    -webkit-animation-delay: 1.8s;
-    animation-delay: 1.8s;
-}
-
-span:nth-of-type(19) {
-    -webkit-animation-delay: 1.9s;
-    animation-delay: 1.9s;
-}
-
-span:nth-of-type(20) {
-    -webkit-animation-delay: 2s;
-    animation-delay: 2s;
-}
-
-span:nth-of-type(21) {
-    -webkit-animation-delay: 2.1s;
-    animation-delay: 2.1s;
-}
-
-@keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@-moz-keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@-webkit-keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@-o-keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-*/
