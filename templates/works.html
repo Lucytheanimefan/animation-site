@@ -3,23 +3,13 @@
 <div class="container-fluid">
     <h1>Works</h1>
     <hr>
-    <div class="row">
-        <div class="col-md-4">
-            {% for work in works %}
-            <div class="work">
-                <a href="/works/{{ work.url }}">{{ work.name }}
-            </a>
-                <p>Created on {{ work.date }}
-                    <br> ·{% for credit in work.credit %} {{ credit }} · {% endfor %}
-                </p>
-            </div>
-            {% endfor %}
-        </div>
+    <div id="works">
+       
     </div>
 </div>
 </div>
-{% endblock %}
-
-{% block javascript %}
-<script>populateWorks();</script>
+{% endblock %} {% block javascript %}
+<script>
+populateWorks();
+</script>
 {% endblock %}

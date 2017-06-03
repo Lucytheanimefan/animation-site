@@ -247,11 +247,42 @@
 
 
 /*--------works----------*/
-var flaskData = $('#my-data').data();
+/*
+ <div class="row">
+            <div class="col-md-4">
+                {% for work in works %}
+                <div class="work">
+                    <a href="/works/{{ work.url }}">{{ work.name }}
+            </a>
+                    <p>Created on {{ work.date }}
+                        <br> ·{% for credit in work.credit %} {{ credit }} · {% endfor %}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+ */
 
+var recentRow;
 function populateWorks() {
     var flaskData = $('#my-data').data();
-    console.log(flaskData);
-    var data = JSON.parse("["+flaskData["name"].replace(/'/g, '"')+"]");
+    var data = JSON.parse("[" + flaskData["name"].replace(/'/g, '"') + "]")[0];
     console.log(data);
+    for (var i = 0; i < data.length; i++) {
+        if (i % 3 == 0) {
+        	recentRow = i;
+            $("#works").append("<div id = 'workRow" + i + "'class='row'></div>");
+        }
+        var name = data[i]["name"];
+        var url = data[i]["url"];
+        var date = data[i]["date"];
+        console.log(data[i]["credit"]);
+        var credits = data[i]["credit"].toString();
+        $("#workRow" + recentRow).append("<div class='col-md-4'>" +
+            "<div class='work'>" +
+            "<a href='/works/" + url + "'>"+name+"</a>" +
+            "<p>Created on " + date +
+            "<br>" + credits +
+            "</p>" + "</div></div>");
+    }
 }
