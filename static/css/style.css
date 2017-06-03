@@ -1,6 +1,4 @@
-* {
-    font-family: 'Open Sans', sans-serif;
-}
+@import url('https://fonts.googleapis.com/css?family=Actor');
 
 .navbar-brand {
     display: inline;
@@ -27,7 +25,7 @@
 
 #title {
     position: absolute;
-    font-color: white;
+    color: grey;
     z-index: 10;
     margin-top: 30%;
     margin-bottom: 30%;
@@ -42,8 +40,16 @@
     margin-left: 2px;
 }
 
+.bio p {
+    font-size: 13px;
+}
+
 .about {
     margin-bottom: 3%;
+}
+
+.work > a {
+    font-weight: bolder;
 }
 
 .profile {
@@ -66,10 +72,6 @@
     margin-right: auto;
 }
 
-body {
-    background-color: black;
-}
-
 .links {
     color: white;
 }
@@ -80,14 +82,6 @@ a {
 
 .navbar {
     text-align: center;
-    /*
-    position: absolute;
-    left: 10%;
-    right: 10%;
-    bottom: 0px !important;
-    background: none;
-    border: 0px;
-    */
 }
 
 .navbar .navbar-nav {
@@ -104,12 +98,12 @@ a {
 .nav a {
     /*bottom: 0px !important;*/
     text-align: center;
+    color: lightgrey;
 }
 
 .nav li:hover,
 .nav a:hover {
     background: none !important;
-    font-weight: bolder;
 }
 
 .navbar-toggle .icon-bar {
@@ -145,20 +139,13 @@ a {
     height: 120px;
 }
 
-a,
-h1,
-h2 {
-    color: white;
-}
-
 a:hover {
-    color: lightgrey;
+    color: white;
+    font-weight: 900;
 }
 
 
 /*----------footer water ----------*/
-
-@import url(https://fonts.googleapis.com/css?family=Karla:700,400);
 #water-spring {
     z-index: 0;
     position: fixed;
@@ -170,15 +157,19 @@ a:hover {
 }
 
 body {
-    font-family: Karla, sans-serif;
-    font-size: 11px;
-    font-weight: 700;
+    padding-top: 60px;
+    /*necessary or else navbar will overlap content*/
+    font-family: 'Actor', sans-serif !important;
+    font-size: 14px;
+    color: lightgrey;
+    background-color: black;
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Actor', sans-serif !important;
 }
 
 a {
