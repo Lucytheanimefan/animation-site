@@ -277,7 +277,7 @@ function populateWorks() {
         var url = data[i]["url"];
         var date = data[i]["date"];
         console.log(data[i]["credit"]);
-        var credits = data[i]["credit"].toString();
+        var credits = data[i]["credit"].join(" · ");
         $("#workRow" + recentRow).append("<div class='col-md-4'>" +
             "<div class='work'>" +
             "<a href='/works/" + url + "'>"+name+"</a>" +
