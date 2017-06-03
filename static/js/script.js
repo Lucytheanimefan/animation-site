@@ -243,3 +243,15 @@
     })();
 
 })(jQuery);
+
+
+
+/*--------works----------*/
+var flaskData = $('#my-data').data();
+
+function populateWorks() {
+    var flaskData = $('#my-data').data();
+    console.log(flaskData);
+    var data = JSON.parse("["+flaskData["name"].replace(/'/g, '"')+"]");
+    console.log(data);
+}

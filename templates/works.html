@@ -1,4 +1,5 @@
 {% extends "layout.html" %} {% block body %}
+<meta id="my-data" data-name="{{ works }}" data-other="{{ works }}">
 <div class="container-fluid">
     <h1>Works</h1>
     <hr>
@@ -8,7 +9,8 @@
             <div class="work">
                 <a href="/works/{{ work.url }}">{{ work.name }}
             </a>
-                <p>Created on {{ work.date }} <br> ·{% for credit in work.credit %} {{ credit }} · {% endfor %}
+                <p>Created on {{ work.date }}
+                    <br> ·{% for credit in work.credit %} {{ credit }} · {% endfor %}
                 </p>
             </div>
             {% endfor %}
@@ -16,4 +18,8 @@
     </div>
 </div>
 </div>
+{% endblock %}
+
+{% block javascript %}
+<script>populateWorks();</script>
 {% endblock %}
