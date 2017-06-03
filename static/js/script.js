@@ -1,25 +1,3 @@
-//generate title -- deprecated for old home page
-/*
-var title = "deadfisheyed";
-
-function fillTitle(title) {
-    for (var i = 0; i < title.length; i++) {
-        $("#title").html($("#title").html() + "<span>" + title.charAt(i) + "</span>");
-    }
-}
-
-fillTitle(title);
-*/
-
-
-// Water Springs
-//
-// Made by BASICS09
-// http://basics09.de
-//
-// https://github.com/hirasso/water-spring
-//
-
 (function($) {
 
     "use strict";
@@ -86,7 +64,7 @@ fillTitle(title);
             }
             surface = new Path();
             // surface.fullySelected = true;
-            surface.fillColor = "#000";
+            surface.fillColor = "#ffffff";
             var margin = -300;
             var waterDepth = view.size.height;
 

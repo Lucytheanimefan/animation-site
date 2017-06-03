@@ -2,13 +2,12 @@
     font-family: 'Open Sans', sans-serif;
 }
 
-
-
 .navbar-brand {
     display: inline;
 }
 
 #fishLogo {
+    z-index: 1;
     width: 17%;
     /*
     -ms-transform: rotate(90deg);
@@ -70,8 +69,8 @@ body {
     color: white;
 }
 
-a{
-    text-decoration:none !important;
+a {
+    text-decoration: none !important;
 }
 
 .navbar {
@@ -161,86 +160,34 @@ a:hover {
     width: auto !important;
 }
 
+
 /*----------footer water ----------*/
+
 @import url(https://fonts.googleapis.com/css?family=Karla:700,400);
 #water-spring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100% !important;
-  height: 100% !important;
-  background: #ffffff;
+    z-index: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    background: #000;
 }
 
 body {
-  font-family: Karla, sans-serif;
-  font-size: 11px;
-  font-weight: 700;
+    font-family: Karla, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
 }
 
-
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 a {
-  color: inherit;
-  text-decoration: underline;
-  text-transform: uppercase;
+    color: inherit;
+    text-decoration: underline;
+    text-transform: uppercase;
 }
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  padding: 0 20px 0 50px;
-  height: 50px;
-  line-height: 50px;
-  text-align: right;
-  z-index: 1;
-  overflow: hidden;
-}
-.footer .info {
-  position: absolute;
-  top: -1000px;
-  color: #fff;
-  z-index: 1;
-  background: #000;
-  border-radius: 10px;
-  line-height: 20px;
-  height: 20px;
-  display: inline-block;
-  vertical-align: middle;
-  padding: 0 10px;
-}
-.footer .toggle {
-  opacity: 1;
-  position: absolute;
-  top: 0;
-  right: 20px;
-  width: 20px;
-  height: 100%;
-  text-align: center;
-  cursor: pointer;
-  z-index: 2;
-}
-.footer .toggle span {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  border-radius: 50%;
-  background: black;
-  color: white;
-}
-.footer:hover .info {
-  position: relative;
-  top: 0;
-}
-.footer:hover .toggle {
-  display: none;
-}
-
-
