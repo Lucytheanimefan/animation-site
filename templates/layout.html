@@ -60,20 +60,16 @@
     <div class="row buffer"></div>
 </body>
 <footer class="footer">
-    <!--<nav class="navbar">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
-            <li><a href="{{ url_for('works') }}">Works</a></li>
-        </ul>
-    </nav>-->
+    {% block footer %}{% endblock %}
     <div class="container">
         <p>Contact: deadfisheyed@gmail.com</p>
     </div>
 </footer>
 <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='css/lib/bootstrap/js/bootstrap.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/water.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='css/lib/bootstrap/js/bootstrap.min.js') }}"></script><script type="text/javascript" src="{{ url_for('static', filename='plugins/anime.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='plugins/paper-full.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/lib/three.min.js') }}"></script>
+<!--<script type="text/javascript" src="{{ url_for('static', filename='js/water.js') }}"></script>-->
 <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
 <script>
 (function(i, s, o, g, r, a, m) {
