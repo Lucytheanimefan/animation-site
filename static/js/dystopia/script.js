@@ -17,7 +17,8 @@ myAudio.onended = function() {
 
 }
 
-var cometRadius = 0.1
+var cometRadius = 0.1;
+
 
 //background scene
 
@@ -93,22 +94,34 @@ var vector = new THREE.Vector3();
 
 webglEl.appendChild(renderer.domElement);
 
-//$("body").css("background-image","/static/img/dystopia/galaxy.png");
-//top right bottom left
+//images
+var galaxyImage = new Image();
+galaxyImage.src = "/static/img/dystopia/galaxy.png";
+var nycImage = new Image();
+nycImage.src = "/static/img/dystopia/galaxy.png";
+var greatWallImage = new Image();
+greatWallImage.src = "/static/img/dystopia/greatwall.png";
+var reaperImage = new Image();
+reaperImage.src = "/static/img/dystopia/reaper.png";
+
+
 $(document).ready(function() {
-    myAudio.play();
-    $("body").addClass("stage0");
-    //$("body").addClass("stage0");
-    //setTimeout(function() {
-    //zoomEarth();
-    //three_dEarth();
-    //prepareExplodeEarth();
-
-    animate();
-    //render();
-    //}, 5000)
-    beginFadeBackground();
-
+    galaxyImage.onload = function() {
+        console.log("galaxy image loaded");
+        reaperImage.onload = function() {
+            console.log("reaper loaded");
+            greatWallImage.onload = function() {
+                console.log("great wall image loaded");
+                //nycImage.onload = function() {
+                    console.log("DOne loading everything :)");
+                    myAudio.play();
+                    $("body").addClass("stage0");
+                    animate();
+                    beginFadeBackground();
+                //};
+            };
+        };
+    };
 })
 
 
@@ -254,35 +267,16 @@ THREE.ExplodeModifier.prototype.modify = function(geometry) {
 };
 
 function render() {
-    renderer.clear()
-        //controls.update();
-        //sphere.rotation.y += 0.005;
-        //clouds.rotation.y += 0.0005;
-        //requestAnimationFrame(render);
-        //renderer.render(backgroundScene, backgroundCamera);
+    renderer.clear();
     renderer.render(cometScene, camera);
     renderer.render(scene, camera);
 }
 
 /*----------------transition background-----------*/
 
+
+
 function beginFadeBackground() {
-    /*
-    setTimeout(function(){
-        setBackground("nyc");
-    }, 2000);
-    setTimeout(function(){
-        setBackground("greatwall");
-    }, 4000);
-    */
-    /*
-    $('body').fadeIn('slow', 0.3, function() {
-        $("body").css('background-image', 'url("/static/img/dystopia/nyc.png")')
-    }).delay(3000).fadeIn('slow', 1);
-    $('body').fadeIn('slow', 0.3, function() {
-        $("body").css('background-image', 'url("/static/img/dystopia/greatwall.png")')
-    }).delay(6000).fadeIn('slow', 1);
-    */
     var counter = 1;
     var refreshIntervalId = setInterval(function() {
         $("body").prop("class", "stage" + counter);
@@ -297,32 +291,4 @@ function beginFadeBackground() {
             counter++;
         }
     }, 11000);
-
 }
-
-function setBackground(imageName) {
-    var texture = THREE.ImageUtils.loadTexture('/static/img/dystopia/' + imageName + '.png');
-    var backgroundMesh = new THREE.Mesh(
-        new THREE.PlaneGeometry(2, 2, 0),
-        new THREE.MeshBasicMaterial({
-            map: texture
-        }));
-
-    backgroundMesh.material.depthTest = false;
-    backgroundMesh.material.depthWrite = false;
-
-    backgroundScene.add(backgroundCamera);
-    backgroundScene.add(backgroundMesh);
-
-}
-
-/*
-$('#elem').fadeTo('slow', 0.3, function() {
-    $(this).css('background-image', 'url(' + $img + ')');
-}).fadeTo('slow', 1);
-With a 1 second delay:
-
-    $('#elem').fadeTo('slow', 0.3, function() {
-        $(this).css('background-image', 'url(' + $img + ')');
-    }).delay(1000).fadeTo('slow', 1);
-    */
