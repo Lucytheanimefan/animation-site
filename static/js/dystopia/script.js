@@ -98,7 +98,7 @@ webglEl.appendChild(renderer.domElement);
 var galaxyImage = new Image();
 galaxyImage.src = "/static/img/dystopia/galaxy.png";
 var nycImage = new Image();
-nycImage.src = "/static/img/dystopia/galaxy.png";
+nycImage.src = "/static/img/dystopia/nyc.png";
 var greatWallImage = new Image();
 greatWallImage.src = "/static/img/dystopia/greatwall.png";
 var reaperImage = new Image();
@@ -107,22 +107,22 @@ reaperImage.src = "/static/img/dystopia/reaper.png";
 
 $(document).ready(function() {
     galaxyImage.onload = function() {
-        console.log("galaxy image loaded");
+        /*console.log("galaxy image loaded");
         reaperImage.onload = function() {
             console.log("reaper loaded");
             greatWallImage.onload = function() {
                 console.log("great wall image loaded");
-                //nycImage.onload = function() {
-                    console.log("DOne loading everything :)");
-                    myAudio.play();
-                    $("body").addClass("stage0");
-                    animate();
-                    beginFadeBackground();
-                //};
-            };
-        };
+                //nycImage.onload = function() {*/
+        console.log("DOne loading everything :)");
+        myAudio.play();
+        $("body").addClass("stage0");
+        animate();
+        beginFadeBackground();
+        //};
+        //};
+        //};
     };
-})
+});
 
 
 function zoomEarth() {
