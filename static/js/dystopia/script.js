@@ -106,24 +106,32 @@ reaperImage.src = "/static/img/dystopia/reaper.png";
 
 
 $(document).ready(function() {
+    createLoading();
     galaxyImage.onload = function() {
-        /*console.log("galaxy image loaded");
-        reaperImage.onload = function() {
-            console.log("reaper loaded");
-            greatWallImage.onload = function() {
-                console.log("great wall image loaded");
-                //nycImage.onload = function() {*/
+        removeLoading();
         console.log("DOne loading everything :)");
         myAudio.play();
         $("body").addClass("stage0");
         animate();
         beginFadeBackground();
-        //};
-        //};
-        //};
     };
 });
 
+
+function createLoading() {
+    $("#main").append('<div id="load">' +
+        '<div>G</div>' +
+        '<div>N</div>' +
+        '<div>I</div>' +
+        '<div>D</div>' +
+        '<div>A</div>' +
+        '<div>O</div>' +
+        '<div>L</div></div>');
+}
+
+function removeLoading() {
+    $("#load").remove();
+}
 
 function zoomEarth() {
     $("#earth").animate({
