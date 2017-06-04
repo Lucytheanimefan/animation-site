@@ -256,7 +256,7 @@ function populateWorks() {
     for (var i = 0; i < data.length; i++) {
         if (i % 3 == 0) {
             recentRow = i;
-            $("#works").append("<div id = 'workRow" + i + "'class='row'></div>");
+            $("#works").append("<div id = 'workRow" + i + "'class='row works'></div>");
         }
         var name = data[i]["name"];
         var url = data[i]["url"];
@@ -265,8 +265,8 @@ function populateWorks() {
         var credits = data[i]["credit"].join(" · ");
         $("#workRow" + recentRow).append("<div class='col-md-4'>" +
             "<div class='work'>" +
-            "<a href='/works/" + url + "'>" + name + "</a>" +
-            "<p>Created on " + date +
+            "<a class = 'workTitle' href='/works/" + url + "'>" + name + "</a>" +
+            "<p class = 'workInfo' >Created on " + date +
             "<br>" + credits +
             "</p>" + "</div></div>");
     }
