@@ -9,8 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/lib/bootstrap/css/bootstrap.min.css') }}">
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="icon" href="{{ url_for('static', filename='img/favicon2.ico?v=2') }}" type="image/x-icon" />
-    {% block css %}{% endblock %}
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon2.ico?v=2') }}" type="image/x-icon" /> {% block css %}{% endblock %}
     <script>
     (function(w, d, s, l, i) {
         w[l] = w[l] || [];
@@ -60,9 +59,9 @@
     {% block body %}{% endblock %}
     <div class="row buffer"></div>
 </body>
-<footer class="footer">
+<footer>
     {% block footer %}{% endblock %}
-    <div class="container">
+    <div id="contact">
         <p>Contact: deadfisheyed@gmail.com</p>
     </div>
 </footer>

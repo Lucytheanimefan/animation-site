@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Actor');
-
 .navbar-brand {
     display: inline;
 }
@@ -146,6 +145,7 @@ a:hover {
 
 
 /*----------footer water ----------*/
+
 #water-spring {
     z-index: 0;
     position: fixed;
@@ -176,4 +176,26 @@ a {
     color: inherit;
     text-decoration: underline;
     text-transform: uppercase;
+}
+
+
+/*------------ contact info footer ------------*/
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+footer {
+    left: 0;
+    bottom: 0;
+    height: 20px;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    font-size: 10px;
+    color: grey;
+}
+
+#contact{
+    text-align: center;
 }
