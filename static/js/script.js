@@ -421,9 +421,7 @@ var Fish = function(id) {
 /* ---------------------- MAIN START -------------------- */
 var canvas = document.getElementById('fishtank');
 var context = canvas.getContext('2d');
-
 var fishes = [];
-
 
 var speedBoostCountdown = 200,
     speedBoost = 0,
@@ -435,7 +433,7 @@ function startFishBackground() {
         update();
     };
 }
-fishBitmap.src = "https://dl.dropboxusercontent.com/u/4534978/2014/fishes/fish.png";
+fishBitmap.src = "/static/img/fish.png";
 
 //Draw Circle
 function draw(f) {
