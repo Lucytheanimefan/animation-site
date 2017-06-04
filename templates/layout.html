@@ -10,6 +10,7 @@
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/lib/bootstrap/css/bootstrap.min.css') }}">
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img/favicon2.ico?v=2') }}" type="image/x-icon" />
+    {% block css %}{% endblock %}
     <script>
     (function(w, d, s, l, i) {
         w[l] = w[l] || [];
@@ -42,7 +43,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!--????-->
-                <a class="navbar-brand" href="/"><img id = "fishLogo" src="/static/img/deadfisheyedicon_white.png"></a>
+                <a class="navbar-brand" href="/"><img id="fishLogo" src="/static/img/deadfisheyedicon_white.png"></a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -66,7 +67,8 @@
     </div>
 </footer>
 <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='css/lib/bootstrap/js/bootstrap.min.js') }}"></script><!--<script type="text/javascript" src="{{ url_for('static', filename='plugins/anime.min.js') }}"></script>-->
+<script type="text/javascript" src="{{ url_for('static', filename='css/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='plugins/anime.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='plugins/paper-full.min.js') }}"></script>
 <!--<script type="text/javascript" src="{{ url_for('static', filename='js/lib/three.min.js') }}"></script>-->
 <!--<script type="text/javascript" src="{{ url_for('static', filename='js/water.js') }}"></script>-->
