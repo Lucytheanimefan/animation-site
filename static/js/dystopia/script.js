@@ -94,7 +94,7 @@ var vector = new THREE.Vector3();
 
 webglEl.appendChild(renderer.domElement);
 
-//images
+//load all the images to cache
 var galaxyImage = new Image();
 galaxyImage.src = "/static/img/dystopia/galaxy.png";
 var nycImage = new Image();
@@ -103,6 +103,10 @@ var greatWallImage = new Image();
 greatWallImage.src = "/static/img/dystopia/greatwall.png";
 var reaperImage = new Image();
 reaperImage.src = "/static/img/dystopia/reaper.png";
+var earthImage = new Image();
+earthImage.src = "/static/img/dystopia/dystopia_map.png";
+var earthBumpImage = new Image();
+earthBumpImage.src = "/static/img/dystopia/earthbump1k.jpg";
 
 
 $(document).ready(function() {
