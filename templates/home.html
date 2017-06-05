@@ -1,6 +1,9 @@
 {% extends "layout.html" %} {% block body %}
 <div class="main_container">
-    <div id="title">deadfisheyed</div>
+    <div id="title">
+        <img class="deadfisheyed_logo" src="{{url_for('static', filename='img/deadfisheyedicon_black.png')}}"> deadfisheyed
+        <img class="deadfisheyed_logo" src="{{url_for('static', filename='img/deadfisheyedicon_white.png')}}">
+    </div>
     <canvas id="water-spring"></canvas>
 </div>
 {% endblock %}

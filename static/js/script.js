@@ -413,8 +413,8 @@ var Fish = function(id) {
 /* ---------------------- FISH "CLASS" END -------------- */
 
 /* ---------------------- MAIN START -------------------- */
-var canvas = document.getElementById('fishtank');
-var context = canvas.getContext('2d');
+var canvas;
+var context; 
 var fishes = [];
 
 var speedBoostCountdown = 200,
@@ -423,6 +423,8 @@ var speedBoostCountdown = 200,
 var fishBitmap = new Image();
 
 function startFishBackground() {
+    canvas = document.getElementById('fishtank');
+    context = canvas.getContext('2d');
     fishBitmap.onload = function() {
         update();
     };

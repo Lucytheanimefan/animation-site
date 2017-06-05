@@ -3,14 +3,9 @@
     display: inline;
 }
 
-#fishLogo {
+.deadfisheyed_logo {
     z-index: 1;
     width: 17%;
-    /*
-    -ms-transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
-    transform: rotate(90deg);
-    */
 }
 
 .main_container {
@@ -26,7 +21,7 @@
     position: absolute;
     color: grey;
     z-index: 10;
-    margin-top: 30%;
+    margin-top: 20%;
     margin-bottom: 30%;
     font-size: 60px;
     text-align: center;
