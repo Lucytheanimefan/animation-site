@@ -1,18 +1,12 @@
 (function($) {
-
     "use strict";
-
     var mypaper;
-
     $(document).ready(function() {
-
         // initialize the paper animation
         mypaper = new PaperWrap($('#water-spring')[0]);
-
     });
 
     function PaperWrap(canvasElement) {
-
         var mypaper = new paper.PaperScope();
         mypaper.setup(canvasElement);
 

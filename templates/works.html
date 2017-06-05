@@ -1,9 +1,5 @@
-{% extends "layout.html" %} 
-{% block css %}
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/works.css') }}">
-
-{% endblock %}
-{% block body %}
+{% extends "layout.html" %} {% block css %}
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/works.css') }}"> {% endblock %} {% block body %}
 <meta id="my-data" data-name="{{ works }}" data-other="{{ works }}">
 <div class="container-fluid">
     <h1>Works</h1>

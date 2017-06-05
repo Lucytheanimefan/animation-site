@@ -68,9 +68,9 @@ def chair():
 	return render_template("cage/index.html")
 
 
-@app.route("/anime")
-def diary():
-	return render_template("anime/index.html")
+@app.route("/googleDoodle")
+def doodle():
+	return render_template("googleDoodle/index.html")
 
 @app.route("/game")
 def game():
