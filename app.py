@@ -76,7 +76,9 @@ def doodle():
 def game():
 	return render_template("game/index.html")
 
-
+@app.route("/apple")
+def apple():
+	return render_template("apple.html")
 
 
 
