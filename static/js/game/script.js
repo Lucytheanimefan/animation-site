@@ -17,9 +17,9 @@ penguins.src = "/static/img/game/penguins.png";
 
 var noBrickHeight = $(document).height() - penguinHeight;
 var penguinWalk;
-var brickSequence = [{ "name": "brickwall", "class": "brick", "x":0 },
-    { "name": "AoTWall", "class": "brick","x":1400},
-    { "name": "piano", "class": "piano", "x":2300 },
+var brickSequence = [{ "name": "brickwall", "class": "brick", "x": 0 },
+    { "name": "AoTWall", "class": "brick", "x": 1400 },
+    { "name": "piano", "class": "piano", "x": 2300 },
     { "name": "door", "class": "brick", "x": 3000 },
     { "name": "lolipop1", "class": "lolipop" },
     { "name": "lolipop2", "class": "lolipop" }
@@ -51,7 +51,7 @@ function create2DWorld() {
     updateBricks(0);
 }
 
-function finishedTravelingAcrossElement(element, penguin_x_pos){
+function finishedTravelingAcrossElement(element, penguin_x_pos) {
     var width = $(element).width();
     var position = $(element).position();
     var max_x_pos = position.left + width;
@@ -61,10 +61,8 @@ function finishedTravelingAcrossElement(element, penguin_x_pos){
 function mouseDown2DWorld() {
     $(document).keydown(function(e) {
         penguinWalkIsPaused = false;
-
         var penguin_x_pos = $("#container").position().left + $("#container").width() - 100;
-
-        if (finishedTravelingAcrossElement("#"+mostRecentBrick,penguin_x_pos)){//(Math.abs(penguin_x_pos - screenWidth) < 600) {
+        if (finishedTravelingAcrossElement("#" + mostRecentBrick, penguin_x_pos)) {
             console.log("Call update Bricks");
             updateBricks();
         }
@@ -167,7 +165,6 @@ function updateBricks(begin = 1) {
             //create3DWorld();
         }
     } else {
-        console.log("---------------New brick!")
         var newBrick = brickSequence.shift();
         var newBrickName = newBrick["name"];
         var newBrickClass = newBrick["class"];
@@ -193,11 +190,7 @@ function remove2Dworld() {
 function gameLoop() {
     penguinWalk = window.requestAnimationFrame(gameLoop);
     var standingOnBrick = ($("#container").position().left >= ($("#" + mostRecentBrick).position().left) - 200) && (($("#container").position().left + 400) <= ($("#" + mostRecentBrick).position().left + $("#" + mostRecentBrick).width() + 200));
-    //console.log("most recent brick: " + mostRecentBrick);
     var bottomYCoord = $(window).height() - $("#penguins").position().top - $("#penguins").height();
-    //console.log("Bottom y coord: " + bottomYCoord);
-    //console.log("COmpared to window height: "+$(window).height());
-    //var standingOnBrick = bottomYCoord < ($(window).height() - penguinHeight/2);
 
     var passedBrick = $("#container").position().left >= ($("#" + mostRecentBrick).position().left + $(document).width() - 10);
     if (passedBrick) {
@@ -205,7 +198,6 @@ function gameLoop() {
     }
 
     if (standingOnBrick) {
-        //console.log("Standing on brick!!!!")
         formatPenguin("#" + mostRecentBrick);
     } else {
         formatPenguin();
