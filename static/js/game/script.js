@@ -51,15 +51,20 @@ function create2DWorld() {
     updateBricks(0);
 }
 
+function finishedTravelingAcrossElement(element, penguin_x_pos){
+    var width = $(element).width();
+    var position = $(element).position();
+    var max_x_pos = position.left + width;
+    return (penguin_x_pos > max_x_pos);
+}
+
 function mouseDown2DWorld() {
     $(document).keydown(function(e) {
         penguinWalkIsPaused = false;
 
         var penguin_x_pos = $("#container").position().left + $("#container").width() - 100;
-        console.log("screenwidth: "+screenWidth);
-        var x = penguin_x_pos%screenWidth;
-        console.log("penguin_x_pos: "+x);
-        if (Math.abs(penguin_x_pos - screenWidth) < 600) {
+
+        if (finishedTravelingAcrossElement("#"+mostRecentBrick,penguin_x_pos)){//(Math.abs(penguin_x_pos - screenWidth) < 600) {
             console.log("Call update Bricks");
             updateBricks();
         }
@@ -162,7 +167,7 @@ function updateBricks(begin = 1) {
             //create3DWorld();
         }
     } else {
-        //console.log("New brick!")
+        console.log("---------------New brick!")
         var newBrick = brickSequence.shift();
         var newBrickName = newBrick["name"];
         var newBrickClass = newBrick["class"];
