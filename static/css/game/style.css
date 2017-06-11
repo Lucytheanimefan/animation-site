@@ -27,23 +27,25 @@ body {
     height: 100%;
 }
 
-.brick {
-    min-height: 300px;
-    max-height: 400px;
+.brickElement {
     position: absolute;
     z-index: -2;
     bottom: 0;
     display: inline;
 }
 
+.brick {
+    min-height: 300px;
+    max-height: 400px;
+
+}
+
 .lolipop {
-    position: absolute;
-    bottom: 0;
+
 }
 
 .piano {
-    position: absolute;
-    bottom: 0;
+
 }
 
 #penguins {

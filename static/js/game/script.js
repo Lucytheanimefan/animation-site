@@ -1,5 +1,5 @@
 var penguinWalkIsPaused = false;
-var screenWidth = Math.round($(document).width());
+var screenWidth = Math.round($(window).width());
 //animation sprite images penguins
 container = $("#container");
 container.append("<canvas class='penguinCanvas'id='penguins'></canvas>");
@@ -17,10 +17,10 @@ penguins.src = "/static/img/game/penguins.png";
 
 var noBrickHeight = $(document).height() - penguinHeight;
 var penguinWalk;
-var brickSequence = [{ "name": "brickwall", "class": "brick" },
-    { "name": "AoTWall", "class": "brick" },
-    { "name": "piano", "class": "piano" },
-    { "name": "door", "class": "brick" },
+var brickSequence = [{ "name": "brickwall", "class": "brick", "x":0 },
+    { "name": "AoTWall", "class": "brick","x":1400},
+    { "name": "piano", "class": "piano", "x":2300 },
+    { "name": "door", "class": "brick", "x": 3000 },
     { "name": "lolipop1", "class": "lolipop" },
     { "name": "lolipop2", "class": "lolipop" }
 ];
@@ -56,7 +56,9 @@ function mouseDown2DWorld() {
         penguinWalkIsPaused = false;
 
         var penguin_x_pos = $("#container").position().left + $("#container").width() - 100;
-        console.log("penguin_x_pos: "+penguin_x_pos);
+        console.log("screenwidth: "+screenWidth);
+        var x = penguin_x_pos%screenWidth;
+        console.log("penguin_x_pos: "+x);
         if (Math.abs(penguin_x_pos - screenWidth) < 600) {
             console.log("Call update Bricks");
             updateBricks();
@@ -136,7 +138,7 @@ function penguinCoordinates() {
 
 function updatePenguinPositions(right = true) {
     var dir = right ? -1 : 1;
-    $(".brick").each(function(i) {
+    $(".brickElement").each(function(i) {
         $(this).css("left", $(this).position().left + dir * background_speed);
     })
     $('body').css('background-position', background_xpos + 'px 0');
@@ -165,8 +167,8 @@ function updateBricks(begin = 1) {
         var newBrickName = newBrick["name"];
         var newBrickClass = newBrick["class"];
         mostRecentBrick = newBrickName;
-        $("#main").append("<img class='" + newBrickClass + "' id = '" + newBrickName + "'src='/static/img/game/" + newBrickName + ".png'>");
-        $("#" + newBrickName).css("left", (begin * ($(document).width() - penguinWidth) + main_xpos) + "px");
+        $("#main").append("<img class='" + newBrickClass + " brickElement' id = '" + newBrickName + "'src='/static/img/game/" + newBrickName + ".png'>");
+        $("#" + newBrickName).css("left", (begin * ($(window).width() - penguinWidth) + main_xpos) + "px");
     }
 }
 
