@@ -169,6 +169,15 @@ function updateBricks(begin = 1) {
         var newBrickName = newBrick["name"];
         var newBrickClass = newBrick["class"];
         mostRecentBrick = newBrickName;
+
+        if (newBrickClass == "piano"){
+            //penguin.context = ctx
+            
+            ctx.rotate(-45 * Math.PI / 180);
+            //ctx.translate(canvas.width/2,canvas.height/2);
+            penguin.context = ctx;
+        }
+
         $("#main").append("<img class='" + newBrickClass + " brickElement' id = '" + newBrickName + "'src='/static/img/game/" + newBrickName + ".png'>");
         $("#" + newBrickName).css("left", (begin * ($(window).width() - penguinWidth) + main_xpos) + "px");
     }
@@ -268,7 +277,9 @@ var penguin = sprite({
     image: penguins,
     numberOfFrames: 6,
     ticksPerFrame: 6
-})
+});
+console.log("penguin context: ");
+console.log(penguin.context);
 
 // Load sprite sheet
 penguins.addEventListener("load", gameLoop);
