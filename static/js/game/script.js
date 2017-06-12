@@ -170,12 +170,32 @@ function updateBricks(begin = 1) {
         var newBrickClass = newBrick["class"];
         mostRecentBrick = newBrickName;
 
-        if (newBrickClass == "piano"){
+        if (newBrickClass == "piano") {
+            cancelAnimationFrame(penguinWalk);
             //penguin.context = ctx
-            
             ctx.rotate(-45 * Math.PI / 180);
-            //ctx.translate(canvas.width/2,canvas.height/2);
-            penguin.context = ctx;
+            penguinHeight = 800;
+            canvas.height = penguinHeight;
+            penguin = null;
+            //ctx.clearRect(0, 0, canvas.width, canvas.height);
+            //ctx.save();
+            //ctx.translate(0, -200);
+
+            //ctx.drawImage(image, -image.width / 2, -image.height / 2);
+            //ctx.restore();
+
+            ctx.rotate(-45 * Math.PI / 180);
+            penguin = sprite({
+                context: ctx,
+                width: 2400,
+                height: penguinHeight,
+                image: penguins,
+                numberOfFrames: 6,
+                ticksPerFrame: 6,
+                rotate: true
+            });
+            penguinWalk = window.requestAnimationFrame(gameLoop);
+
         }
 
         $("#main").append("<img class='" + newBrickClass + " brickElement' id = '" + newBrickName + "'src='/static/img/game/" + newBrickName + ".png'>");
@@ -237,6 +257,7 @@ function sprite(options) {
     that.width = options.width;
     that.height = options.height;
     that.image = options.image;
+    that.rotate = options.rotate;
 
     that.update = function() {
         tickCount += 1;
@@ -255,6 +276,9 @@ function sprite(options) {
     that.render = function() {
         // Clear the canvas
         that.context.clearRect(0, 0, that.width, that.height);
+        //if (that.rotate){
+        //    that.context.rotate(-45 * Math.PI / 180);
+        //}
         // Draw the animation
         that.context.drawImage(
             that.image,
@@ -276,7 +300,8 @@ var penguin = sprite({
     height: 237,
     image: penguins,
     numberOfFrames: 6,
-    ticksPerFrame: 6
+    ticksPerFrame: 6,
+    rotate: false
 });
 console.log("penguin context: ");
 console.log(penguin.context);
