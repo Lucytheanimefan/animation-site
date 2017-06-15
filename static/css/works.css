@@ -7,6 +7,9 @@ body {
     color: #4c4c4c !important;
 }
 
+.navbar-toggle .icon-bar{
+    background-color: grey !important;
+}
 hr{
 	display: block;
     height: 1px;
