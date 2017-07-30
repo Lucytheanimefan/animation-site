@@ -63,9 +63,9 @@ def chapel():
 	return render_template('chapel_entrance/index.html')
 '''
 
-@app.route("/cage")
+@app.route("/oneMoreLight")
 def chair():
-	return render_template("cage/index.html")
+	return render_template("oneMoreLight/index.html")
 
 
 @app.route("/googleDoodle")
@@ -84,4 +84,5 @@ def apple():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port, threaded=True)
+    #app.run(host='0.0.0.0', port=port, threaded=True)
+    app.run(debug=True)
