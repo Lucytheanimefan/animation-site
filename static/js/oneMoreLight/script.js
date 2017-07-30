@@ -1,7 +1,11 @@
 var youtubecode = "3kaUvGSLMew";
 var player;
 var timeInterval;
-
+var starAnimationID;
+var stop = false;
+// 72 - who cares
+// 74 seconds - when one more light goes our
+// // 79 - flickers
 function onYouTubePlayerAPIReady() {
     player = new YT.Player('ytplayer', {
         height: '200',
@@ -19,19 +23,20 @@ function onStateChange(event) {
     switch (event.data) {
         case YT.PlayerState.ENDED:
             console.log("Video ended");
-            clearInterval(timeInterval);
+            cancel();
             break;
         case YT.PlayerState.PLAYING:
+            stop = false;
             console.log("Video playing");
             updateTimerDisplay();
             break;
         case YT.PlayerState.PAUSED:
             console.log("Video paused");
-            clearInterval(timeInterval);
+            cancel();
             break;
         case YT.PlayerState.BUFFERING:
             console.log("Video buffering");
-            clearInterval(timeInterval);
+            cancel();
             break;
         case YT.PlayerState.CUED:
             console.log("Video cued");
@@ -43,28 +48,101 @@ function onStateChange(event) {
 
 function initialize() {
     console.log("Change background");
-    $('body').animate({ backgroundColor: 'black' }, 27*1000);
+    $('body').animate({ backgroundColor: 'black' }, 27 * 1000);
     updateTimerDisplay();
+}
 
+function cancel() {
+    stop = true;
+    console.log("Canceled stuff");
+    window.cancelAnimationFrame(starAnimationID);
+    clearInterval(timeInterval);
 }
 
 // This function is called by initialize()
 function updateTimerDisplay() {
     timeInterval = setInterval(function() {
-        // Update current time text display.
-        console.log(player.getCurrentTime());
-        console.log(formatTime(player.getDuration()));
-    }, 1000)
+        var time = player.getCurrentTime()
+        if (time > 27) // after background fades to black
+        {
+            tick();
+        }
+        if (time >= 74 && time <= 75) // when one more light goes out
+        {
 
+        }
+        //console.log(player.getCurrentTime());
+    }, 1500);
 }
 
 function formatTime(time) {
     time = Math.round(time);
-
     var minutes = Math.floor(time / 60),
         seconds = time - minutes * 60;
-
     seconds = seconds < 10 ? '0' + seconds : seconds;
-
     return minutes + ":" + seconds;
+}
+
+/* -------------- stars ------------------ */
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+var stars = [], // Array that contains the stars
+    FPS = 40, // Frames per second
+    x = canvas.width; // Number of stars
+
+for (var i = 0; i < x; i++) {
+    stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random(),
+        vx: Math.floor(Math.random() * 10) - 5,
+        vy: Math.floor(Math.random() * 10) - 5
+    });
+}
+
+
+// Draw the scene
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.globalCompositeOperation = "lighter";
+
+    for (var i = 0, x = stars.length; i < x; i++) {
+        var s = stars[i];
+
+        ctx.fillStyle = "#fff";
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, 2 * Math.PI);
+        ctx.fill();
+    }
+}
+
+// Update star locations
+
+function update() {
+    for (var i = 0, x = stars.length; i < x; i++) {
+        var s = stars[i];
+
+        s.x += s.vx / FPS;
+        s.y += s.vy / FPS;
+
+        if (s.x < 0 || s.x > canvas.width) s.x = -s.x;
+        if (s.y < 0 || s.y > canvas.height) s.y = -s.y;
+    }
+}
+
+// Update and draw
+
+function tick() {
+    //console.log("tick");
+    if (!stop) {
+        draw();
+        update();
+    }
+    starAnimationID = requestAnimationFrame(tick);
 }
