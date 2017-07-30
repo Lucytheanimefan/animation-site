@@ -3,6 +3,10 @@ var player;
 var timeInterval;
 var starAnimationID;
 var stop = false;
+var decreaseStars = false;
+var flicker = false;
+var flickerOnce = false;
+
 // 72 - who cares
 // 74 seconds - when one more light goes our
 // // 79 - flickers
@@ -63,14 +67,39 @@ function cancel() {
 function updateTimerDisplay() {
     timeInterval = setInterval(function() {
         var time = player.getCurrentTime()
-        if (time > 27) // after background fades to black
+        if (time > 27) // after background fades to black, start the stars
         {
+            ctx.globalAlpha = 1;
             tick();
         }
-        if (time >= 74 && time <= 75) // when one more light goes out
+        if (time >= 70 && time < 74) 
         {
-
+            decreaseStars = true;
+        } 
+        else if (time >= 74 && time <= 75) // when one more light goes out
+        {
+            decreaseStars = false;
+        } 
+        else if (time > 75 && time < 79) 
+        {
+            if (!flickerOnce) {
+              flickerOnce = true;
+              // single star
+              stars = [{
+                  x: canvas.width / 2,
+                  y: canvas.height / 2,
+                  radius: 10,
+                  vx: 0,
+                  vy: 0
+              }];
+            }
+        } 
+        else if (time >= 79 && time <= 82) 
+        {
+            ctx.globalAlpha = 0;
+            flicker = true;
         }
+
         //console.log(player.getCurrentTime());
     }, 1500);
 }
@@ -92,7 +121,7 @@ canvas.height = window.innerHeight;
 
 var stars = [], // Array that contains the stars
     FPS = 40, // Frames per second
-    x = canvas.width; // Number of stars
+    x = 1000 //canvas.width; // Number of stars
 
 for (var i = 0; i < x; i++) {
     stars.push({
@@ -104,11 +133,17 @@ for (var i = 0; i < x; i++) {
     });
 }
 
+console.log("stars: ")
+console.log(stars)
 
-// Draw the scene
+var radiusDiff = 0.1;
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (decreaseStars) {
+        console.log("Start decreasing stars");
+        stars.splice(-2)
+    }
 
     ctx.globalCompositeOperation = "lighter";
 
@@ -116,6 +151,19 @@ function draw() {
         var s = stars[i];
 
         ctx.fillStyle = "#fff";
+        if (flicker) {
+            if (ctx.globalAlpha >= 1) {
+                ctx.globalAlpha = 0;
+            }
+            if (s.radius >= 5) {
+                radiusDiff = -0.1;
+            }
+            if (s.radius < 0) {
+                radiusDiff = 0.1;
+            }
+            ctx.globalAlpha += 0.1;
+            s.radius += radiusDiff
+        }
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.radius, 0, 2 * Math.PI);
         ctx.fill();
@@ -146,3 +194,4 @@ function tick() {
     }
     starAnimationID = requestAnimationFrame(tick);
 }
+
