@@ -51,7 +51,7 @@ function onStateChange(event) {
 }
 
 function initialize() {
-    console.log("Change background");
+    //console.log("Change background");
     $('body').animate({ backgroundColor: 'black' }, 27 * 1000);
     updateTimerDisplay();
 }
@@ -59,20 +59,20 @@ function initialize() {
 function cancel() {
     stop = true;
     console.log("Canceled stuff");
-    window.cancelAnimationFrame(starAnimationID);
     clearInterval(timeInterval);
 }
 
 // This function is called by initialize()
 function updateTimerDisplay() {
     timeInterval = setInterval(function() {
-        var time = player.getCurrentTime()
+        var time = player.getCurrentTime();
+        console.log(time);
         if (time > 27) // after background fades to black, start the stars
         {
             ctx.globalAlpha = 1;
             tick();
         }
-        if (time >= 70 && time < 74) 
+        if (time >= 64 && time < 74) 
         {
             decreaseStars = true;
         } 
@@ -80,10 +80,11 @@ function updateTimerDisplay() {
         {
             decreaseStars = false;
         } 
-        else if (time > 75 && time < 79) 
+        else if (time > 75 && time < 76) 
         {
             if (!flickerOnce) {
               flickerOnce = true;
+              ctx.globalAlpha = 0;
               // single star
               stars = [{
                   x: canvas.width / 2,
@@ -94,9 +95,8 @@ function updateTimerDisplay() {
               }];
             }
         } 
-        else if (time >= 79 && time <= 82) 
+        else if (time >= 76 && time <= 82) 
         {
-            ctx.globalAlpha = 0;
             flicker = true;
         }
 
@@ -133,16 +133,16 @@ for (var i = 0; i < x; i++) {
     });
 }
 
-console.log("stars: ")
-console.log(stars)
+//console.log("stars: ")
+//console.log(stars)
 
-var radiusDiff = 0.1;
+var radiusDiff = 0.01;
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (decreaseStars) {
-        console.log("Start decreasing stars");
-        stars.splice(-2)
+        //console.log("Start decreasing stars");
+        stars.pop();
     }
 
     ctx.globalCompositeOperation = "lighter";
@@ -153,15 +153,15 @@ function draw() {
         ctx.fillStyle = "#fff";
         if (flicker) {
             if (ctx.globalAlpha >= 1) {
-                ctx.globalAlpha = 0;
+                ctx.globalAlpha = 0; 
             }
-            if (s.radius >= 5) {
-                radiusDiff = -0.1;
+            if (s.radius >= 7) {
+                radiusDiff = -0.01;
             }
-            if (s.radius < 0) {
-                radiusDiff = 0.1;
+            if (s.radius < 0.02) {
+                radiusDiff = 0.01;
             }
-            ctx.globalAlpha += 0.1;
+            ctx.globalAlpha += 0.05;
             s.radius += radiusDiff
         }
         ctx.beginPath();
