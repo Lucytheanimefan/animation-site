@@ -133,7 +133,7 @@ for (var i = 0; i < x; i++) {
 //console.log(stars)
 
 var radiusDiff = 0.005;
-var alphaDiff = 0.02;
+var alphaDiff = 0.1;
 var diff = 0.01;
 var spiralCoords = spiralCoordinates();
 
@@ -162,7 +162,7 @@ function draw() {
 
         ctx.fillStyle = "#fff";
         if (flicker) {
-            if (ctx.globalAlpha >= 1) {
+            if (ctx.globalAlpha >= 0.9) {
                 ctx.globalAlpha = 0;
             }
             if (s.radius >= 10) {
