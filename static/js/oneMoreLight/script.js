@@ -7,7 +7,8 @@ var decreaseStars = false;
 var flicker = false;
 var flickerOnce = false;
 var spiralStars = false;
-
+var circleStars = false;
+var counter = 0;
 // 72 - who cares
 // 74 seconds - when one more light goes our
 // // 79 - flickers
@@ -73,7 +74,7 @@ function updateTimerDisplay() {
             ctx.globalAlpha = 1;
             tick();
         }
-        if (time >= 72 && time < 79) {
+        if (time >= 70 && time < 79) {
             decreaseStars = true;
         } else if (time >= 79 && time < 81) {
             decreaseStars = false;
@@ -86,14 +87,19 @@ function updateTimerDisplay() {
             }
         } else if (time >= 81 && time <= 83) {
             flicker = true;
-        } else if (time > 83 && time < 130) {
+        } else if (time > 83 && time < 103) {
             flicker = false;
             if (!spiralStars) {
                 stars = []; // just empty it once
             }
             spiralStars = true;
-        } else if (time > 130) { // spiral is done
-        	decreaseStars = true;
+        } else if (time > 103 && time <= 110) { // spiral is done
+            decreaseStars = true;
+            spiralStars = false;
+            counter = 0; // reset counter
+        } else if (time > 110) {
+            decreaseStars = false;
+            circleStars = true;
         }
 
         //console.log(player.getCurrentTime());
@@ -136,26 +142,40 @@ var radiusDiff = 0.005;
 var alphaDiff = 0.1;
 var diff = 0.01;
 var spiralCoords = spiralCoordinates();
-
-var counter = 0;
+var circleCoords = generateCircleCoordinates(500, 500, canvas.width / 2, canvas.height / 2);
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.globalCompositeOperation = "lighter";
+
     if (decreaseStars) {
-        stars.pop();
+        counter += 1;
+        if (counter % 3 == 0) {
+            stars.pop();
+        }
     }
     if (spiralStars && spiralCoords.length > 1) {
         var vx = 1 //Math.floor(Math.random() * 10) - 5;
         var vy = 1;
         counter += 1;
         if (counter % 30 == 0) {
-        	var coordinateSet = spiralCoords.pop();
-        	console.log("Replenish spiral star");
+            var coordinateSet = spiralCoords.pop();
+            //console.log("Replenish spiral star");
             replenishStar(coordinateSet[0], coordinateSet[1], Math.random(), vx, vy);
         }
         //console.log("star spiral length: "+ stars.length);
     }
-    ctx.globalCompositeOperation = "lighter";
+
+    if (circleStars && circleCoords.length > 1) {
+        counter += 1
+        vx = 2;
+        vy = 2;
+        if (counter % 40 == 0) {
+            var coordinateSet = circleCoords.pop();
+            replenishStar(coordinateSet[0], coordinateSet[1], Math.random(), vx, vy);
+        }
+    }
+
 
     for (var i = 0, x = stars.length; i < x; i++) {
         var s = stars[i];
