@@ -132,7 +132,6 @@ function crop(a, b) {
 
     // put the clipped image on the new canvas.
     newCtx.putImageData(imageData, 0, 0);
-
     return newCan;
 }
 
