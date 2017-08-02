@@ -4,6 +4,7 @@ var timeInterval;
 var starAnimationID;
 var stop = false;
 var normalStar = true;
+var finale = false;
 var decreaseStars = false;
 var decreaseStarRate = 5;
 var flicker = false;
@@ -93,7 +94,7 @@ function cancel() {
 function updateTimerDisplay() {
     timeInterval = setInterval(function() {
         var time = player.getCurrentTime();
-        console.log(time);
+        //console.log(time);
         if (time > 27) // after background fades to black, start the stars
         {
             ctx.globalAlpha = 1;
@@ -149,11 +150,12 @@ function updateTimerDisplay() {
             spiralCoords = spiralCoordinates(700, 4);
             flicker = true;
         } else if (time >= 180 && time < 200) {
-            decreaseStarRate = 30;
+            decreaseStarRate = 50;
             maxRadius = 2;
         } else if (time >= 200 && time < 210) {
-            decreaseStarRate = 1;
+            decreaseStarRate = 10;
             spiralStars = true;
+            finale = true;
         } else if (time > 210) {
         	decreaseStars = false;
             circleStars = true;
@@ -161,7 +163,7 @@ function updateTimerDisplay() {
             decreaseStarRate = 20;
         } else if (time > 227 && time < 232) {
         	decreaseStars = true;
-        	circleStars = false;
+        	//circleStars = false;
             spiralStars = false;
             decreaseStarRate = 1;
         } else if (time >= 232) {
@@ -217,6 +219,10 @@ function draw() {
     if (spiralStars && spiralCoords.length > 1) {
         var vx = 1 //Math.floor(Math.random() * 10) - 5;
         var vy = 1;
+        if (finale) {
+        	vx = Math.random();
+        	vy = Math.random();
+        }
         counter += 1;
         if (counter % 30 == 0) {
             var coordinateSet = spiralCoords.pop();
