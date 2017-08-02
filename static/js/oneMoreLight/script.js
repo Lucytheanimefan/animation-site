@@ -13,8 +13,6 @@ var circleStars = false;
 var shootingStars = false;
 var counter = 0;
 var maxRadius = 10;
-
-
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext('2d');
 
@@ -24,6 +22,17 @@ canvas.height = window.innerHeight;
 var stars = [], // Array that contains the stars
     FPS = 40, // Frames per second
     x = 1000 //canvas.width; // Number of stars
+
+
+var radiusDiff = 0.005;
+var alphaDiff = 0.15;
+var diff = 0.01;
+var spiralCoords = spiralCoordinates(720, 10);
+var circleCoords = circleCoordinates(canvas.width / 2, 0.75 * canvas.height, 800, canvas.width / 2).concat(circleCoordinates(canvas.width / 3, canvas.height / 3, 800, canvas.width / 3));
+var shootingStarCoords1 = generateDiagonalCoordinates({ "start": [0, canvas.height], "end": [canvas.width, 0] });
+var shootingStarCoords2 = generateDiagonalCoordinates({ "start": [canvas.width, 0], "end": [0, canvas.height] });
+
+
 
 // 72 - who cares
 // 74 seconds - when one more light goes our
@@ -125,19 +134,39 @@ function updateTimerDisplay() {
         } else if (time > 152 && time <= 159) {
             decreaseStars = false;
             circleStars = true;
-            circleCoords = circleCoordinates(canvas.width / 2, 0.85 * canvas.height, 500, canvas.width / 2.2);
-        } else if (time > 161 && time < 165) {
+            circleCoords = circleCoords.concat(circleCoordinates(canvas.width / 2, 0.85 * canvas.height, 500, canvas.width / 2.2));
+        } else if (time > 161 && time < 164) {
             decreaseStars = false;
             shootingStars = true;
             stars = []
-        } else if (time >= 165 && time < 170) {
+        } else if (time >= 164 && time < 170) {
             decreaseStars = true;
-            decreaseStarRate = 50;
-        } else if (time > 170) {
-        	maxRadius = 7;
-        	decreaseStarRate = 60;
+            decreaseStarRate = 40;
+        } else if (time > 170 && time < 175) {
+            shootingStars = false;
+            maxRadius = 5;
+            alphaDiff = 0.2;
             spiralCoords = spiralCoordinates(700, 4);
             flicker = true;
+        } else if (time >= 180 && time < 200) {
+            decreaseStarRate = 30;
+            maxRadius = 2;
+        } else if (time >= 200 && time < 210) {
+            decreaseStarRate = 1;
+            spiralStars = true;
+        } else if (time > 210) {
+        	decreaseStars = false;
+            circleStars = true;
+        } else if (time > 220) {
+            decreaseStarRate = 20;
+        } else if (time > 227 && time < 232) {
+        	decreaseStars = true;
+        	circleStars = false;
+            spiralStars = false;
+            decreaseStarRate = 1;
+        } else if (time >= 232) {
+        	stars = [];
+        	replenishStar(canvas.width / 2, canvas.height / 2, 2, 0, 0);
         }
 
         //console.log(player.getCurrentTime());
@@ -168,13 +197,6 @@ for (var i = 0; i < x; i++) {
 //console.log("stars: ")
 //console.log(stars)
 
-var radiusDiff = 0.005;
-var alphaDiff = 0.15;
-var diff = 0.01;
-var spiralCoords = spiralCoordinates(720, 10);
-var circleCoords = circleCoordinates(canvas.width / 2, 0.75 * canvas.height, 800, canvas.width / 2).concat(circleCoordinates(canvas.width / 3, canvas.height / 3, 800, canvas.width / 3));
-var shootingStarCoords1 = generateDiagonalCoordinates({ "start": [0, canvas.height], "end": [canvas.width, 0] });
-var shootingStarCoords2 = generateDiagonalCoordinates({ "start": [canvas.width, 0], "end": [0, canvas.height] });
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -227,6 +249,7 @@ function draw() {
             replenishStar(coordinateSet2[0], coordinateSet2[1], Math.random(), vx * Math.random(), vy * Math.random());
         }
     }
+
 
     for (var i = 0, x = stars.length; i < x; i++) {
         var s = stars[i];
