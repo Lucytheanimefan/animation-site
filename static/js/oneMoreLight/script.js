@@ -26,7 +26,7 @@ var stars = [], // Array that contains the stars
 
 
 var radiusDiff = 0.005;
-var alphaDiff = 0.15;
+var alphaDiff = 0.12;
 var diff = 0.01;
 var spiralCoords = spiralCoordinates(720, 10);
 var circleCoords = circleCoordinates(canvas.width / 2, 0.75 * canvas.height, 800, canvas.width / 2).concat(circleCoordinates(canvas.width / 3, canvas.height / 3, 800, canvas.width / 3));
@@ -54,27 +54,27 @@ function onYouTubePlayerAPIReady() {
 function onStateChange(event) {
     switch (event.data) {
         case YT.PlayerState.ENDED:
-            console.log("Video ended");
-            cancel();
+            //console.log("Video ended");
+            cancel(true);
             break;
         case YT.PlayerState.PLAYING:
             stop = false;
-            console.log("Video playing");
+            //console.log("Video playing");
             updateTimerDisplay();
             break;
         case YT.PlayerState.PAUSED:
-            console.log("Video paused");
+            //console.log("Video paused");
             cancel();
             break;
         case YT.PlayerState.BUFFERING:
-            console.log("Video buffering");
+            //console.log("Video buffering");
             cancel();
             break;
         case YT.PlayerState.CUED:
-            console.log("Video cued");
+            //console.log("Video cued");
             break;
         default:
-            console.log("nothing");
+            //console.log("nothing");
     }
 }
 
@@ -84,17 +84,19 @@ function initialize() {
     updateTimerDisplay();
 }
 
-function cancel() {
+function cancel(final = false) {
     stop = true;
-    console.log("Canceled stuff");
     clearInterval(timeInterval);
+    if (final) {
+        cancelAnimationFrame(starAnimationID);
+    }
 }
 
 // This function is called by initialize()
 function updateTimerDisplay() {
     timeInterval = setInterval(function() {
         var time = player.getCurrentTime();
-        //console.log(time);
+        console.log(time);
         if (time > 27) // after background fades to black, start the stars
         {
             ctx.globalAlpha = 1;
@@ -127,22 +129,19 @@ function updateTimerDisplay() {
         } else if (time > 109 && time < 130) { // circle ish sprinkle ish stars
             decreaseStars = false
             circleStars = true;
-            decreaseStarRate = 250;
         } else if (time >= 130 && time <= 151) {
             decreaseStars = true;
-            decreaseStarRate = 50;
-            circleStars = false;
-        } else if (time > 152 && time <= 159) {
-            decreaseStars = false;
-            circleStars = true;
             circleCoords = circleCoords.concat(circleCoordinates(canvas.width / 2, 0.85 * canvas.height, 500, canvas.width / 2.2));
-        } else if (time > 161 && time < 164) {
-            decreaseStars = false;
+            decreaseStarRate = 100;
+        } else if (time > 152 && time <= 159) {
             shootingStars = true;
+        } else if (time > 161 && time < 164) {
+
+
             stars = []
         } else if (time >= 164 && time < 170) {
             decreaseStars = true;
-            decreaseStarRate = 40;
+            decreaseStarRate = 70;
         } else if (time > 170 && time < 175) {
             shootingStars = false;
             maxRadius = 5;
@@ -153,22 +152,30 @@ function updateTimerDisplay() {
             decreaseStarRate = 50;
             maxRadius = 2;
         } else if (time >= 200 && time < 210) {
-            decreaseStarRate = 10;
+            decreaseStarRate = 5;
+        } else if (time > 217 && time < 227) {
+            flicker = false;
             spiralStars = true;
             finale = true;
-        } else if (time > 210) {
-        	decreaseStars = false;
+            decreaseStars = false;
             circleStars = true;
-        } else if (time > 220) {
+        } else if (time > 227) {
+            flicker = true;
+            maxRadius = 5;
             decreaseStarRate = 20;
         } else if (time > 227 && time < 232) {
-        	decreaseStars = true;
-        	//circleStars = false;
+            maxRadius = 4;
+            decreaseStars = true;
+            //circleStars = false;
             spiralStars = false;
-            decreaseStarRate = 1;
+            decreaseStarRate = 7;
         } else if (time >= 232) {
-        	stars = [];
-        	replenishStar(canvas.width / 2, canvas.height / 2, 2, 0, 0);
+            maxRadius = 2;
+            stars = [];
+            replenishStar(canvas.width / 2, canvas.height / 2, 2, 0, 0);
+        } else if (time > 244) {
+            maxRadius = 1;
+            decreaseStarRate = 1;
         }
 
         //console.log(player.getCurrentTime());
@@ -220,8 +227,8 @@ function draw() {
         var vx = 1 //Math.floor(Math.random() * 10) - 5;
         var vy = 1;
         if (finale) {
-        	vx = Math.random();
-        	vy = Math.random();
+            vx = Math.random();
+            vy = -1; //Math.random();
         }
         counter += 1;
         if (counter % 30 == 0) {
