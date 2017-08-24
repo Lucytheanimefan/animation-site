@@ -38,14 +38,17 @@
         <div class="text-notification left-text">Click anywhere on the screen and <b>hold down</b> on your mouse. Then let go. As many times and for however long you'd like until you reach the end</div>
     </div>
 </div>
-<!--
-<audio controls autoplay loop>
-    <source src="/static/sound/Kira_Theme.mp3" type="audio/mpeg">
-</audio>-->
+
 {% endblock %}
 <!--js-->
 {% block scripts %}
+{% assets output="gen/packed.js", "js/lib/turn.min.js", "js/butterfly/script.js", "js_layout" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+
 <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<!--
 <script type="text/javascript" src="{{ url_for('static', filename='js/lib/turn.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/butterfly/script.js') }}"></script>
+-->
 {% endblock %}

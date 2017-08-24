@@ -1,16 +1,17 @@
 import os
 from flask import Flask, render_template,send_from_directory, jsonify
-#from flask_assets import Environment, Bundle
+from flask_assets import Environment, Bundle
 import requests
 
 app = Flask(__name__)
-'''
+
+
 assets = Environment(app)
 
-js = Bundle('/js/lib/jquery.js', 'base.js', 'widgets.js',
-            filters='jsmin', output='gen/packed.js')
-assets.register('js_all', js)
-'''
+js = Bundle("js/lib/jquery.min.js", "js/mygraphics.js", "js/lib/soundmanager2-jsmin.js", "css/lib/bootstrap/js/bootstrap.min.js", "plugins/anime.min.js", "plugins/paper-full.min.js", "js/script.js",
+            output='gen/packed.js')
+assets.register('js_layout', js)
+
 
 my_works = [{'url':'castleinblood','name':'Castle in Blood','credit':["Lucy","Stephanie"],'date':'12/31/16'},
 {'url':'chapel_entrance','name':'Chapel in Light','credit':["Lucy", "Yuhao Hu (photography)"],'date':'2/22/17'},
@@ -21,12 +22,6 @@ my_works = [{'url':'castleinblood','name':'Castle in Blood','credit':["Lucy","St
 {'url':'dystopia','name':'Comet','credit':["Kaijie", "Lucy"],'date':'4/28/17'},
 {'url':'oneMoreLight','name':'One More Light','credit':['Lucy'], 'date':'8/1/17'}]
 
-
-
-#js = Bundle('js/jquery.js', 'base.js', 'widgets.js',filters='jsmin', output='packed.js')
-#assets.register('js_all', js)
-
-#{'url':'butterfly','name':'Butterfly','credit':["Lucy","Kaijie"],'date':''}, NOT DONE YET
 @app.route("/")
 @app.route("/home")
 def home():
@@ -34,17 +29,15 @@ def home():
 
 @app.route("/works")
 def works():
-	print works
 	return render_template('works.html', works = my_works)
 
 @app.route("/about")
 def about():
-	return render_template('about.html')
+	return render_template('about.html', works = False)
 
 @app.route('/works/<variable>', methods=['GET'])
 def daily_post(variable):
-    #do your code here
-    return render_template(variable+"/index.html")
+    return render_template(variable+"/index.html", works = True)
 
 '''
 @app.route("/castleinblood")
