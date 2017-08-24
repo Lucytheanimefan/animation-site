@@ -40,16 +40,12 @@
 </div>
 
 {% endblock %}
+
 <!--js-->
 {% block scripts %}
-
-
 
 {% assets output="gen/packed.js", "js_genlayout", "plugins/jquery-ui.min.js", "js/lib/turn.min.js", "js/butterfly/script.js" %}
 <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
-<!--
-<script type="text/javascript" src="{{ url_for('static', filename='js/lib/turn.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/butterfly/script.js') }}"></script>
--->
+
 {% endblock %}

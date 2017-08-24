@@ -17,11 +17,8 @@
 {% endblock %}
 <!--js-->
 {% block scripts %}
-<script type="text/javascript" src="{{ url_for('static', filename='js/lib/three.min.js') }}"></script>
-<!--<script src="http://threejs.org/examples/js/modifiers/ExplodeModifier.js"></script> -->
-<script type="text/javascript" src="{{ url_for('static', filename='js/lib/TrackballControls.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/lib/ExplodeModifier.js') }}"></script>
-<!--<script src="http://threejs.org/examples/js/lib/tween.min.js"></script> -->
-<script type="text/javascript" src="{{ url_for('static', filename='js/dystopia/script.js') }}"></script>
-<!--<script type="text/javascript" src="{{ url_for('static', filename='js/dystopia/ribbon.js') }}"></script>-->
+{% assets output="gen/packed.js", "js_genlayout", "js/lib/three.min.js","js/lib/TrackballControls.js", "js/lib/ExplodeModifier.js", "js/dystopia/script.js" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+
 {% endblock %}

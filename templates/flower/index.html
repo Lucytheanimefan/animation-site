@@ -16,5 +16,9 @@
 {% endblock %}
 <!--js-->
 {% block scripts %}
-<script type="text/javascript" src="{{ url_for('static', filename='js/flower/script.js') }}"></script>
+
+{% assets output="gen/packed.js", "js_genlayout", "js/flower/script.js" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+
 {% endblock %}

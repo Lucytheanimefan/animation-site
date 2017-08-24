@@ -25,8 +25,8 @@
 {% endblock %}
 <!--js-->
 {% block scripts %}
-<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/lib/turn.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/deathnote/rules.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/deathnote/script.js') }}"></script>
+{% assets output="gen/packed.js", "js_genlayout", "plugins/jquery-ui.min.js","js/lib/turn.min.js", "js/deathnote/rules.js", "js/deathnote/script.js" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+
 {% endblock %}

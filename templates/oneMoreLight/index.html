@@ -11,7 +11,12 @@
 {% endblock %}
 <!--js-->
 {% block scripts %}
-<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+<!-- TODO: get local copy -->
 <script src="https://www.youtube.com/iframe_api"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/oneMoreLight/script.js') }}"></script>
+
+{% assets output="gen/packed.js", "js_genlayout", "js/oneMoreLight/script.js" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+
 {% endblock %}
