@@ -41,8 +41,6 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <!--????-->
-                <!--<a class="navbar-brand" href="/"><img id="fishLogo" src="/static/img/deadfisheyedicon_white.png"></a>-->
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -66,22 +64,13 @@
     </div>
 </footer>
 
-{% if not works %}
+{% if not isWorks %}
 {% assets "js_layout" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
 {% endif %}
-<!--{% assets output="gen/packed.js",
-          "js/lib/jquery.min.js", "js/mygraphics.js", "js/lib/soundmanager2-jsmin.js", "css/lib/bootstrap/js/bootstrap.min.js", "plugins/anime.min.js", "plugins/paper-full.min.js", "js/script.js" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-{% endassets %}-->
-<!--
-<script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='css/lib/bootstrap/js/bootstrap.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='plugins/anime.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='plugins/paper-full.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
--->
+
+{% block javascript %}{% endblock %}
 <script>
 (function(i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
@@ -98,4 +87,3 @@
 ga('create', 'UA-89624096-1', 'auto');
 ga('send', 'pageview');
 </script>
-{% block javascript %}{% endblock %}

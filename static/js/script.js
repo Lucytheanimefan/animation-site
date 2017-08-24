@@ -246,7 +246,6 @@ var recentRow;
 function populateWorks() {
     var flaskData = $('#my-data').data();
     var data = JSON.parse("[" + flaskData["name"].replace(/'/g, '"') + "]")[0];
-    console.log(data);
     for (var i = 0; i < data.length; i++) {
         if (i % 3 == 0) {
             recentRow = i;
@@ -255,7 +254,6 @@ function populateWorks() {
         var name = data[i]["name"];
         var url = data[i]["url"];
         var date = data[i]["date"];
-        console.log(data[i]["credit"]);
         var credits = data[i]["credit"].join(" · ");
         $("#workRow" + recentRow).append("<div class='col-md-4'>" +
             "<div class='work'>" +

@@ -12,6 +12,9 @@ js = Bundle("js/lib/jquery.min.js", "js/mygraphics.js", "js/lib/soundmanager2-js
             output='gen/packed.js')
 assets.register('js_layout', js)
 
+genlayout_js = Bundle("js/lib/jquery.min.js", "js/mygraphics.js", "js/lib/soundmanager2-jsmin.js", "css/lib/bootstrap/js/bootstrap.min.js", "plugins/anime.min.js", "plugins/paper-full.min.js",
+            output='gen/packed.js')
+assets.register('js_genlayout', genlayout_js)
 
 my_works = [{'url':'castleinblood','name':'Castle in Blood','credit':["Lucy","Stephanie"],'date':'12/31/16'},
 {'url':'chapel_entrance','name':'Chapel in Light','credit':["Lucy", "Yuhao Hu (photography)"],'date':'2/22/17'},
@@ -33,29 +36,11 @@ def works():
 
 @app.route("/about")
 def about():
-	return render_template('about.html', works = False)
+	return render_template('about.html', isWorks = False)
 
 @app.route('/works/<variable>', methods=['GET'])
 def daily_post(variable):
-    return render_template(variable+"/index.html", works = True)
-
-'''
-@app.route("/castleinblood")
-def castle():
-	return render_template('castleinblood/index.html')
-
-@app.route("/butterfly")
-def butterfly():
-	return render_template('butterfly/index.html')
-
-@app.route("/three")
-def three():
-	return render_template('three/three.html')
-
-@app.route("/chapel_entrance")
-def chapel():
-	return render_template('chapel_entrance/index.html')
-'''
+    return render_template(variable+"/index.html", isWorks = True)
 
 @app.route("/oneMoreLight")
 def chair():

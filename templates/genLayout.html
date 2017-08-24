@@ -36,15 +36,13 @@
     <body>
         {% block body %}{% endblock %}
     </body>
+    <!--
     {% assets output="gen/packed.js",
           "js/lib/jquery.min.js", "js/mygraphics.js", "js/lib/soundmanager2-jsmin.js" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
-<!--
-    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/mygraphics.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/soundmanager2-jsmin.js') }}"></script>
--->
+    -->
+
     {% block scripts %} {% endblock %}
     <script>
     (function(i, s, o, g, r, a, m) {
