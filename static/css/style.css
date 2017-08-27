@@ -5,7 +5,6 @@
 
 .deadfisheyed_logo {
     z-index: 1;
-    width: 17%;
 }
 
 .main_container {
@@ -59,14 +58,6 @@
     font-size: 17px;
 }
 
-.letter {
-    height: 300px;
-    text-align: center !important;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .links {
     color: white;
 }
@@ -75,37 +66,7 @@ a {
     text-decoration: none !important;
 }
 
-.navbar {
-    text-align: center;
-}
 
-.navbar .navbar-nav {
-    display: inline-block;
-    float: none;
-}
-
-.navbar .navbar-collapse {
-    text-align: center;
-}
-
-.nav,
-.nav li,
-.nav a {
-    /*bottom: 0px !important;*/
-    text-align: center;
-    color: lightgrey;
-}
-
-.nav li:hover,
-.nav a:hover {
-    background: none !important;
-}
-
-.navbar-toggle .icon-bar {
-    background-color: white;
-    color: white !important;
-    stroke: white;
-}
 
 .icon-bar,
 .navbar-toggle,
@@ -150,15 +111,6 @@ a:hover {
     width: 100% !important;
     height: 100% !important;
     background: #000;
-}
-
-body {
-    padding-top: 60px;
-    /*necessary or else navbar will overlap content*/
-    font-family: 'Actor', sans-serif !important;
-    font-size: 14px;
-    color: lightgrey;
-    background-color: black;
 }
 
 * {

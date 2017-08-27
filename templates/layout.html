@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>deadfisheyed</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style-critical.css') }}">
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Open+Sans" onload="this.rel='stylesheet'">
     <link rel="preload" as="style" href="/static/css/lib/bootstrap/css/bootstrap.min.css" onload="this.rel='stylesheet'">
     <!--<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/lib/bootstrap/css/bootstrap.min.css') }}">-->
     <link rel="preload" as="style" href="/static/css/style.css" onload="this.rel='stylesheet'">
-    <!--<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">-->
     <link rel="icon" href="{{ url_for('static', filename='img/favicon2.ico') }}" type="image/x-icon" /> {% block css %}{% endblock %}
     <script>
     (function(w, d, s, l, i) {
