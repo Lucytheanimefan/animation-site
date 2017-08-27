@@ -9,8 +9,8 @@ Compress(app)
 
 assets = Environment(app)
 
-css = Bundle("css/style.css", "css/lib/bootstrap/css/bootstrap.min.css", output='gen/packed.css')
-assets.register('home_css', css)
+#css = Bundle("css/style.css", "css/lib/bootstrap/css/bootstrap.min.css", output='gen/packed.css')
+#assets.register('home_css', css)
 
 js = Bundle("js/lib/jquery.min.js", "js/mygraphics.js", "js/lib/soundmanager2-jsmin.js", "css/lib/bootstrap/js/bootstrap.min.js", "plugins/anime.min.js", "plugins/paper-full.min.js", "js/script.js",
             output='gen/packed.js')
