@@ -4,7 +4,7 @@ body {
     font-family: 'Actor', sans-serif !important;
     font-size: 14px;
     color: lightgrey;
-    background-color: black;
+    background-color: black !important;
 }
 
 .letter {
@@ -13,6 +13,10 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.links {
+    color: white;
 }
 
 .navbar {
