@@ -9,4 +9,4 @@ Werkzeug==0.11.11
 gunicorn
 gevent
 Flask-Assets
-flask-compress
+flask-compress==1.4.0
