@@ -1,10 +1,11 @@
 import os
 from flask import Flask, render_template,send_from_directory, jsonify
 from flask_assets import Environment, Bundle
+from flask_compress import Compress
 import requests
 
 app = Flask(__name__)
-
+Compress(app)
 
 assets = Environment(app)
 
