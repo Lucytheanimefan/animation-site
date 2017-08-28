@@ -4,6 +4,7 @@
 }
 
 .deadfisheyed_logo {
+    width: 17%;
     z-index: 1;
 }
 
@@ -16,7 +17,7 @@
     justify-content: center;
 }
 
-#title {
+#title{
     left: 0 !important;
     position: absolute;
     color: grey;
@@ -75,6 +76,7 @@ a {
 }
 
 .navbar {
+    z-index: 5;
     text-align: center;
 }
 
@@ -92,7 +94,7 @@ a {
 .nav a {
     /*bottom: 0px !important;*/
     text-align: center;
-    color: lightgrey;
+    color: lightgrey !important;
 }
 
 .nav li:hover,
