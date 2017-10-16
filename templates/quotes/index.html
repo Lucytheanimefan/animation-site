@@ -1,0 +1,19 @@
+{% extends "genLayout.html" %}
+<!--css-->
+{% block css %}
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/quotes/style.css') }}"> {% endblock %}
+<!--html-->
+{% block body %}
+
+
+
+{% endblock %}
+<!--js-->
+{% block scripts %}
+
+
+{% assets output="gen/packed.js", "js_genlayout", "js/quotes/script.js" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+
+{% endblock %}
