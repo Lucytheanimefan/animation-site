@@ -402,18 +402,25 @@ function drawText(text) {
     ctx.fillText(text, 10, 50);
 }
 
+var letterIndex = 0;
 function textGrowth(){
   window.requestAnimFrame(textGrowth);
-  render(100, 5000);
+  renderText(100, 5000, 0, letterIndex);
 }
 
-var render = function(totalGrowth, time) {
+var renderText = function(totalGrowth, time, i, j) {
     ctx.clearRect(0, 0, 1000, 500);
     ctx.font = fontSize + "px Arial";
-    ctx.fillText("Hello World", 200, 150);
+    var text = quotes[i];
+    //console.log(text);
+    //context.fillText(text,x,y,maxWidth);
+    ctx.fillText(text[letterIndex], 200 + (letterIndex*5), 150);
+    
+    letterIndex+=1;
+    //ctx.fillText("Hello World", 200, 150);
 
     var growthPerFrame = time / totalGrowth / 60;
     fontSize += growthPerFrame;
-    //console.log('font size: ', fontSize);
+
     if (fontSize > totalGrowth) fontSize = 12;
 };
