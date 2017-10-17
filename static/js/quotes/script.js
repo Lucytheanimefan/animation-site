@@ -4,16 +4,29 @@ var quotes = ["There are no inherently bad people. Everyone believes that, mysel
 
 var canvas;
 var ctx;
+var fontSize   = 12;
 
 $(document).ready(function() {
-	canvasSetup();
-	console.log(findLetter(quotes[0], "i"));
-	drawText(quotes[0]);
+    canvasSetup();
+    console.log(findLetter(quotes[0], "i"));
+    //drawText(quotes[0]);
+    textGrowth();
 });
+
+window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame       || 
+    window.webkitRequestAnimationFrame || 
+    window.mozRequestAnimationFrame    || 
+    window.oRequestAnimationFrame      || 
+    window.msRequestAnimationFrame     || 
+    function( callback ){
+      window.setTimeout(callback, 1000 / 60);
+    };
+})();
 
 
 function canvasSetup() {
-	canvas = document.getElementById('background');
+    canvas = document.getElementById('background');
     canvas.width = $(document).width();
     canvas.height = $(document).height();
     ctx = canvas.getContext('2d');
@@ -33,6 +46,22 @@ function findLetter(string, letter) {
     }
 }
 
-function drawText(text){
-	ctx.fillText(text,10,50);
+function drawText(text) {
+    ctx.fillText(text, 10, 50);
 }
+
+function textGrowth(){
+  window.requestAnimFrame(textGrowth);
+  render(100, 5000);
+}
+
+var render = function(totalGrowth, time) {
+    ctx.clearRect(0, 0, 1000, 500);
+    ctx.font = fontSize + "px Arial";
+    ctx.fillText("Hello World", 200, 150);
+
+    var growthPerFrame = time / totalGrowth / 60;
+    fontSize += growthPerFrame;
+    //console.log('font size: ', fontSize);
+    if (fontSize > totalGrowth) fontSize = 12;
+};
