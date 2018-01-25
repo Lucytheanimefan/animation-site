@@ -5,6 +5,11 @@
 <!--html-->
 {% block body %}
 
+<form action='/sentiment_analysis' method='post'>
+	<input type="text" name="quote">
+	<input type="submit" value="Submit">
+</form>
+
 <canvas id="background"></canvas>
 
 {% endblock %}

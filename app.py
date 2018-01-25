@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template,send_from_directory, jsonify
+from flask import Flask, render_template,send_from_directory, jsonify, request
 from flask_assets import Environment, Bundle
 from flask_compress import Compress
 import requests
@@ -44,20 +44,21 @@ def about():
 
 @app.route('/works/<variable>', methods=['GET'])
 def daily_post(variable):
-    return render_template(variable+"/index.html", isWorks = True)
+    return render_template(variable+'/index.html', isWorks = True)
 
-@app.route("/oneMoreLight")
-def chair():
-	return render_template("oneMoreLight/index.html")
+@app.route("/sentiment_analysis", methods = ['POST'])
+def sentiment_analysis():
+	text = request.form['quote']
+	return render_template('quotes/index.html', data = text)
 
 
-@app.route("/googleDoodle")
-def doodle():
-	return render_template("googleDoodle/index.html")
+# @app.route("/googleDoodle")
+# def doodle():
+# 	return render_template("googleDoodle/index.html")
 
-@app.route("/game")
-def game():
-	return render_template("game/index.html")
+# @app.route("/game")
+# def game():
+# 	return render_template("game/index.html")
 
 @app.route("/quotes")
 def apple():
