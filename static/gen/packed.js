@@ -2355,7 +2355,7 @@ function getSentimentData() {
 
 
 function visualizeDataSpheres(data) {
-	var group = new THREE.Group();
+  var group = new THREE.Group();
   for (i in data) {
     let value = data[i];
     let mesh = meshForTextPolarity(value.text, value.polarity, value.polarity_confidence, value.subjectivity, value.subjectivity_confidence);
@@ -2365,14 +2365,21 @@ function visualizeDataSpheres(data) {
 }
 
 function meshForTextPolarity(text, polarity, polarity_confidence, subjectivity, subjectivity_confidence) {
-	let polarity_factor = (polarity === 'negative') ? 0.75 : 1.25;
-	let radius = polarity_confidence*polarity_factor* 10;
-  let geometry = new THREE.SphereBufferGeometry(radius, 48, 24);
+  let polarity_factor = (polarity === 'negative') ? 0.75 : 1.25;
+  let polarity_value = polarity_confidence * polarity_factor; 
+  let radius = polarity_value * 10;
+  let geometry = new THREE.SphereBufferGeometry(radius, 48*polarity_value, 24*polarity_value);
+
+  let color = new THREE.Color(Math.sin(i * polarity_confidence) * 0.5 + 0.5, Math.cos(i * polarity_confidence) * 0.5 + 0.5, Math.sin(i * polarity_confidence * subjectivity_confidence) * 0.5 + 0.5);
+
+  //console.log(color);
+
   let material = new THREE.MeshLambertMaterial({
-    color: new THREE.Color(Math.sin(i * polarity_confidence) * 0.5 + 0.5, Math.cos(i * polarity_confidence) * 0.5 + 0.5, Math.sin(i * polarity_confidence * subjectivity) * 0.5 + 0.5),
+    color: color,
     side: THREE.DoubleSide,
     clippingPlanes: clipPlanes,
-    clipIntersection: params.clipIntersection
+    clipIntersection: params.clipIntersection,
+    wireframe: (polarity === 'negative') 
   });
   return new THREE.Mesh(geometry, material);
 }
