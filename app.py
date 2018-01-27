@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, render_template,send_from_directory, jsonify, request
+from flask import Flask, render_template,send_from_directory, jsonify, request, redirect,url_for
 from flask_assets import Environment, Bundle
 from flask_compress import Compress
 from aylienapiclient import textapi
@@ -29,7 +29,8 @@ my_works = [{'url':'castleinblood','name':'Castle in Blood','credit':["Lucy","St
 {'url':'butterfly','name':'Butterfly','credit':["Kaijie", "Lucy"],'date':'3/16/17'},
 {'url':'flower','name':'Flower','credit':["Lucy", "Yuhao Hu (photography)"],'date':'4/6/17'},
 {'url':'dystopia','name':'Comet','credit':["Kaijie", "Lucy"],'date':'4/28/17'},
-{'url':'oneMoreLight','name':'One More Light','credit':['Lucy'], 'date':'8/1/17'}]
+{'url':'oneMoreLight','name':'One More Light','credit':['Lucy'], 'date':'8/1/17'},
+{'url':'quotes','name':'Quote Sentiment Visualization','credit':['Lucy'], 'date':'1/27/18'}]
 
 @app.route("/")
 @app.route("/home")
@@ -45,18 +46,19 @@ def about():
 	return render_template('about.html', isWorks = False)
 
 @app.route('/works/<variable>', methods=['GET'])
-def daily_post(variable):
+def work(variable):
     return render_template(variable+'/index.html', isWorks = True)
 
 @app.route("/sentiment_analysis", methods = ['POST'])
 def sentiment_analysis():
-	text_list = request.form['quote'].split('.')
+	text_list = request.form['quote'].encode('utf-8').split('.')
 	client = textapi.Client('8d1fc860', 'e87b5298692123977e5c6cc98c6dae0e')
 	sentiment_per_line = {}
 	for i, text in enumerate(text_list):
 		sentiment = client.Sentiment({'text': text}) 
 		sentiment_per_line[i] = sentiment
 	print sentiment_per_line
+	#return redirect(url_for('work', variable = 'quotes', data = json.dumps(sentiment_per_line)))
 	return render_template('quotes/index.html', data = json.dumps(sentiment_per_line))
 
 

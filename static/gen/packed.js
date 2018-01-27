@@ -2349,6 +2349,7 @@ $(document).ready(function() {
 function getSentimentData() {
   let sentimentData = $('#data').data('sentiment');
   let data = JSON.parse(JSON.stringify(sentimentData));
+  console.log(data);
   return data;
 }
 
