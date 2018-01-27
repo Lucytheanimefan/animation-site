@@ -10,3 +10,4 @@ gunicorn
 gevent
 Flask-Assets
 flask-compress==1.4.0
+aylien-apiclient

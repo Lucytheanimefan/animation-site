@@ -1,7 +1,9 @@
 import os
+import json
 from flask import Flask, render_template,send_from_directory, jsonify, request
 from flask_assets import Environment, Bundle
 from flask_compress import Compress
+from aylienapiclient import textapi
 import requests
 
 app = Flask(__name__)
@@ -48,8 +50,14 @@ def daily_post(variable):
 
 @app.route("/sentiment_analysis", methods = ['POST'])
 def sentiment_analysis():
-	text = request.form['quote']
-	return render_template('quotes/index.html', data = text)
+	text_list = request.form['quote'].split('.')
+	client = textapi.Client('8d1fc860', 'e87b5298692123977e5c6cc98c6dae0e')
+	sentiment_per_line = {}
+	for i, text in enumerate(text_list):
+		sentiment = client.Sentiment({'text': text}) 
+		sentiment_per_line[i] = sentiment
+	print sentiment_per_line
+	return render_template('quotes/index.html', data = json.dumps(sentiment_per_line))
 
 
 # @app.route("/googleDoodle")

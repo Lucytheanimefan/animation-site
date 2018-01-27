@@ -4,21 +4,13 @@
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/quotes/style.css') }}"> {% endblock %}
 <!--html-->
 {% block body %}
-
 <form action='/sentiment_analysis' method='post'>
-	<input type="text" name="quote">
-	<input type="submit" value="Submit">
+  <input type="text" name="quote">
+  <input type="submit" value="Submit">
 </form>
-
-<canvas id="background"></canvas>
-
+<div id='data' data-sentiment='{{ data }}'></div>
 {% endblock %}
 <!--js-->
-{% block scripts %}
-
-
-{% assets output="gen/packed.js", "js_genlayout", "js/quotes/script.js" %}
+{% block scripts %} {% assets output="gen/packed.js", "js_genlayout", "js/lib/three_new.min.js","js/lib/OrbitControls.js", "js/lib/dat.gui.min.js","js/quotes/script.js" %}
 <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-{% endassets %}
-
-{% endblock %}
+{% endassets %} {% endblock %}
