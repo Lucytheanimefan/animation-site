@@ -5,8 +5,11 @@
 <!--html-->
 {% block body %}
 <form action='/sentiment_analysis' method='post'>
-  <input type="text" name="quote">
-  <input type="submit" value="Submit">
+  <div class="form-group">
+    <label for="quote">Password</label>
+    <input class="form-control" type="text" id="quote" name="quote">
+    <button type="submit" class="btn btn-primary">Go</button>
+  </div>
 </form>
 <div id='data' data-sentiment='{{ data }}'></div>
 {% endblock %}
