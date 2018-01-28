@@ -4,14 +4,22 @@
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/quotes/style.css') }}"> {% endblock %}
 <!--html-->
 {% block body %}
-<form action='/sentiment_analysis' method='post'>
-  <div class="form-group">
-    <label for="quote">Password</label>
-    <input class="form-control" type="text" id="quote" name="quote">
-    <button type="submit" class="btn btn-primary">Go</button>
+<div class="container">
+  <form action='/sentiment_analysis' method='post'>
+    <div class="form-group">
+      <label for="quote">Text</label>
+      <input class="form-control" type="text" id="quote" name="quote">
+      <button type="submit" class="btn btn-primary">Go</button>
+    </div>
+  </form>
+  <div class='dropdown'>
+  	<button type="button" class="btn btn-primary" id='viewData'>View data</button>
+    <div class='dropdown-content'>
+      <div id='data' data-sentiment='{{ data }}'>
+      </div>
+    </div>
   </div>
-</form>
-<div id='data' data-sentiment='{{ data }}'></div>
+</div>
 {% endblock %}
 <!--js-->
 {% block scripts %} {% assets output="gen/packed.js", "js_genlayout", "js/lib/three_new.min.js","js/lib/OrbitControls.js", "js/lib/dat.gui.min.js","js/quotes/script.js" %}

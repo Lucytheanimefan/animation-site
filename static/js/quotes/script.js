@@ -15,6 +15,8 @@ var clipPlanes = [
 $(document).ready(function() {
   init();
   let data = getSentimentData();
+  viewDataButton();
+  displayData(data);
   visualizeDataSpheres(data);
   setupHelpers();
   setupHelpers();
@@ -22,6 +24,13 @@ $(document).ready(function() {
   render();
 });
 
+function viewDataButton() {
+  $('#viewData').click(function() {
+    let display = $('.dropdown-content').css('display');
+    let displayValue = (display === 'block') ? 'none' : 'block';
+    $('.dropdown-content').css('display', displayValue);
+  })
+}
 
 function getSentimentData() {
   let sentimentData = $('#data').data('sentiment');
@@ -30,6 +39,11 @@ function getSentimentData() {
   return data;
 }
 
+function displayData(data) {
+  for (i in data) {
+    $('#data').append('<div>' + JSON.stringify(data[i]) + '</div>');
+  }
+}
 
 function visualizeDataSpheres(data) {
   var group = new THREE.Group();
@@ -42,21 +56,29 @@ function visualizeDataSpheres(data) {
 }
 
 function meshForTextPolarity(text, polarity, polarity_confidence, subjectivity, subjectivity_confidence) {
-  let polarity_factor = (polarity === 'negative') ? 0.75 : 1.25;
-  let polarity_value = polarity_confidence * polarity_factor; 
-  let radius = polarity_value * 10;
-  let geometry = new THREE.SphereBufferGeometry(radius, 48*polarity_value, 24*polarity_value);
+  var polarity_factor = 1;
+  if (polarity === 'negative') {
+    polarity_factor = 0.5
+  } else if (polarity === 'positive') {
+    polarity_factor = 1.5
+  }
 
-  let color = new THREE.Color(Math.sin(i * polarity_confidence) * 0.5 + 0.5, Math.cos(i * polarity_confidence) * 0.5 + 0.5, Math.sin(i * polarity_confidence * subjectivity_confidence) * 0.5 + 0.5);
+  let polarity_value = polarity_confidence * polarity_factor;
+  let radius = polarity_value * 20;
+  let geometry = new THREE.SphereBufferGeometry(radius, 48 * polarity_value, 24 * polarity_value);
 
-  //console.log(color);
+  console.log('polarity value: ' + polarity_value);
+  let color = new THREE.Color(polarity_value, subjectivity_confidence, polarity_confidence);
+  console.log(color);
+
+  //new THREE.Color(Math.sin(polarity_confidence) * 0.5 + 0.5, Math.cos(subjectivity_confidence) * 0.5 + 0.5, Math.sin( polarity_value) * 0.5 + 0.5);
 
   let material = new THREE.MeshLambertMaterial({
     color: color,
     side: THREE.DoubleSide,
     clippingPlanes: clipPlanes,
     clipIntersection: params.clipIntersection,
-    wireframe: (polarity === 'negative') 
+    wireframe: (polarity === 'negative')
   });
   return new THREE.Mesh(geometry, material);
 }
@@ -79,21 +101,6 @@ function init() {
   scene.add(light);
   scene.add(new THREE.AmbientLight(0x505050));
 }
-
-// function setupSphere() {
-//   var group = new THREE.Group();
-//   for (var i = 1; i < 25; i++) {
-//     var geometry = new THREE.SphereBufferGeometry(i / 2, 48, 24);
-//     var material = new THREE.MeshLambertMaterial({
-//       color: new THREE.Color(Math.sin(i * 0.5) * 0.5 + 0.5, Math.cos(i * 1.5) * 0.5 + 0.5, Math.sin(i * 4.5 + 0) * 0.5 + 0.5),
-//       side: THREE.DoubleSide,
-//       clippingPlanes: clipPlanes,
-//       clipIntersection: params.clipIntersection
-//     });
-//     group.add(new THREE.Mesh(geometry, material));
-//   }
-//   scene.add(group);
-// }
 
 function setupHelpers() {
   // helpers
