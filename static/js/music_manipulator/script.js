@@ -45,8 +45,8 @@ function stop() {
   var canvas = document.getElementById('canvas'),
     /** @type {CanvasRenderingContext2D} */
     ctx = canvas.getContext('2d'),
-    width = 960,
-    height = 400,
+    width = window.innerWidth,
+    height = window.innerHeight,
     half_width = width >> 1,
     half_height = height >> 1,
     size = width * (height + 2) * 2,
