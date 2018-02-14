@@ -70,9 +70,9 @@ def sentiment_analysis():
 # def game():
 # 	return render_template("game/index.html")
 
-@app.route("/quotes")
+@app.route("/music_manipulator")
 def apple():
-	return render_template("quotes/index.html")
+	return render_template("music_manipulator/index.html")
 
 
 
