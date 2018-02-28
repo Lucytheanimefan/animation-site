@@ -18,6 +18,7 @@ var object;
 var glitchPass;
 var trackedLatitude = 30;
 var trackedLongitude = 250;
+var object;
 init();
 animate();
 
@@ -121,11 +122,11 @@ function createScene() {
   });
 }
 
-function createGeometry() {
-  object = new THREE.Object3D();
+function createGeometry(position = null) {
+  var object = new THREE.Object3D();
   object.name = 'object_geometry';
   var geometry = new THREE.SphereGeometry(1, 4, 4);
-  for (var i = 0; i < 100; i++) {
+  for (var i = 0; i < Math.round(100 * Math.random()); i++) {
     var material = new THREE.MeshPhongMaterial({ color: 0xffffff * Math.random(), flatShading: true });
     var mesh = new THREE.Mesh(geometry, material);
     mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
@@ -134,8 +135,11 @@ function createGeometry() {
     mesh.scale.x = mesh.scale.y = mesh.scale.z = Math.random() * 50;
     object.add(mesh);
   }
+  if (position) {
+    object.position = position;
+  }
   scene.add(object);
-  console.log(object);
+  //console.log(object);
 }
 
 function glitchSwitch() {
@@ -165,13 +169,38 @@ function render() {
   // }
   //console.log(controls);
 
-  let latitude = controls.lat;
-  let longitude = controls.lon;
+  var latitude = controls.lat;
+  var longitude = controls.lon;
   let mouseX = controls.mouseX;
   let mouseY = controls.mouseY;
 
 
-  if (Math.abs(latitude - trackedLatitude))
+  if (Math.abs(latitude - trackedLatitude) >= 30 || Math.abs(longitude - trackedLongitude) >= 30) {
+    if (Math.random() < 0.5) {
+      var selectedObject = scene.getObjectByName("object_geometry");
+      scene.remove(selectedObject);
+    }
+    trackedLongitude = longitude;
+    trackedLatitude = latitude;
+    console.log('Create geometry');
+    let cosLongitude = Math.cos(longitude);
+    let sinLatitude = Math.sin(latitude);
+    let sinLongitude = Math.sin(longitude);
+    let cosLatitude = Math.cos(latitude);
+    createGeometry(THREE.Vector3(cosLongitude * 90 * sinLatitude, sinLatitude * 90, sinLongitude * 90 * cosLatitude));
+
+    // let newTarget = selectedObject.position;
+    // newTarget.x = + -50;
+    // newTarget.y = + -50;
+
+    // controls.target = newTarget;
+
+    // setTimeout(function() {
+    //   controls.target = camera.position;
+    // }, 3000);
+  }
+
+
 
   //console.log(latitude + ',' + longitude);
   controls.update(delta);
