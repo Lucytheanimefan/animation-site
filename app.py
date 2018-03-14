@@ -22,13 +22,13 @@ genlayout_js = Bundle("js/lib/jquery.min.js", "js/mygraphics.js", "js/lib/soundm
             output='gen/packed.js')
 assets.register('js_genlayout', genlayout_js)
 
-my_works = [{'url':'castleinblood','name':'Castle in Blood','credit':["Lucy","Stephanie"],'date':'12/31/16'},
+my_works = [{'url':'castleinblood','name':'Castle in Blood','credit':["Lucy","Stephanie Zhou"],'date':'12/31/16'},
 {'url':'chapel_entrance','name':'Chapel in Light','credit':["Lucy", "Yuhao Hu (photography)"],'date':'2/22/17'},
 {'url':'deathnote','name':'Death Note','credit':['Lucy'],'date':'1/9/17'},
 #{'url':'chair','name':'Unravel (Tokyo Ghoul)','credit':["Lucy"],'date':'3/7/17'},
-{'url':'butterfly','name':'Butterfly','credit':["Kaijie", "Lucy"],'date':'3/16/17'},
+{'url':'butterfly','name':'Butterfly','credit':["Kaijie Chen", "Lucy"],'date':'3/16/17'},
 {'url':'flower','name':'Flower','credit':["Lucy", "Yuhao Hu (photography)"],'date':'4/6/17'},
-{'url':'dystopia','name':'Comet','credit':["Kaijie", "Lucy"],'date':'4/28/17'},
+{'url':'dystopia','name':'Comet','credit':["Kaijie Chen", "Lucy"],'date':'4/28/17'},
 #{'url':'oneMoreLight','name':'One More Light','credit':['Lucy'], 'date':'8/1/17'},
 {'url':'quotes','name':'Quote Sentiment Visualization','credit':['Lucy'], 'date':'1/27/18'},
 {'url':'music_manipulator','name':'Sound Manipulator','credit':['Lucy'], 'date':'2/13/18'},
