@@ -59,7 +59,7 @@ def sentiment_analysis():
 	for i, text in enumerate(text_list):
 		sentiment = client.Sentiment({'text': text}) 
 		sentiment_per_line[i] = sentiment
-	print sentiment_per_line
+	print(sentiment_per_line)
 	#return redirect(url_for('work', variable = 'quotes', data = json.dumps(sentiment_per_line)))
 	return render_template('quotes/index.html', data = json.dumps(sentiment_per_line))
 

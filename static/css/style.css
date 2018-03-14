@@ -3,6 +3,10 @@
     display: inline;
 }
 
+h1, h2{
+    color: #606060;
+}
+
 .deadfisheyed_logo {
     width: 17%;
     z-index: 1;
@@ -57,6 +61,7 @@
     margin-top: 10px;
     text-align: left !important;
     font-size: 17px;
+    color: #606060;
 }
 
 .letter {
