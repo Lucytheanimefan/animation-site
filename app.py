@@ -37,7 +37,8 @@ my_works = [{'url':'castleinblood','name':'Castle in Blood','credit':["Lucy","St
 #{'url':'oneMoreLight','name':'One More Light','credit':['Lucy'], 'date':'8/1/17'},
 {'url':'quotes','name':'Quote Sentiment Visualization','credit':['Lucy'], 'date':'1/27/18'},
 {'url':'music_manipulator','name':'Sound Manipulator','credit':['Lucy'], 'date':'2/13/18'},
-{'url':'glitch','name':'Glitch','credit':['Lucy'], 'date':'2/27/18'}]
+{'url':'glitch','name':'Glitch','credit':['Lucy'], 'date':'2/27/18'},
+{'url':'music-art', 'name':'Line Music', 'credit':['Lucy'], 'date':'4/16/18'}]
 
 @app.route("/")
 @app.route("/home")
