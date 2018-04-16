@@ -1,12 +1,17 @@
 import os
 import json
-from flask import Flask, render_template,send_from_directory, jsonify, request, redirect,url_for
+from flask import Flask, render_template, send_from_directory, jsonify, request, redirect,url_for
 from flask_assets import Environment, Bundle
 from flask_compress import Compress
 from aylienapiclient import textapi
 import requests
 
+
 app = Flask(__name__)
+
+UPLOAD_FOLDER = '/tmp/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 Compress(app)
 
 assets = Environment(app)
@@ -67,6 +72,24 @@ def sentiment_analysis():
 @app.route("/glitch")
 def apple():
 	return render_template("glitch/index.html")
+
+@app.route('/upload/<template>', methods=['POST'])
+def upload(template):
+    # Get the name of the uploaded file
+    file = request.files['file']
+    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+    file.save(full_filename)
+
+    return render_template(template + '/index.html', musicfile=str(url_for('uploaded_file', filename=file.filename)))
+
+# This route is expecting a parameter containing the name
+# of a file. Then it will locate that file on the upload
+# directory and show it on the browser, so if the user uploads
+# an image, that image is going to be show after the upload
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
 
 
 
