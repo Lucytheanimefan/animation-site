@@ -85,10 +85,10 @@ function generateNewColors() {
   console.log('Factor: ' + factor);
   // Generate colors
   for (let i = 0; i < timeDomainData.length - 3; i++) {
-  	let d = timeDomainData[i];
-    COLORS.push('rgb(' + Math.round(d * factor * Math.random()) + 
-    	',' + Math.round(d * factor * Math.random()) + 
-    	',' + Math.round(d * factor * Math.random()) + ')');
+    let d = timeDomainData[i];
+    COLORS.push('rgb(' + Math.round(d * factor * Math.random()) +
+      ',' + Math.round(d * factor * Math.random()) +
+      ',' + Math.round(d * factor * Math.random()) + ')');
   }
   // console.log(timeDomainData);
   console.log(COLORS);
@@ -170,7 +170,7 @@ function render() {
       current is above target, move down
       current is equal or around target, randomlyGeneratePoint()
     */
-    var yFreq = Math.sqrt(frequencyData[index]);
+    var yFreq = frequencyData[index]//Math.pow(frequencyData[index], 2);
     if (item.current.y < item.target.y) {
       item.current.y += yFreq; //item.current.speed
     } else if (item.current.y >= item.target.y && item.current.y <= item.target.y + SPEED) {
