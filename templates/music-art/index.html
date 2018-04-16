@@ -9,13 +9,13 @@
   <div>
     <label class="btn btn-default btn-file">Browse
       <input type="file" name="file" style="display: none;">
-      <span>{{ musicfile }}</span>
    </label>
   </div>
   <div>
     <input class="btn btn-default" type="submit" value="Upload"> 
   </div>
 </form>
+<span>{{ musicfile }}</span>
 <audio src="{{ musicfile }}" controls onpause="pauseMusic()" onplay="playMusic()" id="sound"></audio>
 
 
