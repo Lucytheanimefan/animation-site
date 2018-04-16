@@ -7,21 +7,21 @@
 {% block body %}
 <form action="/upload/music-art" method="post" enctype="multipart/form-data">
   <div>
-    <label class="btn btn-default btn-file">Browse
-      <input type="file" name="file" style="display: none;">
-   </label>
+    {# <label class="btn btn-default btn-file">Browse #}
+      <input type="file" name="file">
+{#    </label> #}
   </div>
   <div>
     <input class="btn btn-default" type="submit" value="Upload"> 
   </div>
 </form>
-<span>{{ musicfile }}</span>
+<p>{{ musicfile }}</p>
 <audio src="{{ musicfile }}" controls onpause="pauseMusic()" onplay="playMusic()" id="sound"></audio>
 
 
 <div class="wobble__wrapper">
   <div class="wobble__canvas--right">
-    <canvas id="wobble" class="wobble__canvas" width="1000" height="800"></canvas>
+    <canvas id="wobble" class="wobble__canvas" width="1000" height="700"></canvas>
   </div>
 </div>
 
