@@ -368,10 +368,10 @@ var items = [];
 
 const CHUNKS = 32; // 3 ~ 30
 const SPEED = 4; // 1 ~ 30
-const COLOURS = ['#ffa300', '#cf0060', '#ff00ff', '#444444', '#555555'] // Colours will be sampled
+var COLORS = []; //['#ffa300', '#cf0060', '#ff00ff', '#444444', '#555555'] // Colors will be sampled
 const MOVEMENT = 2
 
-
+const SEED_COLOR = { 'r': 255, 'g': 255, 'b': 255 };
 
 function playMusic() {
   if (firstTimePlay) {
@@ -382,7 +382,7 @@ function playMusic() {
     duration = audio.duration;
     var audioSrc = audioCtx.createMediaElementSource(audio);
     analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 64; //2048;
+    analyser.fftSize = CHUNKS; //2048;
     audioSrc.connect(audioCtx.destination);
     audioSrc.connect(analyser);
 
@@ -413,8 +413,8 @@ function renderFrame() {
   analyser.getByteTimeDomainData(timeDomainData); // fill the Uint8Array with data returned from getByteTimeDomainData()
 
 
-  //console.log(timeDomainData);
-  
+  console.log('Time domain data length: ' + timeDomainData.length);
+
 
 
 }
@@ -427,10 +427,24 @@ function pauseMusic() {
 
 
 // Sample item from array
-function sample(collection){
-	return collection[Math.floor(Math.random() * collection.length)]
+function sample(collection) {
+  return collection[Math.floor(Math.random() * collection.length)]
 }
 //var sample = (collection) => collection[Math.floor(Math.random() * collection.length)]
+
+function generateNewColors() {
+  let factor = 255 / 128;
+  console.log('Factor: ' + factor);
+  // Generate colors
+  for (let i = 0; i < timeDomainData.length - 3; i++) {
+  	let d = timeDomainData[i];
+    COLORS.push('rgb(' + Math.round(d * factor * Math.random()) + 
+    	',' + Math.round(d * factor * Math.random()) + 
+    	',' + Math.round(d * factor * Math.random()) + ')');
+  }
+  // console.log(timeDomainData);
+  console.log(COLORS);
+}
 
 function setup() {
   // Setup canvas
@@ -439,8 +453,12 @@ function setup() {
   WIDTH = canvas.width;
   HEIGHT = canvas.height;
 
+  analyser.getByteTimeDomainData(timeDomainData);
+
+  generateNewColors();
+
   // Prepare items
-  items = generateItems(CHUNKS);
+  items = generateItems(CHUNKS / 2);
 
   // Start animation frame
   window.requestAnimationFrame(render);
@@ -448,7 +466,8 @@ function setup() {
 
 // Randomly reassigns values to point
 var randomlyGeneratePoint = (item) => {
-  item.color = sample(COLOURS)
+  generateNewColors();
+  item.color = sample(COLORS)
   item.speed = SPEED
   item.target.y = HEIGHT * Math.random()
 }
@@ -464,7 +483,7 @@ function generateItems(amount) {
     let speed = SPEED * Math.random();
 
     return {
-      color: sample(COLOURS),
+      color: sample(COLORS),
       target: {
         x: x,
         y: y,
@@ -482,27 +501,35 @@ function generateItems(amount) {
 function render() {
   const renderItems = items;
   freqAnalyser.getByteFrequencyData(frequencyData);
+  analyser.getByteTimeDomainData(timeDomainData);
   ctx.beginPath();
 
-  console.log('Render items length: ' + renderItems.length);
-  console.log('FFT length: ' + frequencyData.length);
+  // console.log('Render items length: ' + renderItems.length);
+  // console.log('FFT length: ' + frequencyData.length);
   renderItems.forEach((item, index) => {
-    if (index === 0) ctx.moveTo(0, HEIGHT / 2) // start at zero point
-    if (index + 1 !== renderItems.length) ctx.lineTo(renderItems[index + 1].current.x, items[index + 1].current.y); // move current to target
-    if (index + 1 === renderItems.length) ctx.lineTo(canvas.width, canvas.height / 2) // move last point to center end of canvas
+    if (index === 0) {
+      ctx.moveTo(0, HEIGHT / 2); // start at zero point
+    }
+    if (index + 1 !== renderItems.length) {
+      ctx.lineTo(renderItems[index + 1].current.x, items[index + 1].current.y); // move current to target
+    }
+    if (index + 1 === renderItems.length) {
+      ctx.lineTo(canvas.width, canvas.height / 2); // move last point to center end of canvas
+    }
 
     /*
       current is under target, move up
       current is above target, move down
       current is equal or around target, randomlyGeneratePoint()
     */
+    var yFreq = Math.sqrt(frequencyData[index]);
     if (item.current.y < item.target.y) {
-      item.current.y += item.current.speed
+      item.current.y += yFreq; //item.current.speed
     } else if (item.current.y >= item.target.y && item.current.y <= item.target.y + SPEED) {
       ctx.strokeStyle = item.color
-      randomlyGeneratePoint(item) // generate new target points to move to
+      randomlyGeneratePoint(item); // generate new target points to move to
     } else {
-      item.current.y -= item.current.speed
+      item.current.y -= yFreq; //item.current.speed
     }
   });
 
