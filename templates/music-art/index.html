@@ -19,7 +19,11 @@
 <audio src="{{ musicfile }}" controls onpause="pauseMusic()" onplay="playMusic()" id="sound"></audio>
 
 
-<canvas id="canvas"></canvas>
+<div class="wobble__wrapper">
+  <div class="wobble__canvas--right">
+    <canvas id="wobble" class="wobble__canvas" width="1000" height="500"></canvas>
+  </div>
+</div>
 
 {% endblock %}
 

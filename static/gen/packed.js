@@ -352,6 +352,7 @@ t[n].setClockwise(0===s%2&&e)}}return this}});var N=e.extend({_class:"PathIterat
 case tn:if(z(),e.block=W(),e.handler=null,be===qe){var l=L();z(),F(pn),l.param=le(),Te&&Zn(l.param.name)&&n(l.param.start,"Binding "+l.param.name+" in strict mode"),F(vn),l.guard=null,l.body=W(),e.handler=N(l,"CatchClause")}return e.guardedHandlers=Le,e.finalizer=B(Ge)?W():null,e.handler||e.finalizer||n(e.start,"Missing catch or finally clause"),N(e,"TryStatement");case en:return z(),X(e),R(),N(e,"VariableDeclaration");case nn:return z(),e.test=H(),Oe.push(ti),e.body=U(),Oe.pop(),N(e,"WhileStatement");case rn:return Te&&n(me,"'with' in strict mode"),z(),e.object=H(),e.body=U(),N(e,"WithStatement");case _n:return W();case yn:return z(),N(e,"EmptyStatement");default:var c=Ce,d=J();if(t===Be&&"Identifier"===d.type&&B(wn)){for(var r=0;r<Oe.length;++r)Oe[r].name===c&&n(d.start,"Label '"+c+"' is already declared");var f=be.isLoop?"loop":be===Ke?"switch":null;return Oe.push({name:c,kind:f}),e.body=U(),Oe.pop(),e.label=d,N(e,"LabeledStatement")}return e.expression=d,R(),N(e,"ExpressionStatement")}}function H(){F(pn);var t=J();return F(vn),t}function W(t){var e,n=L(),i=!0,r=!1;for(n.body=[],F(_n);!B(gn);){var s=U();n.body.push(s),i&&t&&j(s)&&(e=r,A(r=!0)),i=!1}return r&&!e&&A(!1),N(n,"BlockStatement")}function G(t,e){return t.init=e,F(yn),t.test=be===yn?null:J(),F(yn),t.update=be===vn?null:J(),F(vn),t.body=U(),Oe.pop(),N(t,"ForStatement")}function $(t,e){return t.left=e,t.right=J(),F(vn),t.body=U(),Oe.pop(),N(t,"ForInStatement")}function X(t,e){for(t.declarations=[],t.kind="var";;){var i=L();if(i.id=le(),Te&&Zn(i.id.name)&&n(i.id.start,"Binding "+i.id.name+" in strict mode"),i.init=B(Sn)?J(!0,e):null,t.declarations.push(N(i,"VariableDeclarator")),!B(mn))break}return t}function J(t,e){var n=Y(e);if(!t&&be===mn){var i=E(n);for(i.expressions=[n];B(mn);)i.expressions.push(Y(e));return N(i,"SequenceExpression")}return n}function Y(t){var e=K(t);if(be.isAssign){var n=E(e);return n.operator=Ce,n.left=e,z(),n.right=Y(t),V(e),N(n,"AssignmentExpression")}return e}function K(t){var e=Q(t);if(B(bn)){var n=E(e);return n.test=e,n.consequent=J(!0),F(wn),n.alternate=J(!0,t),N(n,"ConditionalExpression")}return e}function Q(t){return te(ee(),-1,t)}function te(t,e,n){var i=be.binop;if(null!=i&&(!n||be!==ln)&&i>e){var r=E(t);r.left=t,r.operator=Ce,z(),r.right=te(ee(),i,n);var s=N(r,/&&|\|\|/.test(r.operator)?"LogicalExpression":"BinaryExpression");return te(s,e,n)}return t}function ee(){if(be.prefix){var t=L(),e=be.isUpdate;return t.operator=Ce,t.prefix=!0,Se=!0,z(),t.argument=ee(),e?V(t.argument):Te&&"delete"===t.operator&&"Identifier"===t.argument.type&&n(t.start,"Deleting local variable in strict mode"),N(t,e?"UpdateExpression":"UnaryExpression")}for(var i=ne();be.postfix&&!D();){var t=E(i);t.operator=Ce,t.prefix=!1,t.argument=i,V(i),z(),i=N(t,"UpdateExpression")}return i}function ne(){return ie(re())}function ie(t,e){if(B(xn)){var n=E(t);return n.object=t,n.property=le(!0),n.computed=!1,ie(N(n,"MemberExpression"),e)}if(B(dn)){var n=E(t);return n.object=t,n.property=J(),n.computed=!0,F(fn),ie(N(n,"MemberExpression"),e)}if(!e&&B(pn)){var n=E(t);return n.callee=t,n.arguments=ue(vn,!1),ie(N(n,"CallExpression"),e)}return t}function re(){switch(be){case an:var t=L();return z(),N(t,"ThisExpression");case Be:return le();case Ee:case je:case Ne:var t=L();return t.value=Ce,t.raw=de.slice(me,ye),z(),N(t,"Literal");case on:case hn:case un:var t=L();return t.value=be.atomValue,t.raw=be.keyword,z(),N(t,"Literal");case pn:var e=we,n=me;z();var i=J();return i.start=n,i.end=ye,ce.locations&&(i.loc.start=e,i.loc.end=xe),ce.ranges&&(i.range=[n,ye]),F(vn),i;case dn:var t=L();return z(),t.elements=ue(fn,!0,!0),N(t,"ArrayExpression");case _n:return ae();case Xe:var t=L();return z(),he(t,!1);case sn:return se();default:q()}}function se(){var t=L();return z(),t.callee=ie(re(),!0),t.arguments=B(pn)?ue(vn,!1):Le,N(t,"NewExpression")}function ae(){var t=L(),e=!0,i=!1;for(t.properties=[],z();!B(gn);){if(e)e=!1;else if(F(mn),ce.allowTrailingCommas&&B(gn))break;var r,s={key:oe()},a=!1;if(B(wn)?(s.value=J(!0),r=s.kind="init"):ce.ecmaVersion>=5&&"Identifier"===s.key.type&&("get"===s.key.name||"set"===s.key.name)?(a=i=!0,r=s.kind=s.key.name,s.key=oe(),be!==pn&&q(),s.value=he(L(),!1)):q(),"Identifier"===s.key.type&&(Te||i))for(var o=0;o<t.properties.length;++o){var h=t.properties[o];if(h.key.name===s.key.name){var u=r==h.kind||a&&"init"===h.kind||"init"===r&&("get"===h.kind||"set"===h.kind);u&&!Te&&"init"===r&&"init"===h.kind&&(u=!1),u&&n(s.key.start,"Redefinition of property")}}t.properties.push(s)}return N(t,"ObjectExpression")}function oe(){return be===Ee||be===je?re():le(!0)}function he(t,e){be===Be?t.id=le():e?q():t.id=null,t.params=[];var i=!0;for(F(pn);!B(vn);)i?i=!1:F(mn),t.params.push(le());var r=Ae,s=Oe;if(Ae=!0,Oe=[],t.body=W(!0),Ae=r,Oe=s,Te||t.body.body.length&&j(t.body.body[0]))for(var a=t.id?-1:0;a<t.params.length;++a){var o=0>a?t.id:t.params[a];if((Vn(o.name)||Zn(o.name))&&n(o.start,"Defining '"+o.name+"' in strict mode"),a>=0)for(var h=0;a>h;++h)o.name===t.params[h].name&&n(o.start,"Argument name clash in strict mode")}return N(t,e?"FunctionDeclaration":"FunctionExpression")}function ue(t,e,n){for(var i=[],r=!0;!B(t);){if(r)r=!1;else if(F(mn),e&&ce.allowTrailingCommas&&B(t))break;n&&be===mn?i.push(null):i.push(J(!0))}return i}function le(t){var e=L();return e.name=be===Be?Ce:t&&!ce.forbidReserved&&be.keyword||q(),Se=!1,z(),N(e,"Identifier")}t.version="0.4.0";var ce,de,fe,_e;t.parse=function(t,n){return de=t+"",fe=de.length,e(n),s(),Z(ce.program)};var ge=t.defaultOptions={ecmaVersion:5,strictSemicolons:!1,allowTrailingCommas:!0,forbidReserved:!1,locations:!1,onComment:null,ranges:!1,program:null,sourceFile:null},pe=t.getLineInfo=function(t,e){for(var n=1,i=0;;){Yn.lastIndex=i;var r=Yn.exec(t);if(!(r&&r.index<e))break;++n,i=r.index+r[0].length}return{line:n,column:e-i}};t.tokenize=function(t,n){function i(t){return y(t),r.start=me,r.end=ye,r.startLoc=we,r.endLoc=xe,r.type=be,r.value=Ce,r}de=t+"",fe=de.length,e(n),s();var r={};return i.jumpTo=function(t,e){if(ve=t,ce.locations){Pe=1,ke=Yn.lastIndex=0;for(var n;(n=Yn.exec(de))&&n.index<t;)++Pe,ke=n.index+n[0].length}Se=e,u()},i};var ve,me,ye,we,xe,be,Ce,Se,Pe,ke,Me,Ie,ze,Ae,Oe,Te,Le=[],Ee={type:"num"},Ne={type:"regexp"},je={type:"string"},Be={type:"name"},De={type:"eof"},Re={keyword:"break"},Fe={keyword:"case",beforeExpr:!0},qe={keyword:"catch"},Ve={keyword:"continue"},Ze={keyword:"debugger"},Ue={keyword:"default"},He={keyword:"do",isLoop:!0},We={keyword:"else",beforeExpr:!0},Ge={keyword:"finally"},$e={keyword:"for",isLoop:!0},Xe={keyword:"function"},Je={keyword:"if"},Ye={keyword:"return",beforeExpr:!0},Ke={keyword:"switch"},Qe={keyword:"throw",beforeExpr:!0},tn={keyword:"try"},en={keyword:"var"},nn={keyword:"while",isLoop:!0},rn={keyword:"with"},sn={keyword:"new",beforeExpr:!0},an={keyword:"this"},on={keyword:"null",atomValue:null},hn={keyword:"true",atomValue:!0},un={keyword:"false",atomValue:!1},ln={keyword:"in",binop:7,beforeExpr:!0},cn={"break":Re,"case":Fe,"catch":qe,"continue":Ve,"debugger":Ze,"default":Ue,"do":He,"else":We,"finally":Ge,"for":$e,"function":Xe,"if":Je,"return":Ye,"switch":Ke,"throw":Qe,"try":tn,"var":en,"while":nn,"with":rn,"null":on,"true":hn,"false":un,"new":sn,"in":ln,"instanceof":{keyword:"instanceof",binop:7,beforeExpr:!0},"this":an,"typeof":{keyword:"typeof",prefix:!0,beforeExpr:!0},"void":{keyword:"void",prefix:!0,beforeExpr:!0},"delete":{keyword:"delete",prefix:!0,beforeExpr:!0}},dn={type:"[",beforeExpr:!0},fn={type:"]"},_n={type:"{",beforeExpr:!0},gn={type:"}"},pn={type:"(",beforeExpr:!0},vn={type:")"},mn={type:",",beforeExpr:!0},yn={type:";",beforeExpr:!0},wn={type:":",beforeExpr:!0},xn={type:"."},bn={type:"?",beforeExpr:!0},Cn={binop:10,beforeExpr:!0},Sn={isAssign:!0,beforeExpr:!0},Pn={isAssign:!0,beforeExpr:!0},kn={binop:9,prefix:!0,beforeExpr:!0},Mn={postfix:!0,prefix:!0,isUpdate:!0},In={prefix:!0,beforeExpr:!0},zn={binop:1,beforeExpr:!0},An={binop:2,beforeExpr:!0},On={binop:3,beforeExpr:!0},Tn={binop:4,beforeExpr:!0},Ln={binop:5,beforeExpr:!0},En={binop:6,beforeExpr:!0},Nn={binop:7,beforeExpr:!0},jn={binop:8,beforeExpr:!0},Bn={binop:10,beforeExpr:!0};t.tokTypes={bracketL:dn,bracketR:fn,braceL:_n,braceR:gn,parenL:pn,parenR:vn,comma:mn,semi:yn,colon:wn,dot:xn,question:bn,slash:Cn,eq:Sn,name:Be,eof:De,num:Ee,regexp:Ne,string:je};for(var Dn in cn)t.tokTypes["_"+Dn]=cn[Dn];var Rn,Fn=i("abstract boolean byte char class double enum export extends final float goto implements import int interface long native package private protected public short static super synchronized throws transient volatile"),qn=i("class enum extends super const export import"),Vn=i("implements interface let package private protected public static yield"),Zn=i("eval arguments"),Un=i("break case catch continue debugger default do else finally for function if return switch throw try var while with null true false instanceof typeof void delete new in this"),Hn=/[\u1680\u180e\u2000-\u200a\u202f\u205f\u3000\ufeff]/,Wn="\xaa\xb5\xba\xc0-\xd6\xd8-\xf6\xf8-\u02c1\u02c6-\u02d1\u02e0-\u02e4\u02ec\u02ee\u0370-\u0374\u0376\u0377\u037a-\u037d\u0386\u0388-\u038a\u038c\u038e-\u03a1\u03a3-\u03f5\u03f7-\u0481\u048a-\u0527\u0531-\u0556\u0559\u0561-\u0587\u05d0-\u05ea\u05f0-\u05f2\u0620-\u064a\u066e\u066f\u0671-\u06d3\u06d5\u06e5\u06e6\u06ee\u06ef\u06fa-\u06fc\u06ff\u0710\u0712-\u072f\u074d-\u07a5\u07b1\u07ca-\u07ea\u07f4\u07f5\u07fa\u0800-\u0815\u081a\u0824\u0828\u0840-\u0858\u08a0\u08a2-\u08ac\u0904-\u0939\u093d\u0950\u0958-\u0961\u0971-\u0977\u0979-\u097f\u0985-\u098c\u098f\u0990\u0993-\u09a8\u09aa-\u09b0\u09b2\u09b6-\u09b9\u09bd\u09ce\u09dc\u09dd\u09df-\u09e1\u09f0\u09f1\u0a05-\u0a0a\u0a0f\u0a10\u0a13-\u0a28\u0a2a-\u0a30\u0a32\u0a33\u0a35\u0a36\u0a38\u0a39\u0a59-\u0a5c\u0a5e\u0a72-\u0a74\u0a85-\u0a8d\u0a8f-\u0a91\u0a93-\u0aa8\u0aaa-\u0ab0\u0ab2\u0ab3\u0ab5-\u0ab9\u0abd\u0ad0\u0ae0\u0ae1\u0b05-\u0b0c\u0b0f\u0b10\u0b13-\u0b28\u0b2a-\u0b30\u0b32\u0b33\u0b35-\u0b39\u0b3d\u0b5c\u0b5d\u0b5f-\u0b61\u0b71\u0b83\u0b85-\u0b8a\u0b8e-\u0b90\u0b92-\u0b95\u0b99\u0b9a\u0b9c\u0b9e\u0b9f\u0ba3\u0ba4\u0ba8-\u0baa\u0bae-\u0bb9\u0bd0\u0c05-\u0c0c\u0c0e-\u0c10\u0c12-\u0c28\u0c2a-\u0c33\u0c35-\u0c39\u0c3d\u0c58\u0c59\u0c60\u0c61\u0c85-\u0c8c\u0c8e-\u0c90\u0c92-\u0ca8\u0caa-\u0cb3\u0cb5-\u0cb9\u0cbd\u0cde\u0ce0\u0ce1\u0cf1\u0cf2\u0d05-\u0d0c\u0d0e-\u0d10\u0d12-\u0d3a\u0d3d\u0d4e\u0d60\u0d61\u0d7a-\u0d7f\u0d85-\u0d96\u0d9a-\u0db1\u0db3-\u0dbb\u0dbd\u0dc0-\u0dc6\u0e01-\u0e30\u0e32\u0e33\u0e40-\u0e46\u0e81\u0e82\u0e84\u0e87\u0e88\u0e8a\u0e8d\u0e94-\u0e97\u0e99-\u0e9f\u0ea1-\u0ea3\u0ea5\u0ea7\u0eaa\u0eab\u0ead-\u0eb0\u0eb2\u0eb3\u0ebd\u0ec0-\u0ec4\u0ec6\u0edc-\u0edf\u0f00\u0f40-\u0f47\u0f49-\u0f6c\u0f88-\u0f8c\u1000-\u102a\u103f\u1050-\u1055\u105a-\u105d\u1061\u1065\u1066\u106e-\u1070\u1075-\u1081\u108e\u10a0-\u10c5\u10c7\u10cd\u10d0-\u10fa\u10fc-\u1248\u124a-\u124d\u1250-\u1256\u1258\u125a-\u125d\u1260-\u1288\u128a-\u128d\u1290-\u12b0\u12b2-\u12b5\u12b8-\u12be\u12c0\u12c2-\u12c5\u12c8-\u12d6\u12d8-\u1310\u1312-\u1315\u1318-\u135a\u1380-\u138f\u13a0-\u13f4\u1401-\u166c\u166f-\u167f\u1681-\u169a\u16a0-\u16ea\u16ee-\u16f0\u1700-\u170c\u170e-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176c\u176e-\u1770\u1780-\u17b3\u17d7\u17dc\u1820-\u1877\u1880-\u18a8\u18aa\u18b0-\u18f5\u1900-\u191c\u1950-\u196d\u1970-\u1974\u1980-\u19ab\u19c1-\u19c7\u1a00-\u1a16\u1a20-\u1a54\u1aa7\u1b05-\u1b33\u1b45-\u1b4b\u1b83-\u1ba0\u1bae\u1baf\u1bba-\u1be5\u1c00-\u1c23\u1c4d-\u1c4f\u1c5a-\u1c7d\u1ce9-\u1cec\u1cee-\u1cf1\u1cf5\u1cf6\u1d00-\u1dbf\u1e00-\u1f15\u1f18-\u1f1d\u1f20-\u1f45\u1f48-\u1f4d\u1f50-\u1f57\u1f59\u1f5b\u1f5d\u1f5f-\u1f7d\u1f80-\u1fb4\u1fb6-\u1fbc\u1fbe\u1fc2-\u1fc4\u1fc6-\u1fcc\u1fd0-\u1fd3\u1fd6-\u1fdb\u1fe0-\u1fec\u1ff2-\u1ff4\u1ff6-\u1ffc\u2071\u207f\u2090-\u209c\u2102\u2107\u210a-\u2113\u2115\u2119-\u211d\u2124\u2126\u2128\u212a-\u212d\u212f-\u2139\u213c-\u213f\u2145-\u2149\u214e\u2160-\u2188\u2c00-\u2c2e\u2c30-\u2c5e\u2c60-\u2ce4\u2ceb-\u2cee\u2cf2\u2cf3\u2d00-\u2d25\u2d27\u2d2d\u2d30-\u2d67\u2d6f\u2d80-\u2d96\u2da0-\u2da6\u2da8-\u2dae\u2db0-\u2db6\u2db8-\u2dbe\u2dc0-\u2dc6\u2dc8-\u2dce\u2dd0-\u2dd6\u2dd8-\u2dde\u2e2f\u3005-\u3007\u3021-\u3029\u3031-\u3035\u3038-\u303c\u3041-\u3096\u309d-\u309f\u30a1-\u30fa\u30fc-\u30ff\u3105-\u312d\u3131-\u318e\u31a0-\u31ba\u31f0-\u31ff\u3400-\u4db5\u4e00-\u9fcc\ua000-\ua48c\ua4d0-\ua4fd\ua500-\ua60c\ua610-\ua61f\ua62a\ua62b\ua640-\ua66e\ua67f-\ua697\ua6a0-\ua6ef\ua717-\ua71f\ua722-\ua788\ua78b-\ua78e\ua790-\ua793\ua7a0-\ua7aa\ua7f8-\ua801\ua803-\ua805\ua807-\ua80a\ua80c-\ua822\ua840-\ua873\ua882-\ua8b3\ua8f2-\ua8f7\ua8fb\ua90a-\ua925\ua930-\ua946\ua960-\ua97c\ua984-\ua9b2\ua9cf\uaa00-\uaa28\uaa40-\uaa42\uaa44-\uaa4b\uaa60-\uaa76\uaa7a\uaa80-\uaaaf\uaab1\uaab5\uaab6\uaab9-\uaabd\uaac0\uaac2\uaadb-\uaadd\uaae0-\uaaea\uaaf2-\uaaf4\uab01-\uab06\uab09-\uab0e\uab11-\uab16\uab20-\uab26\uab28-\uab2e\uabc0-\uabe2\uac00-\ud7a3\ud7b0-\ud7c6\ud7cb-\ud7fb\uf900-\ufa6d\ufa70-\ufad9\ufb00-\ufb06\ufb13-\ufb17\ufb1d\ufb1f-\ufb28\ufb2a-\ufb36\ufb38-\ufb3c\ufb3e\ufb40\ufb41\ufb43\ufb44\ufb46-\ufbb1\ufbd3-\ufd3d\ufd50-\ufd8f\ufd92-\ufdc7\ufdf0-\ufdfb\ufe70-\ufe74\ufe76-\ufefc\uff21-\uff3a\uff41-\uff5a\uff66-\uffbe\uffc2-\uffc7\uffca-\uffcf\uffd2-\uffd7\uffda-\uffdc",Gn="\u0300-\u036f\u0483-\u0487\u0591-\u05bd\u05bf\u05c1\u05c2\u05c4\u05c5\u05c7\u0610-\u061a\u0620-\u0649\u0672-\u06d3\u06e7-\u06e8\u06fb-\u06fc\u0730-\u074a\u0800-\u0814\u081b-\u0823\u0825-\u0827\u0829-\u082d\u0840-\u0857\u08e4-\u08fe\u0900-\u0903\u093a-\u093c\u093e-\u094f\u0951-\u0957\u0962-\u0963\u0966-\u096f\u0981-\u0983\u09bc\u09be-\u09c4\u09c7\u09c8\u09d7\u09df-\u09e0\u0a01-\u0a03\u0a3c\u0a3e-\u0a42\u0a47\u0a48\u0a4b-\u0a4d\u0a51\u0a66-\u0a71\u0a75\u0a81-\u0a83\u0abc\u0abe-\u0ac5\u0ac7-\u0ac9\u0acb-\u0acd\u0ae2-\u0ae3\u0ae6-\u0aef\u0b01-\u0b03\u0b3c\u0b3e-\u0b44\u0b47\u0b48\u0b4b-\u0b4d\u0b56\u0b57\u0b5f-\u0b60\u0b66-\u0b6f\u0b82\u0bbe-\u0bc2\u0bc6-\u0bc8\u0bca-\u0bcd\u0bd7\u0be6-\u0bef\u0c01-\u0c03\u0c46-\u0c48\u0c4a-\u0c4d\u0c55\u0c56\u0c62-\u0c63\u0c66-\u0c6f\u0c82\u0c83\u0cbc\u0cbe-\u0cc4\u0cc6-\u0cc8\u0cca-\u0ccd\u0cd5\u0cd6\u0ce2-\u0ce3\u0ce6-\u0cef\u0d02\u0d03\u0d46-\u0d48\u0d57\u0d62-\u0d63\u0d66-\u0d6f\u0d82\u0d83\u0dca\u0dcf-\u0dd4\u0dd6\u0dd8-\u0ddf\u0df2\u0df3\u0e34-\u0e3a\u0e40-\u0e45\u0e50-\u0e59\u0eb4-\u0eb9\u0ec8-\u0ecd\u0ed0-\u0ed9\u0f18\u0f19\u0f20-\u0f29\u0f35\u0f37\u0f39\u0f41-\u0f47\u0f71-\u0f84\u0f86-\u0f87\u0f8d-\u0f97\u0f99-\u0fbc\u0fc6\u1000-\u1029\u1040-\u1049\u1067-\u106d\u1071-\u1074\u1082-\u108d\u108f-\u109d\u135d-\u135f\u170e-\u1710\u1720-\u1730\u1740-\u1750\u1772\u1773\u1780-\u17b2\u17dd\u17e0-\u17e9\u180b-\u180d\u1810-\u1819\u1920-\u192b\u1930-\u193b\u1951-\u196d\u19b0-\u19c0\u19c8-\u19c9\u19d0-\u19d9\u1a00-\u1a15\u1a20-\u1a53\u1a60-\u1a7c\u1a7f-\u1a89\u1a90-\u1a99\u1b46-\u1b4b\u1b50-\u1b59\u1b6b-\u1b73\u1bb0-\u1bb9\u1be6-\u1bf3\u1c00-\u1c22\u1c40-\u1c49\u1c5b-\u1c7d\u1cd0-\u1cd2\u1d00-\u1dbe\u1e01-\u1f15\u200c\u200d\u203f\u2040\u2054\u20d0-\u20dc\u20e1\u20e5-\u20f0\u2d81-\u2d96\u2de0-\u2dff\u3021-\u3028\u3099\u309a\ua640-\ua66d\ua674-\ua67d\ua69f\ua6f0-\ua6f1\ua7f8-\ua800\ua806\ua80b\ua823-\ua827\ua880-\ua881\ua8b4-\ua8c4\ua8d0-\ua8d9\ua8f3-\ua8f7\ua900-\ua909\ua926-\ua92d\ua930-\ua945\ua980-\ua983\ua9b3-\ua9c0\uaa00-\uaa27\uaa40-\uaa41\uaa4c-\uaa4d\uaa50-\uaa59\uaa7b\uaae0-\uaae9\uaaf2-\uaaf3\uabc0-\uabe1\uabec\uabed\uabf0-\uabf9\ufb20-\ufb28\ufe00-\ufe0f\ufe20-\ufe26\ufe33\ufe34\ufe4d-\ufe4f\uff10-\uff19\uff3f",$n=RegExp("["+Wn+"]"),Xn=RegExp("["+Wn+Gn+"]"),Jn=/[\n\r\u2028\u2029]/,Yn=/\r\n|[\n\r\u2028\u2029]/g,Kn=t.isIdentifierStart=function(t){return 65>t?36===t:91>t?!0:97>t?95===t:123>t?!0:t>=170&&$n.test(String.fromCharCode(t))},Qn=t.isIdentifierChar=function(t){return 48>t?36===t:58>t?!0:65>t?!1:91>t?!0:97>t?95===t:123>t?!0:t>=170&&Xn.test(String.fromCharCode(t))},ti={kind:"loop"},ei={kind:"switch"}});var g={"+":"__add","-":"__subtract","*":"__multiply","/":"__divide","%":"__modulo","==":"equals","!=":"equals"},p={"-":"__negate","+":null},v=e.each(["add","subtract","multiply","divide","modulo","negate"],function(t){this["__"+t]="#"+t},{});return h.inject(v),c.inject(v),R.inject(v),"complete"===document.readyState?setTimeout(u):U.add(window,{load:u}),{compile:s,execute:a,load:l,parse:i}}.call(this),paper=new(r.inject(e.exports,{enumerable:!0,Base:e,Numerical:o,Key:X})),"function"==typeof define&&define.amd?define("paper",paper):"object"==typeof module&&module&&(module.exports=paper),paper};
 var audioCtx = new(window.AudioContext || window.webkitAudioContext)();
 var analyser;
+var freqAnalyser;
 var bufferLength;
 var timeDomainData;
 var frequencyData;
@@ -359,6 +360,18 @@ var frequencyData;
 var animationID;
 
 var firstTimePlay = true;
+
+var canvas;
+var WIDTH, HEIGHT;
+
+var items = [];
+
+const CHUNKS = 32; // 3 ~ 30
+const SPEED = 4; // 1 ~ 30
+const COLOURS = ['#ffa300', '#cf0060', '#ff00ff', '#444444', '#555555'] // Colours will be sampled
+const MOVEMENT = 2
+
+
 
 function playMusic() {
   if (firstTimePlay) {
@@ -376,11 +389,13 @@ function playMusic() {
     bufferLength = analyser.frequencyBinCount;
 
     freqAnalyser = audioCtx.createAnalyser();
-    freqAnalyser.fftSize = 64;
+    freqAnalyser.fftSize = CHUNKS;
     audioSrc.connect(freqAnalyser);
     // frequencyBinCount tells you how many values you'll receive from the analyser
     frequencyData = new Uint8Array(freqAnalyser.frequencyBinCount); // Not being used
     timeDomainData = new Uint8Array(analyser.fftSize); // Uint8Array should be the same length as the fftSize 
+
+    setup();
   }
 
   renderFrame();
@@ -398,7 +413,8 @@ function renderFrame() {
   analyser.getByteTimeDomainData(timeDomainData); // fill the Uint8Array with data returned from getByteTimeDomainData()
 
 
-  console.log(timeDomainData)
+  //console.log(timeDomainData);
+  
 
 
 }
@@ -406,4 +422,91 @@ function renderFrame() {
 function pauseMusic() {
   console.log('Pause!');
   cancelAnimationFrame(animationID);
+}
+
+
+
+// Sample item from array
+function sample(collection){
+	return collection[Math.floor(Math.random() * collection.length)]
+}
+//var sample = (collection) => collection[Math.floor(Math.random() * collection.length)]
+
+function setup() {
+  // Setup canvas
+  canvas = document.getElementById('wobble');
+  ctx = canvas.getContext('2d');
+  WIDTH = canvas.width;
+  HEIGHT = canvas.height;
+
+  // Prepare items
+  items = generateItems(CHUNKS);
+
+  // Start animation frame
+  window.requestAnimationFrame(render);
+}
+
+// Randomly reassigns values to point
+var randomlyGeneratePoint = (item) => {
+  item.color = sample(COLOURS)
+  item.speed = SPEED
+  item.target.y = HEIGHT * Math.random()
+}
+
+// Initialise and generate items.
+function generateItems(amount) {
+  let ary = new Array(amount);
+  ary.fill(1);
+
+  return ary.fill({}).map((_item, index) => {
+    let x = WIDTH * index / ary.length
+    let y = HEIGHT * Math.random()
+    let speed = SPEED * Math.random();
+
+    return {
+      color: sample(COLOURS),
+      target: {
+        x: x,
+        y: y,
+        speed: speed
+      },
+      current: {
+        x: WIDTH * index / ary.length,
+        y: HEIGHT * Math.random(),
+        speed: speed
+      }
+    }
+  });
+}
+
+function render() {
+  const renderItems = items;
+  freqAnalyser.getByteFrequencyData(frequencyData);
+  ctx.beginPath();
+
+  console.log('Render items length: ' + renderItems.length);
+  console.log('FFT length: ' + frequencyData.length);
+  renderItems.forEach((item, index) => {
+    if (index === 0) ctx.moveTo(0, HEIGHT / 2) // start at zero point
+    if (index + 1 !== renderItems.length) ctx.lineTo(renderItems[index + 1].current.x, items[index + 1].current.y); // move current to target
+    if (index + 1 === renderItems.length) ctx.lineTo(canvas.width, canvas.height / 2) // move last point to center end of canvas
+
+    /*
+      current is under target, move up
+      current is above target, move down
+      current is equal or around target, randomlyGeneratePoint()
+    */
+    if (item.current.y < item.target.y) {
+      item.current.y += item.current.speed
+    } else if (item.current.y >= item.target.y && item.current.y <= item.target.y + SPEED) {
+      ctx.strokeStyle = item.color
+      randomlyGeneratePoint(item) // generate new target points to move to
+    } else {
+      item.current.y -= item.current.speed
+    }
+  });
+
+  ctx.stroke()
+
+  window.requestAnimationFrame(render);
 }

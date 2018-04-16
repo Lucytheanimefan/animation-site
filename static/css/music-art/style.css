@@ -1,0 +1,17 @@
+audio {
+  top: 0;
+}
+
+.wobble__wrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wobble__canvas {
+  background-color: #232323;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
