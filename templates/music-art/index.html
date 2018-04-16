@@ -5,6 +5,8 @@
 {% endblock %}
 <!--html-->
 {% block body %}
+<div class="container">
+<div class="row">
 <form action="/upload/music-art" method="post" enctype="multipart/form-data">
   <div>
     {# <label class="btn btn-default btn-file">Browse #}
@@ -15,16 +17,25 @@
     <input class="btn btn-default" type="submit" value="Upload"> 
   </div>
 </form>
-<p>{{ musicfile }}</p>
-<audio src="{{ musicfile }}" controls onpause="pauseMusic()" onplay="playMusic()" id="sound"></audio>
+</div>
+{% if musicfile is not none and musicfile %}
+<div class="row">
+<div class="col-md-6">
+<span>File: {{ musicfile }}</span>
 <input class="btn btn-default" type="button" onclick="canvasToImage()" value="Get png">
+</div>
+<div class="col-md-6">
+<audio src="{{ musicfile }}" controls onpause="pauseMusic()" onplay="playMusic()" id="sound"></audio>
+</div>
+</div>
+{% endif %}
 
 <div class="wobble__wrapper">
   <div class="wobble__canvas--right">
     <canvas id="wobble" class="wobble__canvas" width="1000" height="700"></canvas>
   </div>
 </div>
-
+</div>
 {% endblock %}
 
 
