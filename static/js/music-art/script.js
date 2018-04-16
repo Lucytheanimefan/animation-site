@@ -170,7 +170,7 @@ function render() {
       current is above target, move down
       current is equal or around target, randomlyGeneratePoint()
     */
-    var yFreq = frequencyData[index]//Math.pow(frequencyData[index], 2);
+    var yFreq = frequencyData[index] //Math.pow(frequencyData[index], 2);
     if (item.current.y < item.target.y) {
       item.current.y += yFreq; //item.current.speed
     } else if (item.current.y >= item.target.y && item.current.y <= item.target.y + SPEED) {
@@ -184,4 +184,12 @@ function render() {
   ctx.stroke()
 
   window.requestAnimationFrame(render);
+}
+
+
+function canvasToImage() {
+  var c = document.getElementById("wobble");
+  var d = c.toDataURL("image/png");
+  var w = window.open('about:blank', 'image from canvas');
+  w.document.write("<img src='" + d + "' alt='from canvas'/>");
 }
