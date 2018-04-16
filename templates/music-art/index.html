@@ -7,9 +7,10 @@
 {% block body %}
 <form action="/upload/music-art" method="post" enctype="multipart/form-data">
   <div>
-    <label class="btn btn-default btn-file">Browse</label>
-      <input type="file" name="file" style="display: none;" value="{{ musicfile }}">
-      {{ musicfile }}
+    <label class="btn btn-default btn-file">Browse
+      <input type="file" name="file" style="display: none;">
+      <span>{{ musicfile }}</span>
+   </label>
   </div>
   <div>
     <input class="btn btn-default" type="submit" value="Upload"> 
