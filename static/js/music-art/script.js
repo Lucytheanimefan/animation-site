@@ -21,6 +21,12 @@ const MOVEMENT = 2
 
 const SEED_COLOR = { 'r': 255, 'g': 255, 'b': 255 };
 
+const schemeTypes = ['mono', 'contrast', 'triade', 'tetrade', 'analogic'];
+const variations = ['default', 'pastel', 'soft', 'light', 'hard', 'pale'];
+
+var SCHEME = schemeTypes[0];
+var VARIATION = variations[0];
+
 function playMusic() {
   if (firstTimePlay) {
     firstTimePlay = false;
@@ -84,12 +90,30 @@ function generateNewColors() {
   let factor = 255 / 128;
   console.log('Factor: ' + factor);
   // Generate colors
-  for (let i = 0; i < timeDomainData.length - 3; i++) {
-    let d = timeDomainData[i];
-    COLORS.push('rgb(' + Math.round(d * factor * Math.random()) +
-      ',' + Math.round(d * factor * Math.random()) +
-      ',' + Math.round(d * factor * Math.random()) + ')');
+  var hueVal = Math.max(timeDomainData); //timeDomainData[Math.round(timeDomainData.length * Math.random())];
+  if (hueVal == null) return;
+
+  var distance = null; //The value must be a float from 0 to 1
+  if (SCHEME == 'triade' || SCHEME == 'tetrade' || SCHEME == 'analogic') {
+    distance = hueVal/128;
   }
+  console.log("hueVal: " + hueVal);
+  var scheme = new ColorScheme;
+  scheme.from_hue(hueVal)
+    .scheme(SCHEME)
+    .distance(distance)
+    .variation(VARIATION);
+  COLORS = scheme.colors();
+
+
+  // var colors = scheme.colors();
+
+  // for (let i = 0; i < timeDomainData.length - 3; i++) {
+  //   let d = timeDomainData[i];
+  //   COLORS.push('rgb(' + Math.round(d * factor * Math.random()) +
+  //     ',' + Math.round(d * factor * Math.random()) +
+  //     ',' + Math.round(d * factor * Math.random()) + ')');
+  // }
   // console.log(timeDomainData);
   console.log(COLORS);
 }
@@ -115,7 +139,7 @@ function setup() {
 // Randomly reassigns values to point
 var randomlyGeneratePoint = (item) => {
   generateNewColors();
-  item.color = sample(COLORS)
+  item.color = "#" + sample(COLORS)
   item.speed = SPEED
   item.target.y = HEIGHT * Math.random()
 }
@@ -131,7 +155,7 @@ function generateItems(amount) {
     let speed = SPEED * Math.random();
 
     return {
-      color: sample(COLORS),
+      color: "#" + sample(COLORS),
       target: {
         x: x,
         y: y,

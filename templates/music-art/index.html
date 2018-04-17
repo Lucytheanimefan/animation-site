@@ -1,45 +1,32 @@
 {% extends "genLayout.html" %}
 <!--css-->
 {% block css %}
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/music-art/style.css') }}">
-{% endblock %}
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/music-art/style.css') }}"> {% endblock %}
 <!--html-->
 {% block body %}
 <div class="container">
-<div class="row">
-<form action="/upload/music-art" method="post" enctype="multipart/form-data">
-  <div>
-    {# <label class="btn btn-default btn-file">Browse #}
-      <input type="file" name="file">
-{#    </label> #}
+  <div class="row">
+    <form action="/upload/music-art" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="file">Upload a music file</label>
+        <input type="file" name="file">
+      </div>
+      <input class="btn btn-default" type="submit" value="Upload">
+    </form>
   </div>
-  <div>
-    <input class="btn btn-default" type="submit" value="Upload"> 
+  {% if musicfile is not none and musicfile %}
+  <audio src="{{ musicfile }}" controls onpause="pauseMusic()" onplay="playMusic()" id="sound"></audio>
+  <span>File: {{ musicfile }}</span>
+  <input class="btn btn-default" type="button" onclick="canvasToImage()" value="Get png">
+  {% endif %}
+  <div class="wobble__wrapper">
+    <div class="wobble__canvas--right">
+      <canvas id="wobble" class="wobble__canvas" width="1000" height="700"></canvas>
+    </div>
   </div>
-</form>
-</div>
-{% if musicfile is not none and musicfile %}
-<div class="row">
-<div class="col-md-6">
-<span>File: {{ musicfile }}</span>
-<input class="btn btn-default" type="button" onclick="canvasToImage()" value="Get png">
-</div>
-<div class="col-md-6">
-<audio src="{{ musicfile }}" controls onpause="pauseMusic()" onplay="playMusic()" id="sound"></audio>
-</div>
-</div>
-{% endif %}
-
-<div class="wobble__wrapper">
-  <div class="wobble__canvas--right">
-    <canvas id="wobble" class="wobble__canvas" width="1000" height="700"></canvas>
-  </div>
-</div>
 </div>
 {% endblock %}
-
-
 <!--js-->
-{% block scripts %} {% assets output="gen/packed.js", "js_genlayout","js/music-art/script.js" %}
+{% block scripts %} {% assets output="gen/packed.js", "plugins/color-scheme.min.js", "js_genlayout","js/music-art/script.js" %}
 <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %} {% endblock %}
