@@ -29,7 +29,7 @@ var oldMax = 0;
 //var oldTimeDomainData = Array.apply(null, Array(CHUNKS)).map(Number.prototype.valueOf, 0);;
 
 const MAX_HUE = 239;
-var COLOR_THRESHOLD = 50;
+var COLOR_THRESHOLD = 30;
 
 var regularClear = true;
 
