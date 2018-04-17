@@ -24,54 +24,56 @@ const SEED_COLOR = { 'r': 255, 'g': 255, 'b': 255 };
 const schemeTypes = ['mono', 'contrast', 'triade', 'tetrade', 'analogic'];
 const variations = ['default', 'pastel', 'soft', 'light', 'hard', 'pale'];
 
-var SCHEME = schemeTypes[0];
-var VARIATION = variations[0];
+var SCHEME = schemeTypes[Math.floor(Math.random() * schemeTypes.length)];
+var VARIATION = variations[Math.floor(Math.random() * variations.length)];
+
+var oldTimeDomainTotal = 0;
+var oldMax = 0;
+//var oldTimeDomainData = Array.apply(null, Array(CHUNKS)).map(Number.prototype.valueOf, 0);;
+
+const MAX_HUE = 239;
+const factor = 255 / 128;
+var COLOR_THRESHOLD = 50;
+
+$("#color-threshold").change(function() {
+  COLOR_THRESHOLD = $(this).val();
+  console.log("New color threshold: " + COLOR_THRESHOLD);
+})
+
+$("#clear-canvas").click(function() {
+  canvas = document.getElementById('wobble');
+  ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+})
 
 function playMusic() {
-  if (firstTimePlay) {
-    firstTimePlay = false;
-    audioCtx = new AudioContext();
-    audio = document.getElementById('sound');
+  console.log(SCHEME);
+  console.log(VARIATION);
+  if (!firstTimePlay) return;
+  firstTimePlay = false;
+  audioCtx = new AudioContext();
+  audio = document.getElementById('sound');
 
-    duration = audio.duration;
-    var audioSrc = audioCtx.createMediaElementSource(audio);
-    analyser = audioCtx.createAnalyser();
-    analyser.fftSize = CHUNKS; //2048;
-    audioSrc.connect(audioCtx.destination);
-    audioSrc.connect(analyser);
+  duration = audio.duration;
+  var audioSrc = audioCtx.createMediaElementSource(audio);
+  analyser = audioCtx.createAnalyser();
+  analyser.fftSize = CHUNKS; //2048;
+  audioSrc.connect(audioCtx.destination);
+  audioSrc.connect(analyser);
 
-    bufferLength = analyser.frequencyBinCount;
+  bufferLength = analyser.frequencyBinCount;
 
-    freqAnalyser = audioCtx.createAnalyser();
-    freqAnalyser.fftSize = CHUNKS;
-    audioSrc.connect(freqAnalyser);
-    // frequencyBinCount tells you how many values you'll receive from the analyser
-    frequencyData = new Uint8Array(freqAnalyser.frequencyBinCount); // Not being used
-    timeDomainData = new Uint8Array(analyser.fftSize); // Uint8Array should be the same length as the fftSize 
+  freqAnalyser = audioCtx.createAnalyser();
+  freqAnalyser.fftSize = CHUNKS;
+  audioSrc.connect(freqAnalyser);
+  // frequencyBinCount tells you how many values you'll receive from the analyser
+  frequencyData = new Uint8Array(freqAnalyser.frequencyBinCount); // Not being used
+  timeDomainData = new Uint8Array(analyser.fftSize); // Uint8Array should be the same length as the fftSize 
 
-    setup();
-  }
-
-  renderFrame();
-}
-
-function renderFrame() {
-
-  animationID = requestAnimationFrame(renderFrame);
-  // update data in frequencyData
-
-  //analyser.getByteFrequencyData(frequencyData);
-  // render frame based on values in frequencyData
-
-  //The byte values do range between 0-255, and yes, that maps to -1 to +1, so 128 is zero. (It's not volts, but full-range unitless values.)
-  analyser.getByteTimeDomainData(timeDomainData); // fill the Uint8Array with data returned from getByteTimeDomainData()
-
-
-  console.log('Time domain data length: ' + timeDomainData.length);
-
-
+  setup();
 
 }
+
 
 function pauseMusic() {
   console.log('Pause!');
@@ -84,18 +86,28 @@ function pauseMusic() {
 function sample(collection) {
   return collection[Math.floor(Math.random() * collection.length)]
 }
-//var sample = (collection) => collection[Math.floor(Math.random() * collection.length)]
+
+function add(a, b) {
+  return a + b;
+}
 
 function generateNewColors() {
-  let factor = 255 / 128;
-  console.log('Factor: ' + factor);
-  // Generate colors
-  var hueVal = Math.max(timeDomainData); //timeDomainData[Math.round(timeDomainData.length * Math.random())];
-  if (hueVal == null) return;
+  //console.log(timeDomainData);
+  var newMax = Math.max(...timeDomainData);
+  //let newTotal = timeDomainData.reduce(add, 0);
 
-  var distance = null; //The value must be a float from 0 to 1
+  //console.log(newMax + ' vs ' + oldMax);
+  // Generate colors
+  if (Math.abs(newMax - oldMax) < COLOR_THRESHOLD) return;
+
+  var hueVal = MAX_HUE * oldMax / newMax; //timeDomainData[Math.round(timeDomainData.length * Math.random())];
+  if (hueVal == null || isNaN(hueVal)) hueVal = 21;
+
+  //console.log(newTotal + ' v. ' + oldTimeDomainTotal);
+
+  var distance = 0; //The value must be a float from 0 to 1
   if (SCHEME == 'triade' || SCHEME == 'tetrade' || SCHEME == 'analogic') {
-    distance = hueVal/128;
+    distance = Math.random();
   }
   console.log("hueVal: " + hueVal);
   var scheme = new ColorScheme;
@@ -115,7 +127,10 @@ function generateNewColors() {
   //     ',' + Math.round(d * factor * Math.random()) + ')');
   // }
   // console.log(timeDomainData);
-  console.log(COLORS);
+
+  //oldTimeDomainTotal = newTotal;
+  oldMax = newMax;
+  //oldTimeDomainData = timeDomainData;
 }
 
 function setup() {
@@ -176,8 +191,6 @@ function render() {
   analyser.getByteTimeDomainData(timeDomainData);
   ctx.beginPath();
 
-  // console.log('Render items length: ' + renderItems.length);
-  // console.log('FFT length: ' + frequencyData.length);
   renderItems.forEach((item, index) => {
     if (index === 0) {
       ctx.moveTo(0, HEIGHT / 2); // start at zero point
