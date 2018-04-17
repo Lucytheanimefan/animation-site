@@ -31,7 +31,7 @@ var oldMax = 0;
 const MAX_HUE = 239;
 var COLOR_THRESHOLD = 50;
 
-var regularClear = false;
+var regularClear = true;
 
 $("#color-threshold").change(function() {
   COLOR_THRESHOLD = $(this).val();
@@ -55,7 +55,7 @@ function clearCanvas() {
 
 $("#regularClear").click(function() {
   regularClear = $(this).is(':checked');
-  console.log('Random clear: ' + regularClear);
+  console.log('Regular clear: ' + regularClear);
 })
 
 function playMusic() {

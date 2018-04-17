@@ -384,7 +384,7 @@ var oldMax = 0;
 const MAX_HUE = 239;
 var COLOR_THRESHOLD = 50;
 
-var randomClear = false;
+var regularClear = true;
 
 $("#color-threshold").change(function() {
   COLOR_THRESHOLD = $(this).val();
@@ -406,9 +406,9 @@ function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-$("#randomClear").click(function() {
-  randomClear = $(this).is(':checked');
-  console.log('Random clear: ' + randomClear);
+$("#regularClear").click(function() {
+  regularClear = $(this).is(':checked');
+  console.log('Regular clear: ' + regularClear);
 })
 
 function playMusic() {
@@ -469,7 +469,7 @@ function generateNewColors() {
   if (SCHEME == 'triade' || SCHEME == 'tetrade' || SCHEME == 'analogic') {
     distance = Math.random();
   }
-  console.log("hueVal: " + hueVal);
+  //console.log("hueVal: " + hueVal);
   var scheme = new ColorScheme;
   scheme.from_hue(hueVal)
     .scheme(SCHEME)
@@ -479,7 +479,7 @@ function generateNewColors() {
 
   oldMax = newMax;
 
-  if (randomClear) {
+  if (regularClear) {
     clearCanvas();
   }
 }
