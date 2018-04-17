@@ -384,20 +384,31 @@ var oldMax = 0;
 const MAX_HUE = 239;
 var COLOR_THRESHOLD = 50;
 
+var randomClear = false;
+
 $("#color-threshold").change(function() {
   COLOR_THRESHOLD = $(this).val();
   console.log("New color threshold: " + COLOR_THRESHOLD);
 })
 
 $("#clear-canvas").click(function() {
-  canvas = document.getElementById('wobble');
-  ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  clearCanvas();
 })
 
 $("#speed").change(function() {
   SPEED = $(this).val();
   console.log('Speed: ' + SPEED);
+})
+
+function clearCanvas() {
+  let canvas = document.getElementById('wobble');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+$("#randomClear").click(function() {
+  randomClear = $(this).is(':checked');
+  console.log('Random clear: ' + randomClear);
 })
 
 function playMusic() {
@@ -447,16 +458,12 @@ function add(a, b) {
 function generateNewColors() {
   //console.log(timeDomainData);
   var newMax = Math.max(...timeDomainData);
-  //let newTotal = timeDomainData.reduce(add, 0);
 
-  //console.log(newMax + ' vs ' + oldMax);
   // Generate colors
   if (Math.abs(newMax - oldMax) < COLOR_THRESHOLD) return;
 
-  var hueVal = MAX_HUE * oldMax / newMax; //timeDomainData[Math.round(timeDomainData.length * Math.random())];
+  var hueVal = MAX_HUE * oldMax / newMax;
   if (hueVal == null || isNaN(hueVal)) hueVal = 21;
-
-  //console.log(newTotal + ' v. ' + oldTimeDomainTotal);
 
   var distance = 0; //The value must be a float from 0 to 1
   if (SCHEME == 'triade' || SCHEME == 'tetrade' || SCHEME == 'analogic') {
@@ -470,20 +477,11 @@ function generateNewColors() {
     .variation(VARIATION);
   COLORS = scheme.colors();
 
-
-  // var colors = scheme.colors();
-
-  // for (let i = 0; i < timeDomainData.length - 3; i++) {
-  //   let d = timeDomainData[i];
-  //   COLORS.push('rgb(' + Math.round(d * factor * Math.random()) +
-  //     ',' + Math.round(d * factor * Math.random()) +
-  //     ',' + Math.round(d * factor * Math.random()) + ')');
-  // }
-  // console.log(timeDomainData);
-
-  //oldTimeDomainTotal = newTotal;
   oldMax = newMax;
-  //oldTimeDomainData = timeDomainData;
+
+  if (randomClear) {
+    clearCanvas();
+  }
 }
 
 function setup() {

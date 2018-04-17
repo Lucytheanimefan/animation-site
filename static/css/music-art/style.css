@@ -1,6 +1,9 @@
 audio {
  
 }
+label{
+	font-style: normal;
+}
 
 .wobble__wrapper {
   width: 100%;
