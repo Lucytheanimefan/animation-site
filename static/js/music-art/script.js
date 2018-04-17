@@ -15,11 +15,8 @@ var WIDTH, HEIGHT;
 var items = [];
 
 const CHUNKS = 32; // 3 ~ 30
-const SPEED = 4; // 1 ~ 30
+var SPEED = 2; // 1 ~ 30
 var COLORS = []; //['#ffa300', '#cf0060', '#ff00ff', '#444444', '#555555'] // Colors will be sampled
-const MOVEMENT = 2
-
-const SEED_COLOR = { 'r': 255, 'g': 255, 'b': 255 };
 
 const schemeTypes = ['mono', 'contrast', 'triade', 'tetrade', 'analogic'];
 const variations = ['default', 'pastel', 'soft', 'light', 'hard', 'pale'];
@@ -32,7 +29,6 @@ var oldMax = 0;
 //var oldTimeDomainData = Array.apply(null, Array(CHUNKS)).map(Number.prototype.valueOf, 0);;
 
 const MAX_HUE = 239;
-const factor = 255 / 128;
 var COLOR_THRESHOLD = 50;
 
 $("#color-threshold").change(function() {
@@ -44,6 +40,11 @@ $("#clear-canvas").click(function() {
   canvas = document.getElementById('wobble');
   ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+})
+
+$("#speed").change(function() {
+  SPEED = $(this).val();
+  console.log('Speed: ' + SPEED);
 })
 
 function playMusic() {
@@ -77,7 +78,6 @@ function playMusic() {
 
 function pauseMusic() {
   console.log('Pause!');
-  cancelAnimationFrame(animationID);
 }
 
 
