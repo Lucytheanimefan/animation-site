@@ -57,6 +57,10 @@ def about():
 def work(variable):
     return render_template(variable+'/index.html', isWorks = True)
 
+@app.route('/works/<variable>/<specific_work>', methods=['GET'])
+def specific_work(variable, specific_work):
+    return render_template(variable+'/' + specific_work + '.html', isWorks = True)
+
 @app.route("/sentiment_analysis", methods = ['POST'])
 def sentiment_analysis():
 	text_list = request.form['quote'].encode('utf-8').split('.')
