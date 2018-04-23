@@ -12,7 +12,9 @@ function draw() {
   analyser.getByteTimeDomainData(timeDomainData);
   freqAnalyser.getByteFrequencyData(frequencyData);
   background(51);
-  system.addParticle();
+  if (isPlaying) {
+    system.addParticle();
+  }
   system.run();
 }
 

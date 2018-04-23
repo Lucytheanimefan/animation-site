@@ -6,6 +6,7 @@ var timeDomainData;
 var frequencyData;
 
 var firstTimePlay = true;
+var isPlaying = false;
 const CHUNKS = 32; // 3 ~ 30
 
 function handleSelect(elm) {
@@ -13,6 +14,7 @@ function handleSelect(elm) {
 }
 
 function playMusic() {
+  isPlaying = true;
   if (!firstTimePlay) return;
   firstTimePlay = false;
   audioCtx = new AudioContext();
@@ -37,5 +39,6 @@ function playMusic() {
 }
 
 function pauseMusic() {
+  isPlaying = false;
   console.log('Pause!');
 }
