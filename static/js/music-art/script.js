@@ -6,6 +6,7 @@ var timeDomainData;
 var frequencyData;
 
 var firstTimePlay = true;
+const CHUNKS = 32; // 3 ~ 30
 
 function handleSelect(elm) {
   window.location = window.location + "/" + elm.value;

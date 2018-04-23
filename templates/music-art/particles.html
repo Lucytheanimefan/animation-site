@@ -23,6 +23,14 @@
 </div>
 {% endblock %}
 <!--js-->
-{% block scripts %} {% assets output="gen/packed.js", "plugins/p5.min.js", "js_genlayout","js/music-art/script.js","js/music-art/particles.js" %}
-<script type="text/javascript" src="{{ ASSET_URL }}"></script>
-{% endassets %} {% endblock %}
+{% block scripts %} 
+{% if musicfile is not none and musicfile %}
+	{% assets output="gen/packed.js", "plugins/p5.min.js", "js_genlayout","js/music-art/script.js","js/music-art/particles.js" %}
+	<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+{% else %}
+	{% assets output="gen/packed.js", "plugins/p5.min.js", "js_genlayout","js/music-art/script.js" %}
+	<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+{% endif %}
+{% endblock %}

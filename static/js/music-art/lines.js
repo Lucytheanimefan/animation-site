@@ -14,7 +14,6 @@ var WIDTH, HEIGHT;
 
 var items = [];
 
-const CHUNKS = 32; // 3 ~ 30
 var SPEED = 2; // 1 ~ 30
 var COLORS = []; //['#ffa300', '#cf0060', '#ff00ff', '#444444', '#555555'] // Colors will be sampled
 
