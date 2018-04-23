@@ -78,14 +78,14 @@ def sentiment_analysis():
 def apple():
 	return render_template("glitch/index.html")
 
-@app.route('/upload/<template>', methods=['POST'])
-def upload(template):
+@app.route('/upload/<template>/<work>', methods=['POST'])
+def upload(template, work):
     # Get the name of the uploaded file
     file = request.files['file']
     full_filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
     file.save(full_filename)
 
-    return render_template(template + '/index.html', musicfile=str(url_for('uploaded_file', filename=file.filename)))
+    return render_template(template + '/'+ work + '.html', musicfile=str(url_for('uploaded_file', filename=file.filename)))
 
 # This route is expecting a parameter containing the name
 # of a file. Then it will locate that file on the upload

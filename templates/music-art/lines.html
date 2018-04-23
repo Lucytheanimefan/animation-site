@@ -7,7 +7,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
+    	{% with work='lines' %}
       {% include 'music-art/upload.html' %} 
+      {% endwith %}
+
       {% if musicfile is not none and musicfile %}
       <audio src="{{ musicfile }}" controls onpause="pauseMusic()" onplay="playMusic()" id="sound"></audio>
       {% endif %}
@@ -45,6 +48,6 @@
 </div>
 {% endblock %}
 <!--js-->
-{% block scripts %} {% assets output="gen/packed.js", "plugins/color-scheme.min.js", "js_genlayout","js/music-art/lines.js" %}
+{% block scripts %} {% assets output="gen/packed.js", "plugins/color-scheme.min.js", "js_genlayout", "js/music-art/script.js","js/music-art/lines.js" %}
 <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %} {% endblock %}
