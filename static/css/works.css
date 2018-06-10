@@ -1,6 +1,6 @@
 body {
   background: #000;
-  overflow: hidden;
+  overflow: scroll;
   /*background: url('https://dl.dropboxusercontent.com/u/4534978/2014/fishes/bg2.jpg') no-repeat center center fixed;*/
   background-color: white !important;
   background-size: cover;
