@@ -249,7 +249,7 @@ function populateWorks() {
     for (var i = 0; i < data.length; i++) {
         if (i % 3 == 0) {
             recentRow = i;
-            $("#works").append("<div id = 'workRow" + i + "'class='row works'></div>");
+            $("#works").after("<div id = 'workRow" + i + "'class='row works'></div>");
         }
         var name = data[i]["name"];
         var url = data[i]["url"];

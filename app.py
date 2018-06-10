@@ -3,7 +3,7 @@ import json
 from flask import Flask, render_template, send_from_directory, jsonify, request, redirect,url_for
 from flask_assets import Environment, Bundle
 from flask_compress import Compress
-from aylienapiclient import textapi
+# from aylienapiclient import textapi
 import requests
 
 
@@ -61,17 +61,17 @@ def work(variable):
 def specific_work(variable, specific_work):
     return render_template(variable+'/' + specific_work + '.html', isWorks = True)
 
-@app.route("/sentiment_analysis", methods = ['POST'])
-def sentiment_analysis():
-	text_list = request.form['quote'].encode('utf-8').split('.')
-	client = textapi.Client('8d1fc860', 'e87b5298692123977e5c6cc98c6dae0e')
-	sentiment_per_line = {}
-	for i, text in enumerate(text_list):
-		sentiment = client.Sentiment({'text': text}) 
-		sentiment_per_line[i] = sentiment
-	print(sentiment_per_line)
-	#return redirect(url_for('work', variable = 'quotes', data = json.dumps(sentiment_per_line)))
-	return render_template('quotes/index.html', data = json.dumps(sentiment_per_line))
+# @app.route("/sentiment_analysis", methods = ['POST'])
+# def sentiment_analysis():
+# 	text_list = request.form['quote'].encode('utf-8').split('.')
+# 	client = textapi.Client('8d1fc860', 'e87b5298692123977e5c6cc98c6dae0e')
+# 	sentiment_per_line = {}
+# 	for i, text in enumerate(text_list):
+# 		sentiment = client.Sentiment({'text': text}) 
+# 		sentiment_per_line[i] = sentiment
+# 	print(sentiment_per_line)
+# 	#return redirect(url_for('work', variable = 'quotes', data = json.dumps(sentiment_per_line)))
+# 	return render_template('quotes/index.html', data = json.dumps(sentiment_per_line))
 
 
 @app.route("/glitch")

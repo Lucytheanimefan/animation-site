@@ -1,53 +1,54 @@
 body {
-    background: #000;
-    overflow: hidden;
-    /*background: url('https://dl.dropboxusercontent.com/u/4534978/2014/fishes/bg2.jpg') no-repeat center center fixed;*/
-    background-color: white !important;
-    background-size: cover;
-    color: #4c4c4c !important;
+  background: #000;
+  overflow: hidden;
+  /*background: url('https://dl.dropboxusercontent.com/u/4534978/2014/fishes/bg2.jpg') no-repeat center center fixed;*/
+  background-color: white !important;
+  background-size: cover;
+  color: #4c4c4c !important;
 }
 
-.navbar-toggle .icon-bar{
-    background-color: grey !important;
+.navbar-toggle .icon-bar {
+  background-color: grey !important;
 }
-hr{
-	display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #4c4c4c;
-    margin: 1em 0;
-    padding: 0; 
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #4c4c4c;
+  margin: 1em 0;
+  padding: 0;
 }
 
 .fishcontainer {
-    position: absolute;
-    left: 50%;
-    margin-left: -700px;
-    top: 50%;
-    margin-top: -300px;
-    height: 600px;
-    width: 1400px;
-    z-index: -1;
+  position: absolute;
+  left: 50%;
+  margin-left: -700px;
+  top: 50%;
+  margin-top: -300px;
+  height: 600px;
+  width: 1400px;
+  z-index: -1;
 }
 
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 #fishbitmap {
-    display: none;
+  display: none;
 }
 
-.works{
-	z-index: 1 !important;
-	margin-bottom: 15px;
+.works {
+  z-index: 1 !important;
+  margin-bottom: 15px;
 }
 
-.workTitle{
-	margin-top: 5px;
+.workTitle {
+  margin-top: 5px;
 }
 
 a:hover {
-    color: black !important;
+  color: black !important;
 }
