@@ -24,7 +24,7 @@ hr {
   position: absolute;
   left: 50%;
   margin-left: -700px;
-  top: 50%;
+  top: 40%;
   margin-top: -300px;
   height: 600px;
   width: 1400px;
@@ -42,7 +42,7 @@ hr {
 
 .works {
   z-index: 1 !important;
-  margin-bottom: 15px;
+/*  margin-bottom: 15px;*/
 }
 
 .workTitle {
