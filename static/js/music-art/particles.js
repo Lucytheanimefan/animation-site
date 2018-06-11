@@ -60,8 +60,8 @@ var ParticleSystem = function(position) {
   this.particles = [];
 };
 
-ParticleSystem.prototype.addParticle = function() {
-  this.particles.push(new Particle(this.origin));
+ParticleSystem.prototype.addParticle = function(acceleration = null, velocity = null) {
+  this.particles.push(new Particle(this.origin, acceleration, velocity));
 };
 
 ParticleSystem.prototype.run = function() {
