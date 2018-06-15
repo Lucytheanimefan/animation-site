@@ -387,7 +387,7 @@ function drawFish(originalFish = false) {
   let fishType = Math.random() < 0.5 ? fishTypes[0] : fishTypes[1];
   $("#body").append("<img class='fish' id = '" + id + "' src='/static/img/derpderp/" + fishType + "'>")
   fish.push({});
-  fishSpeeds.push(Math.random() * fishSpeedLimit);
+  fishSpeeds.push({ x: Math.random() * fishSpeedLimit, y: Math.random() * fishSpeedLimit });
 }
 
 function animateFish() {
@@ -395,17 +395,27 @@ function animateFish() {
     var fish = this;
     var fishIndex = i;
     setInterval(function() {
+    	let speed = fishSpeeds[i];
       //console.log(this);
       var position = $(fish).offset(); //position();
-      // console.log(position);
-      // console.log($(document).width());
+
       if (position.left < 0) {
-        fishSpeeds[i] = (fishSpeeds[i] < 0) ? -1 * fishSpeeds[i] : fishSpeeds[i];
+        speed.x = (speed.x < 0) ? -1 * speed.x : speed.x;
       } else if (position.left > $(document).width()) {
-        fishSpeeds[i] = (fishSpeeds[i] > 0) ? -1 * fishSpeeds[i] : fishSpeeds[i];
+        speed.x = (speed.x > 0) ? -1 * speed.x : speed.x;
       }
-      // console.log("New pos: " + (position.left + fishSpeeds[fishIndex]));
-      $(fish).offset({ left: (position.left + fishSpeeds[fishIndex]) });
+
+      if (position.top < 0) {
+        speed.y = (speed.y < 0) ? -1 * speed.y : speed.y;
+      } else if (position.top > $(document).height()) {
+        speed.y = (speed.y > 0) ? -1 * speed.y : speed.y;
+      }
+
+      $(fish).offset({
+        left: position.left + speed.x,
+        top: position.top + speed.y,
+      });
+
     }, 10);
   });
 }
