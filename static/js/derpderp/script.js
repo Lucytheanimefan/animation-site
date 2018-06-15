@@ -11,11 +11,11 @@
 
 var fish = [];
 var originalFishClicked = false;
-const maxNumFish = 100;
+const maxNumFish = 70;
 var fishSpeeds = [];
 const fishSpeedLimit = 20;
 
-const fishTypes = ["bigger-fish.gif", "fat-fish.gif"]
+const fishTypes = ["bigger-fish.gif", "fat-fish.gif", "foot-fish.gif"]
 
 document.addEventListener("DOMContentLoaded", function(event) {
   drawFish(true);
@@ -25,14 +25,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 function drawFish(originalFish = false) {
   var id = "fish" + fish.length;
-  let fishType = Math.random() < 0.5 ? fishTypes[0] : fishTypes[1];
-  if (originalFish) {
-    $("#body").append("<div class='fish' id='originalFish'><img id = 'originalFish' src='/static/img/derpderp/" + fishType + "'><div id='clickMe'>Click me</p></div>");
+  if (Math.random() <= 0.017) {
+    // Foot fish
+    $("#body").append("<img class='footfish fish' src='/static/img/derpderp/" + fishTypes[2] + "'>");
   } else {
-    $("#body").append("<img class='fish' id = '" + id + "' src='/static/img/derpderp/" + fishType + "'>");
+    let fishType = (Math.random() < 0.5 ? fishTypes[0] : fishTypes[1]);
+    if (originalFish) {
+      $("#body").append("<div class='fish' id='originalFish'><img id = 'originalFish' src='/static/img/derpderp/" + fishType + "'><div id='clickMe'>Click me</p></div>");
+    } else {
+      $("#body").append("<img class='fish' src='/static/img/derpderp/" + fishType + "'>");
+    }
   }
   fish.push({});
-  fishSpeeds.push({ x: Math.random() * fishSpeedLimit, y: Math.random() * fishSpeedLimit });
+  fishSpeeds.push({ x: Math.random() * fishSpeedLimit, y: Math.random() * fishSpeedLimit, ycoord: Math.random() * $(document).height() });
 }
 
 function animateFish() {
@@ -42,24 +47,41 @@ function animateFish() {
     setInterval(function() {
       let speed = fishSpeeds[i];
       var position = $(fish).offset(); //position();
+      var topPos = 0;
+      var leftPos = 0;
 
-      if (position.left < 0) {
-        speed.x = (speed.x < 0) ? -1 * speed.x : speed.x;
-      } else if (position.left > $(document).width()) {
-        speed.x = (speed.x > 0) ? -1 * speed.x : speed.x;
-      }
+      if ($(fish).hasClass("footfish")) {
+        if (position.left < 0) {
 
-      if (position.top < 0) {
-        speed.y = (speed.y < 0) ? -1 * speed.y : speed.y;
-      } else if (position.top > $(document).height()) {
-        speed.y = (speed.y > 0) ? -1 * speed.y : speed.y;
+          leftPos = $(document).width();
+          topPos = Math.random() * $(document).height();
+
+        } else {
+          leftPos = position.left - 50;
+          topPos = speed.ycoord;
+        }
+        
+
+      } else {
+        if (position.left < 0) {
+          speed.x = (speed.x < 0) ? -1 * speed.x : speed.x;
+        } else if (position.left > $(document).width()) {
+          speed.x = (speed.x > 0) ? -1 * speed.x : speed.x;
+        }
+
+        if (position.top < 0) {
+          speed.y = (speed.y < 0) ? -1 * speed.y : speed.y;
+        } else if (position.top > $(document).height()) {
+          speed.y = (speed.y > 0) ? -1 * speed.y : speed.y;
+        }
+        topPos = position.top + speed.y
+        leftPos = position.left + speed.x
       }
 
       $(fish).offset({
-        left: position.left + speed.x,
-        top: position.top + speed.y,
+        left: leftPos,
+        top: topPos,
       });
-
     }, 10);
   });
 }
