@@ -43,7 +43,7 @@ my_works = [
     {'url': 'music_manipulator', 'name': 'Sound Manipulator', 'credit': ['Lucy'], 'date': '2/13/18'},
     {'url': 'glitch', 'name': 'Glitch', 'credit': ['Lucy'], 'date': '2/27/18'},
     {'url': 'music-art', 'name': 'Line Music', 'credit': ['Lucy'], 'date': '4/16/18'},
-    {'url': 'derpderp', 'name': 'Derp Derp', 'credit': ['Lucy', 'Stephanie Zhou'], 'date': '7/15/18'}]
+    {'url': 'derpderp', 'name': 'Derp Derp', 'credit': ['Lucy', 'Stephanie Zhou'], 'date': '6/15/18'}]
 
 
 @app.route("/")
