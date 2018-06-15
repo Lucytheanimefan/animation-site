@@ -1,0 +1,30 @@
+{% extends "genLayout.html" %}
+<!--css-->
+{% block css %}
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/anime/style.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='plugins/slick/slick.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='plugins/slick/slick-theme.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='plugins/animate/animate.min.css') }}"> {% endblock %}
+<!--html-->
+{% block body %}
+<div id="main">
+    <button onclick="begin()">Start</button>
+    <canvas id="canvas"></canvas>
+    <img src="/static/img/anime/pokemon.jpg">
+    <img id="naruto" src="/static/img/anime/naruto_orig.jpg">
+    <!--
+        <div><img src="/static/img/anime/naruto_orig.jpg"></div>
+        <div><img src="/static/img/anime/cardcaptor.jpg"></div>
+        <div><img src="/static/img/anime/yugi.jpg"></div>
+        -->
+    <!--
+    <audio controls autoplay>
+        <source src="" type="audio/mpeg">
+    </audio>-->
+</div>
+{% endblock %}
+<!--js-->
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='plugins/slick/slick.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/anime/script.js') }}"></script>
+{% endblock %}

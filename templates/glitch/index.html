@@ -1,0 +1,17 @@
+{% extends "genLayout.html" %}
+<!--css-->
+{% block css %}
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/music_manipulator/style.css') }}">
+{% endblock %}
+<!--html-->
+{% block body %}
+<canvas id="canvas"></canvas>
+
+{% endblock %}
+
+
+
+<!--js-->
+{% block scripts %} {% assets output="gen/packed.js", "js_genlayout", "js/lib/three_new.min.js","js/lib/FirstPersonControls.js","js/lib/OrbitControls.js", "js/lib/CopyShader.js","js/lib/DigitalGlitch.js", "js/lib/EffectComposer.js","js/lib/RenderPass.js","js/lib/MaskPass.js","js/lib/ShaderPass.js","js/lib/GlitchPass.js","js/lib/dat.gui.min.js","js/glitch/script.js" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %} {% endblock %}

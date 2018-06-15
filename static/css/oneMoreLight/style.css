@@ -1,0 +1,7 @@
+#ytplayer {
+    position: fixed;
+    display: inline-block;
+    visibility: visible;
+    bottom: 0;
+    right: 0;
+}

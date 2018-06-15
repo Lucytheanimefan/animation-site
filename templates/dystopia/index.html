@@ -1,0 +1,24 @@
+{% extends "genLayout.html" %}
+<!--css-->
+{% block css %}
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/dystopia/style.css') }}"> {% endblock %}
+<!--html-->
+{% block body %}
+<div id="main">
+    <!--<img id = "earth" src="/static/img/dystopia/earth.png">-->
+    <div id="webgl"></div>
+    <canvas id='world'></canvas>
+
+</div>
+
+<!--<audio controls autoplay loop>
+    <source src="/static/sound/comet.mp3" type="audio/mpeg">
+</audio>-->
+{% endblock %}
+<!--js-->
+{% block scripts %}
+{% assets output="gen/packed.js", "js_genlayout", "js/lib/three.min.js","js/lib/TrackballControls.js", "js/lib/ExplodeModifier.js", "js/dystopia/script.js" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "genLayout.html" %}
+<!--css-->
+{% block css %}
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/butterfly/style.css') }}"> {% endblock %}
+<!--html-->
+{% block body %}
+<div id="main">
+    <canvas id='background'></canvas>
+    <!--intro-->
+    <div class="type-js headline">
+        <p class="text-js">The Butterfly Lovers (梁祝) is a traditional Chinese legend and love story about the pair Liang Shanbo (梁山伯) and Zhu Yingtai (祝英台). Due to circumstance and fate, the two are unable to be together, leading to both of their tragic deaths. Their spirits turn into a pair of butterflies and depart their graves, finally together again. This interactive piece is a product of both our music and artistic interpretation of the legend. Alternate between mousedown and mouseup to see the full range of the piece.
+        </p>
+    </div>
+    <div class="type-js2 headline">
+        <p class="text-js">Music created by Kaijie Chen. Frontend interactive created by Lucy Zhang. Concept by Kaijie & Lucy.</p>
+    </div>
+    <div class="container container1">
+        <div class="hover-container">
+            <div class="left wing"></div>
+            <div class="right wing"></div>
+            <div class="body"></div>
+            <div class="head"></div>
+        </div>
+    </div>
+    <!--<div class="instructions">
+    Click and hold down on your mouse. Then let go. As many times, for however long you'd like</div>-->
+    <div class="container container2">
+        <div class="hover-container">
+            <div class="left wing2"></div>
+            <div class="right wing2"></div>
+            <div class="body"></div>
+            <div class="head"></div>
+        </div>
+    </div>
+
+    <div class="mynotification">
+        <div class="close-me leftn"></div>
+        <div class="text-notification left-text">Click anywhere on the screen and <b>hold down</b> on your mouse. Then let go. As many times and for however long you'd like until you reach the end</div>
+    </div>
+</div>
+
+{% endblock %}
+
+<!--js-->
+{% block scripts %}
+
+{% assets output="gen/packed.js", "js_genlayout", "plugins/jquery-ui.min.js", "js/lib/turn.min.js", "js/butterfly/script.js" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+
+{% endblock %}

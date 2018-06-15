@@ -1,0 +1,17 @@
+{% extends "genLayout.html" %}
+<!--css-->
+{% block css %} {% endblock %}
+<!--html-->
+{% block body %}
+<div class="container">
+  <select name="formal" onchange="handleSelect(this)">
+    <option value="">Home</option>
+    <option value="lines">Lines</option>
+    <option value="particles">Particles</option>
+  </select>
+</div>
+{% endblock %}
+<!--js-->
+{% block scripts %} {% assets output="gen/packed.js", "plugins/color-scheme.min.js", "js_genlayout","js/music-art/script.js" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %} {% endblock %}
