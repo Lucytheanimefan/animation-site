@@ -42,7 +42,8 @@ my_works = [
     {'url': 'quotes', 'name': 'Quote Sentiment Visualization', 'credit': ['Lucy'], 'date': '1/27/18'},
     {'url': 'music_manipulator', 'name': 'Sound Manipulator', 'credit': ['Lucy'], 'date': '2/13/18'},
     {'url': 'glitch', 'name': 'Glitch', 'credit': ['Lucy'], 'date': '2/27/18'},
-    {'url': 'music-art', 'name': 'Line Music', 'credit': ['Lucy'], 'date': '4/16/18'}]
+    {'url': 'music-art', 'name': 'Line Music', 'credit': ['Lucy'], 'date': '4/16/18'},
+    {'url': 'derpderp', 'name': 'Derp Derp', 'credit': ['Lucy', 'Stephanie Zhou'], 'date': '7/15/18'}]
 
 
 @app.route("/")
@@ -82,11 +83,6 @@ def sentiment_analysis():
     print(sentiment_per_line)
     # return redirect(url_for('work', variable = 'quotes', data = json.dumps(sentiment_per_line)))
     return render_template('quotes/index.html', data=json.dumps(sentiment_per_line))
-
-
-@app.route("/glitch")
-def apple():
-    return render_template("glitch/index.html")
 
 
 @app.route('/upload/<template>/<work>', methods=['POST'])
