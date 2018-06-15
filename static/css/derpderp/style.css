@@ -13,3 +13,8 @@ body,
 body {
   background-color: #46468c;
 }
+
+#clickMe{
+  color: white;
+  font-size: 20px;
+}

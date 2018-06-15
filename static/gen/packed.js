@@ -381,11 +381,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 function drawFish(originalFish = false) {
   var id = "fish" + fish.length;
-  if (originalFish) {
-    id = "originalFish"
-  }
   let fishType = Math.random() < 0.5 ? fishTypes[0] : fishTypes[1];
-  $("#body").append("<img class='fish' id = '" + id + "' src='/static/img/derpderp/" + fishType + "'>")
+  if (originalFish) {
+    $("#body").append("<div class='fish' id='originalFish'><img id = 'originalFish' src='/static/img/derpderp/" + fishType + "'><div id='clickMe'>Click me</p></div>");
+  } else {
+    $("#body").append("<img class='fish' id = '" + id + "' src='/static/img/derpderp/" + fishType + "'>");
+  }
   fish.push({});
   fishSpeeds.push({ x: Math.random() * fishSpeedLimit, y: Math.random() * fishSpeedLimit });
 }
@@ -395,8 +396,7 @@ function animateFish() {
     var fish = this;
     var fishIndex = i;
     setInterval(function() {
-    	let speed = fishSpeeds[i];
-      //console.log(this);
+      let speed = fishSpeeds[i];
       var position = $(fish).offset(); //position();
 
       if (position.left < 0) {
@@ -425,6 +425,8 @@ function setFishClickEvent() {
     if (originalFishClicked) {
       return
     }
+
+    $("#clickMe").remove();
     var i = 0;
     // Start spawning fish
     while (i < maxNumFish) {
