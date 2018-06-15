@@ -34,7 +34,7 @@ function animateFish() {
     setInterval(function() {
     	//console.log(this);
       var moveRight = 5;
-      let position = $(fish).offset();//position();
+      var position = $(fish).offset();//position();
       console.log(position);
       if (position.left < 0) {
         moveRight = 5;
@@ -42,7 +42,7 @@ function animateFish() {
         moveRight = -5;
       }
       console.log("New pos: " + (position.left + moveRight));
-      $(fish).css({ left: (position.left + moveRight) + "px"});
+      $(fish).offset({ left: (position.left + moveRight)});
     }, 10);
   });
 }
