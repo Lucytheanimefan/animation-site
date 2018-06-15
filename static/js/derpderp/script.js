@@ -31,11 +31,12 @@ function drawFish(originalFish = false) {
 function animateFish() {
   $(".fish").each(function(i) {
   	var fish = this;
+  	var moveRight = 5;
     setInterval(function() {
     	//console.log(this);
-      var moveRight = 5;
       var position = $(fish).offset();//position();
       console.log(position);
+      console.log($(document).width());
       if (position.left < 0) {
         moveRight = 5;
       } else if (position.left > $(document).width()) {
