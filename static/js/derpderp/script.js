@@ -11,7 +11,11 @@
 
 var fish = [];
 var originalFishClicked = false;
-const fishLimit = 100;
+const maxNumFish = 100;
+var fishSpeeds = [];
+const fishSpeedLimit = 20;
+
+const fishTypes = ["bigger-fish.gif", "fat-fish.gif"]
 
 document.addEventListener("DOMContentLoaded", function(event) {
   drawFish(true);
@@ -24,26 +28,28 @@ function drawFish(originalFish = false) {
   if (originalFish) {
     id = "originalFish"
   }
-  $("#body").append("<img class='fish' id = '" + id + "' src='/static/img/derpderp/bigger-fish.gif'>")
+  let fishType = Math.random() < 0.5 ? fishTypes[0] : fishTypes[1];
+  $("#body").append("<img class='fish' id = '" + id + "' src='/static/img/derpderp/" + fishType + "'>")
   fish.push({});
+  fishSpeeds.push(Math.random() * fishSpeedLimit);
 }
 
 function animateFish() {
   $(".fish").each(function(i) {
-  	var fish = this;
-  	var moveRight = 5;
+    var fish = this;
+    var fishIndex = i;
     setInterval(function() {
-    	//console.log(this);
-      var position = $(fish).offset();//position();
-      console.log(position);
-      console.log($(document).width());
+      //console.log(this);
+      var position = $(fish).offset(); //position();
+      // console.log(position);
+      // console.log($(document).width());
       if (position.left < 0) {
-        moveRight = 5;
+        fishSpeeds[i] = (fishSpeeds[i] < 0) ? -1 * fishSpeeds[i] : fishSpeeds[i];
       } else if (position.left > $(document).width()) {
-        moveRight = -5;
+        fishSpeeds[i] = (fishSpeeds[i] > 0) ? -1 * fishSpeeds[i] : fishSpeeds[i];
       }
-      console.log("New pos: " + (position.left + moveRight));
-      $(fish).offset({ left: (position.left + moveRight)});
+      // console.log("New pos: " + (position.left + fishSpeeds[fishIndex]));
+      $(fish).offset({ left: (position.left + fishSpeeds[fishIndex]) });
     }, 10);
   });
 }
@@ -55,10 +61,11 @@ function setFishClickEvent() {
     }
     var i = 0;
     // Start spawning fish
-    while (i < fishLimit) {
+    while (i < maxNumFish) {
       drawFish();
       i++;
     }
+    animateFish();
     originalFishClicked = true;
   })
 }
