@@ -1,25 +1,65 @@
-const canvas = document.getElementById("canvas");
-const context = canvas.getContext("2d");
-const img = document.getElementById("fish");
-const rect = canvas.getBoundingClientRect();
-context.canvas.width = window.innerWidth;
-context.canvas.height = window.innerHeight;
+// const canvas = document.getElementById("canvas");
+// const context = canvas.getContext("2d");
+// const img = document.getElementById("fish");
+// const rect = canvas.getBoundingClientRect();
+// context.canvas.width = window.innerWidth;
+// context.canvas.height = window.innerHeight;
+// const fishWidth = img.width;
+// const fishHeight = img.height;
+// var fishLocations = [];
 
-const fishWidth = img.width;
-const fishHeight = img.height;
-var fishLocations = [];
 
-console.log(fishWidth);
-console.log(fishHeight);
+var fish = [];
+var originalFishClicked = false;
+const fishLimit = 100;
 
 document.addEventListener("DOMContentLoaded", function(event) {
+  drawFish(true);
+  animateFish();
   setFishClickEvent();
-  drawFish();
-  testFish();
 });
 
-function drawFish(){
-	
+function drawFish(originalFish = false) {
+  var id = "fish" + fish.length;
+  if (originalFish) {
+    id = "originalFish"
+  }
+  $("#body").append("<img class='fish' id = '" + id + "' src='/static/img/derpderp/bigger-fish.gif'>")
+  fish.push({});
+}
+
+function animateFish() {
+  $(".fish").each(function(i) {
+  	var fish = this;
+    setInterval(function() {
+    	//console.log(this);
+      var moveRight = 5;
+      let position = $(fish).offset();//position();
+      console.log(position);
+      if (position.left < 0) {
+        moveRight = 5;
+      } else if (position.left > $(document).width()) {
+        moveRight = -5;
+      }
+      console.log("New pos: " + (position.left + moveRight));
+      $(fish).css({ left: (position.left + moveRight) + "px"});
+    }, 10);
+  });
+}
+
+function setFishClickEvent() {
+  $("#originalFish").click(function() {
+    if (originalFishClicked) {
+      return
+    }
+    var i = 0;
+    // Start spawning fish
+    while (i < fishLimit) {
+      drawFish();
+      i++;
+    }
+    originalFishClicked = true;
+  })
 }
 
 // function drawFish(x = 0, y = 0, width = fishWidth, height = fishHeight) {
