@@ -1,14 +1,3 @@
-// const canvas = document.getElementById("canvas");
-// const context = canvas.getContext("2d");
-// const img = document.getElementById("fish");
-// const rect = canvas.getBoundingClientRect();
-// context.canvas.width = window.innerWidth;
-// context.canvas.height = window.innerHeight;
-// const fishWidth = img.width;
-// const fishHeight = img.height;
-// var fishLocations = [];
-
-
 var fish = [];
 var originalFishClicked = false;
 const maxNumFish = 70;
@@ -60,7 +49,7 @@ function animateFish() {
           leftPos = position.left - 50;
           topPos = speed.ycoord;
         }
-        
+
 
       } else {
         if (position.left < 0) {
@@ -104,35 +93,107 @@ function setFishClickEvent() {
   })
 }
 
-// function drawFish(x = 0, y = 0, width = fishWidth, height = fishHeight) {
-//   if (width && height) {
-//     context.drawImage(img, x, y, width, height);
-//   } else {
-//     context.drawImage(img, x, y);
-//   }
-//   fishLocations.push({ x: x, y: y })
-// }
+/* ----------- TANK -------------- */
+var canvas = null;
+var context = null;
+var bufferCanvas = null;
+var bufferCanvasCtx = null;
+var bubbleArray = [];
+var bubbleTimer = null;
+var maxBubbles = (window.innerWidth / 10); // Here you may set max bubbles to be created
 
-// function testFish(numFish = 10) {
-//   for (let i = 0; i < numFish; i++) {
-//     let posx = (Math.random() * $(document).width()).toFixed();
-//     let posy = (Math.random() * $(document).height()).toFixed();
-//     drawFish(posx, posy);
-//   }
-//   console.log(fishLocations);
-// }
+function sizeCanvas(height, width) {
+  bufferCanvas = document.createElement("canvas");
+  bufferCanvas.width = canvas.width = width;
+  bufferCanvas.height = canvas.height = height;
+  bufferCanvasCtx = bufferCanvas.getContext("2d");
+}
 
-// function setFishClickEvent() {
-//   $("#canvas").on("click", function(event) {
-//     var x = event.clientX - rect.left;
-//     var y = event.clientY - rect.top;
-//     for (let i = 0, len = fishLocations.length; i < len; i++) {
-//       let fishLocation = fishLocations[i];
-//       if (x < (fishLocation.x + fishWidth) && (x > fishLocation.x) &&
-//         y < (fishLocation.y + fishHeight) && (y > fishLocation.y)) {
-//         console.log(location);
-//         console.log("Clicked the fish!" + x + "," + y);
-//       }
-//     }
-//   })
-// }
+function init() {
+  bubbleTimer = null;
+  canvas = document.getElementById("glCanvas");
+  context = canvas.getContext("2d");
+  sizeCanvas(window.innerHeight, window.innerWidth);
+  bubbleTimer = setInterval(addBubble, 200);
+
+  DrawBubble();
+
+  setInterval(animate, 30);
+}
+
+function animate() {
+  context.save();
+  blank();
+  UpdateBubble();
+  DrawBubble();
+  context.drawImage(bufferCanvas, 0, 0, bufferCanvas.width, bufferCanvas.height);
+  context.font = '80px sans-serif';
+  // context.fillText('Want to find out how I drew this fish?', bufferCanvas.width / 2 - 750, 100);
+  context.restore();
+}
+
+function addBubble() {
+  bubbleArray[bubbleArray.length] = new Bubble();
+  if (bubbleArray.length == maxBubbles) {
+    clearInterval(bubbleTimer);
+  }
+}
+
+function blank() {
+  bufferCanvasCtx.fillStyle = "#8789C0";
+  bufferCanvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function UpdateBubble() {
+  for (var i = 0; i < bubbleArray.length; i++) {
+    if (bubbleArray[i].y <= context.canvas.height) {
+      bubbleArray[i].y -= bubbleArray[i].speed;
+      if (bubbleArray[i].y <= 0)
+        bubbleArray[i].y = context.canvas.height;
+      bubbleArray[i].x += bubbleArray[i].drift;
+      if (bubbleArray[i].x > context.canvas.width)
+        bubbleArray[i].x = 0;
+    }
+  }
+}
+
+
+function Bubble() {
+  this.x = Math.round(Math.random() * context.canvas.width);
+  this.y = context.canvas.height - 10;
+  this.drift = Math.random();
+  this.speed = Math.round(Math.random() * 3) + 1;
+  this.width = (Math.random() * 5) + 10;
+  this.height = this.width;
+}
+
+
+function DrawBubble() {
+  for (var i = 0; i < bubbleArray.length; i++) {
+    bufferCanvasCtx.beginPath();
+    bufferCanvasCtx.arc(bubbleArray[i].x, bubbleArray[i].y, bubbleArray[i].width, 0, Math.PI * 2, true);
+    bufferCanvasCtx.strokeStyle = "white";
+    bufferCanvasCtx.lineWidth = 1;
+    bufferCanvasCtx.fillStyle = "rgba(255,255,255,.15)";
+    bufferCanvasCtx.stroke();
+    bufferCanvasCtx.fill();
+
+  }
+  // context.drawImage(bufferCanvas, 0, 0, bufferCanvas.width, bufferCanvas.height);
+  // context.restore();
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  init();
+});
+
+//Set up logic to resize!
+if (typeof window.orientation !== 'undefined') {
+  window.addEventListener("orientationchange", function() {
+    sizeCanvas(document.body.clientHeight, document.body.clientWidth);
+  });
+} else {
+  window.onresize = (function() {
+    sizeCanvas(window.innerHeight, window.innerWidth);
+  });
+}

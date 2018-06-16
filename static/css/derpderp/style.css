@@ -6,7 +6,7 @@ body,
   margin: 0px;
   border: 0;
   display: block;
-  overflow-x: hidden;
+  overflow: hidden;
   /* No floating content on sides */
 }
 
@@ -17,4 +17,9 @@ body {
 #clickMe{
   color: white;
   font-size: 20px;
+}
+
+canvas {
+  z-index: -1;
+  position: absolute !important;
 }
