@@ -6,13 +6,25 @@ const fishSpeedLimit = 20;
 
 const fishTypes = ["bigger-fish.gif", "fat-fish.gif", "foot-fish.gif"]
 
-document.addEventListener("DOMContentLoaded", function(event) {
+
+if (document.readyState === 'complete') {
+  console.log('document is already ready, just execute code here');
+  fullInit();
+} else {
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('document was not ready, place code here');
+    fullInit()
+  });
+}
+
+
+function fullInit() {
   init();
   drawFish(true);
   animateFish();
   setFishClickEvent();
   console.log('DOMContentLoaded calls');
-});
+}
 
 function drawFish(originalFish = false) {
   var id = "fish" + fish.length;
