@@ -7,9 +7,11 @@ const fishSpeedLimit = 20;
 const fishTypes = ["bigger-fish.gif", "fat-fish.gif", "foot-fish.gif"]
 
 document.addEventListener("DOMContentLoaded", function(event) {
+  init();
   drawFish(true);
   animateFish();
   setFishClickEvent();
+  console.log('DOMContentLoaded calls');
 });
 
 function drawFish(originalFish = false) {
@@ -182,10 +184,6 @@ function DrawBubble() {
   // context.drawImage(bufferCanvas, 0, 0, bufferCanvas.width, bufferCanvas.height);
   // context.restore();
 }
-
-window.addEventListener('DOMContentLoaded', function() {
-  init();
-});
 
 //Set up logic to resize!
 if (typeof window.orientation !== 'undefined') {
