@@ -257,7 +257,7 @@ function populateWorks() {
         var credits = data[i]["credit"].join(" · ");
         $("#workRow" + recentRow).append("<div class='col-md-4'>" +
             "<div class='work'>" +
-            "<a class = 'workTitle' href='/works/" + url + "'>" + name + "</a>" +
+            "<a class = 'workTitle' href='/work/" + url + "'>" + name + "</a>" +
             "<p class = 'workInfo' >Created on " + date +
             "<br>" + credits +
             "</p>" + "</div></div>");

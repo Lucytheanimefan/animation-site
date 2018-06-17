@@ -62,12 +62,16 @@ def about():
     return render_template('about.html', isWorks=False)
 
 
-@app.route('/works/<variable>', methods=['GET'])
+@app.route('/work/<variable>', methods=['GET'])
+def individual_work(variable):
+    return render_template('project.html', work=variable)
+
+@app.route('/project/<variable>', methods=['GET'])
 def work(variable):
     return render_template(variable + '/index.html', isWorks=True)
 
 
-@app.route('/works/<variable>/<specific_work>', methods=['GET'])
+@app.route('/project/<variable>/<specific_work>', methods=['GET'])
 def specific_work(variable, specific_work):
     return render_template(variable + '/' + specific_work + '.html', isWorks=True)
 
