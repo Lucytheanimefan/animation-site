@@ -13,6 +13,7 @@
 {% endblock %}
 <!--js-->
 {% block scripts %}
-<script type="text/javascript" src="{{ url_for('static', filename='plugins/slick/slick.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/cage/script.js') }}"></script>
+{% assets output="gen/packed.js", "js_genlayout", "js/lib/jquery.min.js", "js/cage/script.js", "plugins/slick/slick.min.js" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
 {% endblock %}

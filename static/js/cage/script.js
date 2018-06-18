@@ -27,8 +27,8 @@ function generateBars() {
         animateLines("right" + i, ctx, rightcoords, 1, "white", 1, 0);
     }
     //vertical bars
-    for (var j = 0; j < 20; j++) {
-        animateLines("vertical" + j, ctx, generateCoordinates(firstLeftCoords[j][1], canvas.height, step = 1, false, 15 * j), 1, "white", 1, 0);
+    for (var j = 0; j < 30; j++) {
+        animateLines("vertical" + j, ctx, generateCoordinates(firstLeftCoords[j][1], canvas.height, step = 1.5, false, 15 * j), 1, "white", 1, 0);
     }
 }
 
