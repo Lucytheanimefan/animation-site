@@ -7,6 +7,8 @@ const cubeDepth = 2.3;
 
 const cageCorner = canvas.width / cubeDepth;
 
+const clearArea = 20;
+
 $(document).ready(function() {
   generateBars();
   setMouseHover();
@@ -56,11 +58,17 @@ function generateCoordinatesFromLinearEqn(slope, xintercept, start, end) {
 function setMouseHover() {
   canvas.onmousemove = function(e) {
     // important: correct mouse position:
-    var rect = this.getBoundingClientRect(),
+    let rect = this.getBoundingClientRect(),
       x = e.clientX - rect.left,
       y = e.clientY - rect.top,
       i = 0,
       r;
-    ctx.clearRect(x, y, cubeDepth, cubeDepth); // for demo
+    ctx.clearRect(x, y, clearArea, clearArea);
+    let xinterceptpos = y - 0.5 * x;
+    let xinterceptneg = y + 0.5 * x;
+    let posCoords = generateCoordinatesFromLinearEqn(0.5, xinterceptpos, x-20, x + 24);
+    let negCoords = generateCoordinatesFromLinearEqn(-0.5, xinterceptneg, x-20, x + 24);
+    animateLines("diag" + x, ctx, posCoords, 1, "red", 1, 0);
+    animateLines("diag" + y, ctx, negCoords, 1, "red", 1, 0);
   }
 }
