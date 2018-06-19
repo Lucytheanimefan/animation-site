@@ -9,6 +9,8 @@
     <h1>{{ work }}</h1>
     <hr>
     <p>See the project <a href='/project/{{ work }}'>here</a></p>
+
+    {{ description|safe }}
     
 </div>
 {% endblock %} 

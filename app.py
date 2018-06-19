@@ -46,6 +46,10 @@ my_works = [
     {'url': 'derpderp', 'name': 'Derp Derp', 'credit': ['Lucy', 'Stephanie Zhou'], 'date': '6/15/18'}]
 
 
+descriptions = {'castleinblood': 'There\'s a castle in the dark and it\'s raining blood (or whatever you\'d like to interpret that red as, but we say it\'s blood. Your mouse functions as a flashlight. Hover your mouse over the screen to see beyond the black.',
+'chapel_entrance': '<p>This project uses Yuhao Hu\'s phenomenal photography of the Duke University chapel and fancy HTML canvas animations to embellish and enhance the image. The sun peeking in the from the top of the chapel inspired the theme of light so you\'ll see light represented as lines and shapes animated in when the piece first loads in the browser.</p> <p> To quote Yuhao\'s description when he saw the finished piece: When the curves descend and an arc about the sun developed to about just matching the arc on the gate. This point, the motion is quite developed on the left-top, right-top, right-bottom corners, and seemingly that there remains for something to occur to the left side. Then, when I let the motions go long enough, I\'ll see curves being developed quite rapidly, perhaps one by one, concentrating on the upper half of the window, until that part of space almost entirely whited out. Also, lots of thread ends appear on the upper-left, which somewhat reduces the feeling of "continuity", something that was so amazingly clear during the first several seconds.</p>'}
+
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -64,11 +68,11 @@ def about():
 
 @app.route('/work/<variable>', methods=['GET'])
 def individual_work(variable):
-    return render_template('project.html', work=variable)
+    return render_template('project.html', work=variable, description=descriptions[variable])
 
 @app.route('/project/<variable>', methods=['GET'])
-def work(variable):
-    return render_template(variable + '/index.html', isWorks=True)
+def project(variable):
+    return render_template(variable + '/index.html')
 
 
 @app.route('/project/<variable>/<specific_work>', methods=['GET'])
