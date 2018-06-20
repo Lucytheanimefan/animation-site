@@ -55,6 +55,10 @@ function generateCoordinatesFromLinearEqn(slope, xintercept, start, end) {
   return coords;
 }
 
+function getXIntercept(m, x, y) {
+  return y - m * x;
+}
+
 function setMouseHover() {
   canvas.onmousemove = function(e) {
     // important: correct mouse position:
@@ -64,10 +68,10 @@ function setMouseHover() {
       i = 0,
       r;
     ctx.clearRect(x, y, clearArea, clearArea);
-    let xinterceptpos = y - 0.5 * x;
-    let xinterceptneg = y + 0.5 * x;
-    let posCoords = generateCoordinatesFromLinearEqn(0.5, xinterceptpos, x-20, x + 24);
-    let negCoords = generateCoordinatesFromLinearEqn(-0.5, xinterceptneg, x-20, x + 24);
+    let xinterceptpos = getXIntercept(0.5, x, y);
+    let xinterceptneg = getXIntercept(-0.5, x, y);
+    let posCoords = generateCoordinatesFromLinearEqn(0.5, xinterceptpos, x - 20, x + 24);
+    let negCoords = generateCoordinatesFromLinearEqn(-0.5, xinterceptneg, x - 20, x + 24);
     animateLines("diag" + x, ctx, posCoords, 1, "red", 1, 0);
     animateLines("diag" + y, ctx, negCoords, 1, "red", 1, 0);
   }
