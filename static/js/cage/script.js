@@ -8,9 +8,11 @@ const cageCorner = canvas.width / 2.3;
 
 const clearArea = 20;
 
-const cubeWidth = 20;
+const cubeWidth = 60;
 
 const cubeDepth = cubeWidth / 2;
+
+var count = 0;
 
 $(document).ready(function() {
   //generateBars();
@@ -64,6 +66,7 @@ function getXIntercept(m, x, y) {
 
 function setMouseHover() {
   canvas.onmousemove = function(e) {
+    count += 1;
     // important: correct mouse position:
     let rect = this.getBoundingClientRect(),
       x = e.clientX - rect.left,
@@ -81,66 +84,73 @@ function setMouseHover() {
     animateLines("diag" + x, ctx, posCoords, 1, "red", 1, 0);
     animateLines("diag" + y, ctx, negCoords, 1, "red", 1, 0);
 
-    // Create a cube
-    let bottomCoords1 = generateCoordinates(x - 1, x + cubeWidth + 2, step = 1, horizontal = true, extraCoord = y);
-    let topCoords1 = generateCoordinates(x - 1, x + cubeWidth + 2, step = 1, horizontal = true, extraCoord = (y + cubeWidth));
-    let leftCoords1 = generateCoordinates(y, y + cubeWidth, step = 1, horizontal = false, extraCoord = x);
-    let rightCoords1 = generateCoordinates(y, y + cubeWidth, step = 1, horizontal = false, x + cubeWidth);
+    let cubeX = y;
+    let cubeY = x;
 
-    let bottomCoords2 = bottomCoords1.map((val, index, arr) => {
-      return [val[0] + cubeDepth, val[1] + cubeDepth];
-    })
+    let createCube = function() {
+      // Create a cube
+      let bottomCoords1 = generateCoordinates(cubeX - 1, cubeX + cubeWidth + 2, step = 1, horizontal = true, extraCoord = cubeY);
+      let topCoords1 = generateCoordinates(cubeX - 1, cubeX + cubeWidth + 2, step = 1, horizontal = true, extraCoord = (cubeY + cubeWidth));
+      let leftCoords1 = generateCoordinates(cubeY, cubeY + cubeWidth, step = 1, horizontal = false, extraCoord = cubeX);
+      let rightCoords1 = generateCoordinates(cubeY, cubeY + cubeWidth, step = 1, horizontal = false, cubeX + cubeWidth);
 
-    let topCoords2 = topCoords1.map((val, index, arr) => {
-      return [val[0] + cubeDepth, val[1] + cubeDepth];
-    })
+      let bottomCoords2 = bottomCoords1.map((val, index, arr) => {
+        return [val[0] + cubeDepth, val[1] + cubeDepth];
+      })
 
-    let leftCoords2 = leftCoords1.map((val, index, arr) => {
-      return [val[0] + cubeDepth, val[1] + cubeDepth];
-    })
+      let topCoords2 = topCoords1.map((val, index, arr) => {
+        return [val[0] + cubeDepth, val[1] + cubeDepth];
+      })
 
-    let rightCoords2 = rightCoords1.map((val, index, arr) => {
-      return [val[0] + cubeDepth, val[1] + cubeDepth];
-    })
+      let leftCoords2 = leftCoords1.map((val, index, arr) => {
+        return [val[0] + cubeDepth, val[1] + cubeDepth];
+      })
 
-    let diagSlope = 1;
+      let rightCoords2 = rightCoords1.map((val, index, arr) => {
+        return [val[0] + cubeDepth, val[1] + cubeDepth];
+      })
 
-    let xintercept1 = getXIntercept(diagSlope, x, y);
-    let diag1 = generateCoordinatesFromLinearEqn(slope = diagSlope, xintercept1, x, x + cubeDepth);
+      let diagSlope = 1;
 
-    let xintercept2 = getXIntercept(diagSlope, x + cubeWidth, y);
-    let diag2 = generateCoordinatesFromLinearEqn(slope = diagSlope, xintercept2, x + cubeWidth, x + cubeWidth + cubeDepth);
+      let xintercept1 = getXIntercept(diagSlope, cubeX, cubeY);
+      let diag1 = generateCoordinatesFromLinearEqn(slope = diagSlope, xintercept1, cubeX, cubeX + cubeDepth);
 
-    let xintercept3 = getXIntercept(diagSlope, x, y + cubeWidth);
-    let diag3 = generateCoordinatesFromLinearEqn(slope = diagSlope, xintercept3, x, x + cubeDepth);
+      let xintercept2 = getXIntercept(diagSlope, cubeX + cubeWidth, cubeY);
+      let diag2 = generateCoordinatesFromLinearEqn(slope = diagSlope, xintercept2, cubeX + cubeWidth, cubeX + cubeWidth + cubeDepth);
 
-    let xintercept4 = getXIntercept(diagSlope, x + cubeWidth, y + cubeWidth);
-    let diag4 = generateCoordinatesFromLinearEqn(slope = diagSlope, xintercept4, x + cubeWidth, x + cubeWidth + cubeDepth);
+      let xintercept3 = getXIntercept(diagSlope, cubeX, cubeY + cubeWidth);
+      let diag3 = generateCoordinatesFromLinearEqn(slope = diagSlope, xintercept3, cubeX, cubeX + cubeDepth);
 
-    let cubeDiagonals = function() {
-      animateLines("cubeDiag1" + x, ctx, diag1, 1, "white", 1, 0);
-      animateLines("cubeDiag2" + x, ctx, diag2, 1, "white", 1, 0);
-      animateLines("cubeDiag3" + x, ctx, diag3, 1, "white", 1, 0);
-      animateLines("cubeDiag4" + x, ctx, diag4, 1, "white", 1, 0);
+      let xintercept4 = getXIntercept(diagSlope, cubeX + cubeWidth, cubeY + cubeWidth);
+      let diag4 = generateCoordinatesFromLinearEqn(slope = diagSlope, xintercept4, cubeX + cubeWidth, cubeX + cubeWidth + cubeDepth);
+
+      let cubeDiagonals = function() {
+        animateLines("cubeDiag1" + cubeX, ctx, diag1, 1, "white", 1, 0);
+        animateLines("cubeDiag2" + cubeX, ctx, diag2, 1, "white", 1, 0);
+        animateLines("cubeDiag3" + cubeX, ctx, diag3, 1, "white", 1, 0);
+        animateLines("cubeDiag4" + cubeX, ctx, diag4, 1, "white", 1, 0);
+      }
+
+      let secondCube = function() {
+        animateLines("cubeBot2" + cubeX, ctx, bottomCoords2, 1, "white", 1, 0);
+        animateLines("cubeTop2" + cubeX, ctx, topCoords2, 1, "white", 1, 0);
+        animateLines("cubeLeft2" + cubeY, ctx, leftCoords2, 1, "white", 1, 0);
+        animateLines("cubeRight2" + cubeY, ctx, rightCoords2, 1, "white", 1, 0, cubeDiagonals);
+      }
+
+      let firstCube = function() {
+        animateLines("cubeBot1" + cubeX, ctx, bottomCoords1, 1, "white", 1, 0);
+        animateLines("cubeTop1" + cubeX, ctx, topCoords1, 1, "white", 1, 0);
+        animateLines("cubeLeft1" + cubeY, ctx, leftCoords1, 1, "white", 1, 0);
+        animateLines("cubeRight1" + cubeY, ctx, rightCoords1, 1, "white", 1, 0, secondCube);
+      }
+
+      firstCube();
     }
 
-    let secondCube = function() {
-      animateLines("cubeBot2" + x, ctx, bottomCoords2, 1, "white", 1, 0);
-      animateLines("cubeTop2" + x, ctx, topCoords2, 1, "white", 1, 0);
-      animateLines("cubeLeft2" + y, ctx, leftCoords2, 1, "white", 1, 0);
-      animateLines("cubeRight2" + y, ctx, rightCoords2, 1, "white", 1, 0, cubeDiagonals);
+    if (count % 4 == 0){
+      createCube();
     }
-
-    let firstCube = function() {
-      animateLines("cubeBot1" + x, ctx, bottomCoords1, 1, "white", 1, 0);
-      animateLines("cubeTop1" + x, ctx, topCoords1, 1, "white", 1, 0);
-      animateLines("cubeLeft1" + y, ctx, leftCoords1, 1, "white", 1, 0);
-      animateLines("cubeRight1" + y, ctx, rightCoords1, 1, "white", 1, 0, secondCube);
-    }
-
-    firstCube();
-
-
 
 
   }
