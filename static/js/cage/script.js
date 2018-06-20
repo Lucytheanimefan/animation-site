@@ -117,20 +117,31 @@ function setMouseHover() {
     let xintercept4 = getXIntercept(diagSlope, x + cubeWidth, y + cubeWidth);
     let diag4 = generateCoordinatesFromLinearEqn(slope = diagSlope, xintercept4, x + cubeWidth, x + cubeWidth + cubeDepth);
 
-    animateLines("cubeBot1" + x, ctx, bottomCoords1, 1, "white", 1, 0);
-    animateLines("cubeTop1" + x, ctx, topCoords1, 1, "white", 1, 0);
-    animateLines("cubeLeft1" + y, ctx, leftCoords1, 1, "white", 1, 0);
-    animateLines("cubeRight1" + y, ctx, rightCoords1, 1, "white", 1, 0);
+    let cubeDiagonals = function() {
+      animateLines("cubeDiag1" + x, ctx, diag1, 1, "white", 1, 0);
+      animateLines("cubeDiag2" + x, ctx, diag2, 1, "white", 1, 0);
+      animateLines("cubeDiag3" + x, ctx, diag3, 1, "white", 1, 0);
+      animateLines("cubeDiag4" + x, ctx, diag4, 1, "white", 1, 0);
+    }
 
-    animateLines("cubeBot2" + x, ctx, bottomCoords2, 1, "white", 1, 0);
-    animateLines("cubeTop2" + x, ctx, topCoords2, 1, "white", 1, 0);
-    animateLines("cubeLeft2" + y, ctx, leftCoords2, 1, "white", 1, 0);
-    animateLines("cubeRight2" + y, ctx, rightCoords2, 1, "white", 1, 0);
+    let secondCube = function() {
+      animateLines("cubeBot2" + x, ctx, bottomCoords2, 1, "white", 1, 0);
+      animateLines("cubeTop2" + x, ctx, topCoords2, 1, "white", 1, 0);
+      animateLines("cubeLeft2" + y, ctx, leftCoords2, 1, "white", 1, 0);
+      animateLines("cubeRight2" + y, ctx, rightCoords2, 1, "white", 1, 0, cubeDiagonals);
+    }
 
-    animateLines("cubeDiag1" + x, ctx, diag1, 1, "white", 1, 0);
-    animateLines("cubeDiag2" + x, ctx, diag2, 1, "white", 1, 0);
-    animateLines("cubeDiag3" + x, ctx, diag3, 1, "white", 1, 0);
-    animateLines("cubeDiag4" + x, ctx, diag4, 1, "white", 1, 0);
+    let firstCube = function() {
+      animateLines("cubeBot1" + x, ctx, bottomCoords1, 1, "white", 1, 0);
+      animateLines("cubeTop1" + x, ctx, topCoords1, 1, "white", 1, 0);
+      animateLines("cubeLeft1" + y, ctx, leftCoords1, 1, "white", 1, 0);
+      animateLines("cubeRight1" + y, ctx, rightCoords1, 1, "white", 1, 0, secondCube);
+    }
+
+    firstCube();
+
+
+
 
   }
 }
