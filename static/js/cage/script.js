@@ -76,11 +76,11 @@ function setMouseHover() {
     ctx.clearRect(x, y, clearArea, clearArea);
 
     // Create an "X"
-    let xinterceptpos = getXIntercept(0.5, x, y);
-    let xinterceptneg = getXIntercept(-0.5, x, y);
+    let xinterceptpos = getXIntercept(1, x, y);
+    let xinterceptneg = getXIntercept(-1, x, y);
 
-    let posCoords = generateCoordinatesFromLinearEqn(0.5, xinterceptpos, x - 20, x + 24);
-    let negCoords = generateCoordinatesFromLinearEqn(-0.5, xinterceptneg, x - 20, x + 24);
+    let posCoords = generateCoordinatesFromLinearEqn(1, xinterceptpos, x - 20, x + 24);
+    let negCoords = generateCoordinatesFromLinearEqn(-1, xinterceptneg, x - 20, x + 24);
     animateLines("diag" + x, ctx, posCoords, 1, "red", 1, 0);
     animateLines("diag" + y, ctx, negCoords, 1, "red", 1, 0);
 
