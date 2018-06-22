@@ -74,6 +74,7 @@ function setMouseHover() {
       i = 0,
       r;
     ctx.clearRect(x, y, clearArea, clearArea);
+     ctx.clearRect(y, x, clearArea, clearArea);
 
     // Create an "X"
     let xinterceptpos = getXIntercept(1, x, y);
