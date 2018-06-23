@@ -18,9 +18,9 @@ const backgroundImageClearArea = 2 * clearArea;
 
 // Spirograph
 // The parameter 0<=l<=1 represents how far the point A is located from the center of Ci. At the same time, 0<=k<=1 represents how big the inner circle Ci is with respect to the outer one Co.
-const k = 0.5;
-const l = 0.7;
-const R = 500;
+const k = 0.1;
+const l = 0.9;
+const R = 400;
 
 $(document).ready(function() {
   //generateBars();
