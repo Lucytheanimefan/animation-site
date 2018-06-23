@@ -8,11 +8,19 @@ const cageCorner = canvas.width / 2.3;
 
 const clearArea = 20;
 
-const cubeWidth = 60;
+const cubeWidth = 40;
 
 const cubeDepth = cubeWidth / 2;
 
 var count = 0;
+
+const backgroundImageClearArea = 2 * clearArea;
+
+// Spirograph
+// The parameter 0<=l<=1 represents how far the point A is located from the center of Ci. At the same time, 0<=k<=1 represents how big the inner circle Ci is with respect to the outer one Co.
+const k = 0.5;
+const l = 0.7;
+const R = 500;
 
 $(document).ready(function() {
   //generateBars();
@@ -73,8 +81,59 @@ function setMouseHover() {
       y = e.clientY - rect.top,
       i = 0,
       r;
+
+    // Check for background spirograph
+    // Normalize
+    let nX = x - canvas.width / 2;
+    let nY = y - canvas.height / 2;
+    let rad = Math.atan2(nY, nX); // radians
+
+    // Draw the spirograph
+    x_t = R * ((1 - k) * Math.cos(rad) + l * k * Math.cos((1 - k) * rad / k));
+    y_t = R * ((1 - k) * Math.sin(rad) + l * k * Math.sin((1 - k) * rad / k));
+
+    // Unnormalize
+    x_t += canvas.width/2;
+    y_t += canvas.height/2;
+
+    let drawSpirograph = function(x, y) {
+      let diff = Math.abs(x - y);
+      if (diff < 20) {
+        ctx.fillStyle = "#F7BDBC";
+      } else if (diff < 40) {
+        ctx.fillStyle = "#B2F2D3";
+      } else if (diff < 60) {
+        ctx.fillStyle = "#B3E6D6";
+      } else if (diff < 80) {
+        ctx.fillStyle = "#B4BCB5";
+      }
+      ctx.globalAlpha = 0.2;
+      ctx.fillRect(x, y, backgroundImageClearArea, backgroundImageClearArea);
+      ctx.globalAlpha = 1;
+    }
+
+    // let diff = Math.abs(x - y);
+    // if (diff < 100) {
+    // if (diff < 20){
+    //   ctx.fillStyle = "#F7BDBC";
+    // }
+    // else if (diff < 40){
+    //   ctx.fillStyle = "#B2F2D3";
+    // }
+    // else if (diff < 60){
+    //   ctx.fillStyle = "#B3E6D6";
+    // }
+    // else if (diff < 80){
+    //   ctx.fillStyle = "#B4BCB5";
+    // }
+    // ctx.globalAlpha = 0.2;
+    // ctx.fillRect(x, y, backgroundImageClearArea, backgroundImageClearArea);
+    // ctx.globalAlpha = 1;
+    // } else {
     ctx.clearRect(x, y, clearArea, clearArea);
-     ctx.clearRect(y, x, clearArea, clearArea);
+    ctx.clearRect(y, x, clearArea, clearArea);
+
+    drawSpirograph(x_t, y_t);
 
     // Create an "X"
     let xinterceptpos = getXIntercept(1, x, y);
@@ -149,9 +208,10 @@ function setMouseHover() {
       firstCube();
     }
 
-    if (count % 4 == 0){
+    if (count % 4 == 0) {
       createCube();
     }
+    // }
 
 
   }
