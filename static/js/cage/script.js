@@ -89,25 +89,25 @@ function setMouseHover() {
     let rad = Math.atan2(nY, nX); // radians
 
     // Draw the spirograph
-    x_t = R * ((1 - k) * Math.cos(rad) + l * k * Math.cos((1 - k) * rad / k));
-    y_t = R * ((1 - k) * Math.sin(rad) + l * k * Math.sin((1 - k) * rad / k));
+    x_t = R * ((1 - k) * Math.cos(rad) + l * k * Math.cos(((1 - k) * rad) / k));
+    y_t = R * ((1 - k) * Math.sin(rad) + l * k * Math.sin(((1 - k) * rad) / k));
 
     // Unnormalize
     x_t += canvas.width/2;
     y_t += canvas.height/2;
 
     let drawSpirograph = function(x, y) {
-      let diff = Math.abs(x - y);
-      if (diff < 20) {
+      //let diff = Math.abs(x - y);
+      if (count % 9 == 0) {
         ctx.fillStyle = "#F7BDBC";
-      } else if (diff < 40) {
+      } else if (count % 8 == 0) {
         ctx.fillStyle = "#B2F2D3";
-      } else if (diff < 60) {
+      } else if (count % 7 == 0) {
         ctx.fillStyle = "#B3E6D6";
-      } else if (diff < 80) {
+      } else if (count % 6 == 0) {
         ctx.fillStyle = "#B4BCB5";
       }
-      ctx.globalAlpha = 0.2;
+      ctx.globalAlpha = 0.1;
       ctx.fillRect(x, y, backgroundImageClearArea, backgroundImageClearArea);
       ctx.globalAlpha = 1;
     }
