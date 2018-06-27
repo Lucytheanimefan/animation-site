@@ -48,20 +48,25 @@ function setMouseHover() {
     y_t = R * ((1 - k) * Math.sin(rad) + (l * k) * Math.sin(((1 - k) * rad) / k));
 
     // Second one
-    x_t2 = R2 * ((1 - k) * Math.cos(rad) + (l * k) * Math.cos(((1 - k) * rad) / k));
-    y_t2 = R2 * ((1 - k) * Math.sin(rad) + (l * k) * Math.sin(((1 - k) * rad) / k));
+    // x_t2 = R2 * ((1 - k) * Math.cos(rad) + (l * k) * Math.cos(((1 - k) * rad) / k));
+    // y_t2 = R2 * ((1 - k) * Math.sin(rad) + (l * k) * Math.sin(((1 - k) * rad) / k));
 
 
     // Other cool lines
-    x_l1 = rad+rad * Math.cos(rad);
-    y_l2 = rad+rad * Math.sin(rad);
+    let t = (rad * 46.284) / (2 * Math.PI);
+    console.log(t);
+    x_l1 = R2*(Math.cos(t) + 0.25 * Math.cos(12*t) - (1/9) * Math.sin(-28 * t));
+    y_l1 = R2*(Math.sin(t) + 0.25 * Math.sin(12*t) + (1/9) * Math.cos(-28 * t));
 
     // Unnormalize
     x_t += canvas.width / 2;
     y_t += canvas.height / 2;
 
-    x_t2 += canvas.width / 2;
-    y_t2 += canvas.height / 2;
+    // x_t2 += canvas.width / 2;
+    // y_t2 += canvas.height / 2;
+
+    x_l1 += canvas.width / 2;
+    y_l1 += canvas.height / 2;
 
     var distFactor = Math.sqrt(Math.pow(Math.abs(x - canvas.width / 2), 2) + Math.pow(Math.abs(y - canvas.height / 2), 2)) / diagonalDistance;
 
@@ -70,7 +75,7 @@ function setMouseHover() {
     }
 
     //console.log("distFactor: " + distFactor);
-    let drawSpirograph = function(x, y) {
+    let drawPoint = function(x, y, area = squareArea) {
       if (count % 9 == 0) {
         currentColorHex = "#F7BDBC";
         //ctx.fillStyle = ColorLuminance("#F7BDBC", distFactor);
@@ -89,7 +94,7 @@ function setMouseHover() {
       }
       ctx.fillStyle = ColorLuminance(currentColorHex, distFactor);
       ctx.globalAlpha = 0.1;
-      ctx.fillRect(x, y, squareArea, squareArea);
+      ctx.fillRect(x, y, area, area);
       ctx.globalAlpha = 1;
     }
 
@@ -114,8 +119,12 @@ function setMouseHover() {
     ctx.clearRect(x, y, clearArea, clearArea);
     ctx.clearRect(y, x, clearArea, clearArea);
 
-    drawSpirograph(x_t, y_t);
-    drawSpirograph(x_t2, y_t2);
+    // Spirographs
+    drawPoint(x_t, y_t);
+    //drawPoint(x_t2, y_t2);
+
+    // Other stuff
+    drawPoint(x_l1, y_l1, 5);
   }
 }
 
