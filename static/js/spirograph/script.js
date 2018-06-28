@@ -20,8 +20,10 @@ const k = 0.1;
 const l = 0.99;
 const R = 300;
 const R2 = 150;
+const R3 = 40;
 
-
+const n = 7;
+const k2 = 9;
 $(document).ready(function() {
   //generateBars();
   setMouseHover();
@@ -54,9 +56,13 @@ function setMouseHover() {
 
     // Other cool lines
     let t = (rad * 46.284) / (2 * Math.PI);
-    console.log(t);
     x_l1 = R2*(Math.cos(t) + 0.25 * Math.cos(12*t) - (1/9) * Math.sin(-28 * t));
     y_l1 = R2*(Math.sin(t) + 0.25 * Math.sin(12*t) + (1/9) * Math.cos(-28 * t));
+
+
+    let t2 = (rad * 6.3) / (2 * Math.PI);
+    x_l2 = R3 * ((n-k2) * Math.cos(k2 * t2) + k2 * Math.cos((n-k2) * t2))/n;
+    y_l2 = R3 * ((n-k2) * Math.sin(k2 * t2) + k2 * Math.sin((n-k2) * t2))/n;
 
     // Unnormalize
     x_t += canvas.width / 2;
@@ -67,6 +73,9 @@ function setMouseHover() {
 
     x_l1 += canvas.width / 2;
     y_l1 += canvas.height / 2;
+
+    x_l2 += canvas.width / 2;
+    y_l2 += canvas.height / 2;
 
     var distFactor = Math.sqrt(Math.pow(Math.abs(x - canvas.width / 2), 2) + Math.pow(Math.abs(y - canvas.height / 2), 2)) / diagonalDistance;
 
@@ -124,7 +133,9 @@ function setMouseHover() {
     //drawPoint(x_t2, y_t2);
 
     // Other stuff
-    drawPoint(x_l1, y_l1, 5);
+    drawPoint(x_l1, y_l1, 7);
+
+    drawPoint(x_l2, y_l2, 7);
   }
 }
 
