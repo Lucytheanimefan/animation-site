@@ -43,7 +43,9 @@ my_works = [
     {'url': 'music_manipulator', 'name': 'Sound Manipulator', 'credit': ['Lucy'], 'date': '2/13/18'},
     {'url': 'glitch', 'name': 'Glitch', 'credit': ['Lucy'], 'date': '2/27/18'},
     {'url': 'music-art', 'name': 'Line Music', 'credit': ['Lucy'], 'date': '4/16/18'},
-    {'url': 'derpderp', 'name': 'Derp Derp', 'credit': ['Lucy', 'Stephanie Zhou'], 'date': '6/15/18'}]
+    {'url': 'derpderp', 'name': 'Derp Derp', 'credit': ['Lucy', 'Stephanie Zhou'], 'date': '6/15/18'},
+    {'url': 'cage', 'name': 'Cage', 'credit': ['Lucy'], 'date': '6/25/18'},
+    {'url': 'spirograph', 'name': 'Spirograph', 'credit': ['Lucy'], 'date': '6/27/18'},]
 
 
 descriptions = {'castleinblood': 'There\'s a castle in the dark and it\'s raining blood (or whatever you\'d like to interpret that red as, but we say it\'s blood. Your mouse functions as a flashlight. Hover your mouse over the screen to see beyond the black.',
@@ -52,7 +54,9 @@ descriptions = {'castleinblood': 'There\'s a castle in the dark and it\'s rainin
 'butterfly': '',
 'flower': '<p>Another piece that uses Yuhao Hu\'s photography and fancy canvas animations to highlight a flower theme as well as show off interesting line designs.</p>',
 'dystopia': '<p>This piece was inspired by the anime film Kimi no Na Wa, which tells a story about a comet crashing into a small village, Itomori. We represent the planet earth through the alternating backgrounds–from New York City to the Great Wall of China. Finally, the comet spinning around the Earth collides and shatters the planet, leaving a Grim Reaper in the background.</p> <p>The interactions were created using three.js, the images designed in Photoshop, and the music composed in Garageband.</p>',
-'quotes': 'Visualizing text sentiment analysis with three.js and the alien API.'}
+'quotes': 'Visualizing text sentiment analysis with three.js and the alien API.',
+'spirograph': 'Watch cool geometries form as you move your mouse in circles on the screen.',
+'cage': 'Watch criss crosses and boxes animate as you move your mouse around the screen.'}
 
 
 @app.route("/")
