@@ -8,7 +8,7 @@ var count = 0;
 
 const squareArea = 20;
 
-const clearArea = squareArea / 2;
+const clearArea = squareArea;
 
 const diagonalDistance = Math.sqrt(Math.pow(Math.abs(canvas.width / 2), 2) + Math.pow(Math.abs(canvas.height / 2), 2));
 
