@@ -57,7 +57,9 @@ descriptions = {'castleinblood': 'There\'s a castle in the dark and it\'s rainin
 'quotes': 'Visualizing text sentiment analysis with three.js and the alien API.',
 'spirograph': 'Watch cool geometries form as you move your mouse in circles on the screen.',
 'cage': 'Watch criss crosses and boxes animate as you move your mouse around the screen.',
-'music-art': 'A variety of music visualizers that you can select from the dropdown'}
+'music-art': 'A variety of music visualizers that you can select from the dropdown',
+'derpderp':'derpy fish',
+'spirograph': 'A trippy animation/interactive'}
 
 
 @app.route("/")
