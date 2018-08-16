@@ -53,7 +53,7 @@ descriptions = {'castleinblood': 'There\'s a castle in the dark and it\'s rainin
 'deathnote': '<p>Created a digital version of the Death Note notebook as featured in the anime. Flip to the last page to see names being written.</p>',
 'butterfly': '',
 'flower': '<p>Another piece that uses Yuhao Hu\'s photography and fancy canvas animations to highlight a flower theme as well as show off interesting line designs.</p>',
-'dystopia': 'This piece was inspired by the anime film Kimi no Na Wa, which tells a story about a comet crashing into a small village, Itomori. We represent the planet earth through the alternating backgrounds–from New York City to the Great Wall of China. Finally, the comet spinning around the Earth collides and shatters the planet, leaving a Grim Reaper in the background.The interactions were created using three.js, the images designed in Photoshop, and the music composed in Garageband.',
+'dystopia': 'This piece was inspired by the anime film Kimi no Na Wa, which tells a story about a comet crashing into a small village, Itomori. We represent the planet earth through the alternating backgrounds: from New York City to the Great Wall of China. Finally, the comet spinning around the Earth collides and shatters the planet, leaving a Grim Reaper in the background.The interactions were created using three.js, the images designed in Photoshop, and the music composed in Garageband.',
 'quotes': 'Visualizing text sentiment analysis with three.js and the alien API.',
 'spirograph': 'Watch cool geometries form as you move your mouse in circles on the screen.',
 'cage': 'Watch criss crosses and boxes animate as you move your mouse around the screen.',
