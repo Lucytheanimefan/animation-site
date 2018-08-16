@@ -56,7 +56,8 @@ descriptions = {'castleinblood': 'There\'s a castle in the dark and it\'s rainin
 'dystopia': '<p>This piece was inspired by the anime film Kimi no Na Wa, which tells a story about a comet crashing into a small village, Itomori. We represent the planet earth through the alternating backgrounds–from New York City to the Great Wall of China. Finally, the comet spinning around the Earth collides and shatters the planet, leaving a Grim Reaper in the background.</p> <p>The interactions were created using three.js, the images designed in Photoshop, and the music composed in Garageband.</p>',
 'quotes': 'Visualizing text sentiment analysis with three.js and the alien API.',
 'spirograph': 'Watch cool geometries form as you move your mouse in circles on the screen.',
-'cage': 'Watch criss crosses and boxes animate as you move your mouse around the screen.'}
+'cage': 'Watch criss crosses and boxes animate as you move your mouse around the screen.',
+'music-art': 'A variety of music visualizers that you can select from the dropdown'}
 
 
 @app.route("/")
