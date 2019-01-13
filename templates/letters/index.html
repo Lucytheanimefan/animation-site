@@ -1,0 +1,14 @@
+{% extends "genLayout.html" %}
+<!--css-->
+{% block css %}
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/letters/style.css') }}"> {% endblock %}
+<!--html-->
+{% block body %}
+<canvas id="main"></canvas>
+{% endblock %}
+<!--js-->
+{% block scripts %}
+{% assets output="gen/packed.js", "js_genlayout", "js/lib/jquery.min.js", "js/letters/script.js" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+{% endblock %}
