@@ -5,7 +5,6 @@ from flask_assets import Environment, Bundle
 from flask_compress import Compress
 from aylienapiclient import textapi
 
-
 app = Flask(__name__)
 
 UPLOAD_FOLDER = '/tmp/'
