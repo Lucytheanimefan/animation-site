@@ -1,23 +1,26 @@
-html,
 body {
+  background-color: #000000;
+  overflow: hidden;
+  margin: 0;
+}
+
+#snowflake {
   width: 100%;
   height: 100%;
 }
 
-body {
-  background-color: #110c1d;
-  overflow: hidden;
-  margin: 0;
-}
-body * {
+#snowflake * {
   position: absolute;
   top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
+  bottom: 0;
   margin: auto;
 }
-
+/*
+.ice{
+  background-color: white;
+}*/
 .snowflake {
   animation: snowflake 5s linear infinite reverse;
 }
