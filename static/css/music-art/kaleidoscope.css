@@ -5,6 +5,7 @@ body {
 }
 
 #snowflake {
+  margin-top: 250px;
   width: 100%;
   height: 100%;
 }
@@ -24,7 +25,13 @@ body {
 .snowflake {
   animation: snowflake 5s linear infinite reverse;
 }
-.snowflake .crystal:nth-child(0) {
+
+.snowflake .crystal .ice {
+  width: 100px;
+  height: 2px;
+}
+
+/*.snowflake .crystal:nth-child(0) {
   -webkit-transform: rotate(0deg) translate3d(100px, 0, 0);
           transform: rotate(0deg) translate3d(100px, 0, 0);
 }
@@ -60,10 +67,7 @@ body {
   -webkit-transform: rotate(360deg) translate3d(100px, 0, 0);
           transform: rotate(360deg) translate3d(100px, 0, 0);
 }
-.snowflake .crystal .ice {
-  width: 100px;
-  height: 2px;
-}
+
 .snowflake .crystal .ice:nth-child(0) {
   -webkit-transform: rotate(0deg) translate3d(100%, 0, 0);
           transform: rotate(0deg) translate3d(100%, 0, 0);
@@ -522,7 +526,7 @@ body {
   -webkit-animation-delay: -2.5s;
           animation-delay: -2.5s;
   background-color: #00aaff;
-}
+}*/
 .snowflake .crystal .ice i {
   -webkit-animation: snowflake 1s linear infinite;
           animation: snowflake 1s linear infinite;
